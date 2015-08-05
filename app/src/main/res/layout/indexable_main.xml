@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:id="@+id/dumpsys_index_ll"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+		<com.yhh.widget.IndexableListView
+		    android:layout_width="fill_parent" 
+		    android:layout_height="fill_parent" 
+		    android:id="@+id/listview" />
+	</LinearLayout>
+	<LinearLayout
+        android:id="@+id/dumpsys_content_ll"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+		<ScrollView
+	        android:id="@+id/dumpsys_scroll" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:scrollbars="vertical"
+	        android:fadingEdge="vertical">
+	        <TextView
+	            android:layout_width="fill_parent" 
+	            android:layout_height="wrap_content" 
+	            android:id="@+id/dumpsys_content"
+	            android:text="@string/status_loading" />
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

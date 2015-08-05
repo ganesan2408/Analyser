@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    <HorizontalScrollView 
+        android:id="@+id/catalog_hsv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+         <LinearLayout
+            android:id="@+id/catalog_ll"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+     </LinearLayout>
+    </HorizontalScrollView>
+    
+            
+     <LinearLayout
+            android:id="@+id/up_layout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/catalog_hsv">
+            <EditText
+                android:id="@+id/adbKey"
+                android:layout_width="fill_parent"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_edittext"
+                android:padding="5dp"
+                android:layout_margin="10dp"
+                android:textColorHint="#AAAAAA"
+                android:hint=" 快速检索..."
+                android:singleLine="true"
+                android:textSize="15sp"/>
+    </LinearLayout>
+    <ListView 
+        android:id="@+id/node_list"
+        android:layout_below="@id/up_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+ <!--    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/up_layout">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical"
+        android:background="#ddd">
+        <HorizontalScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">   
+            <TextView
+                android:id="@+id/adb_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"/>
+        </HorizontalScrollView>
+    </ScrollView>
+    </LinearLayout> -->
+</RelativeLayout>

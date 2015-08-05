@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">分析中心</string>
+	
+	<string name="main_app_analyser">系统监控器</string>
+    <string name="main_app_analyser_sub">实时监控CPU/GPU/内存/电流/温度等状态</string>
+    <string name="main_log_analyser">Log分析器</string>
+    <string name="main_log_analyser_sub">查看Log,智能解析Log并可视化展现信息</string>
+    <string name="main_status_analyser">状态监控器</string>
+    <string name="main_status_analyser_sub">可查看手机各种状态信息</string>
+    <string name="main_node_viewer">节点查看器</string>
+    <string name="main_node_viewer_sub">查看节点值</string>
+	<string name="main_shell_analyser">超级终端</string>
+	<string name="main_shell_analyser_sub">进入命令行模式</string>
+    <string name="main_automatic_robot">自动化</string>
+    <string name="main_automatic_robot_sub">自动化运行用户场景</string>
+	<string name="main_tool_analyser">工具箱</string>
+    <string name="main_tool_analyser_sub">背光调节，Wifi信号等</string>
+    <string name="main_perf">性能调度器</string>
+    <string name="main_perf_sub">性能优化调节CPU/GPU/温控等各种参数(开发中)</string>
+    <string name="main_benchmark">性能跑分</string>
+    <string name="main_benchmark_sub">自动化跑分并统计分数</string>
+    
+    <string name="main_cpu_governor">CPU Governor</string>
+    <string name="main_cpu_governor_sub">调节CPU核数，CPU频率(开发中)</string>
+    
+	<string name="status_loading">\n正在加载中...</string>
+	<string name="screen_shoot">截屏</string>
+
+	<string name="log_show_all">显示完整Log</string>
+	<string name="log_show_search">显示搜索Log</string>
+	<string name="log_local_parser">解析本机Log</string>
+    <string name="log_parser">解析他机Log</string>
+	
+	<string name="delete">删除</string>
+	<string name="view_current_log">查看实时Log</string>
+	<string name="view_history_log">查看历史Log</string>
+	<string name="delete_current_log">删除实时Log</string>
+	<string name="delete_history_log">删除历史Log</string>
+    <string name="save_log">保存Log</string>
+    
+    <!-- 首页start -->
+    <string name="title_monitor">监控</string>
+    <string name="title_view">查看</string>
+    <string name="title_performance">性能</string>
+    <string name="title_tool">工具箱</string>
+
+    <string name="status_power">Power</string>
+    <string name="status_battery">Battery</string>
+	<string name="top_processes">Process</string>
+	<string name="top_threads">Thread</string>
+	
+	<string name="perf_cpu">CPU</string>
+	<string name="perf_gpu">GPU</string>
+	<string name="perf_score">跑分</string>
+	
+	<string name="toolbox_node">查看节点</string>
+	<string name="toolbox_score">安兔兔跑分</string>
+	<string name="toolbox_auto">自动化Case</string>
+	<string name="toolbox_bright">亮度调节</string>
+	<string name="toolbox_kernel">Kernel</string>
+	
+    <string name="toolbox_log_viewer">查看Log</string>
+    <string name="toolbox_log_parser">解析Log</string>
+    <string name="toolbox_more">更多实用工具</string>
+	<!-- 首页end -->
+	
+	<string name="app_pkgname">包名:</string>
+	<string name="app_version">版本:</string>
+	<string name="app_pid">PID = </string>
+	<string name="app_uid">UID = </string>
+	<string name="app_else">其他信息（开发中）</string>
+	
+	
+	<string name="about_version">软件版本</string>
+	<string name="yes_str">确定</string>
+	<string name="no_str">取消</string>
+	<string name="rtn">返回</string>
+	<string name="right_into_description">into</string>   
+	<string name="log_search">搜索</string>
+	<string name="searchHint">请输入搜索关键字</string>
+	
+    <string name="LogFileBrowser">sleeplog</string>
+    <string name="sleeplog">sleeplog:</string>
+    <string name="statistics">查看统计信息</string>
+    <string name="sleepTimes">休眠次数：</string>
+    <string name="sleepTime">休眠时间：</string>
+    <string name="awakeTime">唤醒时间：</string>
+    <string name="current_log">查看实时Log</string>
+    <string name="history_log">查看保存Log</string>
+    <string name="menu_previous">上一页</string>
+    <string name="menu_next">下一页</string>
+    <string name="firstOne">第一幅图</string>
+    <string name="lastOne">最后一幅图</string>
+    <string name="mydialog_title">请稍等片刻...</string>
+    <string name="mydialog_body">正在执行运算中...</string>
+    <string name="Open">打开</string>
+    <string name="Delete">删除</string>
+    
+    <string name="msg_exit">退出</string>
+    <string name="msg_exit_content">确定退出Analyser吗?</string>
+    
+    <string name="dumpsys_text">Dumpsys</string>
+    <string name="dialog_choose_title">选择数据</string>
+    
+    <string name="introduction_title">使用说明</string>
+    <string name="introduction_node_viewer">(1)点击最上方的目录名，可跳转相应的目录；
+        (2)点击返回键，可也跳转上级父目录</string>
+    <string name="introduction_log_analyser">(1)实时解析：解析手机实时Log； (注：X3的Log机制更改后不支持此功能)\n
+            (2)历史解析：需提前将Log文件夹放至sdcard/myLog目录。</string>
+    <string name="introduction_log_viewer">直接访问本机的Log。 (注：X3的Log机制更改后不支持此功能)</string>
+    <string name="introduction_automatic">长按某一个case，可修改执行参数。</string>
+    <string name="introduction_performance">只针对X3手机功能,设置完成后点击更新即可</string>
+    <string name="introduction_benchmark">请提前安装安兔兔v5.7.1 (运行结果保存至/sdcard/systemAnalyzer/)</string>
+    
+    <!-- main start-->
+    <string name="about_phone">手机版本</string>
+    <string name="create_icon">创建桌面图标</string>
+    <string name="create_icon_msg">是否创建桌面快捷图标？</string>
+    <string name="help">关于System Analyzer</string>
+    <string name="help_url">有任何建议或反馈，欢迎联系MBG BSP或邮件至yuanhh1@lenovo.com(袁辉辉)</string>
+    <!-- main end-->
+    
+    <!-- menu start-->
+    <string name="menu_phone">手机型号</string>
+    <string name="menu_phone_version">当前手机版本</string>
+    
+    <string name="menu_create_icon">创建桌面图标</string>
+    <string name="menu_file">我的文件</string>
+    <string name="menu_feedback">我的反馈</string>
+    <string name="menu_help">帮助文档</string>
+    
+    <string name="menu_monitor_setting">监控设置</string>
+    <string name="menu_score_setting">跑分设置</string>
+    
+    <string name="menu_about">关于</string>
+    <!-- menu end-->
+    
+    <!-- #### CPU START -->
+    <string name="cpu_big_number">CPU大核 个数</string>
+    <string name="cpu_small_number">CPU小核 个数</string>
+    <string name="cpu_big_freq">CPU大核 频率(M)</string>
+    <string name="cpu_small_freq">CPU小核频率(M)</string>
+    <string name="gpu_freq_tv">GPU频率(M)</string>
+    <string name="reflash_btn">更新</string>
+    <string name="reflash_working">正在执行中。。。</string>
+    <string name="reflash_comlepte">执行完成</string>
+    
+    <string name="settings_cpu_big_number">CPU大核 个数区间</string>
+    <string name="settings_cpu_small_number">CPU小核 个数区间</string>
+    <string name="settings_cpu_big_freq">CPU大核 频率区间</string>
+    <string name="settings_cpu_small_freq">CPU小核频率区间</string>
+    <string name="settings_gpu_freq_tv">GPU频率区间</string>
+    
+    <string name="settings_loop">遍历下面配置</string>
+    <string name="settings_thermal_control">温控策略</string>
+    <string name="settings_benchmark_temp">启动温度 </string>
+    <string name="settings_benchmark_temp_hint">不大于则启动</string>
+    <!-- #### CPU END -->
+    
+    
+    <!-- #########   app monitor           #########               --> 
+    <string name="setting">设置</string>
+    <string name="exit">退出</string>
+    <string name="start_monitor">启动</string>
+    <string name="stop_monitor">停止</string>
+    <string name="change_color">换色</string>
+    <string name="moving_bar">拖动条</string>
+    <string name="float_fold">收缩</string>
+    <string name="float_unfold">展开</string>
+    
+    <string name="float_top">TOP</string>
+    <string name="float_monitor">MONI</string>
+    
+    <string name="view_monitor_chart">统计</string>
+    <string name="upload">上传</string>
+    
+    <string name="monitor_stop_tips">点击  系统监控器-->统计，可查看可视化图形数据</string>
+    
+    <string name="start_automatic">开始自动化</string>
+    <string name="stop_automatic">停止自动化</string>
+    
+    <string name="start_benchmark">启动跑分</string>
+    <string name="stop_benchmark">停止</string>
+
+    <string name="app_collecting_frequency">监控频率(s)</string>
+    <string name="monitor_system_app">显示系统APP</string>
+    
+    <string name="app_monitor_item_title">设置监控项</string>
+    <string name="app_monitor_item_description">可指定后台监控项，尽量按需定制</string>
+    <string name="app_floating_item_title">设置浮窗显示项</string>
+    <string name="app_floating_item_description">后台监控项，是否同时在前台浮窗展现</string>
+    <string name="app_exception_monitor_title">异常监控</string>
+    <string name="app_exception_monitor_description">可根据触发条件，扫描后台Top进程</string>
+
+    <string name="shell_monitor_title">浮窗显示Adb</string>
+    <string name="shell_monitor_description">浮窗显示指定adb指令</string>
+    <string name="shell_monitor_hint">Please input adb command</string>
+    <string name="shell_top_title">Top Process</string>
+    
+    
+    
+    <string name="app_tempearture_unit"> ℃ </string>
+    <string name="app_percent_unit"> % </string>
+    <string name="app_current_unit"> mA </string>
+    
+    <string name="app_exception_tempearture">温度     ≥</string>
+    <string name="app_exception_cpu">CPU     ≥</string>
+    <string name="app_exception_current">电流     ≥</string>
+    
+    <string name="app_automatic_window">开启自动化</string>
+
+    <string name="monitor_app_cpu">CPU程序使用率</string>
+    <string name="monitor_cpu">CPU总使用率</string>
+    <string name="monitor_cpu_freq">CPU频率</string>
+    <string name="monitor_gpu">GPU总使用率</string>
+    <string name="monitor_gpu_freq">GPU频率</string>
+    <string name="monitor_app_memory">Memory程序使用量</string>
+    <string name="monitor_memory">Memory总剩余量</string>
+    <string name="monitor_current">电流</string>
+    <string name="monitor_brightness">屏幕亮度</string>
+    <string name="monitor_battery_level">电池电量</string>
+    <string name="monitor_battery_temperature">电池温度</string>
+    <string name="monitor_battery_voltage">电池电压</string>
+    <string name="monitor_traffic_speed">网络流量</string>
+    
+    <string name="save">保存</string>
+    <string name="calculating">计算中...</string>
+    
+    <string name="process_free_mem">应用/剩余内存:</string>
+    <string name="process_overall_cpu">应用/总体CPU:</string>
+    <string name="cpu_freq_big">大核(MHz):</string>
+    <string name="cpu_freq_small">小核(MHz):</string>
+    <string name="overall_gpu">GPU:</string>
+    <string name="current">电流(mA)</string>
+    <string name="battery_temperature">温度(C)</string>
+    
+    <string name="start_time">启动时间:</string>
+    <string name="total_usage">总使用率(%)</string>
+    <string name="process_package">应用包名</string>
+    <string name="process_name">应用名称</string>
+    <string name="process_pid">应用PID</string>
+    <string name="phone_internal_version">内部版本号</string>
+    <string name="android_system_version">Android系统版本</string>
+    <string name="mobile_type">手机型号</string>
+
+    <string name="can_not_start_app_toast">该程序无法启动</string>
+    <string name="test_result_file_toast">监控报告：</string>
+    <string name="save_success_toast">保存成功</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定退出程序？</string>
+    <string name="quite_alert">再点击一次退出应用</string>
+    
+    <string name="select_auto_case">请选择自动化case</string>
+    <!-- #########   app monitor           #########               --> 
+     
+    <!-- #########   automatic          #########               --> 
+    <string name="case_username">账号</string>
+    <string name="case_password">密码</string>
+    <string name="case_spped">滑动间隔</string>
+    
+    <string name="qq_send_to">好友昵称</string>
+    <string name="qq_send_message">消息内容</string>
+    
+    <string name="luncher_number">屏数</string>
+    <string name="luncher_freq">频率(s)</string>
+     
+   <!-- #########   term           #########               --> 
+   
+   <string name="application_terminal">终端</string>
+   <string name="preferences">首选项</string>
+   <string name="new_window">新建窗口</string>
+   <string name="close_window">关闭窗口</string>
+   
+   <string name="input_tools">输入法工具</string>
+   <string name="input_tab">TAB键</string>
+   <string name="input_left">Left键</string>
+   <string name="input_right">Right键</string>
+   
+   <string name="window_list">窗口列表</string>
+   <string name="prev_window">前一窗口</string>
+   <string name="next_window">后一窗口</string>
+   <string name="reset">重置终端</string>
+   <string name="send_email">发送电子邮件到...</string>
+   <string name="special_keys">特殊键</string>
+   <string name="toggle_soft_keyboard">打开/关闭软键盘</string>
+
+   <string name="reset_toast_notification">当前窗口终端状态将被重置</string>
+
+   <string name="enable_wakelock">开启唤醒锁</string>
+   <string name="disable_wakelock">关闭唤醒锁</string>
+   <string name="enable_wifilock">开启 Wifi 锁</string>
+   <string name="disable_wifilock">关闭 Wifi 锁</string>
+
+   <string name="edit_text">Ctrl</string>
+   <string name="send_control_key">发送 Ctrl 键</string>
+
+   <string name="window_title">终端%1$d</string>
+
+   <string name="service_notify_text">会话正在运行</string>
+
+   <string name="process_exit_message">会话已结束</string>
+
+   <!-- Preference dialog -->
+   <string name="screen_preferences">屏幕</string>
+
+   <string name="title_statusbar_preference">状态栏</string>
+   <string name="summary_statusbar_preference">显示/隐藏状态栏。</string>
+   <string name="dialog_title_statusbar_preference">状态栏</string>
+
+   <string name="title_actionbar_preference">操作栏</string>
+   <string name="summary_actionbar_preference">选择操作栏行为 </string>
+   <string name="dialog_title_actionbar_preference">操作栏行为</string>
+
+   <string name="title_cursorstyle_preference">光标样式</string>
+   <string name="summary_cursorstyle_preference">选择光标样式</string>
+   <string name="dialog_title_cursorstyle_preference">光标样式</string>
+
+   <string name="title_cursorblink_preference">光标闪烁</string>
+   <string name="summary_cursorblink_preference">选择光标闪烁模式</string>
+   <string name="dialog_title_cursorblink_preference">光标闪烁</string>
+
+   <string name="text_preferences">文本</string>
+
+   <string name="title_utf8_by_default_preference">默认 UTF-8</string>
+   <string name="summary_utf8_by_default_preference">是否将 UTF-8 模式设为默认</string>
+
+   <string name="title_fontsize_preference">文本大小</string>
+   <string name="summary_fontsize_preference">选择文本大小</string>
+   <string name="dialog_title_fontsize_preference">文本大小</string>
+
+   <string name="title_color_preference">颜色</string>
+   <string name="summary_color_preference">选择文本颜色</string>
+   <string name="dialog_title_color_preference">文本颜色</string>
+
+   <string name="keyboard_preferences">键盘</string>
+
+   <string name="title_backaction_preference">返回键行为</string>
+   <string name="summary_backaction_preference">选择返回键行为</string>
+   <string name="dialog_title_backaction_preference">返回键行为</string>
+
+   <string name="title_controlkey_preference">Ctrl 键</string>
+   <string name="summary_controlkey_preference">设置 Ctrl 键</string>
+   <string name="dialog_title_controlkey_preference">Ctrl 键</string>
+
+
+   <string name="title_ime_preference">输入方式</string>
+   <string name="summary_ime_preference">选择输入方式或软键盘</string>
+   <string name="dialog_title_ime_preference">输入方式</string>
+
+   <string name="shell_preferences">Shell</string>
+   <string name="title_shell_preference">命令行</string>
+   <string name="summary_shell_preference">指定命令行使用的 Shell</string>
+   <string name="dialog_title_shell_preference">Shell</string>
+
+   <string name="title_initialcommand_preference">初始命令</string>
+   <string name="summary_initialcommand_preference">启动 Shell 时自动执行的命令</string>
+   <string name="dialog_title_initialcommand_preference">初始命令</string>
+
+   <string name="title_termtype_preference">终端类型</string>
+   <string name="summary_termtype_preference">设置 Shell 的终端类型</string>
+   <string name="dialog_title_termtype_preference">终端类型</string>
+
+   <string name="title_close_window_on_process_exit_preference">退出时关闭窗口</string>
+   <string name="summary_close_window_on_process_exit_preference">退出 Shell 时是否关闭窗口</string>
+
+   <string name="title_verify_path_preference">验证 PATH 路径</string>
+   <string name="summary_verify_path_preference">是否将 PATH 中无效的路径清除</string>
+
+   <string name="title_do_path_extensions_preference">允许 PATH 后扩</string>
+   <string name="summary_do_path_extensions_preference">是否允许程序添加额外命令到 PATH</string>
+
+   <string name="title_allow_prepend_path_preference">允许 PATH 前置</string>
+   <string name="summary_allow_prepend_path_preference">是否允许程序覆盖 PATH 中已有命令</string>
+
+   <string name="title_home_path_preference">HOME 文件夹</string>
+   <string name="summary_home_path_preference">用作 HOME 的可写文件夹路径</string>
+
+   <string name="control_key_dialog_title">特殊键</string>
+   <string name="control_key_dialog_control_text">音量键(+) : UP\n音量键(-) : Down</string>
+
+   <string name="confirm_window_close_message">关闭窗口吗？</string>
+
+   <string name="perm_run_script">在终端模拟器中运行命令</string>
+   <string name="permdesc_run_script">允许程序开启新窗口并运行包括与网络、存储卡相关命令在内的所有命令</string>
+   <string name="perm_append_to_path">添加命令到终端模拟器</string>
+   <string name="permdesc_append_to_path">允许程序添加额外命令</string>
+   <string name="perm_prepend_to_path">覆盖终端模拟器中已有命令</string>
+   <string name="permdesc_prepend_to_path">允许程序覆盖终端模拟器中已有命令</string>
+
+   <string name="email_transcript_subject">终端模拟器副本</string>
+   <string name="email_transcript_chooser_title">发送副本的邮件实例：</string>
+   <string name="email_transcript_no_email_activity_found">找不到邮件实例发送副本</string>
+
+   <string name="alt_sends_esc">Alt 键发送 ESC</string>
+   <string name="alt_sends_esc_summary_on">开启 Alt 键发送 ESC</string>
+   <string name="alt_sends_esc_summary_off">关闭 Alt 键发送 ESC</string>
+
+   <string name="title_mouse_tracking_preference">发送鼠标事件</string>
+   <string name="summary_mouse_tracking_preference">触摸与滚屏事件是否被终端忽略</string>
+	
+   <string name="title_use_keyboard_shortcuts">Use Keyboard Shortcuts</string>
+  <string name="use_keyboard_shortcuts_summary_on">Ctrl-Tab: cycle window, Ctrl-Shift-N: new window, Ctrl-Shift-V: paste.</string>
+  <string name="use_keyboard_shortcuts_summary_off">Keyboard shortcuts disabled.</string>
+
+  <string name="activity_term_here_title">Term here</string>
+  <!-- BEGIN SHORTCUT RELATED STRINGS -->
+  <!-- FSNavigator.java -->
+  <string name="fsnavigator_title">FILE SELECTOR</string>
+  <string name="fsnavigator_no_external_storage">External storage not available</string>
+  <string name="fsnavigator_optional_enter_path">Or enter path here.</string>
+  <string name="fsnavigator_change_theme">Change theme</string>
+  <!-- AddShortcut.java -->
+  <string name="addshortcut_command_hint">command</string>
+  <string name="addshortcut_example_hint">--example=\""a\"</string>
+  <string name="addshortcut_button_find_command">Find command</string>
+  <string name="addshortcut_navigator_title">SELECT SHORTCUT TARGET</string>
+  <string name="addshortcut_command_window_instructions">Command window requires full path, no arguments. For other commands use Arguments window (ex: cd /sdcard).</string>
+  <string name="addshortcut_arguments_label">Arguments\:</string>
+  <string name="addshortcut_shortcut_label">Shortcut label\:</string>
+  <string name="addshortcut_button_text_icon">Text icon</string>
+  <string name="addshortcut_make_text_icon">MAKE TEXT ICON</string>
+  <string name="addshortcut_text_icon_instructions"></string>
+  <string name="addshortcut_title">Term shortcut</string>
+  
+  <!-- ColorValue.java -->
+  <string name="colorvalue_letter_alpha">α</string>
+  <string name="colorvalue_letter_red">R</string>
+  <string name="colorvalue_letter_green">G</string>
+  <string name="colorvalue_letter_blue">B</string>
+  <string name="colorvalue_label_lock_button_column">LOCK</string>
+  <string name="colorvalue_icon_text_entry_hint">Enter icon text</string>
+  
+  <!-- LDrawer start -->
+  <string name="drawer_open">drawer_open</string>
+  <string name="drawer_close">drawer_close</string>
+  <!-- LDrawer end -->
+  
+</resources>

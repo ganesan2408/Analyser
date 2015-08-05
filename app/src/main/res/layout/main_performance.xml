@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+   android:orientation="vertical"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RadioGroup 
+      android:id="@+id/main_perf_RadioGroup"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:layout_marginTop="20dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:orientation="horizontal" 
+        >
+        <RadioButton 
+            android:id="@+id/main_perf_cpu"
+            style="@style/status_main_tab" 
+            android:background="@drawable/main_selector_left"
+            android:padding="6dp"
+            android:text="@string/perf_cpu"
+            android:checked="true"
+            />
+        <RadioButton 
+             android:id="@+id/main_perf_gpu"
+             style="@style/status_main_tab" 
+             android:background="@drawable/main_selector_right"
+             android:layout_marginLeft="1dp"
+             android:layout_marginRight="1dp"
+             android:padding="6dp"
+             android:text="@string/perf_gpu"   
+            />
+    </RadioGroup>
+    <FrameLayout
+       android:id="@+id/perf_Pager"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1.0"/>
+</LinearLayout> 

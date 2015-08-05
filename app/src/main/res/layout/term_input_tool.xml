@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#dcde"
+    android:alpha="1">
+    <Button
+            android:id="@+id/button_up"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="↑"
+            android:onClick="termToolHandler"
+             />
+
+        <Button
+            android:id="@+id/button_down"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="↓" 
+            android:onClick="termToolHandler"/>
+        
+         <Button
+            android:id="@+id/button_left"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="←" 
+            android:onClick="termToolHandler"/>
+
+        <Button
+            android:id="@+id/button_right"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="→" 
+            android:onClick="termToolHandler"/>
+        
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="|" 
+            android:onClick="termToolHandler"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="-" 
+            android:layout_toRightOf="@id/button2"
+            android:onClick="termToolHandler"/>
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="30sp"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="_" 
+            android:onClick="termToolHandler"/>
+        
+        <Button
+            android:id="@+id/button_piperight"
+            android:layout_width="30sp"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text=">" 
+            android:onClick="termToolHandler"/>
+        
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="/" 
+            android:onClick="termToolHandler"/>
+        
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="*" 
+            android:layout_toRightOf="@id/button4"
+            android:onClick="termToolHandler"/>
+
+        
+        <Button
+            android:id="@+id/button_tab"
+            android:layout_width="0sp"
+            android:layout_weight="1.7"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="TAB" 
+            android:onClick="termToolHandler"/>
+        <TextView
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="0sp"
+            android:text="手柄"
+            android:textColor="#832"
+            android:textSize="10sp" />
+</LinearLayout>

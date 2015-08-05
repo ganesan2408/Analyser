@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yhh.analyser"
+    android:background="@color/light_purple"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+        <com.yhh.widget.SwitchButton
+            android:id="@+id/shell_monitor_sb"
+            style="@style/item"
+            android:text="@string/shell_monitor_title"
+            android:background="@drawable/selector_preference_complete"
+            android:checked="true"
+            app:withTextInterval="6dp"
+            app:frameDrawable="@drawable/switch_frame"
+            app:stateDrawable="@drawable/selector_switch_state"
+            app:stateMaskDrawable="@drawable/switch_state_mask"
+            app:sliderDrawable="@drawable/selector_switch_slider"/>    
+    
+       <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="fill_parent"
+            android:layout_height="150sp"
+            android:background="@drawable/selector_preference_complete"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/shell_command"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="10sp"
+                android:layout_margin="15sp"
+                android:textSize="20sp"
+                android:hint="@string/shell_monitor_hint"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"/>
+        </LinearLayout>
+        <Button
+                android:id="@+id/shell_top"
+                android:text="@string/shell_top_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+</LinearLayout>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <string name="QQ#username">137849218</string>
+    <string name="QQ#password">***</string>
+    <string name="QQ#receiver">1324229916</string>
+    <string name="QQ#message">this is test message for QQ.</string>  
+    <string name="QQ#speed">2</string>
+    <string name="QQ#slipStep">3</string>
+    
+    <string name="Weixin#username">137849218</string>
+    <string name="Weixin#password">***</string>
+    <string name="Weixin#receiver">辉 辉</string>
+    <string name="Weixin#message">this is test message  for Weinxin.</string>
+    <string name="Weixin#speed">2</string>
+    <string name="Weixin#slipStep">3</string>
+    
+    <string name="Weibo#username">18101021558</string>
+    <string name="Weibo#password">***</string>
+    <string name="Weibo#message">this is test message for weibo </string>
+    <string name="Weibo#speed">2</string>
+    <string name="Weibo#slipStep">3</string>
+         
+    <string name="Browser#browserName">浏览器</string>
+    <string name="Browser#speed">2</string>
+    <string name="Browser#slipStep">3</string>
+
+    <string name="BenchMark#count">99</string>
+
+    <string name="Launcher#speed">2</string>
+    <string name="Launcher#slipStep">3</string>
+    
+    <string name="Read#speed">2</string>
+    <string name="Read#count">3</string>
+    
+    <string name="Email#username">yuanhh1@163.com</string>
+    <string name="Email#password">***</string>
+    <string name="Email#receiver">137849218@qq.com</string>
+    <string name="Email#speed">2</string>
+    <string name="Email#slipStep">3</string>
+    
+    <string name="Camera#speed">3</string>
+    <string name="Camera#count">100</string>
+    
+    <string name="MusicPlayer#musicName">我们的爱</string>
+    <string name="MusicPlayer#sampleDelay">10</string>
+    
+    <string name="Call#phoneNumber">10086</string>
+    
+    <string name="Workflow#QQ">60</string>
+    <string name="Workflow#Weibo">60</string>
+    <string name="Workflow#Weixin">60</string>
+    <string name="Workflow#Browser">60</string>
+    <string name="Workflow#Camera">60</string>
+    
+    <string name="System#Home">false</string>   
+    <string name="System#logEnable">false</string>   
+</map>

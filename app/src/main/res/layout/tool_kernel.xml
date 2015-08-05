@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"  
+    android:layout_width="fill_parent"     
+    android:layout_height="fill_parent">
+     <LinearLayout android:orientation="horizontal" 
+            android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+          <TextView
+                android:id="@+id/kernel_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="panic is download and ssr is related"/>
+          <CheckBox 
+                android:id="@+id/kernel_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+       </LinearLayout>
+   <Button
+        android:id="@+id/kernel_crash"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="@dimen/layout_marginBottom_test"
+        android:layout_marginLeft="@dimen/layout_marginLeft_test"
+        android:layout_marginRight="@dimen/layout_marginRight_test"
+        android:layout_marginTop="@dimen/layout_marginTop_test"
+        android:background="@drawable/selector_monitor_button"
+        android:text="simulate kernel crash"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_test" />
+</LinearLayout>

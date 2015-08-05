@@ -1,0 +1,53 @@
+<resources>
+    <!-- App monitor START! -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="layout_horizontal_margin">15dp</dimen>
+    <dimen name="layout_horizontal_margin_large">30dp</dimen>
+    <dimen name="layout_vertical_margin">20dp</dimen>
+    <dimen name="layout_vertical_margin_small">10dp</dimen>
+    <dimen name="textview_horizontal_margin">10dp</dimen>
+    <dimen name="textview_vertical_margin">3dp</dimen>
+    <dimen name="textview_vertical_margin_large">3dp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size_middle">12sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_big">20sp</dimen>
+    <dimen name="text_size_bigest">30sp</dimen>
+    
+    <dimen name="button_width">140dp</dimen>
+    <dimen name="button_height">40dp</dimen>
+    
+    <dimen name="image_padding">10dp</dimen>
+    <dimen name="image_padding_small">5dp</dimen>
+    
+    <dimen name="line_height">1px</dimen>
+    
+    <dimen name="edit_margin">5px</dimen>
+    
+    <dimen name="action_bar_height">40dp</dimen>
+
+    <dimen name="layout_height_test">50dp</dimen>
+    <dimen name="layout_marginTop_test">6dp</dimen>
+    <dimen name="layout_marginBottom_test">4dp</dimen>
+    <dimen name="layout_marginLeft_test">24dp</dimen>
+    <dimen name="layout_marginRight_test">24dp</dimen>
+    <dimen name="text_size_test">16sp</dimen>
+    <!-- App monitor END! -->
+    
+    <dimen name="shadow_width">1dp</dimen>
+    <dimen name="slidingmenu_offset">80dp</dimen>
+    <dimen name="bbuton_rounded_corner_radius">5dp</dimen>
+    
+    <!-- LDrawer start -->
+    <dimen name="ldrawer_drawableSize">50dp</dimen>
+    <dimen name="ldrawer_barSize">18dp</dimen>
+    <dimen name="ldrawer_topBottomBarArrowSize">11dp</dimen>
+    <dimen name="ldrawer_thickness">2dp</dimen>
+    <dimen name="ldrawer_gapBetweenBars">3dp</dimen>
+    <dimen name="ldrawer_middleBarArrowSize">16dp</dimen>
+    <dimen name="navdrawer_width">260dp</dimen>
+    <!-- LDrawer end -->
+    
+
+</resources>

@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item android:id="@+id/main_about_phone"
+        android:title="@string/about_phone" 
+        android:showAsAction="always"/>
+    
+    <item android:id="@+id/main_shortcut"
+        android:showAsAction="collapseActionView"
+        android:title="@string/create_icon" />
+    
+    <item android:id="@+id/main_help"
+        android:showAsAction="collapseActionView"
+        android:title="@string/help" />
+    
+</menu>

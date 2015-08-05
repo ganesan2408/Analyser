@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yhh.analyser"
+    android:background="@color/light_purple"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <LinearLayout
+            style="@style/item"
+            android:background="@drawable/selector_preference_complete"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/layout_vertical_margin_small" >
+
+                <TextView
+                    style="@style/slide_menu_left_icon"
+                    android:text="@string/app_collecting_frequency"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" >
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="50sp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size" >
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/app_frequence_sb"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:max="29"
+                android:maxHeight="4.0dip"
+                android:minHeight="4.0dip"
+                android:paddingBottom="@dimen/layout_vertical_margin_small"
+                android:paddingLeft="16.0dip"
+                android:paddingRight="16.0dip"
+                android:progress="5"
+                android:progressDrawable="@drawable/custom_seekbar"
+                android:thumb="@drawable/seekbar_thumb" />
+        </LinearLayout>
+        
+       <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:id="@+id/app_monitor_items_rl"
+            style="@style/item"
+            android:background="@drawable/selector_preference_header"
+            android:onClick="settingHandler">
+            <TextView
+                style="@style/slide_menu_left_title2"
+                android:id="@+id/app_monitor_times_tv"
+                android:text="@string/app_monitor_item_title"/>
+            <TextView
+                style="@style/slide_menu_left_description"
+                android:layout_below="@id/app_monitor_times_tv"
+                android:text="@string/app_monitor_item_description"/>
+            <ImageView 
+                style="@style/slide_menu_right"
+                android:src="@drawable/right_into"
+                android:contentDescription="@string/right_into_description"/>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/app_floating_items_rl"
+            style="@style/item"
+            android:background="@drawable/selector_preference_footer"
+            android:onClick="settingHandler">
+            <TextView
+                style="@style/slide_menu_left_title2"
+                android:id="@+id/app_floating_items_tv"
+                android:text="@string/app_floating_item_title"/>
+            <TextView
+                style="@style/slide_menu_left_description"
+                android:layout_below="@id/app_floating_items_tv"
+                android:text="@string/app_floating_item_description"/>
+            <ImageView 
+                style="@style/slide_menu_right"
+                android:src="@drawable/right_into"
+                android:contentDescription="@string/right_into_description"/>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:id="@+id/app_exception_monitor_rl"
+            style="@style/item"
+            android:background="@drawable/selector_preference_complete"
+            android:onClick="settingHandler">
+            <TextView
+                style="@style/slide_menu_left_title2"
+                android:id="@+id/app_exception_monitor_tv"
+                android:text="@string/app_exception_monitor_title"/>
+            <TextView
+                style="@style/slide_menu_left_description"
+                android:layout_below="@id/app_exception_monitor_tv"
+                android:text="@string/app_exception_monitor_description"/>
+            <ImageView 
+                style="@style/slide_menu_right"
+                android:src="@drawable/right_into"
+                android:contentDescription="@string/right_into_description"/>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:id="@+id/shell_monitor_rl"
+            style="@style/item"
+            android:background="@drawable/selector_preference_complete"
+            android:onClick="settingHandler">
+            <TextView
+                style="@style/slide_menu_left_title2"
+                android:id="@+id/shell_monitor_tv"
+                android:text="@string/shell_monitor_title"/>
+            <TextView
+                style="@style/slide_menu_left_description"
+                android:layout_below="@id/shell_monitor_tv"
+                android:text="@string/shell_monitor_description"/>
+            <ImageView 
+                style="@style/slide_menu_right"
+                android:src="@drawable/right_into"
+                android:contentDescription="@string/right_into_description"/>
+        </RelativeLayout>
+</LinearLayout>
