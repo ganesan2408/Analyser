@@ -1,269 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yhh.analyser"><!--
+    package="com.yhh.analyser"
     android:sharedUserId="android.uid.system">
-   
-	<uses-permission android:name="android.permission.RETRIEVE_WINDOW_CONTENT"/> -->
-	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    
+	<uses-permission android:name="android.permission.RETRIEVE_WINDOW_CONTENT"/>
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo1"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-        
-        <!--  Main Analyser START-->
+        android:theme="@style/AppTheme" >
+
+        <!-- Main Analyser START -->
         <activity
-            android:name="com.yhh.analyser.Main"
+            android:name=".Main"
             android:configChanges="orientation|screenSize"
-			android:windowSoftInputMode="adjustUnspecified|stateHidden"
-			android:screenOrientation="portrait" 
-			android:theme="@style/NoWindowTheme"
-            >			
-             <intent-filter>
+            android:screenOrientation="portrait"
+            android:theme="@style/NoWindowTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.LAUNCHER" />
+
+               <!--<category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
-        <!--  Main Analyser END -->
+        <!-- Main Analyser END -->
+
+
+        <!-- umeng start -->
+        <activity android:name="com.umeng.fb.ConversationActivity" />
+        <activity android:name=".CustomFeedback"
+            android:label="@string/menu_feedback"
+            android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55c2c0f867e58e12f5001997" />
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="69cc8db4e08c5de406a224ffb5967058" />
+        <meta-data
+            android:name="Channel ID"
+            android:value="umeng" />
+        <!-- umeng end -->
+
+
+        <!-- <activity -->
+        <!-- android:name="com.yhh.widget.letterlistview.MainActivity" -->
+        <!-- android:label="@string/main_app_analyser" -->
+        <!-- android:windowSoftInputMode = "adjustPan" -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:screenOrientation="portrait"> -->
+        <!-- </activity> -->
+        <!-- App Monitor  START -->
+        <!-- <activity -->
+        <!-- android:name="com.yhh.app.monitor.AppMonitor" -->
+        <!-- android:label="@string/main_app_analyser" -->
+        <!-- android:configChanges="orientation|screenSize" -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:screenOrientation="portrait"> -->
+        <!-- </activity> -->
         <activity
-                android:name="com.yhh.widget.letterlistview.MainActivity"
-                android:label="@string/main_app_analyser"
-                android:windowSoftInputMode = "adjustPan"
-                android:launchMode="singleTask"
-                android:screenOrientation="portrait">
-        </activity>
-         <!-- App Monitor  START -->
-         <activity
-                android:name="com.yhh.app.monitor.AppMonitor"
-                android:label="@string/main_app_analyser"
-                android:configChanges="orientation|screenSize"
-                android:launchMode="singleTask"
-                android:screenOrientation="portrait">
-        </activity>
-         <activity
-                android:name="com.yhh.app.monitor.SingleAppMonitor"
-                android:label="@string/main_app_analyser"
-                android:configChanges="orientation|screenSize"
-                android:launchMode="singleTask"
-                android:screenOrientation="portrait">
-        </activity>
-        <activity android:name="com.yhh.app.setttings.SettingsActivity"
-                  android:label="@string/setting"
-                  android:screenOrientation="portrait"/>
-        
-        <activity android:name="com.yhh.app.setttings.SettingMonitorActivity"
-                  android:label="@string/app_monitor_item_title"
-                  android:screenOrientation="portrait"/>
-        
-        <activity android:name="com.yhh.app.setttings.SettingFloatingActivity"
-                  android:label="@string/app_floating_item_title"
-                  android:screenOrientation="portrait"/>
-        
-        <activity android:name="com.yhh.app.setttings.SettingExcptionActivity"
-                  android:label="@string/app_exception_monitor_title"
-                  android:screenOrientation="portrait"/>
-        
-        <activity android:name="com.yhh.app.setttings.SettingShellActivity"
-                  android:label="@string/setting"
-                  android:screenOrientation="portrait"/>
-        
-        <service android:name="com.yhh.app.monitor.MonitorService"/>
-        <!-- App Monitor END -->
-        
-        <!-- Log Analyser START -->
-		<activity 
-	        android:name="com.yhh.log.analyser.LogChart"
-	        android:label="@string/app_name"
-	        android:configChanges="orientation|screenSize"
-	        android:screenOrientation="portrait"  />
-		<activity 
-	        android:name="com.yhh.log.viewer.LogViewerActivity"
-	        android:label="@string/main_log_analyser"
-	        android:configChanges="orientation|screenSize"
-	        android:screenOrientation="portrait"  />
-		<activity 
-	        android:name="com.yhh.log.analyser.MainLogAnalyser"
-	        android:label="@string/main_log_analyser"
-	        android:configChanges="orientation|screenSize"
-	        android:screenOrientation="portrait"  />
-		
-	    <activity android:name="com.yhh.log.viewer.ContentReaderActivity"
-	        android:label="@string/main_log_analyser"
-	        android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"  >
-	        <intent-filter>   
-                <action android:name="android.intent.action.SEARCH" />   
-            </intent-filter> 
-	    </activity> 
-            
-        <activity android:name="com.yhh.log.viewer.SleepLogReader"
-            android:label="@string/main_log_analyser"
-            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"  /> 
-              
-        <activity android:name="com.yhh.log.viewer.SleepLogStatistics"
-            android:label="@string/main_log_analyser"
+            android:name="com.yhh.app.monitor.SingleAppMonitor"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"  />
-        <!-- Log Analyser END -->
-        
-        <!-- Status Analyser START -->
-        <activity 
-            android:name="com.yhh.fragment.status.StatusAnalyser"
-            android:label="@string/main_status_analyser"
-            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"  /> 
-            
-         <activity android:name="com.yhh.fragment.status.DumpsysStatusActivity"
-                  android:label="@string/main_status_analyser"
-                  android:configChanges="orientation|screenSize"
-                  android:screenOrientation="portrait"  />
-        <!-- Status Analyser START -->
-        
-        <!-- Chart Analyser START -->
-        <activity 
-            android:name="com.yhh.chart.other.SleepChart"
-            android:label="@string/main_log_analyser"
-            android:screenOrientation="portrait"  
-            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
-            /> 
-        <activity 
-            android:name="com.yhh.app.analyser.AppChartAnalyser"
+            android:label="@string/main_app_analyser"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yhh.app.setttings.SettingsActivity"
+            android:label="@string/setting"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.app.setttings.SettingMonitorActivity"
+            android:label="@string/app_monitor_item_title"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.app.setttings.SettingFloatingActivity"
+            android:label="@string/app_floating_item_title"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.app.setttings.SettingExcptionActivity"
+            android:label="@string/app_exception_monitor_title"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.app.setttings.SettingShellActivity"
+            android:label="@string/setting"
+            android:screenOrientation="portrait" />
+
+        <service android:name="com.yhh.app.monitor.MonitorService" />
+        <!-- App Monitor END -->
+
+        <activity
+            android:name="com.yhh.analyser.HelpActivity"
+            android:label="@string/menu_feedback"
+            android:screenOrientation="portrait"/>
+
+        <!-- Log Analyser START -->
+        <activity
+            android:name="com.yhh.log.analyser.LogChart"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"  
-            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"/> 
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.log.viewer.LogViewerActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_log_analyser"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.log.analyser.MainLogAnalyser"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_log_analyser"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.log.viewer.ContentReaderActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:label="@string/main_log_analyser"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.yhh.log.viewer.SleepLogReader"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:label="@string/main_log_analyser"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name="com.yhh.log.viewer.SleepLogStatistics"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_log_analyser"
+            android:screenOrientation="portrait" />
+        <!-- Log Analyser END -->
+
+
+        <!-- Status Analyser START -->
+        <!-- <activity -->
+        <!-- android:name="com.yhh.fragment.status.StatusAnalyser" -->
+        <!-- android:label="@string/main_status_analyser" -->
+        <!-- android:configChanges="orientation|screenSize|keyboardHidden|keyboard" -->
+        <!-- android:windowSoftInputMode="adjustUnspecified|stateHidden" -->
+        <!-- android:screenOrientation="portrait"  /> -->
+
+        <activity
+            android:name="com.yhh.fragment.status.DumpsysStatusActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_status_analyser"
+            android:screenOrientation="portrait" />
+        <!-- Status Analyser START -->
+
+
+        <!-- Chart Analyser START -->
+        <activity
+            android:name="com.yhh.chart.other.SleepChart"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:label="@string/main_log_analyser"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yhh.app.analyser.AppChartAnalyser"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <!-- Chart Analyser END -->
-        
+
+
         <!-- Automatic START -->
         <activity
-              android:name="com.yhh.robot.AutomaticActivity"
-              android:label="@string/main_automatic_robot"
-              android:configChanges="orientation|screenSize"
-              android:screenOrientation="portrait"  
-              android:windowSoftInputMode="adjustPan">
+            android:name="com.yhh.robot.AutomaticActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_automatic_robot"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <!-- Automatic END -->
-        
+
         <activity
-              android:name="com.yhh.toolbox.SuperBox"
-              android:label="@string/main_tool_analyser"
-              android:screenOrientation="portrait"  
-              android:configChanges="orientation|screenSize">
+            android:name="com.yhh.toolbox.SuperBox"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_tool_analyser"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-              android:name="com.yhh.toolbox.KernelTool"
-              android:label="@string/toolbox_kernel"
-              android:screenOrientation="portrait"  
-              android:configChanges="orientation|screenSize">
+            android:name="com.yhh.toolbox.KernelTool"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/toolbox_kernel"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-              android:name="com.yhh.toolbox.MoreActivity"
-              android:label="@string/toolbox_more"
-              android:screenOrientation="portrait"  
-              android:configChanges="orientation|screenSize">
+            android:name="com.yhh.toolbox.MoreActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/toolbox_more"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-              android:name="com.yhh.toolbox.NodeViewActivity"
-              android:label="@string/main_node_viewer"
-              android:screenOrientation="portrait"
-              android:windowSoftInputMode="adjustUnspecified|stateHidden"  
-              android:configChanges="orientation|screenSize">
+            android:name="com.yhh.toolbox.NodeViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_node_viewer"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
-        
+
+
         <!-- Performance start -->
+        <!-- <activity -->
+        <!-- android:name="com.yhh.fragment.performance.MainPerfActivity" -->
+        <!-- android:label="@string/main_perf" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:configChanges="orientation|screenSize"> -->
+        <!-- </activity> -->
+        <!-- <activity -->
+        <!-- android:name="com.yhh.fragment.performance.CpuGovernor" -->
+        <!-- android:label="@string/main_perf" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:configChanges="orientation|screenSize"> -->
+        <!-- </activity> -->
+        <!-- Performance end -->
+
+
+        <!-- Benchmark start -->
         <activity
-              android:name="com.yhh.fragment.performance.MainPerfActivity"
-              android:label="@string/main_perf"
-              android:screenOrientation="portrait"  
-              android:configChanges="orientation|screenSize">
+            android:name="com.yhh.benchmark.BenchmarkRunner"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_benchmark"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-              android:name="com.yhh.fragment.performance.CpuGovernor"
-              android:label="@string/main_perf"
-              android:screenOrientation="portrait"  
-              android:configChanges="orientation|screenSize">
-        </activity>
-         <!-- Performance end -->
-         
-         <!-- Benchmark start -->
-        <activity
-              android:name="com.yhh.benchmark.BenchmarkRunner"
-              android:label="@string/main_benchmark"
-              android:screenOrientation="portrait"  
-              android:configChanges="orientation|screenSize">
+            android:name="com.yhh.benchmark.BenchmarkChartAnalyser"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_benchmark"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-              android:name="com.yhh.benchmark.BenchmarkChartAnalyser"
-              android:label="@string/main_benchmark"
-              android:screenOrientation="portrait"  
-              android:configChanges="orientation|screenSize">
-        </activity>
-        <activity
-              android:name="com.yhh.benchmark.BenchmarkSettingsActivity"
-              android:label="@string/main_benchmark"
-              android:screenOrientation="portrait"  
-              >
+            android:name="com.yhh.benchmark.BenchmarkSettingsActivity"
+            android:label="@string/main_benchmark"
+            android:screenOrientation="portrait" >
         </activity>
         <!-- Benchmark end -->
-         
+
+
         <!-- Terminal START -->
-         <activity
+        <activity
             android:name="com.yhh.terminal.Term"
-            android:icon="@drawable/ic_launcher"
-            android:label="@string/application_terminal" 
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/application_terminal"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize|stateAlwaysVisible" 
-            android:screenOrientation="portrait"  >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible" >
             <intent-filter>
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity-alias
-            android:name="TermInternal"
+            android:name=".TermInternal"
             android:exported="false"
             android:targetActivity="com.yhh.terminal.Term" >
             <intent-filter>
                 <action android:name="jackpal.androidterm.private.OPEN_NEW_WINDOW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
                 <action android:name="jackpal.androidterm.private.SWITCH_WINDOW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity-alias>
 
         <activity
             android:name="com.yhh.terminal.RemoteInterface"
-            android:excludeFromRecents="true" 
-            android:screenOrientation="portrait"  >
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="jackpal.androidterm.OPEN_NEW_WINDOW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <activity-alias
-            android:name="TermHere"
+            android:name=".TermHere"
             android:exported="true"
             android:label="@string/activity_term_here_title"
             android:targetActivity="com.yhh.terminal.RemoteInterface" >
@@ -278,14 +310,13 @@
             android:permission="jackpal.androidterm.permission.RUN_SCRIPT" >
             <intent-filter>
                 <action android:name="jackpal.androidterm.RUN_SCRIPT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.yhh.terminal.TermPreferences"
             android:label="@string/preferences" />
-        
         <activity
             android:name="com.yhh.terminal.WindowList"
             android:label="@string/window_list" />
@@ -296,7 +327,9 @@
             android:name="com.sec.android.support.multiwindow"
             android:value="true" >
         </meta-data>
-		<!-- Terminal END -->
-		
+        <!-- Terminal END -->
+
+
     </application>
+
 </manifest>

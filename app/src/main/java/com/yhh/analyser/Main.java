@@ -123,7 +123,7 @@ public class Main extends FragmentActivity {
     private void initMenu(){
         menuMenu = new SlidingMenu(Main.this);
         menuMenu.setMode(SlidingMenu.LEFT);
-        menuMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);// 设置触摸屏幕的模式 
+        menuMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);// 设置触摸屏幕的模式
         menuMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset); // 设置滑动菜单视图的宽度
         menuMenu.setFadeDegree(0.9f);  // 设置渐入渐出效果的值 
         menuMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
@@ -209,14 +209,13 @@ public class Main extends FragmentActivity {
                 break;
                 
             case R.id.mmenu_my_feedback:
-                Toast.makeText(this, "开发中。。。", Toast.LENGTH_SHORT).show();
+                Intent fbIntent = new Intent(this, CustomFeedback.class);
+                startActivity(fbIntent);
                 break;
                 
             case R.id.mmenu_help:
-                DialogUtils.showAlergDialog(this, "帮助", 
-                        "1. 进入监控界面，点击 系统监控，再点击启动，等价于 老版本直接点击监控的效果。 选择某个APP可实现具体app的监控。"+
-                        "2. 进入工具箱，点击更多实用工具，别有洞天，可能有你需要的工具！");
-                Toast.makeText(this, "开发中。。。", Toast.LENGTH_SHORT).show();
+                Intent helpIntent = new Intent(this, HelpActivity.class);
+                startActivity(helpIntent);
                 break;
                 
             case R.id.mmenu_setting_monitor:

@@ -106,7 +106,7 @@
     <string name="introduction_title">使用说明</string>
     <string name="introduction_node_viewer">(1)点击最上方的目录名，可跳转相应的目录；
         (2)点击返回键，可也跳转上级父目录</string>
-    <string name="introduction_log_analyser">(1)实时解析：解析手机实时Log； (注：X3的Log机制更改后不支持此功能)\n
+    <string name="introduction_log_analyser">(1)实时解析：解析手机实时Log;
             (2)历史解析：需提前将Log文件夹放至sdcard/myLog目录。</string>
     <string name="introduction_log_viewer">直接访问本机的Log。 (注：X3的Log机制更改后不支持此功能)</string>
     <string name="introduction_automatic">长按某一个case，可修改执行参数。</string>
@@ -127,13 +127,13 @@
     
     <string name="menu_create_icon">创建桌面图标</string>
     <string name="menu_file">我的文件</string>
-    <string name="menu_feedback">我的反馈</string>
-    <string name="menu_help">帮助文档</string>
+    <string name="menu_feedback">意见反馈</string>
+    <string name="menu_help">使用指南</string>
     
     <string name="menu_monitor_setting">监控设置</string>
     <string name="menu_score_setting">跑分设置</string>
     
-    <string name="menu_about">关于</string>
+    <string name="menu_about">关于分析中心</string>
     <!-- menu end-->
     
     <!-- #### CPU START -->
@@ -170,12 +170,12 @@
     <string name="float_unfold">展开</string>
     
     <string name="float_top">TOP</string>
-    <string name="float_monitor">MONI</string>
+    <string name="float_monitor">监控</string>
     
     <string name="view_monitor_chart">统计</string>
     <string name="upload">上传</string>
     
-    <string name="monitor_stop_tips">点击  系统监控器-->统计，可查看可视化图形数据</string>
+    <string name="monitor_stop_tips">点击-->统计，可查看可视化图形数据</string>
     
     <string name="start_automatic">开始自动化</string>
     <string name="stop_automatic">停止自动化</string>
@@ -254,8 +254,11 @@
     <string name="quite_alert">再点击一次退出应用</string>
     
     <string name="select_auto_case">请选择自动化case</string>
-    <!-- #########   app monitor           #########               --> 
-     
+    <!-- #########   app monitor           #########               -->
+
+    <string name="message_image_desc">Message Image</string>
+    <string name="umeng_fb_welcome">我是产品创始人，有任何建议或问题，欢迎留言！</string>
+
     <!-- #########   automatic          #########               --> 
     <string name="case_username">账号</string>
     <string name="case_password">密码</string>
@@ -436,6 +439,9 @@
   <!-- LDrawer start -->
   <string name="drawer_open">drawer_open</string>
   <string name="drawer_close">drawer_close</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
   <!-- LDrawer end -->
   
 </resources>
