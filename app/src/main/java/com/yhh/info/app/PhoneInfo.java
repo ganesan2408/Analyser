@@ -8,7 +8,6 @@ package com.yhh.info.app;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
 
 import com.yhh.utils.CommandUtils;
 import com.yhh.utils.ConstUtils;
@@ -17,7 +16,8 @@ import com.yhh.utils.FileUtils;
 public class PhoneInfo {
     public static String ZOOM = "Z90";
     public static String S7 = "X2";
-    
+    public static String X3 = "X3";
+
     /**
      * get the sdk version of phone.
      * 
@@ -38,6 +38,10 @@ public class PhoneInfo {
      */
     public static String getPhoneType() {
         return android.os.Build.MODEL;
+    }
+
+    public static  boolean isX3( ){
+        return getPhoneType().contains(X3);
     }
     
     public static String getIMEI(Context context){

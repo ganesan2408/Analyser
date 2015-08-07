@@ -38,10 +38,23 @@
             android:textColor="@color/black"
             />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mmenu_screenshot"
+        android:layout_below="@id/mmenu_create_icon"
+        style="@style/item"
+        android:clickable="true"
+        android:onClick="menuClick">
+        <TextView
+            style="@style/slide_menu_left_center_title"
+            android:text="@string/menu_screenshot"
+            android:textColor="@color/black"
+            />
+    </RelativeLayout>
     
     <RelativeLayout
         android:id="@+id/mmenu_my_file"
-        android:layout_below="@id/mmenu_create_icon"
+        android:layout_below="@id/mmenu_screenshot"
         style="@style/item"
         android:layout_marginTop="15dp"
         android:clickable="true"
@@ -53,10 +66,24 @@
             android:textColor="@color/black"
             />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mmenu_my_shot"
+        android:layout_below="@id/mmenu_my_file"
+        style="@style/item"
+        android:clickable="true"
+        android:layout_marginTop="15dp"
+        android:onClick="menuClick">
+        <TextView
+            style="@style/slide_menu_left_center_title"
+            android:text="@string/menu_shot"
+            android:textColor="@color/black"
+            />
+    </RelativeLayout>
     
     <RelativeLayout
         android:id="@+id/mmenu_my_feedback"
-        android:layout_below="@id/mmenu_my_file"
+        android:layout_below="@id/mmenu_my_shot"
         style="@style/item"
         android:layout_marginTop="15dp"
         android:clickable="true"
@@ -69,35 +96,7 @@
             />
     </RelativeLayout>
     
-    <RelativeLayout
-        android:id="@+id/mmenu_help"
-        android:layout_below="@id/mmenu_my_feedback"
-        style="@style/item"
-        android:layout_marginTop="15dp"
-        android:clickable="true"
-        android:onClick="menuClick">
-        <TextView
-            style="@style/slide_menu_left_center_title"
-            android:text="@string/menu_help"
-            android:textColor="@color/black"
-            />
-    </RelativeLayout>
 
-    
-    <RelativeLayout
-        android:id="@+id/mmenu_setting_monitor"
-        android:layout_below="@id/mmenu_help"
-        style="@style/item"
-        android:clickable="true"
-        android:layout_marginTop="15dp"
-        android:onClick="menuClick">
-        <TextView
-            style="@style/slide_menu_left_center_title"
-            android:text="@string/menu_monitor_setting"
-            android:textColor="@color/black"
-            />
-    </RelativeLayout>
-    
     <RelativeLayout
         android:id="@+id/mmenu_about"
         android:layout_alignParentBottom="true"

@@ -7,11 +7,9 @@ import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -20,7 +18,6 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yhh.app.setttings.SettingsActivity;
 import com.yhh.fragment.MonitorFragment;
 import com.yhh.fragment.PerformanceFragment;
 import com.yhh.fragment.StatusViewerFragment;
@@ -28,6 +25,7 @@ import com.yhh.fragment.ToolBoxFragment;
 import com.yhh.info.app.PhoneInfo;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DialogUtils;
+import com.yhh.utils.TimeUtils;
 import com.yhh.widget.slidingmenu.SlidingMenu;
 
 public class Main extends FragmentActivity {
@@ -94,19 +92,19 @@ public class Main extends FragmentActivity {
         
         //设置切换按钮
         mTabRg = (RadioGroup) findViewById(R.id.tab_rg_menu);
-        mTabRg.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+        mTabRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                for(int i=0; i<count; i++){
-                    if(mRadioIds[i] == checkedId){
+                for (int i = 0; i < count; i++) {
+                    if (mRadioIds[i] == checkedId) {
                         mTabHost.setCurrentTab(i);
                         appNameTv.setText(mTitles[i]);
                         break;
                     }
                 }
             }
-            
+
         });
         
     }
@@ -169,16 +167,7 @@ public class Main extends FragmentActivity {
         });
     }
     
-    private String getVersion(){
-        String version=null;
-        try {
-            version = " V"+ getPackageManager().getPackageInfo(ConstUtils.MY_PACKAGE_NAME, 0).versionName;
-        } catch (NameNotFoundException e) {
-            Log.e(TAG,"Not found version.");
-        }
-        return version;
-    }
-    
+
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
       if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -203,8 +192,17 @@ public class Main extends FragmentActivity {
             case R.id.mmenu_create_icon:
                 createShortCutDialog();
                 break;
-                
+
+            case R.id.mmenu_screenshot:
+                menuMenu.toggle();
+                ScreenShot.shoot(Main.this, TimeUtils.getCurrentTime());
+                break;
+
             case R.id.mmenu_my_file:
+                Toast.makeText(this, "开发中。。。", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.mmenu_my_shot:
                 Toast.makeText(this, "开发中。。。", Toast.LENGTH_SHORT).show();
                 break;
                 
@@ -213,20 +211,9 @@ public class Main extends FragmentActivity {
                 startActivity(fbIntent);
                 break;
                 
-            case R.id.mmenu_help:
-                Intent helpIntent = new Intent(this, HelpActivity.class);
-                startActivity(helpIntent);
-                break;
-                
-            case R.id.mmenu_setting_monitor:
-                Intent monitorIntent = new Intent(this, SettingsActivity.class);
-                startActivity(monitorIntent);
-                break;
-                
             case R.id.mmenu_about:
-                DialogUtils.showAlergDialog(this, getString(R.string.app_name) + getVersion(), 
-                        getString(R.string.help_url));
-                //还需要增加 版本更新
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
                 break;
         }
     }

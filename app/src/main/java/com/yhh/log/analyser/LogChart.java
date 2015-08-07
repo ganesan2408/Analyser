@@ -6,9 +6,6 @@
  */
 package com.yhh.log.analyser;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -50,6 +47,9 @@ import com.yhh.log.provider.LogDataProvider;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DialogUtils;
 import com.yhh.widget.NoScrollListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * draw log chart
@@ -115,7 +115,7 @@ public class LogChart extends ChartBaseActivity {
         }else if(item.getItemId() ==R.id.menu_shoot){
             ScreenShot.shoot(this, mTargetLog);
         }else if(item.getItemId() ==R.id.hide_statistic){
-            if(mTargetLog.startsWith(SleepLogParser.newFile)){
+            if(mTargetLog.endsWith(SleepLogParser.newFile)){
                 Intent intent = new Intent(this, SleepChart.class);
                 intent.putExtra("fileName", mTargetLog);
                 startActivity(intent);
@@ -150,7 +150,7 @@ public class LogChart extends ChartBaseActivity {
         String mTitleDay = mLogProvider.getTitleDay();
         ArrayList<String> xVals = ChartTool.getInstance().getXAxisValues();
         
-        if(mTargetLog.startsWith(BatteryLogParser.newFile)){
+        if(mTargetLog.endsWith(BatteryLogParser.newFile)){
             ArrayList<Entry> batteryLevel = mLogProvider.getLevelEntryList();
             ArrayList<Entry> batteryTemp = mLogProvider.getTemperatureEntryList();
             ArrayList<Entry> batteryVol = mLogProvider.getVoltageEntryList();
@@ -164,18 +164,18 @@ public class LogChart extends ChartBaseActivity {
                     "电池电量(" + mTitleDay+ ")"), getApplicationContext(), true));
             
             mChartItems.add(new LineChartItem(generateLineData(xVals, batteryTemp,
-                    "电池温度(" + mTitleDay+ ")"), getApplicationContext(), false));
-            
-            mChartItems.add(new ExtendBarChartItem(generateBarData(xVals, batteryStatus,
-                    "充电状态(" + mTitleDay+ ")"), getApplicationContext(), false, statusDescription));
-            
-            mChartItems.add(new LineChartItem(generateLineData(xVals, batteryVol,
-                    "电池电压(" + mTitleDay+ ")"), getApplicationContext(), false));
-            
-            mChartItems.add(new ExtendBarChartItem(generateBarData(xVals, batterySHealth,
-                    "健康状态(" + mTitleDay+ ")"), getApplicationContext(), false, healthDescription));
+                    "电池温度(" + mTitleDay + ")"), getApplicationContext(), false));
 
-        }else if(mTargetLog.startsWith(PmLogParser.newFile)){
+            mChartItems.add(new LineChartItem(generateLineData(xVals, batteryVol,
+                    "电池电压(" + mTitleDay + ")"), getApplicationContext(), false));
+
+            mChartItems.add(new ExtendBarChartItem(generateBarData(xVals, batteryStatus,
+                    "充电状态(" + mTitleDay + ")"), getApplicationContext(), false, statusDescription));
+
+            mChartItems.add(new ExtendBarChartItem(generateBarData(xVals, batterySHealth,
+                    "健康状态(" + mTitleDay + ")"), getApplicationContext(), false, healthDescription));
+
+        }else if(mTargetLog.endsWith(PmLogParser.newFile)){
             ArrayList<Entry> currentEntry = mLogProvider.getCurrentEntryList();
             ArrayList<Entry> brightnessEntry = mLogProvider.getBrightnessEntryList();
             ArrayList<Entry> gpuClkEntry = mLogProvider.getGpuClkEntryList();
@@ -193,7 +193,7 @@ public class LogChart extends ChartBaseActivity {
             mChartItems.add(new StackedBarChartItem(generateStackedBarData(xVals,cpuClkEntry,
                     "CPU频率(" + mTitleDay+ ")"), getApplicationContext(), false));
             
-        }else if(mTargetLog.startsWith(SleepLogParser.newFile)){
+        }else if(mTargetLog.endsWith(SleepLogParser.newFile)){
             ArrayList<ArrayList<String>> hhmmssAxisGroup = ChartTool.getInstance().gethhmmssAxisGroup();
             ArrayList<ArrayList<BarEntry>> wakeupEntry = mLogProvider.getWakeupEntry();
             int len = 6;
@@ -201,15 +201,18 @@ public class LogChart extends ChartBaseActivity {
                 Log.d(TAG,"wakeupEntry size=" + wakeupEntry.size());
             }
             for(int i=0;i<len;i++){
-                mChartItems.add(new BarChartItem(generateBarData(hhmmssAxisGroup.get(i), 
-                        wakeupEntry.get(i),"休眠与唤醒(" + mTitleDay+ ") Part"+(i+1)), 
-                        getApplicationContext(), false));
+                ArrayList<BarEntry> curEntry = wakeupEntry.get(i);
+                if(curEntry !=null && curEntry.size()>0){
+                    mChartItems.add(new BarChartItem(generateBarData(hhmmssAxisGroup.get(i),
+                            curEntry,"休眠与唤醒(" + mTitleDay+ ") Part"+(i+1)),
+                            getApplicationContext(), false));
+                }
                 if(DEBUG){
                     Log.d(TAG,"wakeupEntry.get(i) size="+wakeupEntry.get(i).size());
                 }
             }
         }else{
-            
+            Log.e(TAG,"updateAdapter NULL.");
         }
         mChartDataAdapter = new ChartDataAdapter(getApplicationContext(), mChartItems);
     }

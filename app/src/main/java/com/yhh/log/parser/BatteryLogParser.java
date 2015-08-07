@@ -6,6 +6,13 @@
  */
 package com.yhh.log.parser;
 
+import android.os.Handler;
+import android.util.Log;
+
+import com.yhh.chart.base.LogParser;
+import com.yhh.log.analyser.MainLogAnalyser;
+import com.yhh.utils.ConstUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,34 +25,27 @@ import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.os.Handler;
-import android.util.Log;
-
-import com.yhh.chart.base.LogParser;
-import com.yhh.log.analyser.MainLogAnalyser;
-import com.yhh.utils.ConstUtils;
-
 /**
- * parse battery log , and write useful infomation into file.
+ * parse battery log , and write useful information into file.
  * 
  */
 public class BatteryLogParser extends LogParser{
     private static String TAG =  ConstUtils.DEBUG_TAG+ "BatteryLogParser";
     private boolean DEBUG = true;
-    
+
+    private BufferedWriter bw;
     private String mDir;
-    public static String newFile ="BatteryInfo_";
+    public static String newFile ="_电池";
     
     public BatteryLogParser(String dir){
         mDir = dir;
     }
     
-    
-    
+
     @Override
     public void parse(Handler handler){
         super.parse();
-        ArrayList<File> files = listTargetLog(mDir,ConstUtils.LOG_BATTERY);
+        ArrayList<File> files = listTargetLog(mDir, ConstUtils.LOG_BATTERY);
         if(files ==null || files.size() <=0){
             return;
         }
@@ -99,8 +99,8 @@ public class BatteryLogParser extends LogParser{
                          if(lastTime ==null){
                              lastTime = curTime;
                              curYYMMDD = curTime.substring(0,10);
-                             String logPath = MainLogAnalyser.sLogCacheDir+"/"+newFile 
-                                     + curYYMMDD.replace("/", "");
+                             String logPath = MainLogAnalyser.sLogCacheDir+"/"
+                                     + curYYMMDD.replace("/", "") +newFile ;
                              Log.d(TAG,"generate new battery log: " + logPath);
                              bw = new BufferedWriter(new FileWriter(logPath, true));
                          }
@@ -113,7 +113,7 @@ public class BatteryLogParser extends LogParser{
                              usefulData[3] = mChartTool.getAvg(lastHealth);
                              usefulData[4] = mChartTool.getAvg(lastVoltage);
                              
-                             addLine2File(lastTime.substring(11),usefulData);
+                             addLine2File(bw, lastTime.substring(11),usefulData);
                              lastTime = curTime;
                              
                              lastLevels.clear();
@@ -126,8 +126,8 @@ public class BatteryLogParser extends LogParser{
                                  bw.flush();
                                  bw.close();
                                  curYYMMDD = curTime.substring(0,10);
-                                 String logPath = MainLogAnalyser.sLogCacheDir+"/"+newFile 
-                                         + curYYMMDD.replace("/", "");
+                                 String logPath = MainLogAnalyser.sLogCacheDir+"/"
+                                         + curYYMMDD.replace("/", "") +newFile ;
                                  Log.d(TAG,"generate new battery log: " + logPath);
                                  bw = new BufferedWriter(new FileWriter(logPath,true));
                              }

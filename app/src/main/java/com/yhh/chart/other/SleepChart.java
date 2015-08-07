@@ -6,16 +6,13 @@
  */
 package com.yhh.chart.other;
 
-import java.util.ArrayList;
-
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -30,9 +27,12 @@ import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.yhh.analyser.R;
 import com.yhh.chart.base.ChartBaseActivity;
+import com.yhh.log.analyser.MainLogAnalyser;
 import com.yhh.log.model.WakeupInfo;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DialogUtils;
+
+import java.util.ArrayList;
 
 public class SleepChart extends ChartBaseActivity implements  OnChartValueSelectedListener {
     private static final String TAG = ConstUtils.DEBUG_TAG + "SleepChart";
@@ -78,29 +78,21 @@ public class SleepChart extends ChartBaseActivity implements  OnChartValueSelect
         l.setPosition(LegendPosition.RIGHT_OF_CHART);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(5f);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.pie, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.statistic_result: 
+        findViewById(R.id.sleep_detail_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 DialogUtils.showAlergDialog(SleepChart.this, "休眠与唤醒统计", mWakeupContent);
-                break;
-        }
-        return true;
+            }
+        });
     }
-    
+
+
     private void initData(){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        final String parentDir = pref.getString("log_dir", "");
-        
+//        final String parentDir = pref.getString("log_dir", "");
+        final String parentDir = MainLogAnalyser.mParseDir;
+
         // add data
         new Thread(new Runnable(){
 

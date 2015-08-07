@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.mikephil.charting.charts.PieChart
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/chart1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    >
+    <com.github.mikephil.charting.charts.PieChart
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        android:id="@+id/sleep_detail_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sleep_detail"
+        />
+</RelativeLayout>

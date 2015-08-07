@@ -6,6 +6,21 @@
  */
 package com.yhh.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
+import android.os.Environment;
+import android.util.Log;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -20,21 +35,6 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ComponentInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Environment;
-import android.util.Log;
-
 public class Utils {
 	private static final String TAG= ConstUtils.DEBUG_TAG + "Utils";
 	public static long firstTime;
@@ -45,7 +45,7 @@ public class Utils {
         try {
             ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
             applicationName =  (String) packageManager.getApplicationLabel(appInfo); 
-            Log.i(TAG,"applicationName="+applicationName);
+//            Log.i(TAG,"applicationName="+applicationName);
         } catch (NameNotFoundException e) {
         }
         return applicationName;

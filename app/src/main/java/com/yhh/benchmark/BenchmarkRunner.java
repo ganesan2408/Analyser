@@ -6,20 +6,6 @@
  */
 package com.yhh.benchmark;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -50,6 +36,20 @@ import com.yhh.utils.FileMediaScanner;
 import com.yhh.utils.FileUtils;
 import com.yhh.utils.ShellUtils;
 import com.yhh.utils.Utils;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BenchmarkRunner extends Activity{
     private static final String TAG = ConstUtils.DEBUG_TAG +"BenchmarkRunner";
@@ -370,13 +370,13 @@ public class BenchmarkRunner extends Activity{
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.getMenuInflater().inflate(R.menu.app_monitor_menu, menu);
+        this.getMenuInflater().inflate(R.menu.menu_setting, menu);
         return super.onCreateOptionsMenu(menu);
     }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menu_app_settings){
+        if(item.getItemId() == R.id.menu_settings){
             Intent i = new Intent(this, BenchmarkSettingsActivity.class);
             startActivity(i);
         }

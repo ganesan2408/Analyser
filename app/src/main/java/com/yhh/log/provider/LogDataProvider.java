@@ -6,21 +6,13 @@
  */
 package com.yhh.log.provider;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 import android.content.Context;
 import android.util.Log;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.yhh.chart.base.ChartTool;
+import com.yhh.info.app.PhoneInfo;
 import com.yhh.log.analyser.MainLogAnalyser;
 import com.yhh.log.parser.BatteryLogParser;
 import com.yhh.log.parser.LogcatParser;
@@ -29,13 +21,20 @@ import com.yhh.log.parser.SleepLogParser;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.Utils;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 /**
  * provider useful infomation for chart.
  * 
  */
 public class LogDataProvider{
     private static String TAG =  ConstUtils.DEBUG_TAG+ "LogDataProvider";
-    private boolean DEBUG = false;
+    private boolean DEBUG = true;
     
     private Context mContext;
     
@@ -63,13 +62,14 @@ public class LogDataProvider{
     }
     
     public void generateData(String path){
-        if(path.startsWith(BatteryLogParser.newFile)){
+        Log.i(TAG,"======"+path);
+        if(path.endsWith(BatteryLogParser.newFile)){
             generateBatteryData(path);
-        }else if(path.startsWith(PmLogParser.newFile)){
+        }else if(path.endsWith(PmLogParser.newFile)){
             generatePmData(path);
-        }else if(path.startsWith(SleepLogParser.newFile)){
+        }else if(path.endsWith(SleepLogParser.newFile)){
             generateWakeupData(path);
-        }else if(path.startsWith(LogcatParser.newFile)){
+        }else if(path.endsWith(LogcatParser.newFile)){
             generateLogcatData(LogcatParser.newFile);
         }
     }
@@ -85,16 +85,16 @@ public class LogDataProvider{
         BufferedReader br = null;
         String targetPath = MainLogAnalyser.sLogCacheDir +"/" +path;
         mTitleDay = path.split("_")[1];
-        Log.i(TAG,"targetPath: "+targetPath);
+        Log.i(TAG,"generateBatteryData targetPath: "+targetPath);
         try {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(targetPath)));
             while ((line = br.readLine()) != null) {
                 String[] split = line.split("#");
-                mLevelEntry.add(new Entry((float) (Float.parseFloat(split[1])/100),Integer.parseInt(split[0])));
-                mTempEntry.add(new Entry(Float.parseFloat(split[2])/10,Integer.parseInt(split[0])));
-                mStatusEntry.add(new BarEntry(Integer.parseInt(split[3]),Integer.parseInt(split[0])));
-                mHealthEntry.add(new BarEntry(Integer.parseInt(split[4]),Integer.parseInt(split[0])));
-                mVoltageEntry.add(new Entry(Integer.parseInt(split[5]),Integer.parseInt(split[0])));
+                mLevelEntry.add(new Entry(Float.parseFloat(split[1])/100, Integer.parseInt(split[0])));
+                mTempEntry.add(new Entry(Float.parseFloat(split[2])/10, Integer.parseInt(split[0])));
+                mStatusEntry.add(new BarEntry(Integer.parseInt(split[3]), Integer.parseInt(split[0])));
+                mHealthEntry.add(new BarEntry(Integer.parseInt(split[4]), Integer.parseInt(split[0])));
+                mVoltageEntry.add(new Entry(Float.parseFloat(split[5])/1000, Integer.parseInt(split[0])));
                 
             }
             if(DEBUG){
@@ -103,9 +103,9 @@ public class LogDataProvider{
             }
             
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Log.e(TAG,"",e);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "", e);
         }finally {
             if (br != null) {
                 try {
@@ -134,7 +134,7 @@ public class LogDataProvider{
                 String[] split = line.split("#");
                 appStart.add(split[0]);
                 appName.add(Utils.getAppName(mContext, split[1]));
-                Log.i(TAG,split[1]+" ==> "+Utils.getAppName(mContext, split[1]));
+//                Log.i(TAG,split[1]+" ==> "+Utils.getAppName(mContext, split[1]));
             }
             mForeApps.add(appStart);
             mForeApps.add(appName);
@@ -163,7 +163,9 @@ public class LogDataProvider{
         mBrightnessEntry = new ArrayList<Entry>();
         mGpuClkEntry = new ArrayList<Entry>();
         mMulCpuFreq = new ArrayList<BarEntry>();
-        
+
+        int cpuNum = PhoneInfo.isX3()?6:8;
+
         String line;
         BufferedReader br = null;
         String targetPath = MainLogAnalyser.sLogCacheDir +"/" +path;
@@ -174,11 +176,11 @@ public class LogDataProvider{
             float[] mulCpuFreq= new float[8];
             while ((line = br.readLine()) != null) {
                 String[] split = line.split("#");
-                mCurrentEntry.add(new Entry(Integer.parseInt(split[1])/1000, Integer.parseInt(split[0])));
+                mCurrentEntry.add(new Entry(Integer.parseInt(split[1]), Integer.parseInt(split[0])));
                 mBrightnessEntry.add(new Entry(Integer.parseInt(split[2]), Integer.parseInt(split[0])));
-                mGpuClkEntry.add(new Entry(Integer.parseInt(split[3])/1000, Integer.parseInt(split[0])));
+                mGpuClkEntry.add(new Entry(Integer.parseInt(split[3]), Integer.parseInt(split[0])));
                 
-                for(int i=0;i<8;i++){
+                for(int i=0;i<cpuNum;i++){
                     mulCpuFreq[i] = (float)Integer.parseInt(split[4+i]);
                 }
                 mMulCpuFreq.add(new BarEntry(mulCpuFreq, Integer.parseInt(split[0])));

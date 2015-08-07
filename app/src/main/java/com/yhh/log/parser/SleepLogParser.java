@@ -6,6 +6,13 @@
  */
 package com.yhh.log.parser;
 
+import android.os.Handler;
+import android.util.Log;
+
+import com.yhh.chart.base.LogParser;
+import com.yhh.log.analyser.MainLogAnalyser;
+import com.yhh.utils.ConstUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,20 +23,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.os.Handler;
-import android.util.Log;
-
-import com.yhh.chart.base.LogParser;
-import com.yhh.log.analyser.MainLogAnalyser;
-import com.yhh.utils.ConstUtils;
-
 public class SleepLogParser extends LogParser{
     private static String TAG =  ConstUtils.DEBUG_TAG+ "SleepLogParser";
     private boolean DEBUG = true;
-    
+
+    private BufferedWriter bw;
     private String mDir;
     private  int curGroupIndex;
-    public static String newFile ="SleepInfo_";
+    public static String newFile ="_休眠与唤醒";
     
     public SleepLogParser(String dir){
         mDir = dir;
@@ -71,8 +72,8 @@ public class SleepLogParser extends LogParser{
                     curHHMMSS = lastHHMMSS = line.substring(24,32);
                     Log.d(TAG,"frist YYMMDD="+lastYYMMDD +",frist HHMMSS="+lastHHMMSS);
                     
-                    String logPath = MainLogAnalyser.sLogCacheDir+"/"+newFile 
-                            + lastYYMMDD.replace("-", "");
+                    String logPath = MainLogAnalyser.sLogCacheDir+"/"
+                            + lastYYMMDD.replace("-", "") +newFile ;
                     Log.d(TAG,"generate new sleep log: " + logPath);
                     bw = new BufferedWriter(new FileWriter(logPath, true));
                     curGroupIndex = mChartTool.getGroupIndexByHhmmss(lastHHMMSS);
@@ -99,8 +100,8 @@ public class SleepLogParser extends LogParser{
                         bw.flush();
                         bw.close();
                         
-                        String logPath = MainLogAnalyser.sLogCacheDir+"/"+newFile 
-                                + curYYMMDD.replace("-", "");
+                        String logPath = MainLogAnalyser.sLogCacheDir+"/"
+                                + curYYMMDD.replace("-", "") +newFile ;
                         Log.d(TAG,"generate new sleep log: " + logPath);
                         bw = new BufferedWriter(new FileWriter(logPath,true));
                         curGroupIndex = mChartTool.getGroupIndexByHhmmss(curHHMMSS);
@@ -120,8 +121,8 @@ public class SleepLogParser extends LogParser{
 //                        writeTimePoint(mChartTool.hhmmss2Index(lastHHMMSS));
                         bw.flush();
                         bw.close();
-                        String logPath = MainLogAnalyser.sLogCacheDir+"/"+newFile 
-                                + curYYMMDD.replace("-", "");
+                        String logPath = MainLogAnalyser.sLogCacheDir+"/"
+                                + curYYMMDD.replace("-", "") +newFile ;
                         Log.d(TAG,"generate new sleep log: " + logPath);
                         bw = new BufferedWriter(new FileWriter(logPath,true));
                         curGroupIndex = mChartTool.getGroupIndexByHhmmss(curHHMMSS);
@@ -131,8 +132,10 @@ public class SleepLogParser extends LogParser{
                     }
                 }
             }
-            bw.flush();
-            bw.close();
+            if(bw !=null) {
+                bw.flush();
+                bw.close();
+            }
         } catch (Exception e) {
             Log.e(TAG,"init Sleep log failure.",e);
         } finally {

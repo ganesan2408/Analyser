@@ -6,11 +6,6 @@
  */
 package com.yhh.app.monitor;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.Arrays;
-import java.util.Collections;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -23,6 +18,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,6 +35,11 @@ import com.yhh.info.app.AppInfo;
 import com.yhh.info.app.ProcessInfo;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DialogUtils;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class SingleAppMonitor extends Activity {
     
@@ -288,11 +289,20 @@ public class SingleAppMonitor extends Activity {
 		super.onDestroy();
 		unregisterReceiver(receiver);
 	}
-	
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.getMenuInflater().inflate(R.menu.menu_setting, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){
             finish();
+        }else if(item.getItemId() == R.id.menu_settings){
+            Intent monitorIntent = new Intent(this, SettingsActivity.class);
+            startActivity(monitorIntent);
         }
         return super.onOptionsItemSelected(item);
     }

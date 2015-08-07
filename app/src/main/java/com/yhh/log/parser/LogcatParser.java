@@ -6,6 +6,13 @@
  */
 package com.yhh.log.parser;
 
+import android.os.Handler;
+import android.util.Log;
+
+import com.yhh.chart.base.LogParser;
+import com.yhh.log.analyser.MainLogAnalyser;
+import com.yhh.utils.ConstUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,23 +21,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.os.Handler;
-import android.util.Log;
-
-import com.yhh.chart.base.LogParser;
-import com.yhh.log.analyser.MainLogAnalyser;
-import com.yhh.utils.ConstUtils;
 
 public class LogcatParser extends LogParser{
     private static String TAG =  ConstUtils.DEBUG_TAG+ "LogcatParser";
     private boolean DEBUG = true;
-    
+
+    private BufferedWriter bw;
     private String mDir;
-    public static String newFile ="AppStats";
+    public static String newFile ="用户行为统计";
     
     ArrayList<String> foregroundTimes = new ArrayList<String>();
     ArrayList<String> foregroundApps = new ArrayList<String>();
@@ -44,14 +44,14 @@ public class LogcatParser extends LogParser{
     @Override
     public void parse(Handler handler){
         super.parse();
-        ArrayList<File> files = listTargetLog(mDir,ConstUtils.LOG_LOGCAT);
+        ArrayList<File> files = listTargetLog(mDir, ConstUtils.LOG_LOGCAT);
         if(files ==null || files.size() <=0){
             return;
         }
         
         //保证解析过程由旧至新
-        Collections.sort(files, Collections.reverseOrder());
-        for(File f: files){
+        ArrayList<File> sortFiles = sortList(files);
+        for(File f: sortFiles){
             if(mIsParse){
                 parseLogcat(f);
                 handler.sendMessage(handler.obtainMessage(2));
@@ -59,11 +59,50 @@ public class LogcatParser extends LogParser{
         }
         write2File(foregroundTimes, foregroundApps);
     }
+
+    private ArrayList<File> sortList(ArrayList<File> list){
+        int len = list.size();
+        File tmpFile;
+        for(int i=0;i<len;i++){
+            for(int j=i+1;j<len;j++){
+                if(getIndex(list.get(i))<getIndex(list.get(j))){
+                    tmpFile = list.get(i);
+                    list.set(i,list.get(j));
+                    list.set(j, tmpFile);
+                }
+            }
+        }
+
+        return  list;
+    }
+
+//    private String getList(ArrayList<File> list){
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("==>  ");
+//        int len = list.size();
+//        for(int i=0;i<len;i++){
+//            sb.append(list.get(i).getName()).append("  ");
+//        }
+//        return  sb.toString();
+//    }
+
+    private int getIndex(File file){
+        int index = 0;
+        String fileName = file.getName();
+        int dotIndex = fileName.lastIndexOf(".");
+        if(dotIndex > 0) {
+            String subStr = fileName.substring(dotIndex + 1);
+            if (subStr != null) {
+                index = Integer.valueOf(subStr);
+            }
+        }
+        return index;
+    }
     
     private void parseLogcat(File log){
         BufferedReader br = null;
         String line = null;
-        String timeRegex = "[0-2]\\d:[0-5]\\d:[0-5]\\d";
+        String timeRegex = "^\\d{2}[-/]\\d{2}[\\s]+[0-2]\\d:[0-5]\\d:[0-5]\\d";
         Pattern timePattern = Pattern.compile(timeRegex);
         Matcher matcher;
         

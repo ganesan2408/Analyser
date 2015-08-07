@@ -6,6 +6,10 @@
  */
 package com.yhh.utils;
 
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -24,14 +28,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
-
 public class FileUtils {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "FileUtil";
     private static boolean DEBUG=false;
-    public static final String PATH_SD_LOG = Environment.getExternalStorageDirectory().toString()+"/myLog";
+    public static final String PATH_SD_LOG = Environment.getExternalStorageDirectory().getPath()+ "/Log";
     
     public static boolean checkPath(String path){
         if(path == null){

@@ -109,6 +109,11 @@
             android:label="@string/menu_feedback"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name="com.yhh.analyser.AboutActivity"
+            android:label="@string/menu_about"
+            android:screenOrientation="portrait"/>
+
         <!-- Log Analyser START -->
         <activity
             android:name="com.yhh.log.analyser.LogChart"

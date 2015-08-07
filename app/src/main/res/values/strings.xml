@@ -30,7 +30,7 @@
 	<string name="log_show_all">显示完整Log</string>
 	<string name="log_show_search">显示搜索Log</string>
 	<string name="log_local_parser">解析本机Log</string>
-    <string name="log_parser">解析他机Log</string>
+    <string name="log_parser">智能解析</string>
 	
 	<string name="delete">删除</string>
 	<string name="view_current_log">查看实时Log</string>
@@ -38,7 +38,10 @@
 	<string name="delete_current_log">删除实时Log</string>
 	<string name="delete_history_log">删除历史Log</string>
     <string name="save_log">保存Log</string>
-    
+
+
+    <string name="version_update">版本更新</string>
+
     <!-- 首页start -->
     <string name="title_monitor">监控</string>
     <string name="title_view">查看</string>
@@ -96,7 +99,8 @@
     <string name="mydialog_body">正在执行运算中...</string>
     <string name="Open">打开</string>
     <string name="Delete">删除</string>
-    
+    <string name="sleep_detail">查看详细信息</string>
+
     <string name="msg_exit">退出</string>
     <string name="msg_exit_content">确定退出Analyser吗?</string>
     
@@ -126,10 +130,13 @@
     <string name="menu_phone_version">当前手机版本</string>
     
     <string name="menu_create_icon">创建桌面图标</string>
+    <string name="menu_screenshot">开始截图</string>
     <string name="menu_file">我的文件</string>
+    <string name="menu_shot">我的截图</string>
     <string name="menu_feedback">意见反馈</string>
     <string name="menu_help">使用指南</string>
-    
+    <string name="lenovo">Lenovo Phone RD SW Dev.I BSP开发</string>
+
     <string name="menu_monitor_setting">监控设置</string>
     <string name="menu_score_setting">跑分设置</string>
     

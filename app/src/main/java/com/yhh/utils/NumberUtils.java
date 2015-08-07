@@ -19,8 +19,8 @@ public class NumberUtils {
             a.append("0");
         }
         
-//        if(isPercent)
-//            a.append("%");
+        if(isPercent)
+            a.append("%");
         
         DecimalFormat nf = new DecimalFormat("###,###,###,##0" + a.toString());
         String formatted = nf.format(number);

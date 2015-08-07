@@ -6,24 +6,23 @@
  */
 package com.yhh.chart.base;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import android.os.Handler;
 import android.util.Log;
 
 import com.yhh.utils.ConstUtils;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class LogParser extends Parser{
     private static String TAG =  ConstUtils.DEBUG_TAG+ "LogParser";
     private boolean DEBUG = true;
     
-    protected BufferedWriter bw = null;
     protected ChartTool mChartTool = ChartTool.getInstance();
     
-    protected void addLine2File(String dayTime, int[] data){
+    protected void addLine2File(BufferedWriter bw, String dayTime, int[] data){
         if(dayTime == null){
             return ;
         }

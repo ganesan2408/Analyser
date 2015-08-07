@@ -6,6 +6,14 @@
  */
 package com.yhh.log.parser;
 
+import android.os.Handler;
+import android.util.Log;
+
+import com.yhh.chart.base.LogParser;
+import com.yhh.info.app.PhoneInfo;
+import com.yhh.log.analyser.MainLogAnalyser;
+import com.yhh.utils.ConstUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,19 +24,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.os.Handler;
-import android.util.Log;
-
-import com.yhh.chart.base.LogParser;
-import com.yhh.log.analyser.MainLogAnalyser;
-import com.yhh.utils.ConstUtils;
-
 public class PmLogParser extends LogParser{
     private static String TAG =  ConstUtils.DEBUG_TAG+ "PmLogParser";
     private boolean DEBUG = true;
-    
+
+    private BufferedWriter bw;
     private String mDir;
-    public static String newFile ="PmInfo_";
+    public static String newFile ="_电流";
     
     public PmLogParser(String dir){
         mDir = dir;
@@ -37,7 +39,7 @@ public class PmLogParser extends LogParser{
     @Override
     public void parse(Handler handler){
         super.parse();
-        ArrayList<File> files = listTargetLog(mDir,ConstUtils.LOG_PMLOG);
+        ArrayList<File> files = listTargetLog(mDir, ConstUtils.LOG_PMLOG);
         if(files ==null || files.size() <=0){
             return;
         }
@@ -53,7 +55,12 @@ public class PmLogParser extends LogParser{
     }
     
     private void parsePmLog(File log){
-        int dataItemNums = 11;
+        int dataItemNums;
+        if(PhoneInfo.isX3()){
+            dataItemNums = 9;
+        }else{
+            dataItemNums = 11;
+        }
         BufferedReader br = null;
         int[] usefulData = new int[dataItemNums];
         String line, curTime, lastTime = null, curYYMMDD = null;
@@ -84,7 +91,7 @@ public class PmLogParser extends LogParser{
             }
             while ( (line = br.readLine()) != null  && (!line.equals("")) ){ }//忽略后续行，直到遇到空行
             
-            String logPath2 = MainLogAnalyser.sLogCacheDir+"/"+newFile + curYYMMDD.replace("  ", "");
+            String logPath2 = MainLogAnalyser.sLogCacheDir+"/" + curYYMMDD.replace("  ", "") +newFile;
             bw = new BufferedWriter(new FileWriter(logPath2, true));
             
             while ((line = br.readLine()) != null) {
@@ -95,15 +102,15 @@ public class PmLogParser extends LogParser{
                              usefulData[i] = mChartTool.getAvg(lastdata.get(i));
                              lastdata.get(i).clear();
                          }
-                         addLine2File(lastTime.substring(7), usefulData);
+                         addLine2File(bw, lastTime.substring(7), usefulData);
                          lastTime = curTime;
                          
                          if(!curTime.startsWith(curYYMMDD)){
                              bw.flush();
                              bw.close();
                              curYYMMDD = curTime.substring(0,6);
-                             String logPath = MainLogAnalyser.sLogCacheDir+"/"+newFile 
-                                     + curYYMMDD.replace("  ", "");
+                             String logPath = MainLogAnalyser.sLogCacheDir+"/"
+                                     + curYYMMDD.replace("  ", "") +newFile ;
                              bw = new BufferedWriter(new FileWriter(logPath,true));
                          }
                      }
@@ -111,12 +118,12 @@ public class PmLogParser extends LogParser{
                      br.readLine(); // 忽略这一行： current_now, brightness, gpuclk...
                      
                      try{
-                         lastdata.get(0).add(Integer.valueOf(br.readLine()));
+                         lastdata.get(0).add(Integer.valueOf(br.readLine())/1000);
                      }catch(Exception e){
-                         lastdata.get(0).add(Integer.valueOf(br.readLine()));
+                         lastdata.get(0).add(Integer.valueOf(br.readLine())/1000);
                      }
                      lastdata.get(1).add(Integer.valueOf(br.readLine()));
-                     lastdata.get(2).add(Integer.valueOf(br.readLine())/1000);
+                     lastdata.get(2).add(Integer.valueOf(br.readLine())/1000000);
                      
                      for(int i=3;i< dataItemNums;i++){
                          lastdata.get(i).add(getCpuClk(br.readLine()));

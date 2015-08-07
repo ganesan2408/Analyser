@@ -10,7 +10,7 @@
         android:title="统计"
         android:orderInCategory="100"
         android:showAsAction="always"/>
-    
+
     <item
         android:id="@+id/menu_shoot"
         android:title="@string/screen_shoot"
