@@ -3,24 +3,20 @@ package com.yhh.analyser;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.SharedPreferences;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,9 +42,6 @@ public class MyShotActivity extends Activity {
     private ShotAdapter mAdapter;
     private SwipeMenuListView mListView;
 
-    private WindowManager windowManager = null;
-    private WindowManager.LayoutParams wmParams = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +53,7 @@ public class MyShotActivity extends Activity {
     }
 
     private void createSwipeListView(){
-        mShotList = listImages(ScreenShot.sShotDir);
+        reflash();
         mListView = (SwipeMenuListView) findViewById(R.id.shot_swipe_ll);
         if(mShotList !=null) {
             mAdapter = new ShotAdapter();
@@ -109,11 +102,11 @@ public class MyShotActivity extends Activity {
                 switch (index) {
                     case 0:
                         // open
-                        createFloatingWindow(ScreenShot.sShotDir + mShotList.get(position));
+                        showImage(mShotList.get(position));
                         break;
                     case 1:
                         // delete
-                        FileUtils.deleteFile(ScreenShot.sShotDir + mShotList.get(position));
+                        deleteImage(mShotList.get(position));
                         mAdapter.notifyDataSetChanged();
                         break;
                 }
@@ -145,6 +138,10 @@ public class MyShotActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    private void reflash(){
+        mShotList = listImages(ScreenShot.sShotDir);
     }
 
 
@@ -231,33 +228,27 @@ public class MyShotActivity extends Activity {
         bar.setIcon(R.drawable.nav_back);
     }
 
+    private void showImage(String path){
+        View view =LayoutInflater.from(this).inflate(R.layout.image_floating_view, null);
+        ImageView imageView = (ImageView)(view.findViewById(R.id.show_image_iv));
+        TextView name = (TextView)(view.findViewById(R.id.show_name_tv));
+        imageView.setImageBitmap(getBitmp(ScreenShot.sShotDir + path));
+        name.setText(path.substring(0, path.length()-4));
+        new AlertDialog.Builder(this)
+                .setView(view)
+                .setPositiveButton(R.string.yes_str,
+                        new DialogInterface.OnClickListener() {
 
-    private void createFloatingWindow(String path) {
-        final View viFloatingWindow = LayoutInflater.from(this).inflate(R.layout.image_floating_view, null);
-        ImageView imageView = (ImageView)(viFloatingWindow.findViewById(R.id.show_image_iv));
-        Button closeBtn = (Button)(viFloatingWindow.findViewById(R.id.close_btn));
-        imageView.setImageBitmap(getBitmp(path));
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                            }
+                        }).show();
+    }
 
-        windowManager = (WindowManager) getApplicationContext().getSystemService("window");
-        wmParams =  new WindowManager.LayoutParams();
-        wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
-        wmParams.flags =  WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        wmParams.format = PixelFormat.RGBA_8888;
-        wmParams.gravity = Gravity.CENTER;
-        wmParams.x = 0;
-        wmParams.y = 0;
-        wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        wmParams.alpha = 1.0f;
-        windowManager.addView(viFloatingWindow, wmParams);
-
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                windowManager.removeView(viFloatingWindow);
-            }
-
-        });
+    private void deleteImage(String path){
+        FileUtils.deleteFile(ScreenShot.sShotDir + path);
+        reflash();
     }
 
 
