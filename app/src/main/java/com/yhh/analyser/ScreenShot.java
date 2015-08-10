@@ -6,10 +6,6 @@
  */
 package com.yhh.analyser;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -20,10 +16,14 @@ import android.widget.Toast;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.FileUtils;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class ScreenShot {
     private static final String TAG = ConstUtils.DEBUG_TAG+ "ScreenShot";
     
-    private static String mShotDir = "/sdcard/systemAnalyzer/";
+    public final static String sShotDir = "/sdcard/systemAnalyzer/screenshot/";
     
     private static Bitmap takeScreenShot(Activity activity) {
         View view = activity.getWindow().getDecorView();
@@ -52,18 +52,18 @@ public class ScreenShot {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(strFileName);
-            if (null != fos) {
-                b.compress(Bitmap.CompressFormat.PNG, 90, fos);
-                fos.flush();
-                fos.close();
-                rtn =  true;
-                Log.i(TAG,"rtn =  true");
-            }
+            b.compress(Bitmap.CompressFormat.PNG, 90, fos);
+            fos.flush();
+            fos.close();
+            rtn =  true;
+            Log.i(TAG,"rtn =  true");
         } catch (Exception e) {
             Log.i(TAG,"savePic error.",e);
         }finally{
             try {
-                fos.close();
+                if(fos !=null) {
+                    fos.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -86,8 +86,8 @@ public class ScreenShot {
     }
     
     private static String createDiffFile(String shotName, int index) throws IOException{
-        String shotPath ="";
-        shotPath = mShotDir + shotName +"("+ index +").png";
+        String shotPath;
+        shotPath = sShotDir + shotName +"("+ index +").png";
         
         File file = new File(shotPath);  
         if (!file.exists()) {  
@@ -102,7 +102,7 @@ public class ScreenShot {
     
     private static String createFile(String shotName){
         String shotPath ="";
-        if(FileUtils.createFolder(mShotDir)){
+        if(FileUtils.createFolder(sShotDir)){
             try {
                 shotPath = createDiffFile(shotName, 0);
             } catch (IOException e) {

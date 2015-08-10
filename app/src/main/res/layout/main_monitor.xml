@@ -35,7 +35,7 @@
             android:background="#6555"
             android:gravity="center"
             android:textColor="#ffffffff"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:visibility="invisible" />
 
         <com.yhh.widget.letterlistview.SideBar

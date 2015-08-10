@@ -1,9 +1,5 @@
 package com.yhh.fragment;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +29,10 @@ import com.yhh.widget.letterlistview.PinyinComparator;
 import com.yhh.widget.letterlistview.SideBar;
 import com.yhh.widget.letterlistview.SideBar.OnTouchingLetterChangedListener;
 import com.yhh.widget.letterlistview.SortAdapter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MonitorFragment extends Fragment {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "MonitorFragment";
@@ -137,21 +137,23 @@ public class MonitorFragment extends Fragment {
                 @Override
                 public void run() {
                     mAppList = new ProcessInfo().getLaunchApps(mContext);
-                    mHandler.sendMessage(mHandler.obtainMessage());
+                    mHandler.sendMessage(mHandler.obtainMessage(0));
                 }
 		        
 		    }).start();
            
         }else{
-            mHandler.sendMessage(mHandler.obtainMessage());
+            mHandler.sendMessage(mHandler.obtainMessage(1));
         }
 		
 	}
 	
 	private Handler mHandler = new Handler(){
 	    public void handleMessage(Message msg) {
-	        filledData();
-	     // 根据a-z进行排序源数据
+			if(msg.what ==0) {
+				filledData();
+			}
+	        // 根据a-z进行排序源数据
 	        Collections.sort(mAppList, pinyinComparator);
 	        adapter = new SortAdapter(mContext, mAppList);
 	        sortListView.setAdapter(adapter);
@@ -161,8 +163,6 @@ public class MonitorFragment extends Fragment {
 
 	/**
 	 * 为ListView填充数据
-	 * @param date
-	 * @return
 	 */
 	private void filledData(){
 		int appsNum = mAppList.size();
@@ -185,7 +185,7 @@ public class MonitorFragment extends Fragment {
         specailModel.setPackageName("0");
         specailModel.setLogo(mContext.getResources().getDrawable(R.drawable.logo1));
         specailModel.setFirstLetter("☆");
-        mAppList.add(specailModel);
+		mAppList.add(specailModel);
 	}
 	
 	/**

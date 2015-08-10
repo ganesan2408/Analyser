@@ -25,7 +25,6 @@ import com.yhh.fragment.ToolBoxFragment;
 import com.yhh.info.app.PhoneInfo;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DialogUtils;
-import com.yhh.utils.TimeUtils;
 import com.yhh.widget.slidingmenu.SlidingMenu;
 
 public class Main extends FragmentActivity {
@@ -193,17 +192,13 @@ public class Main extends FragmentActivity {
                 createShortCutDialog();
                 break;
 
-            case R.id.mmenu_screenshot:
-                menuMenu.toggle();
-                ScreenShot.shoot(Main.this, TimeUtils.getCurrentTime());
-                break;
-
             case R.id.mmenu_my_file:
                 Toast.makeText(this, "开发中。。。", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.mmenu_my_shot:
-                Toast.makeText(this, "开发中。。。", Toast.LENGTH_SHORT).show();
+                Intent shotIntent = new Intent(this, MyShotActivity.class);
+                startActivity(shotIntent);
                 break;
                 
             case R.id.mmenu_my_feedback:
@@ -229,7 +224,7 @@ public class Main extends FragmentActivity {
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         shortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, mainIntent);
         // add icon
-        ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(this, R.drawable.system3); 
+        ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(this, R.drawable.logo1);
         shortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes); 
         // only one
         shortCutIntent.putExtra("duplicate", false); 

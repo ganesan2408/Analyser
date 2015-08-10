@@ -130,12 +130,14 @@
     <string name="menu_phone_version">当前手机版本</string>
     
     <string name="menu_create_icon">创建桌面图标</string>
-    <string name="menu_screenshot">开始截图</string>
     <string name="menu_file">我的文件</string>
     <string name="menu_shot">我的截图</string>
     <string name="menu_feedback">意见反馈</string>
     <string name="menu_help">使用指南</string>
-    <string name="lenovo">Lenovo Phone RD SW Dev.I BSP开发</string>
+    <string name="menu_weixin">加入微信交流群</string>
+
+    <string name="lenovo">Lenovo Phone RD SW Dev.I BSP 开发</string>
+    <string name="shot_path">储存路径： /sdcard/systemAnalyzer/screenshot/</string>
 
     <string name="menu_monitor_setting">监控设置</string>
     <string name="menu_score_setting">跑分设置</string>
@@ -432,7 +434,6 @@
   <string name="addshortcut_shortcut_label">Shortcut label\:</string>
   <string name="addshortcut_button_text_icon">Text icon</string>
   <string name="addshortcut_make_text_icon">MAKE TEXT ICON</string>
-  <string name="addshortcut_text_icon_instructions"></string>
   <string name="addshortcut_title">Term shortcut</string>
   
   <!-- ColorValue.java -->

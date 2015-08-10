@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yhh.utils.ConstUtils;
 
@@ -23,6 +24,7 @@ public class AboutActivity extends Activity {
         setContentView(R.layout.menu_about);
         initActionBar();
         initView();
+        initListener();
     }
 
 
@@ -37,6 +39,16 @@ public class AboutActivity extends Activity {
                 startActivity(helpIntent);
             }
         });
+    }
+
+    private void initListener(){
+        findViewById(R.id.about_update).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AboutActivity.this,"已是最新版本", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 
