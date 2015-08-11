@@ -18,6 +18,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yhh.fragment.MonitorFragment;
 import com.yhh.fragment.PerformanceFragment;
 import com.yhh.fragment.StatusViewerFragment;
@@ -28,13 +29,13 @@ import com.yhh.utils.DialogUtils;
 import com.yhh.widget.slidingmenu.SlidingMenu;
 
 public class Main extends FragmentActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG+ "StartupActivity";
+    private static final String TAG = ConstUtils.DEBUG_TAG+ "Main";
     
     private FragmentTabHost mTabHost;
     private RadioGroup mTabRg;
     private Long mExitTime = (long) 0;
     
-    public static String MONITOR_PARENT_PATH;
+//    public static String MONITOR_PARENT_PATH;
     
     private final Class[] mFragments = {
             MonitorFragment.class, 
@@ -71,11 +72,25 @@ public class Main extends FragmentActivity {
         initView();
         initMenu();
         setDefaultView();
+
+        MobclickAgent.setDebugMode(true);
+        MobclickAgent.updateOnlineConfig(this);
     }
-    
-    
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
     private void initParams(){
-        MONITOR_PARENT_PATH = getFilesDir().getAbsolutePath() +"/monitor";
+//        MONITOR_PARENT_PATH = getFilesDir().getAbsolutePath() +"/monitor";
       
     }
     
@@ -183,7 +198,7 @@ public class Main extends FragmentActivity {
     
     public void menuClick(View v){
         switch(v.getId()){
-            case R.id.mmenu_phone:
+            case R.id.mmenu_device_info:
                 DialogUtils.showAlergDialog(this, getString(R.string.about_phone), 
                         (new PhoneInfo()).toString());
                 break;
@@ -193,7 +208,8 @@ public class Main extends FragmentActivity {
                 break;
 
             case R.id.mmenu_my_file:
-                Toast.makeText(this, "开发中。。。", Toast.LENGTH_SHORT).show();
+                Intent fIntent = new Intent(this, MyFileActivity.class);
+                startActivity(fIntent);
                 break;
 
             case R.id.mmenu_my_shot:

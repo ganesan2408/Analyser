@@ -1,14 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"     
     android:layout_height="fill_parent">
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/benchmark_ll"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_margin="20dp">
         <TextView
+            android:id="@+id/run_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -18,23 +17,42 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_toRightOf="@id/run_count_tv"
             android:paddingLeft="10sp"
             android:textSize="20sp"
             android:background="@drawable/rounded_edittext"
             android:inputType="number"
             android:gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@id/benchmark_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/loop_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/status_info_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loop_count_tv"
+            android:layout_margin="15dp"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/foot_ll"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/layout_height_test"
-        android:layout_below="@id/benchmark_ll"
-        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
         android:gravity="center">
         <Button
             android:id="@+id/benchmark_run"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginBottom="@dimen/layout_marginBottom_test"
             android:layout_marginLeft="@dimen/layout_marginLeft_test"
@@ -45,9 +63,9 @@
             android:textSize="@dimen/text_size_test" />
         <Button
             android:id="@+id/benchmark_upload"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/benchmark_run"
             android:layout_marginBottom="@dimen/layout_marginBottom_test"
             android:layout_marginLeft="@dimen/layout_marginLeft_test"
             android:layout_marginRight="@dimen/layout_marginRight_test"
@@ -58,9 +76,9 @@
             android:textSize="@dimen/text_size_test" />
         <Button
             android:id="@+id/benchmark_view"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/benchmark_upload"
             android:layout_marginBottom="@dimen/layout_marginBottom_test"
             android:layout_marginLeft="@dimen/layout_marginLeft_test"
             android:layout_marginRight="@dimen/layout_marginRight_test"
@@ -69,21 +87,6 @@
             android:text="@string/view_monitor_chart"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_test" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/loop_count_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/foot_ll"
-        android:layout_margin="15dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/status_info_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loop_count_tv"
-        android:layout_margin="15dp"
-        android:textSize="20sp"/>
-    
+    </RelativeLayout>
+
 </RelativeLayout>

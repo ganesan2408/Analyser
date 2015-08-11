@@ -6,21 +6,21 @@
  */
 package com.yhh.app.analyser;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.yhh.app.monitor.SingleAppMonitor;
+import com.yhh.utils.ConstUtils;
+import com.yhh.utils.LogUtils;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import android.content.Context;
-import android.util.Log;
-
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.yhh.analyser.Main;
-import com.yhh.utils.ConstUtils;
-import com.yhh.utils.LogUtils;
 
 public class MonitorDataProvider {
     private static String TAG =  ConstUtils.DEBUG_TAG+ "MonitorDataProvider";
@@ -41,7 +41,7 @@ public class MonitorDataProvider {
     }
     
     public void parseNewest(){
-        String path =  Main.MONITOR_PARENT_PATH +"/"+LogUtils.getDateNewestLog(Main.MONITOR_PARENT_PATH);
+        String path =  SingleAppMonitor.sMonitorDir +"/"+LogUtils.getDateNewestLog(SingleAppMonitor.sMonitorDir);
         Log.i(TAG, "PATH="+path);
         parse(path);
     }

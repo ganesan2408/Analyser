@@ -3,15 +3,10 @@ package com.yhh.analyser;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,24 +14,23 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.yhh.app.analyser.AppChartAnalyser;
+import com.yhh.app.monitor.SingleAppMonitor;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DensityUtils;
 import com.yhh.utils.FileUtils;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class MyShotActivity extends Activity {
-    private final static String TAG = ConstUtils.DEBUG_TAG + "MyShotActivity";
+public class MyFileActivity extends Activity {
+    private final static String TAG = ConstUtils.DEBUG_TAG + "MyFileActivity";
     private List<String> mShotList;
     private ShotAdapter mAdapter;
     private SwipeMenuListView mListView;
@@ -52,6 +46,7 @@ public class MyShotActivity extends Activity {
     }
 
     private void createSwipeListView(){
+        ((TextView)findViewById(R.id.title_screen)).setText(R.string.monitor_file_path);
         reflash();
         mListView = (SwipeMenuListView) findViewById(R.id.shot_swipe_ll);
         if(mShotList !=null) {
@@ -68,9 +63,9 @@ public class MyShotActivity extends Activity {
                 openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
                 // set item width
-                openItem.setWidth(DensityUtils.dip2px(MyShotActivity.this, 90));
+                openItem.setWidth(DensityUtils.dip2px(MyFileActivity.this, 90));
                 // set item title
-                openItem.setTitle("Open");
+                openItem.setTitle("解析");
                 // set item title fontsize
                 openItem.setTitleSize(18);
                 // set item title font color
@@ -85,7 +80,7 @@ public class MyShotActivity extends Activity {
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
                 // set item width
-                deleteItem.setWidth(DensityUtils.dip2px(MyShotActivity.this, 90));
+                deleteItem.setWidth(DensityUtils.dip2px(MyFileActivity.this, 90));
                 // set a icon
                 deleteItem.setIcon(R.drawable.ic_delete);
                 // add to menu
@@ -101,11 +96,11 @@ public class MyShotActivity extends Activity {
                 switch (index) {
                     case 0:
                         // open
-                        showImage(mShotList.get(position));
+                        analyticFile(mShotList.get(position));
                         break;
                     case 1:
                         // delete
-                        deleteImage(mShotList.get(position));
+                        deleteMonitorFile(mShotList.get(position));
                         mAdapter.notifyDataSetChanged();
                         break;
                 }
@@ -127,55 +122,23 @@ public class MyShotActivity extends Activity {
             }
         });
 
-//        // test item long click
-//        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view,
-//                                           int position, long id) {
-//                Toast.makeText(getApplicationContext(), position + " long click", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
+        // test item long click
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showImage(mShotList.get(position));
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+                Toast.makeText(getApplicationContext(), position + " long click", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
     }
 
     private void reflash(){
-        mShotList = listImages(ScreenShot.sShotDir);
+        mShotList = Arrays.asList(FileUtils.listFiles(SingleAppMonitor.sMonitorDir));
     }
 
 
-    public  List<String> listImages(String dir){
-        File parentDir = new File(dir);
-        String[] files = parentDir.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String filename) {
-                File current = new File(dir, filename);
-                if (filename.endsWith("png")) {
-                    return true;
-                }
-                return false;
-            }
-        });
-        if(files ==null || files.length<1){
-            Log.w(TAG,"screen shot num=0");
-            return null;
-        }
-        Arrays.sort(files, Collections.reverseOrder());
-        List list = new ArrayList<String>();
-        list = Arrays.asList(files);
-        return list;
-    }
-
-    private Bitmap getBitmp(String path){
-        return BitmapFactory.decodeFile(path);
-    }
 
 
     class ShotAdapter extends BaseAdapter{
@@ -208,7 +171,7 @@ public class MyShotActivity extends Activity {
                 holder.name_tv = (TextView) convertView.findViewById(R.id.shotitem_name_tv);
             }
             String name = (String) getItem(position);
-            holder.shot_iv.setImageBitmap(getBitmp(ScreenShot.sShotDir + name));
+            holder.shot_iv.setImageResource(R.drawable.file_logo);
             holder.name_tv.setText(name);
             return convertView;
         }
@@ -234,26 +197,14 @@ public class MyShotActivity extends Activity {
         bar.setIcon(R.drawable.nav_back);
     }
 
-    private void showImage(String path){
-        View view =LayoutInflater.from(this).inflate(R.layout.image_floating_view, null);
-        ImageView imageView = (ImageView)(view.findViewById(R.id.show_image_iv));
-        TextView name = (TextView)(view.findViewById(R.id.show_name_tv));
-        imageView.setImageBitmap(getBitmp(ScreenShot.sShotDir + path));
-        name.setText(path.substring(0, path.length()-4));
-        new AlertDialog.Builder(this)
-                .setView(view)
-                .setPositiveButton(R.string.yes_str,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                            }
-                        }).show();
+    private void analyticFile(String path){
+        Intent intent = new Intent(this, AppChartAnalyser.class);
+        intent.putExtra(SingleAppMonitor.MONITOR_PATH, path);
+        startActivity(intent);
     }
 
-    private void deleteImage(String path){
-        FileUtils.deleteFile(ScreenShot.sShotDir + path);
+    private void deleteMonitorFile(String path){
+        FileUtils.deleteFile(SingleAppMonitor.sMonitorDir + path);
         reflash();
     }
 

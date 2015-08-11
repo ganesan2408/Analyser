@@ -6,15 +6,15 @@
        android:orientation="horizontal"
        android:layout_margin="0dp"
        android:padding="0dp">
-       <Button
-           android:id="@+id/float_stop_btn"
-           android:text="@string/stop_monitor"
-           android:gravity="center"
-           android:layout_width="50dp"
-           android:layout_height="20dp"
-           android:padding="0dp" 
-           android:background="@drawable/selector_floating_title"
-           />
+        <Button
+            android:id="@+id/float_screenshot_btn"
+            android:text="@string/screen_shoot"
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:padding="0sp"
+            android:background="@drawable/selector_floating_title"
+            />
         <View android:layout_width="1dp"
            android:layout_height="20dp"
            android:background="@color/light_black"/>
@@ -30,15 +30,15 @@
         <View android:layout_width="1dp"
            android:layout_height="20dp"
            android:background="@color/light_black"/>
-       <Button
-           android:id="@+id/float_hide_btn"
-           android:text="@string/float_fold"
-           android:gravity="center"
-           android:layout_width="50dp"
-           android:layout_height="20dp"
-           android:padding="0sp"
-           android:background="@drawable/selector_floating_title"
-           />
+        <Button
+            android:id="@+id/float_stop_btn"
+            android:text="@string/stop_monitor"
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:padding="0dp"
+            android:background="@drawable/selector_floating_title"
+            />
         <View android:layout_width="1dp"
            android:layout_height="20dp"
            android:background="@color/light_black"/>

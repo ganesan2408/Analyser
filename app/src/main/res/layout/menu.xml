@@ -12,7 +12,6 @@
         android:background="#e0e0e0"
         android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:onClick="menuClick"
         >
         <TextView
             style="@style/slide_menu_left_center_title"
@@ -25,9 +24,22 @@
             android:textColor="@color/black"
             />
     </RelativeLayout>
-     <RelativeLayout
-        android:id="@+id/mmenu_create_icon"
+    <RelativeLayout
+        android:id="@+id/mmenu_device_info"
         android:layout_below="@id/mmenu_phone"
+        style="@style/item"
+        android:clickable="true"
+        android:onClick="menuClick">
+        <TextView
+            style="@style/slide_menu_left_center_title"
+            android:text="@string/menu_device_info"
+            android:textColor="@color/black"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/mmenu_create_icon"
+        android:layout_below="@id/mmenu_device_info"
+        android:layout_marginTop="15dp"
         style="@style/item"
         android:clickable="true"
         android:onClick="menuClick">

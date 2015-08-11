@@ -23,7 +23,7 @@ import com.yhh.utils.ConstUtils;
 import com.yhh.widget.SwitchButton;
 
 public class SettingFloatingActivity extends Activity {
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingFloatingActivity";
+	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingFloating";
 	private boolean DEBUG = true;
 	
 	private final int MONITOR_ITEMS_COUNT = 13;
@@ -54,7 +54,6 @@ public class SettingFloatingActivity extends Activity {
 	@SuppressLint("NewApi")
     @Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.i(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_monitor_items_settings);
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">分析中心</string>
 	
+	<string name="system_analyzer">系统分析</string>
 	<string name="main_app_analyser">系统监控器</string>
     <string name="main_app_analyser_sub">实时监控CPU/GPU/内存/电流/温度等状态</string>
     <string name="main_log_analyser">Log分析器</string>
@@ -68,10 +69,10 @@
     <string name="toolbox_more">更多实用工具</string>
 	<!-- 首页end -->
 	
-	<string name="app_pkgname">包名:</string>
-	<string name="app_version">版本:</string>
-	<string name="app_pid">PID = </string>
-	<string name="app_uid">UID = </string>
+	<string name="app_pkgname">包名: </string>
+	<string name="app_version">版本: </string>
+	<string name="app_pid">PID : </string>
+	<string name="app_uid">UID : </string>
 	<string name="app_else">其他信息（开发中）</string>
 	
 	
@@ -129,6 +130,7 @@
     <string name="menu_phone">手机型号</string>
     <string name="menu_phone_version">当前手机版本</string>
     
+    <string name="menu_device_info">设备参数</string>
     <string name="menu_create_icon">创建桌面图标</string>
     <string name="menu_file">我的文件</string>
     <string name="menu_shot">我的截图</string>
@@ -138,6 +140,7 @@
 
     <string name="lenovo">Lenovo Phone RD SW Dev.I BSP 开发</string>
     <string name="shot_path">储存路径： /sdcard/systemAnalyzer/screenshot/</string>
+    <string name="monitor_file_path">监控文件路径： /sdcard/systemAnalyzer/monitor/</string>
 
     <string name="menu_monitor_setting">监控设置</string>
     <string name="menu_score_setting">跑分设置</string>
@@ -183,7 +186,8 @@
     
     <string name="view_monitor_chart">统计</string>
     <string name="upload">上传</string>
-    
+    <string name="status_default">未运行</string>
+
     <string name="monitor_stop_tips">点击-->统计，可查看可视化图形数据</string>
     
     <string name="start_automatic">开始自动化</string>

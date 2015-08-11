@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.FileUtils;
+import com.yhh.utils.TimeUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,12 +72,15 @@ public class ScreenShot {
         return rtn;
     }
 
+    public static void shoot(Activity a){
+        shoot(a, TimeUtils.getCurrentTime());
+    }
+
     public static void shoot(Activity a, String shotName) {
         String shotPath = createFile(shotName);
         if(shotPath ==null || shotPath.equals("")){
             return;
         }
-        
         boolean ret = ScreenShot.savePic(ScreenShot.takeScreenShot(a), shotPath);
         if(ret){
            Toast.makeText(a, "截图成功"+shotPath, Toast.LENGTH_SHORT).show();

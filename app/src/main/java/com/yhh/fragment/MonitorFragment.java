@@ -116,7 +116,7 @@ public class MonitorFragment extends Fragment {
             
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterData(s.toString());
+//                filterData(s.toString());
             }
             
             @Override
@@ -208,7 +208,9 @@ public class MonitorFragment extends Fragment {
 		}
 		
 		// 根据a-z进行排序
-		Collections.sort(filterDateList, pinyinComparator);
+		if(filterDateList !=null) {
+			Collections.sort(filterDateList, pinyinComparator);
+		}
 		adapter.updateListView(filterDateList);
 	}
 	

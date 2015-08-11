@@ -6,10 +6,6 @@
  */
 package com.yhh.app.analyser;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,7 +27,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.yhh.analyser.Main;
 import com.yhh.analyser.R;
 import com.yhh.analyser.ScreenShot;
 import com.yhh.app.monitor.ExceptionMonitor;
@@ -47,6 +42,10 @@ import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DialogUtils;
 import com.yhh.utils.LogUtils;
 import com.yhh.widget.NoScrollListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class AppChartAnalyser extends ChartBaseActivity {
     private static final String TAG = ConstUtils.DEBUG_TAG + "AppChartAnalyser";
@@ -139,12 +138,12 @@ public class AppChartAnalyser extends ChartBaseActivity {
             public void run() {
                 mMonitorDataProvider = new MonitorDataProvider(AppChartAnalyser.this);
                 if(mMonitorPath ==null || "".equals(mMonitorPath)){
-                    mMonitorPath = LogUtils.getDateNewestLog(Main.MONITOR_PARENT_PATH);
+                    mMonitorPath = LogUtils.getDateNewestLog(SingleAppMonitor.sMonitorDir);
                 }
                 if(DEBUG){
                     Log.d(TAG,"mMonitorPath="+mMonitorPath);
                 }
-                mMonitorDataProvider.parse(Main.MONITOR_PARENT_PATH +"/"+mMonitorPath);
+                mMonitorDataProvider.parse(SingleAppMonitor.sMonitorDir +"/"+mMonitorPath);
                 
                 updateAdapter();
                 mHandler.sendMessage(mHandler.obtainMessage(0x1));

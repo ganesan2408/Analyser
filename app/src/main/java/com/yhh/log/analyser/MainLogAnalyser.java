@@ -223,7 +223,7 @@ public class MainLogAnalyser extends Activity {
         Log.i(TAG, "files.LEN=" + (files == null ? 0 : files.length));
 
         new AlertDialog.Builder(this)
-                .setTitle("选择目标Log (/sdcard/myLog)")
+                .setTitle("选择目标Log (/sdcard/Log)")
                 .setSingleChoiceItems(files, -1, new DialogInterface.OnClickListener() {
 
                     @Override

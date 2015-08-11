@@ -7,6 +7,7 @@
 package com.yhh.app.monitor;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -27,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yhh.analyser.Main;
 import com.yhh.analyser.R;
 import com.yhh.app.analyser.AppChartAnalyser;
 import com.yhh.app.setttings.SettingsActivity;
@@ -44,6 +45,7 @@ import java.util.Collections;
 public class SingleAppMonitor extends Activity {
     
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SingleAppMonitor";
+    public final static String sMonitorDir = "/sdcard/systemAnalyzer/monitor/";
     
 	private Intent monitorService;
 	private UpdateReceiver receiver;
@@ -69,7 +71,7 @@ public class SingleAppMonitor extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_detailed_info);
 	    
-	     getAppInfo();
+        getAppInfo();
 		initActionBar();
 		initUI();
 		
@@ -98,7 +100,6 @@ public class SingleAppMonitor extends Activity {
 	    
 	}
 	
-	@SuppressLint("NewApi")
     private void initUI(){
 	   monitorService = new Intent();
        monitorService.setClass(SingleAppMonitor.this, MonitorService.class);
@@ -111,68 +112,86 @@ public class SingleAppMonitor extends Activity {
        mVersionTv = (TextView) findViewById(R.id.app_version_value);
        mPidTv = (TextView) findViewById(R.id.app_pid_value);
        mUidTv = (TextView) findViewById(R.id.app_uid_value);
-       
-       mAppLogIv.setBackground(mAppInfo.getLogo());
-       mAppNameTv.setText(mAppInfo.getName());
-       mPkgNameTv.setText(mAppInfo.getPackageName());
-       mVersionTv.setText(mAppInfo.getVersionName());
-       mPidTv.setText(mAppInfo.getPid()+"");
-       mUidTv.setText(mAppInfo.getUid()+"");
-       
-       
+
+
+       setView();
+
        mMonitorBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getString(R.string.start_monitor).equals(mMonitorBtn.getText().toString())) {
-                    if (!mAppInfo.getName().equals("-1") && !mAppInfo.getName().equals("系统监控")) {
-                        Toast.makeText(SingleAppMonitor.this, mAppInfo.getName()+"启动中", Toast.LENGTH_SHORT).show();
-                        Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
-                        try {
-                            mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
-                            startActivity(intent);
-                        } catch (Exception e) {
-                            Toast.makeText(SingleAppMonitor.this, getString(R.string.can_not_start_app_toast), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        new Thread(new Runnable(){
+           @Override
+           public void onClick(View v) {
+               if (getString(R.string.start_monitor).equals(mMonitorBtn.getText().toString())) {
+                   if (!mAppInfo.getName().equals("-1") && !mAppInfo.getName().equals("系统监控")) {
+                       Toast.makeText(SingleAppMonitor.this, mAppInfo.getName() + "启动中", Toast.LENGTH_SHORT).show();
+                       Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
+                       try {
+                           mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
+                           startActivity(intent);
+                       } catch (Exception e) {
+                           Toast.makeText(SingleAppMonitor.this, getString(R.string.can_not_start_app_toast), Toast.LENGTH_SHORT).show();
+                           return;
+                       }
+                       new Thread(new Runnable() {
 
-                            @Override
-                            public void run() {
-                                waitForAppStart(mAppInfo.getPackageName());
-                            }
-                            
-                        }).start();
-                    } else {
-                        monitorService.putExtra("appName", -1);
-                        monitorService.putExtra("pid", -1);
-                        monitorService.putExtra("uid", -1);
-                        monitorService.putExtra("packageName", -1);
-                        monitorService.putExtra("startActivity", -1);
-                        
-                        monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startService(monitorService);
-                    }
-                    MonitorService.isServiceStoped = false;
-                    mMonitorBtn.setText(getString(R.string.stop_monitor));
-                    
-                } else {
-                    MonitorService.isServiceStoped = true;
-                    mMonitorBtn.setText(getString(R.string.start_monitor));
-                    stopService(monitorService);
-                }
-            }
-        });
+                           @Override
+                           public void run() {
+                               waitForAppStart(mAppInfo.getPackageName());
+                           }
+
+                       }).start();
+                   } else {
+                       monitorService.putExtra("appName", -1);
+                       monitorService.putExtra("pid", -1);
+                       monitorService.putExtra("uid", -1);
+                       monitorService.putExtra("packageName", -1);
+                       monitorService.putExtra("startActivity", -1);
+
+                       monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                       monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                       startService(monitorService);
+                   }
+                   MonitorService.isServiceStoped = false;
+                   mMonitorBtn.setText(getString(R.string.stop_monitor));
+
+               } else {
+                   MonitorService.isServiceStoped = true;
+                   mMonitorBtn.setText(getString(R.string.start_monitor));
+                   stopService(monitorService);
+               }
+           }
+       });
        
-       mViewMonitorBtn.setOnClickListener(new OnClickListener(){
+       mViewMonitorBtn.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                showMonitorDataDialog();
-            }
+           @Override
+           public void onClick(View v) {
+               showMonitorDataDialog();
+           }
        });
 	}
-	
+
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void setView(){
+        String appName = mAppInfo.getName();
+        mAppNameTv.setText(appName);
+
+        if(!appName.equals(getResources().getString(R.string.system_analyzer))){
+            mAppLogIv.setBackground(mAppInfo.getLogo());
+            mPkgNameTv.setText(mAppInfo.getPackageName());
+            mVersionTv.setText(mAppInfo.getVersionName());
+            if(mAppInfo.getPid() ==0) {
+                mPidTv.setText(R.string.status_default);
+            }else{
+                mPidTv.setText(mAppInfo.getPid()+"");
+            }
+
+            if(mAppInfo.getUid() ==0){
+                mUidTv.setText(R.string.status_default);
+            }else{
+                mUidTv.setText(mAppInfo.getUid()+"");
+            }
+        }
+    }
 
 	@Override
 	public void onResume() {
@@ -266,7 +285,7 @@ public class SingleAppMonitor extends Activity {
     }
     
     private String[] listMonitorFiles(){
-        File parentDir = new File(Main.MONITOR_PARENT_PATH);
+        File parentDir = new File(sMonitorDir);
         String[] files = parentDir.list(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String filename) {
