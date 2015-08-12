@@ -24,4 +24,25 @@ public class StringUtils {
         }
         return false;
     }
+
+    /**
+     * 字符串为NULL 或者 长度为0
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isEmpty(String str) {
+        return (str == null || str.length() == 0);
+    }
+
+    /**
+     * 字符串为NULL 或者 是一串空格组成
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isBlank(String str) {
+        return (str == null || str.trim().length() == 0);
+    }
+
 }

@@ -63,7 +63,8 @@
 	<string name="toolbox_auto">自动化Case</string>
 	<string name="toolbox_bright">亮度调节</string>
 	<string name="toolbox_kernel">Kernel</string>
-	
+	<string name="toolbox_wakeup">唤醒统计</string>
+
     <string name="toolbox_log_viewer">查看Log</string>
     <string name="toolbox_log_parser">解析Log</string>
     <string name="toolbox_more">更多实用工具</string>

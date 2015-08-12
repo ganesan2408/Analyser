@@ -6,23 +6,13 @@
  */
 package com.yhh.toolbox;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,6 +26,11 @@ import com.yhh.terminal.Term;
 import com.yhh.utils.AppUtils;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.FileUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MoreActivity extends Activity{
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "ToolBoxFragment";

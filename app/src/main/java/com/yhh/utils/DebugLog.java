@@ -6,8 +6,9 @@
  */
 package com.yhh.utils;
 
-import com.yhh.analyser.BuildConfig;
 import android.util.Log;
+
+import com.yhh.analyser.BuildConfig;
 
 public class DebugLog{
 
@@ -36,7 +37,7 @@ public class DebugLog{
 	}
 	
 	private static void getMethodNames(StackTraceElement[] sElements){
-		className = sElements[1].getFileName();
+		className = ConstUtils.DEBUG_TAG+ sElements[1].getFileName();
 		methodName = sElements[1].getMethodName();
 		lineNumber = sElements[1].getLineNumber();
 	}

@@ -10,17 +10,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yhh.activity.WakeupActivity;
 import com.yhh.analyser.R;
 import com.yhh.benchmark.BenchmarkRunner;
 import com.yhh.log.analyser.MainLogAnalyser;
 import com.yhh.log.viewer.LogViewerActivity;
 import com.yhh.robot.AutomaticActivity;
-import com.yhh.terminal.Term;
 import com.yhh.toolbox.KernelTool;
 import com.yhh.toolbox.MoreActivity;
 import com.yhh.toolbox.NodeViewActivity;
@@ -34,6 +33,7 @@ public class ToolBoxFragment extends Fragment{
     private int[] viewIds= new int[]{
             R.id.tool_node_rl,
             R.id.tool_bright_rl,
+            R.id.tool_wakeup_rl,
             R.id.tool_kernel_rl,
             
             R.id.tool_logviewer_rl,
@@ -47,9 +47,9 @@ public class ToolBoxFragment extends Fragment{
     private Class[] targetClasses = new Class[]{
             NodeViewActivity.class,
             SuperBox.class,
+            WakeupActivity.class,
             KernelTool.class,
             
-//            Term.class,
             LogViewerActivity.class,
             MainLogAnalyser.class,
             AutomaticActivity.class,
