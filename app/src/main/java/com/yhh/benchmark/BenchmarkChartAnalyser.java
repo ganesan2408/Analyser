@@ -19,16 +19,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.yhh.analyser.R;
-import com.yhh.analyser.ScreenShot;
+import com.yhh.utils.ScreenShot;
 import com.yhh.app.analyser.MonitorDataProvider;
 import com.yhh.chart.base.ChartBaseActivity;
 import com.yhh.chart.items.ChartItem;

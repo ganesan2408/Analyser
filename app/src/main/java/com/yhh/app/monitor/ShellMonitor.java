@@ -9,9 +9,9 @@ package com.yhh.app.monitor;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.yhh.app.setttings.SettingShellActivity;
+import com.yhh.constant.MonitorConst;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.ShellUtils;
 
@@ -23,7 +23,7 @@ public class ShellMonitor {
     
     public static final int CONDITIONS_COUNT = 1;
     private String[] mThresholdValues;
-    public static final int[] CONDITIONS_ITEMS = new int[]{InfoCollector.BATTERY_TEMPERATURE};
+    public static final int[] CONDITIONS_ITEMS = new int[]{MonitorConst.BATTERY_TEMPERATURE};
     
     public ShellMonitor(Context context){
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());

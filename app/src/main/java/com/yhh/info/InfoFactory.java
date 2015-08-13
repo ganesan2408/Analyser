@@ -6,15 +6,15 @@
  */
 package com.yhh.info;
 
+import android.content.Context;
+
+import com.yhh.model.Battery;
+import com.yhh.utils.NumberUtils;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import com.yhh.utils.NumberUtils;
-import com.yhh.utils.ShellUtils;
-
-import android.content.Context;
 
 
 /**
@@ -31,6 +31,8 @@ public class InfoFactory {
     private ScreenInfo mScreenInfo;
     private TrafficInfo mTrafficInfo;
     private Context mContext;
+
+    private Battery mBattery;
     
     private static InfoFactory mInfoFactory;
     
@@ -62,6 +64,7 @@ public class InfoFactory {
         mContext = context;
         mBatteryInfo.init(context);
         mBatteryInfo.register();
+        mBattery = mBatteryInfo.getBattery();
         
         mTrafficInfo.init(context);
     }
@@ -134,15 +137,15 @@ public class InfoFactory {
     
     /******* BATTERY *********/
     public String getBatteryLevel(){
-        return mBatteryInfo.getLevel();
+        return mBattery.getLevel();
     }
     
     public String getBatteryTemperature(){
-        return mBatteryInfo.getTemperature();
+        return mBattery.getTemperature();
     }
     
     public String getBatteryVoltage(){
-        return mBatteryInfo.getVoltage();
+        return mBattery.getVoltage();
     }
     
     /********Traffic*********/

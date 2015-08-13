@@ -19,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
+import com.yhh.activity.menu.AboutActivity;
+import com.yhh.activity.menu.FeedbackActivity;
+import com.yhh.activity.menu.MyFileActivity;
+import com.yhh.activity.menu.MyShotActivity;
 import com.yhh.fragment.MonitorFragment;
 import com.yhh.fragment.PerformanceFragment;
 import com.yhh.fragment.StatusViewerFragment;
@@ -218,7 +222,7 @@ public class Main extends FragmentActivity {
                 break;
                 
             case R.id.mmenu_my_feedback:
-                Intent fbIntent = new Intent(this, CustomFeedback.class);
+                Intent fbIntent = new Intent(this, FeedbackActivity.class);
                 startActivity(fbIntent);
                 break;
                 

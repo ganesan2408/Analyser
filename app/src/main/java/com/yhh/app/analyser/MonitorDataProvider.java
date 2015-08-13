@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.yhh.app.monitor.SingleAppMonitor;
+import com.yhh.config.AppConfig;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.LogUtils;
 
@@ -41,7 +41,7 @@ public class MonitorDataProvider {
     }
     
     public void parseNewest(){
-        String path =  SingleAppMonitor.sMonitorDir +"/"+LogUtils.getDateNewestLog(SingleAppMonitor.sMonitorDir);
+        String path =  AppConfig.MONITOR_DIR +"/"+LogUtils.getDateNewestLog(AppConfig.MONITOR_DIR);
         Log.i(TAG, "PATH="+path);
         parse(path);
     }

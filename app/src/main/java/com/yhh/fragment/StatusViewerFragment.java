@@ -6,14 +6,11 @@
  */
 package com.yhh.fragment;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +18,10 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
-import com.yhh.benchmark.BenchmarkFragment;
-import com.yhh.fragment.performance.CpuGovernor;
-import com.yhh.fragment.performance.GpuGovernor;
-import com.yhh.fragment.status.BatteryFragment;
-import com.yhh.fragment.status.PowerFragment;
-import com.yhh.fragment.status.TopProcessFragment;
-import com.yhh.fragment.status.TopThreadFragment;
+import com.yhh.aafragment.status.BatteryFragment;
+import com.yhh.aafragment.status.PowerFragment;
+import com.yhh.aafragment.status.TopProcessFragment;
+import com.yhh.aafragment.status.TopThreadFragment;
 
 public class StatusViewerFragment extends Fragment implements
         OnCheckedChangeListener {
@@ -155,7 +149,7 @@ public class StatusViewerFragment extends Fragment implements
 //            startActivity(intent);
 //            return true;
 //        }else if(item.getItemId() ==R.id.menu_shoot){
-//            ScreenShot.shoot(this,chooseName+TimeUtils.getCurrentTime());
+//            ScreenShot.shoot(this,chooseName+TimeUtils.getTime());
 //            return true;
 //        }
 //        return super.onOptionsItemSelected(item);

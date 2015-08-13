@@ -6,15 +6,16 @@
  */
 package com.yhh.app.monitor;
 
-import java.util.HashMap;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.yhh.app.setttings.SettingExcptionActivity;
+import com.yhh.constant.MonitorConst;
 import com.yhh.utils.ConstUtils;
+
+import java.util.HashMap;
 
 public class ExceptionMonitor {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "ExceptionMonitor";
@@ -24,9 +25,9 @@ public class ExceptionMonitor {
     
     public static final int CONDITIONS_COUNT = 3;
     private String[] mThresholdValues;
-    public static final int[] CONDITIONS_ITEMS = new int[]{InfoCollector.BATTERY_TEMPERATURE,
-            InfoCollector.CPU_USED_RATIO,
-            InfoCollector.POWER_CURRENT};
+    public static final int[] CONDITIONS_ITEMS = new int[]{MonitorConst.BATTERY_TEMPERATURE,
+            MonitorConst.CPU_USED_RATIO,
+            MonitorConst.POWER_CURRENT};
     
     public ExceptionMonitor(Context context){
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());

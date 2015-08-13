@@ -1,7 +1,5 @@
 package com.yhh.widget.letterlistview;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.info.app.AppInfo;
+import com.yhh.utils.AppUtils;
+
+import java.util.List;
 
 public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	private List<AppInfo> list = null;
@@ -46,13 +48,14 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 
 	public View getView(final int position, View view, ViewGroup arg2) {
 		ViewHolder viewHolder = null;
-		final AppInfo mContent = list.get(position);
+		final AppInfo app = list.get(position);
 		if (view == null) {
 			viewHolder = new ViewHolder();
 			view = LayoutInflater.from(mContext).inflate(R.layout.item, null);
 			viewHolder.letterTv = (TextView) view.findViewById(R.id.app_letter_tv);
 			viewHolder.titleTv = (TextView) view.findViewById(R.id.app_title_tv);
-			viewHolder.logoIv = (ImageView) view.findViewById(R.id.app_logo_iv);
+			viewHolder.logoImg = (ImageView) view.findViewById(R.id.app_logo_iv);
+			viewHolder.closeTxt = (TextView) view.findViewById(R.id.txt_app_close);
 			view.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
@@ -64,13 +67,35 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 		//如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
 		if(position == getPositionForSection(section)){
 			viewHolder.letterTv.setVisibility(View.VISIBLE);
-			viewHolder.letterTv.setText(mContent.getFirstLetter());
+			viewHolder.letterTv.setText(app.getFirstLetter());
 		}else{
 			viewHolder.letterTv.setVisibility(View.GONE);
 		}
+
+		//关闭按钮是否显示
+		if(app.getPid() != 0){
+			viewHolder.closeTxt.setVisibility(View.VISIBLE);
+			final  TextView txt = viewHolder.closeTxt;
+			viewHolder.closeTxt.setOnClickListener(new View.OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					try {
+						AppUtils.forceStopApp(mContext, app.getPackageName());
+						txt.setVisibility(View.GONE);
+						app.setPid(0);
+					} catch (Exception e) {
+						e.printStackTrace();
+						Toast.makeText(mContext, "无法关闭", Toast.LENGTH_SHORT).show() ;
+					}
+				}
+			});
+		}else{
+			viewHolder.closeTxt.setVisibility(View.GONE);
+		}
 	
 		viewHolder.titleTv.setText(list.get(position).getName());
-		viewHolder.logoIv.setImageDrawable(list.get(position).getLogo());
+		viewHolder.logoImg.setImageDrawable(list.get(position).getLogo());
 		
 		return view;
 
@@ -81,7 +106,8 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	final static class ViewHolder {
 		TextView letterTv;
 		TextView titleTv;
-		ImageView logoIv;
+		ImageView logoImg;
+		TextView closeTxt;
 	}
 
 

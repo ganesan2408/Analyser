@@ -144,7 +144,7 @@ public class LogViewerActivity extends Activity {
             @Override
             public void run() {
                 String srcDir = ConstUtils.LOG_DIR;
-                String desDir = FileUtils.PATH_SD_LOG +"/aplog_"+ TimeUtils.getCurrentTime();
+                String desDir = FileUtils.PATH_SD_LOG +"/aplog_"+ TimeUtils.getTime();
                 FileUtils.copyFolder(srcDir, desDir);
                 mHandler.sendEmptyMessage(0x11);
             }

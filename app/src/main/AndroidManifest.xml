@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yhh.analyser">
     <!--android:sharedUserId="android.uid.system">-->
+
 	<!--<uses-permission android:name="android.permission.RETRIEVE_WINDOW_CONTENT"/>-->
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -42,7 +43,7 @@
 
         <!-- umeng start -->
         <activity android:name="com.umeng.fb.ConversationActivity" />
-        <activity android:name=".CustomFeedback"
+        <activity android:name="com.yhh.activity.menu.FeedbackActivity"
             android:label="@string/menu_feedback"
             android:screenOrientation="portrait"/>
 
@@ -74,9 +75,16 @@
         <!-- android:screenOrientation="portrait"> -->
         <!-- </activity> -->
         <activity
-            android:name="com.yhh.app.monitor.SingleAppMonitor"
+            android:name="com.yhh.activity.AppMonitorActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_app_analyser"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yhh.activity.SysMonitorActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/main_sys_analyser"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
@@ -101,26 +109,26 @@
             android:label="@string/setting"
             android:screenOrientation="portrait" />
 
-        <service android:name="com.yhh.app.monitor.MonitorService" />
+        <service android:name="com.yhh.service.MonitorService" />
         <!-- App Monitor END -->
 
         <activity
-            android:name="com.yhh.analyser.HelpActivity"
+            android:name="com.yhh.activity.menu.HelpActivity"
             android:label="@string/menu_feedback"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.yhh.analyser.MyShotActivity"
+            android:name="com.yhh.activity.menu.MyShotActivity"
             android:label="@string/menu_shot"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.yhh.analyser.MyFileActivity"
+            android:name="com.yhh.activity.menu.MyFileActivity"
             android:label="@string/menu_file"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.yhh.analyser.AboutActivity"
+            android:name="com.yhh.activity.menu.AboutActivity"
             android:label="@string/menu_about"
             android:screenOrientation="portrait"/>
 
@@ -166,14 +174,14 @@
 
         <!-- Status Analyser START -->
         <!-- <activity -->
-        <!-- android:name="com.yhh.fragment.status.StatusAnalyser" -->
+        <!-- android:name="aafragmentnt.status.StatusAnalyser" -->
         <!-- android:label="@string/main_status_analyser" -->
         <!-- android:configChanges="orientation|screenSize|keyboardHidden|keyboard" -->
         <!-- android:windowSoftInputMode="adjustUnspecified|stateHidden" -->
         <!-- android:screenOrientation="portrait"  /> -->
 
         <activity
-            android:name="com.yhh.fragment.status.DumpsysStatusActivity"
+            android:name="com.yhh.aafragment.status.DumpsysStatusActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_status_analyser"
             android:screenOrientation="portrait" />
@@ -239,13 +247,13 @@
 
         <!-- Performance start -->
         <!-- <activity -->
-        <!-- android:name="com.yhh.fragment.performance.MainPerfActivity" -->
+        <!-- android:name="aafragmentnt.performance.MainPerfActivity" -->
         <!-- android:label="@string/main_perf" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- android:configChanges="orientation|screenSize"> -->
         <!-- </activity> -->
         <!-- <activity -->
-        <!-- android:name="com.yhh.fragment.performance.CpuGovernor" -->
+        <!-- android:name="aafragmentnt.performance.CpuGovernor" -->
         <!-- android:label="@string/main_perf" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- android:configChanges="orientation|screenSize"> -->

@@ -18,8 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
-import com.yhh.fragment.performance.CpuGovernor;
-import com.yhh.fragment.performance.GpuGovernor;
+import com.yhh.aafragment.performance.CpuGovernor;
+import com.yhh.aafragment.performance.GpuGovernor;
 import com.yhh.utils.ConstUtils;
 
 public class PerformanceFragment extends Fragment implements
@@ -78,7 +78,7 @@ public class PerformanceFragment extends Fragment implements
                 
 //            case R.id.main_perf_score:
 //                mScoreFragment = new BenchmarkFragment();
-//                fragment = mScoreFragment;
+//                aafragment = mScoreFragment;
 //                Log.i(TAG,"===SCORE");
 //                break;
                 

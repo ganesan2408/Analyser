@@ -6,9 +6,6 @@
  */
 package com.yhh.info.app;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
@@ -19,12 +16,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.yhh.analyser.R;
 import com.yhh.utils.ConstUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * get information of processes
@@ -47,13 +43,17 @@ public class ProcessInfo {
 		List<ApplicationInfo> appList = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
 		//获取能够启动的apk
 		List<String> appNames = getLauncherAppName(pm); 
-		
+
+        String tmpName;
 		for (ApplicationInfo ainfo : appList) {
-		    if(appNames.contains(ainfo.loadLabel(pm).toString())){
+            tmpName = ainfo.loadLabel(pm).toString();
+		    if(appNames.contains(tmpName) && !tmpName.equals("分析中心")){
 		        AppInfo appInfo = new AppInfo();
-	            appInfo.setName(ainfo.loadLabel(pm).toString());
+	            appInfo.setName(tmpName);
 	            appInfo.setLogo(ainfo.loadIcon(pm));
 	            appInfo.setPackageName(ainfo.packageName);
+                getRunningApp(context, appInfo);
+
 	            progressList.add(appInfo);
 		    }
 		}
@@ -64,23 +64,20 @@ public class ProcessInfo {
 	 * 获取指定包名的apk的详细信息
 	 * 
 	 * @param context
-	 * @param appName
+	 * @param appInfo
 	 * @return
 	 */
-	public AppInfo getRunningApp(Context context, String packageName){
+	public void getRunningApp(Context context, AppInfo appInfo){
 	  ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 	  List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
-	  
-	  AppInfo appInfo = new AppInfo();
+
       for (RunningAppProcessInfo running : runingApps) {
-          if ((running.processName != null) && running.processName.equals(packageName)) {
-              appInfo.setPackageName(packageName);
+          if ((running.processName != null) && running.processName.startsWith(appInfo.getPackageName())) {
               appInfo.setPid(running.pid);
               appInfo.setUid(running.uid);
               break;
           }
       }
-      return appInfo;
 	}
 	
 	public AppInfo getPackageInfo(Context context,String pkgName){

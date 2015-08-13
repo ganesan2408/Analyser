@@ -2,6 +2,7 @@ package com.yhh.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,20 +10,20 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.yhh.activity.AppMonitorActivity;
+import com.yhh.activity.SysMonitorActivity;
 import com.yhh.analyser.R;
-import com.yhh.app.monitor.SingleAppMonitor;
 import com.yhh.info.app.AppInfo;
 import com.yhh.info.app.ProcessInfo;
 import com.yhh.utils.ConstUtils;
+import com.yhh.utils.TimeUtils;
 import com.yhh.widget.letterlistview.CharacterParser;
 import com.yhh.widget.letterlistview.ClearEditText;
 import com.yhh.widget.letterlistview.PinyinComparator;
@@ -34,12 +35,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import cn.trinea.android.common.view.DropDownListView;
+
 public class MonitorFragment extends Fragment {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "MonitorFragment";
     
     private Context mContext;
     private static List<AppInfo> mAppList;
-	private ListView sortListView;
+	private DropDownListView sortListView;
 	private SideBar sideBar;
 	private TextView dialog;
 	private SortAdapter adapter;
@@ -59,14 +62,12 @@ public class MonitorFragment extends Fragment {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG,"onCreate");
         mContext = this.getActivity();
     }
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        Log.i(TAG,"onCreateView");
         View v = inflater.inflate(R.layout.main_monitor, null) ;
         initViews(v);
         return v;
@@ -97,41 +98,51 @@ public class MonitorFragment extends Fragment {
 			}
 		});
 		
-		sortListView = (ListView) v.findViewById(R.id.country_lvcountry);
+		sortListView = (DropDownListView) v.findViewById(R.id.country_lvcountry);
 		sortListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-			    Intent intent = new Intent(mContext, SingleAppMonitor.class);
-			    intent.putExtra("appName", ((AppInfo)adapter.getItem(position)).getName());
-			    intent.putExtra("packageName", ((AppInfo)adapter.getItem(position)).getPackageName());
-			    startActivity(intent);
+									int position, long id) {
+				if(position<=1){
+					Intent intent = new Intent(mContext, SysMonitorActivity.class);
+					startActivity(intent);
+				}else {
+					Intent intent = new Intent(mContext, AppMonitorActivity.class);
+					intent.putExtra("appName", ((AppInfo) adapter.getItem(position - 1)).getName());
+					intent.putExtra("packageName", ((AppInfo) adapter.getItem(position - 1)).getPackageName());
+					startActivity(intent);
+				}
+			}
+		});
+		sortListView.setOnDropDownListener(new DropDownListView.OnDropDownListener() {
+			@Override
+			public void onDropDown() {
+				new GetAppTask().execute();
 			}
 		});
 		
 		mClearEditText = (ClearEditText) v.findViewById(R.id.filter_edit);
         //根据输入框输入值的改变来过滤搜索
         mClearEditText.addTextChangedListener(new TextWatcher() {
-            
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                filterData(s.toString());
-            }
-            
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                    int after) {
-                
-            }
-            
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+										  int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
 		
 		if(null == mAppList){
-		    Log.i(TAG,"mAppList == NULL");
 		    new Thread(new Runnable(){
 
                 @Override
@@ -213,5 +224,25 @@ public class MonitorFragment extends Fragment {
 		}
 		adapter.updateListView(filterDateList);
 	}
-	
+
+
+	private class GetAppTask extends AsyncTask<Void,Void,String[]>{
+
+		@Override
+		protected String[] doInBackground(Void... params) {
+			mAppList = new ProcessInfo().getLaunchApps(mContext);
+			filledData();
+			Collections.sort(mAppList, pinyinComparator);
+			adapter = new SortAdapter(mContext, mAppList);
+			return new String[0];
+		}
+
+		@Override
+		protected void onPostExecute(String[] strings) {
+			sortListView.setAdapter(adapter);
+			sortListView.onDropDownComplete(getString(R.string.update_at)+ TimeUtils.getStandardTime());
+
+			super.onPostExecute(strings);
+		}
+	}
 }

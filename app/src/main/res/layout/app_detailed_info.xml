@@ -112,59 +112,19 @@
             android:text="null"/>
      </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/app_else_ll"
-        android:layout_below="@id/app_uid_ll"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        >
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:textSize="20sp"
-            android:text="@string/app_else"/>
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:text="..."/>
-     </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+
+    <GridView
+        android:id="@+id/monitor_gv"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:orientation="vertical"
-        android:gravity="center">
-        <Button
-            android:id="@+id/app_monitor_btn"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_marginBottom="@dimen/layout_marginBottom_test"
-            android:layout_marginLeft="@dimen/layout_marginLeft_test"
-            android:layout_marginRight="@dimen/layout_marginRight_test"
-            android:layout_marginTop="@dimen/layout_marginTop_test"
-            android:background="@drawable/selector_monitor_button"
-            android:text="@string/start_monitor"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_test" />
-        <Button
-            android:id="@+id/app_monitor_view"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_marginBottom="@dimen/layout_marginBottom_test"
-            android:layout_marginLeft="@dimen/layout_marginLeft_test"
-            android:layout_marginRight="@dimen/layout_marginRight_test"
-            android:layout_marginTop="@dimen/layout_marginTop_test"
-            android:background="@drawable/selector_monitor_button"
-            android:text="@string/view_monitor_chart"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_test" />
-    </LinearLayout>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:verticalSpacing="1px"
+        android:horizontalSpacing="1px"
+        android:paddingLeft="1px"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:background="@color/light_gray"
+        />
 
 </RelativeLayout>

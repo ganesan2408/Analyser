@@ -1,6 +1,5 @@
 package com.yhh.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * Created by yuanhh1 on 2015/8/12.
  */
-public class WakeupActivity extends Activity {
+public class WakeupActivity extends BaseActivity {
     TextView mWakeupTv;
 
     @Override

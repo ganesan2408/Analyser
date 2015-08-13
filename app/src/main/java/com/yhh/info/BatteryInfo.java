@@ -12,28 +12,21 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 
+import com.yhh.model.Battery;
+
 class BatteryInfo {
+    private Battery mBattery;
     private Context mContext;
     private BatteryInfoBroadcastReceiver batteryBroadcast;
+
+    public Battery getBattery(){
+        return  mBattery;
+    }
     
-    private String mBatteryLevel;
-    private String mBatteryVoltage;
-    private String mBatteryTemperature;
-    
+
     public void init(Context context){
         mContext = context;
-    }
-    
-    public String getLevel(){
-        return mBatteryLevel;
-    }
-    
-    public String getVoltage(){
-        return mBatteryVoltage;
-    }
-    
-    public String getTemperature(){
-        return mBatteryTemperature;
+        mBattery = new Battery();
     }
     
     public void register(){
@@ -53,9 +46,9 @@ class BatteryInfo {
             if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
                 int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
                 int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                mBatteryLevel = String.valueOf(level * 100 / scale);
-                mBatteryVoltage = String.valueOf(intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1) * 1.0 / 1000);
-                mBatteryTemperature = String.valueOf(intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1) * 1.0 / 10);
+                mBattery.setLevel(String.valueOf(level * 100 / scale));
+                mBattery.setVoltage(String.valueOf(intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1) * 1.0 / 1000));
+                mBattery.setmTemperature(String.valueOf(intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1) * 1.0 / 10));
             }
         }
     }

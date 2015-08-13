@@ -29,7 +29,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.yhh.analyser.R;
-import com.yhh.analyser.ScreenShot;
+import com.yhh.utils.ScreenShot;
 import com.yhh.chart.base.ChartBaseActivity;
 import com.yhh.chart.base.ChartTool;
 import com.yhh.chart.custom.MyValueFormatter;

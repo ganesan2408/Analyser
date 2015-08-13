@@ -11,16 +11,25 @@ import java.util.Date;
 
 
 public class TimeUtils {
-    public static String getCurrentTime(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        Date date = new Date(System.currentTimeMillis());
-        return formatter.format(date);
+    public static final SimpleDateFormat STANDARD_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd_HHmmss");
+
+    public static String getTime(long timeInMillis, SimpleDateFormat dateFormat) {
+        return dateFormat.format(new Date(timeInMillis));
+    }
+
+    public static String getTime(){
+        return getTime(System.currentTimeMillis(), DEFAULT_DATE_FORMAT);
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
+//        Date date = new Date(System.currentTimeMillis());
+//        return formatter.format(date);
     }
     
-    public static String getCurrentTime2(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date(System.currentTimeMillis());
-        return formatter.format(date);
+    public static String getStandardTime(){
+        return getTime(System.currentTimeMillis(), STANDARD_DATE_FORMAT);
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = new Date(System.currentTimeMillis());
+//        return formatter.format(date);
     }
     
     

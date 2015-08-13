@@ -28,10 +28,11 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.yhh.analyser.R;
-import com.yhh.analyser.ScreenShot;
+import com.yhh.config.AppConfig;
+import com.yhh.utils.ScreenShot;
 import com.yhh.app.monitor.ExceptionMonitor;
 import com.yhh.app.monitor.ExceptionStat;
-import com.yhh.app.monitor.SingleAppMonitor;
+import com.yhh.activity.AppMonitorActivity;
 import com.yhh.chart.base.ChartBaseActivity;
 import com.yhh.chart.custom.MyValueFormatter;
 import com.yhh.chart.items.ChartItem;
@@ -69,7 +70,7 @@ public class AppChartAnalyser extends ChartBaseActivity {
         mChartLv = (NoScrollListView) findViewById(R.id.app_monitor_listview);
 //        mStatisticTv = (TextView) findViewById(R.id.app_monitor_statistic);
         
-        mMonitorPath  = getIntent().getStringExtra(SingleAppMonitor.MONITOR_PATH);
+        mMonitorPath  = getIntent().getStringExtra(AppMonitorActivity.MONITOR_PATH);
 //        mStatisticTv.setVisibility(View.GONE);
         initData();
     }
@@ -138,12 +139,12 @@ public class AppChartAnalyser extends ChartBaseActivity {
             public void run() {
                 mMonitorDataProvider = new MonitorDataProvider(AppChartAnalyser.this);
                 if(mMonitorPath ==null || "".equals(mMonitorPath)){
-                    mMonitorPath = LogUtils.getDateNewestLog(SingleAppMonitor.sMonitorDir);
+                    mMonitorPath = LogUtils.getDateNewestLog(AppConfig.MONITOR_DIR);
                 }
                 if(DEBUG){
                     Log.d(TAG,"mMonitorPath="+mMonitorPath);
                 }
-                mMonitorDataProvider.parse(SingleAppMonitor.sMonitorDir +"/"+mMonitorPath);
+                mMonitorDataProvider.parse(AppConfig.MONITOR_DIR +"/"+mMonitorPath);
                 
                 updateAdapter();
                 mHandler.sendMessage(mHandler.obtainMessage(0x1));

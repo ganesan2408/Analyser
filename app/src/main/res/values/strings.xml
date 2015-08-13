@@ -3,7 +3,8 @@
     <string name="app_name">分析中心</string>
 	
 	<string name="system_analyzer">系统分析</string>
-	<string name="main_app_analyser">系统监控器</string>
+	<string name="main_sys_analyser">系统监控器</string>
+	<string name="main_app_analyser">App监控器</string>
     <string name="main_app_analyser_sub">实时监控CPU/GPU/内存/电流/温度等状态</string>
     <string name="main_log_analyser">Log分析器</string>
     <string name="main_log_analyser_sub">查看Log,智能解析Log并可视化展现信息</string>
@@ -197,6 +198,8 @@
     <string name="start_benchmark">启动跑分</string>
     <string name="stop_benchmark">停止</string>
 
+    <string name="btn_app_close">关闭</string>
+
     <string name="app_collecting_frequency">监控频率(s)</string>
     <string name="monitor_system_app">显示系统APP</string>
     
@@ -207,12 +210,22 @@
     <string name="app_exception_monitor_title">异常监控</string>
     <string name="app_exception_monitor_description">可根据触发条件，扫描后台Top进程</string>
 
+    <string name="btn_app_cpu">CPU监控</string>
+    <string name="btn_app_gpu">GPU监控</string>
+    <string name="btn_app_memory">Memory监控</string>
+    <string name="btn_app_Top">Top监控</string>
+    <string name="btn_app_current">电流监控</string>
+    <string name="btn_app_battery">电池监控</string>
+    <string name="btn_app_all_monitor">全监控</string>
+    <string name="btn_app_diy_monitor">自定义监控</string>
+
     <string name="shell_monitor_title">浮窗显示Adb</string>
     <string name="shell_monitor_description">浮窗显示指定adb指令</string>
     <string name="shell_monitor_hint">Please input adb command</string>
     <string name="shell_top_title">Top Process</string>
     
-    
+
+    <string name="update_at">更新于</string>
     
     <string name="app_tempearture_unit"> ℃ </string>
     <string name="app_percent_unit"> % </string>
