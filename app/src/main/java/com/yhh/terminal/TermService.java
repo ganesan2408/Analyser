@@ -68,7 +68,7 @@ public class TermService extends Service implements TermSession.FinishCallback {
         
         /* Put the service in the foreground. */
         Notification notification = new Notification(
-                R.drawable.system3,
+                R.drawable.logo1,
                 getText(R.string.service_notify_text),
                 System.currentTimeMillis());
         notification.flags |= Notification.FLAG_ONGOING_EVENT;

@@ -22,23 +22,17 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <!--<ListView-->
-            <!--android:id="@+id/country_lvcountry"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_gravity="center"/>-->
-
         <cn.trinea.android.common.view.DropDownListView
             android:id="@+id/country_lvcountry"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawSelectorOnTop="false"
+            android:scrollbars="none"
             listViewAttr:isDropDownStyle="true"
             listViewAttr:isOnBottomStyle="false"
             listViewAttr:isAutoLoadOnBottom="false"
             />
-
 
         <TextView
             android:id="@+id/dialog"

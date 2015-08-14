@@ -33,14 +33,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yhh.activity.AppMonitorActivity;
 import com.yhh.analyser.R;
 import com.yhh.app.monitor.ExceptionStat;
-import com.yhh.business.InfoManager;
 import com.yhh.app.monitor.ShellMonitor;
-import com.yhh.activity.AppMonitorActivity;
 import com.yhh.app.setttings.SettingFloatingActivity;
 import com.yhh.app.setttings.SettingMonitorActivity;
 import com.yhh.app.setttings.SettingsActivity;
+import com.yhh.business.InfoManager;
 import com.yhh.config.AppConfig;
 import com.yhh.constant.MonitorConst;
 import com.yhh.info.InfoFactory;
@@ -60,14 +60,14 @@ import java.util.concurrent.Executors;
 /**
  * Service running in background
  */
-public class MonitorService extends Service {
+public class MonitorService_bak extends Service {
 
 	private final static String TAG =  ConstUtils.DEBUG_TAG+ "MonitorService";
 	private boolean DEBUG = true;
 
 	private WindowManager windowManager = null;
-	private WindowManager.LayoutParams wmParams = null;
-	private WindowManager.LayoutParams titleParams = null;
+	private LayoutParams wmParams = null;
+	private LayoutParams titleParams = null;
 	private View viFloatingWindow;
 	private View viFloatingTitle;
 	private float mTouchStartX;
@@ -75,41 +75,41 @@ public class MonitorService extends Service {
 	private float x;
 	private float y;
 	private static int y0;
-	
+
 	private TextView mFloatLv;
 	private Button mFloatStopBtn;
 	private Button mFloatChangeBackgroundBtn;
 	private Button mFloatScreenBtn;
 	private Button mFloatTopBtn;
-	
+
 	private StringBuffer mFloatContent;
 	private String[] itemTitles;
 	private String[] itemUnitTitles;
-	
+
 	private int delaytime;
 	private DecimalFormat fomart;
-	
+
 	private InfoManager infoAdmin;
 	private ShellMonitor mShellMonitor;
 	private boolean isRunTop =false;
 	private Handler handler;
 	private SharedPreferences mPreferences;
-	
+
 	private boolean isFloating;
 	private int mFloatColorIndex =1;
 	private String appName, packageName, startActivity;
 	private int pid, uid;
-	
+
 	public static boolean isServiceStoped = true;
 	public static String resultFilePath;
-	
+
 	// get start time
     private static final int MAX_START_TIME_COUNT = 5;
     private int getStartTimeCount = 0;
     private boolean isGetStartTime = true;
     private String startTime = "";
 	public static final String MONITOR_SERVICE_ACTION = "com.yhh.app.MonitorService";
-	
+
 	private boolean[] mIsFloatingItem = new boolean[SettingMonitorActivity.MONITOR_ITEMS_COUNT];
 
 	@Override
@@ -121,9 +121,9 @@ public class MonitorService extends Service {
 		fomart = new DecimalFormat();
 		fomart.setMaximumFractionDigits(2);
 		fomart.setMinimumFractionDigits(0);
-		
+
 		mShellMonitor = ShellMonitor.newInstance(this);
-		
+
 	}
 
 	private void readPrefs(){
@@ -136,7 +136,7 @@ public class MonitorService extends Service {
         }
         int interval = mPreferences.getInt(SettingsActivity.KEY_INTERVAL, 1);
         delaytime = interval * 1000;
-        
+
         for(int i=0;i< mIsFloatingItem.length;i++){
             if(mIsFloatingItem[i]){
                isFloating = true;
@@ -145,7 +145,7 @@ public class MonitorService extends Service {
         }
         isFloating |=  mShellMonitor.isEnabled();
     }
-	
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.i(TAG, "service onStart");
@@ -162,20 +162,20 @@ public class MonitorService extends Service {
 		appName = intent.getExtras().getString("appName");
 		packageName = intent.getExtras().getString("packageName");
 		startActivity = intent.getExtras().getString("startActivity");
-		
+
 		createMonitorFile();
 		infoAdmin = new InfoManager(getBaseContext(),pid);
 		infoAdmin.writeTitle2File();
-		
+
 		readPrefs();
 		initUI();
-		
+
 		ExceptionStat.getInstance().clear();
-		
+
 		handler.post(task);
 		return START_NOT_STICKY;
 	}
-	
+
 	private void initUI(){
 		itemTitles = this.getResources().getStringArray(R.array.monitor_items);
 		itemUnitTitles = this.getResources().getStringArray(R.array.monitor_unit_items);
@@ -190,18 +190,18 @@ public class MonitorService extends Service {
             mFloatStopBtn = (Button) viFloatingTitle.findViewById(R.id.float_stop_btn);
             mFloatChangeBackgroundBtn = (Button) viFloatingTitle.findViewById(R.id.float_change_btn);
 			mFloatScreenBtn = (Button) viFloatingTitle.findViewById(R.id.float_screenshot_btn);
-            mFloatTopBtn = (Button) viFloatingTitle.findViewById(R.id.float_top_btn);
-            mFloatStopBtn.setOnClickListener(new OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  isServiceStoped = true;
-                  Intent intent = new Intent();
-                  intent.setAction(MONITOR_SERVICE_ACTION);
-                  sendBroadcast(intent);
-                  Toast.makeText(MonitorService.this, R.string.monitor_stop_tips, Toast.LENGTH_LONG).show();
-                  stopSelf();
-              }
-          });
+//            mFloatTopBtn = (Button) viFloatingTitle.findViewById(R.id.float_top_btn);
+//            mFloatStopBtn.setOnClickListener(new OnClickListener() {
+//              @Override
+//              public void onClick(View v) {
+//                  isServiceStoped = true;
+//                  Intent intent = new Intent();
+//                  intent.setAction(MONITOR_SERVICE_ACTION);
+//                  sendBroadcast(intent);
+//                  Toast.makeText(MonitorService_bak.this, R.string.monitor_stop_tips, Toast.LENGTH_LONG).show();
+//                  stopSelf();
+//              }
+//          });
 
 			mFloatScreenBtn.setOnClickListener(new OnClickListener() {
                 @Override
@@ -222,7 +222,7 @@ public class MonitorService extends Service {
                     autoChangeFloatColor();
                 }
             });
-            
+
             mFloatTopBtn.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -238,7 +238,7 @@ public class MonitorService extends Service {
             createFloatingWindow();
 	    }
 	}
-	
+
 	@SuppressLint({ "SimpleDateFormat", "SdCardPath" })
     private void createMonitorFile() {
 		SimpleDateFormat formatter = new SimpleDateFormat("MMdd_HHmmss");
@@ -255,30 +255,30 @@ public class MonitorService extends Service {
 		SharedPreferences.Editor editor = shared.edit();
 		editor.putInt("float", 1);
 		editor.commit();
-		
+
 		y0 = DensityUtils.dip2px(this, 25);
 		windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-		wmParams =  new WindowManager.LayoutParams();
+		wmParams =  new LayoutParams();
 		wmParams.type = LayoutParams.TYPE_SYSTEM_ERROR;
 		wmParams.flags =  LayoutParams.FLAG_LAYOUT_IN_SCREEN|LayoutParams.FLAG_NOT_TOUCHABLE|LayoutParams.FLAG_NOT_FOCUSABLE;
 		wmParams.format = PixelFormat.RGBA_8888;
 		wmParams.gravity = Gravity.LEFT | Gravity.TOP;
 		wmParams.x = 0;
 		wmParams.y = y0;
-		wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		wmParams.width = LayoutParams.WRAP_CONTENT;
+		wmParams.height = LayoutParams.WRAP_CONTENT;
 		wmParams.alpha = 1.0f;
 		windowManager.addView(viFloatingWindow, wmParams);
-		
-		titleParams =  new WindowManager.LayoutParams();
+
+		titleParams =  new LayoutParams();
 		titleParams.type = LayoutParams.TYPE_SYSTEM_ERROR;
 		titleParams.flags =  LayoutParams.FLAG_LAYOUT_IN_SCREEN |LayoutParams.FLAG_NOT_FOCUSABLE;
 		titleParams.format = PixelFormat.RGBA_8888;
 		titleParams.gravity = Gravity.LEFT | Gravity.TOP;
 		titleParams.x = 0;
 		titleParams.y = 0;
-		titleParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		titleParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		titleParams.width = LayoutParams.WRAP_CONTENT;
+		titleParams.height = LayoutParams.WRAP_CONTENT;
 		titleParams.alpha = 1.0f;
 		windowManager.addView(viFloatingTitle, titleParams);
 		
@@ -395,7 +395,7 @@ public class MonitorService extends Service {
                     } catch (InterruptedException e) {
                             e.printStackTrace();
                     }
-                    String adbRes = mShellMonitor.execTop(10);
+                    String adbRes = mShellMonitor.execTop(8);
                     mShellHandler.sendMessage(mShellHandler.obtainMessage(2, adbRes));
                 }
             });
@@ -484,7 +484,7 @@ public class MonitorService extends Service {
                         line = line.substring(0, line.indexOf("total"));
                     }
                     startTime = line.substring(line.lastIndexOf("+") + 1, line.lastIndexOf("ms") + 2);
-                    Toast.makeText(MonitorService.this, getString(R.string.start_time) + startTime, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MonitorService_bak.this, getString(R.string.start_time) + startTime, Toast.LENGTH_LONG).show();
                     isGetStartTime = false;
                     break;
                 }

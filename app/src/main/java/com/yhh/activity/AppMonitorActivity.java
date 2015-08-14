@@ -11,11 +11,8 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,14 +25,16 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.app.analyser.AppChartAnalyser;
+import com.yhh.app.setttings.SettingMonitorActivity;
 import com.yhh.app.setttings.SettingsActivity;
 import com.yhh.config.AppConfig;
 import com.yhh.info.app.AppInfo;
 import com.yhh.info.app.ProcessInfo;
-import com.yhh.service.MonitorService;
+import com.yhh.service.FloatService;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.DialogUtils;
 
@@ -53,10 +52,7 @@ public class AppMonitorActivity extends BaseActivity {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SingleAppMonitor";
 
 	private Intent monitorService;
-	private UpdateReceiver receiver;
-	
-//	private Button mMonitorBtn;
-//	private Button mViewMonitorBtn;
+
 	private ImageView mAppLogIv;
 	private TextView mAppNameTv;
 	private TextView mPkgNameTv;
@@ -89,11 +85,6 @@ public class AppMonitorActivity extends BaseActivity {
 		initUI();
         getData();
         initGridView();
-
-		receiver = new UpdateReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(MonitorService.MONITOR_SERVICE_ACTION);
-		registerReceiver(receiver, filter);
 	}
 	
 	private void getAppInfo(){
@@ -123,7 +114,30 @@ public class AppMonitorActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                if (position == 0) {
+                    Toast.makeText(AppMonitorActivity.this, mAppInfo.getName() + "启动中", Toast.LENGTH_SHORT).show();
+                    Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
+                       try {
+                           mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
+                           startActivity(intent);
+                       } catch (Exception e) {
+                           Toast.makeText(AppMonitorActivity.this, getString(R.string.can_not_start_app_toast), Toast.LENGTH_SHORT).show();
+                           return;
+                       }
+                       new Thread(new Runnable() {
 
+                           @Override
+                           public void run() {
+                               waitForAppStart(mAppInfo.getPackageName());
+                           }
+
+                       }).start();
+
+
+                } else {
+                    Intent diy = new Intent(mContext, SettingMonitorActivity.class);
+                    startActivity(diy);
+                }
             }
 
         });
@@ -140,7 +154,7 @@ public class AppMonitorActivity extends BaseActivity {
 	
     private void initUI(){
 	   monitorService = new Intent();
-       monitorService.setClass(AppMonitorActivity.this, MonitorService.class);
+       monitorService.setClass(AppMonitorActivity.this, FloatService.class);
 	   
 //       mMonitorBtn = (Button) findViewById(R.id.app_monitor_btn);
 //       mViewMonitorBtn = (Button) findViewById(R.id.app_monitor_view);
@@ -248,7 +262,8 @@ public class AppMonitorActivity extends BaseActivity {
                 getActionBar().setTitle(getResources().getString(R.string.main_app_analyser));
                 DialogUtils.closeLoading();
 	        }else if(msg.what ==0x2){  //start floating windows
-	            Log.d(TAG,"begin startup float window.");
+	            Log.d(TAG, "begin startup float window.");
+                AppConfig.TYPE = 11;
 	            monitorService.putExtra("appName", mAppInfo.getName());
                 monitorService.putExtra("pid", mAppInfo.getPid());
                 monitorService.putExtra("uid", mAppInfo.getUid());
@@ -270,7 +285,7 @@ public class AppMonitorActivity extends BaseActivity {
         long startTime = System.currentTimeMillis();
         
         while (System.currentTimeMillis() < startTime + TIMEOUT) {
-            mProcessInfo.getRunningApp(this, mAppInfo);
+            mProcessInfo.getRunningPackage(this, mAppInfo);
             if(mAppInfo.getPid() != 0){
                 break;
             }
@@ -341,7 +356,6 @@ public class AppMonitorActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		unregisterReceiver(receiver);
 	}
 
     @Override
@@ -364,17 +378,10 @@ public class AppMonitorActivity extends BaseActivity {
     @SuppressLint("NewApi")
     private void initActionBar(){
         ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
-    
-    public class UpdateReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-//            if (MonitorService.isServiceStoped) {
-//                mMonitorBtn.setText(getString(R.string.start_monitor));
-//            }
+        if(bar !=null) {
+            bar.setHomeButtonEnabled(true);
+            bar.setIcon(R.drawable.nav_back);
         }
     }
+    
 }

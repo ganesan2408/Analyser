@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- app monitor start -->
+    <string-array name="monitor_items">
+        <item>CPU App</item>
+        <item>CPU使用率</item>
+        <item>CPU频率</item>
+        
+        <item>Memory App</item>
+        <item>Memory剩余量</item>
+        
+        <item>GPU使用率</item>
+        <item>GPU频率</item>
+        
+        <item>电流</item>
+        <item>亮度</item>
+        
+        <item>电量</item>
+        <item>温度</item>
+        <item>电压</item>
+        <item>发/收</item>
+    </string-array>
+    
+    <string-array name="monitor_unit_items">
+        <item>%</item>
+        <item>%</item>
+        <item>MHz</item>
+        <item>MB</item>
+        <item>MB</item>
+        <item>%</item>
+        <item>MHz</item>
+        <item>mA</item>
+        <item></item>
+        <item>%</item>
+        <item>℃</item>
+        <item>V</item>
+        <item>KB/s</item>
+    </string-array>
+    <!-- app monitor end -->
+    
+    <!-- automatic robot start-->
+    <string-array name="case_show_names">
+        <item>QQ</item>
+        <item>微信 </item>
+        <item>微博 </item>
+        <item>浏览器</item>
+        <item>Launcher</item>
+        <item>爱阅读</item>
+        <item>邮箱</item>
+        <item>相机</item>
+        <item>音乐</item>
+        <item>打电话</item>
+        <item>Prepare</item>
+        <item>全自动化</item>
+    </string-array>
+    
+    <string-array name="case_backup_names">
+        <item>QQ</item>
+        <item>Weixin</item>
+        <item>Weibo</item>
+        <item>Browser</item>
+        <item>Launcher</item>
+        <item>Read</item>
+        <item>Email</item>
+        <item>Camera</item>
+        <item>MusicPlayer</item>
+        <item>Call</item>
+        <item>Workflow</item>
+        <item>Workflow</item>
+    </string-array>
+     
+    <string-array name="qq_param_name">
+        <item>账号</item>
+        <item>密码</item>
+        <item>好友昵称</item>
+        <item>消息内容</item>
+        <item>滑动间隔(s)</item>
+        <item>滑动深度</item>
+    </string-array>
+    
+    <string-array name="qq_param_key">
+        <item>username</item>
+        <item>password</item>
+        <item>receiver</item>
+        <item>message</item>
+        <item>speed</item>
+        <item>slipStep</item>
+    </string-array>
+    
+    <string-array name="weixin_param_name">
+        <item>账号</item>
+        <item>密码</item>
+        <item>好友昵称</item>
+        <item>消息内容</item>
+        <item>滑动间隔(s)</item>
+        <item>滑动深度</item>
+    </string-array>
+    
+    <string-array name="weixin_param_key">
+        <item>username</item>
+        <item>password</item>
+        <item>receiver</item>
+        <item>message</item>
+        <item>speed</item>
+        <item>slipStep</item>
+    </string-array>
+    
+    <string-array name="Weibo_param_name">
+        <item>账号</item>
+        <item>密码</item>
+        <item>消息内容</item>
+        <item>滑动间隔(s)</item>
+        <item>滑动深度</item>
+    </string-array>
+    
+    <string-array name="Weibo_param_key">
+        <item>username</item>
+        <item>password</item>
+        <item>message</item>
+        <item>speed</item>
+        <item>slipStep</item>
+    </string-array>
+    
+    <string-array name="Browser_param_name">
+        <item>浏览器名称</item>
+        <item>滑动间隔(s)</item>
+        <item>滑动深度</item>
+    </string-array>
+    
+    <string-array name="Browser_param_key">
+        <item>browserName</item>
+        <item>speed</item>
+        <item>slipStep</item>
+    </string-array>
+    
+    <string-array name="Launcher_param_name">
+        <item>滑动间隔(s)</item>
+        <item>屏数</item>
+    </string-array>
+    
+    <string-array name="Launcher_param_key">
+        <item>speed</item>
+        <item>slipStep</item>
+    </string-array>
+    
+    <string-array name="Read_param_name">
+        <item>滑动间隔(s)</item>
+        <item>滑动次数</item>
+    </string-array>
+    
+    <string-array name="Read_param_key">
+        <item>speed</item>
+        <item>count</item>
+    </string-array>
+    
+    <string-array name="Email_param_name">
+        <item>账号</item>
+        <item>密码</item>
+        <item>收件人</item>
+        <item>滑动间隔(s)</item>
+        <item>滑动深度</item>
+    </string-array>
+    
+    <string-array name="Email_param_key">
+        <item>username</item>
+        <item>password</item>
+        <item>receiver</item>
+        <item>speed</item>
+        <item>slipStep</item>
+    </string-array>
+    
+    <string-array name="Camera_param_name">
+        <item>拍照间隔(s)</item>
+        <item>拍照次数</item>
+    </string-array>
+    
+    <string-array name="Camera_param_key">
+        <item>speed</item>
+        <item>count</item>
+    </string-array>
+    
+    <string-array name="MusicPlayer_param_name">
+        <item>歌曲名</item>
+        <item>采样延迟</item>
+    </string-array>
+    
+    <string-array name="MusicPlayer_param_key">
+        <item>musicName</item>
+        <item>sampleDelay</item>
+    </string-array>
+    
+    <string-array name="Call_param_name">
+        <item>对方号码</item>
+    </string-array>
+    
+    <string-array name="Call_param_key">
+        <item>phoneNumber</item>
+    </string-array>
+    
+    <string-array name="Workflow_param_name">
+        <item>QQ</item>
+        <item>微博</item>
+        <item>微信</item>
+        <item>浏览器</item>
+        <item>超级相机</item>
+    </string-array>
+    
+    <string-array name="Workflow_param_key">
+        <item>QQ</item>
+        <item>Weibo</item>
+        <item>Weixin</item>
+        <item>Browser</item>
+        <item>Camera</item>
+    </string-array>
+    <!-- automatic robot end-->
+    
+      
+    <string-array name="term_input_tools">
+        <item>/</item>
+        <item>|</item>
+        <item>-(短线)</item>
+        <item> _(下划线)</item>
+        <item>*</item>
+        <item>^</item>
+        <item>$</item>
+    </string-array>
+    
+    <string-array name="dumpsys_params">
+          <item>cpuinfo</item>
+          <item>meminfo</item>
+          <item>power</item>
+		  <item>alarm</item>
+		  <item>audio</item>
+		  <item>jobscheduler</item>
+		  <item>netstats</item>
+    </string-array>
+    
+    <!-- term -->
+    <string-array name="entries_statusbar_preference">
+        <item>显示状态栏</item>
+        <item>隐藏状态栏</item>
+    </string-array>
+
+    <string-array name="entries_actionbar_preference">
+        <!-- <item>Action bar disabled</item> -->
+        <item>显示操作栏</item>
+        <item>隐藏操作栏 (点击屏幕上方或按菜单键显示)</item>
+    </string-array>
+
+    <string-array name="entries_orientation_preference">
+        <item>自动</item>
+        <item>横屏</item>
+        <item>竖屏</item>
+    </string-array>
+
+    <string-array name="entries_cursorblink_preference">
+        <item>非闪烁光标</item>
+        <item>闪烁光标</item>
+    </string-array>
+
+    <string-array name="entries_cursorstyle_preference">
+        <item>方块</item>
+        <item>下划线</item>
+        <item>竖线</item>
+    </string-array>
+
+    <string-array name="entries_fontsize_preference">
+        <item>4 x 8 像素</item>
+        <item>6 磅</item>
+        <item>7 磅</item>
+        <item>8 磅</item>
+        <item>9 磅</item>
+        <item>10 磅</item>
+        <item>12 磅</item>
+        <item>14 磅</item>
+        <item>16 磅</item>
+        <item>20 磅</item>
+        <item>24 磅</item>
+        <item>28 磅</item>
+        <item>32 磅</item>
+        <item>36 磅</item>
+        <item>42 磅</item>
+        <item>48 磅</item>
+        <item>64 磅</item>
+        <item>72 磅</item>
+        <item>96 磅</item>
+        <item>144 磅</item>
+        <item>288 磅</item>
+    </string-array>
+
+    <string-array name="entries_color_preference">
+        <item>白底黑字</item>
+        <item>黑底白字</item>
+        <item>蓝底白字</item>
+        <item>黑底绿字</item>
+        <item>黑底黄字</item>
+        <item>黑底红字</item>
+        <item>Holo 风格</item>
+        <item>爆光过度</item>
+        <item>爆光不足</item>
+        <item>Linux 终端</item>
+    </string-array>
+
+    <string-array name="entries_backaction_preference">
+        <item>关闭所有窗口</item>
+        <item>关闭当前窗口</item>
+        <item>关闭当前实例，保留正在运行的会话</item>
+        <item>给终端发送 ESC</item>
+        <item>给终端发送 TAB</item>
+    </string-array>
+
+    <string-array name="entries_controlkey_preference">
+        <item>轨迹球</item>
+        <item>\@ 键</item>
+        <item>左 Alt 键</item>
+        <item>右 Alt 键</item>
+        <item>提升音量键</item>
+        <item>降低音量键</item>
+        <item>相机快门键</item>
+        <item>无</item>
+    </string-array>
+
+    <string-array name="entries_fnkey_preference">
+        <item>轨迹球</item>
+        <item>\@ 键</item>
+        <item>左 Alt 键</item>
+        <item>右 Alt 键</item>
+        <item>提升音量键</item>
+        <item>降低音量键</item>
+        <item>相机快门键</item>
+        <item>无</item>
+    </string-array>
+
+    <string-array name="entries_ime_preference">
+        <item>字本</item>
+        <item>词本</item>
+    </string-array>
+
+    <!-- These are the 'short' names for the control keys. They are used in the special keys dialog. -->
+    <string-array name="control_keys_short_names">
+        <item>Ball</item>
+        <item>\@</item>
+        <item>Left-Alt</item>
+        <item>Right-Alt</item>
+        <item>Vol-Up</item>
+        <item>Vol-Dn</item>
+        <item>Camera</item>
+        <item>None</item>
+    </string-array>
+
+    <!-- These are the 'short' names for the Fn keys. They are used in the special keys dialog. -->
+    <string-array name="fn_keys_short_names">
+        <item>Ball</item>
+        <item>\@</item>
+        <item>Left-Alt</item>
+        <item>Right-Alt</item>
+        <item>Vol-Up</item>
+        <item>Vol-Dn</item>
+        <item>Camera</item>
+        <item>None</item>
+    </string-array>
+</resources>

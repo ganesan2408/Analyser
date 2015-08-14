@@ -47,7 +47,7 @@ public class MonitorFragment extends Fragment {
 	private TextView dialog;
 	private SortAdapter adapter;
 	private ClearEditText mClearEditText;
-	
+
 	/**
 	 * 汉字转换成拼音的类
 	 */
@@ -104,10 +104,10 @@ public class MonitorFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 									int position, long id) {
-				if(position<=1){
+				if (position <= 1) {
 					Intent intent = new Intent(mContext, SysMonitorActivity.class);
 					startActivity(intent);
-				}else {
+				} else {
 					Intent intent = new Intent(mContext, AppMonitorActivity.class);
 					intent.putExtra("appName", ((AppInfo) adapter.getItem(position - 1)).getName());
 					intent.putExtra("packageName", ((AppInfo) adapter.getItem(position - 1)).getPackageName());
@@ -115,13 +115,14 @@ public class MonitorFragment extends Fragment {
 				}
 			}
 		});
+
 		sortListView.setOnDropDownListener(new DropDownListView.OnDropDownListener() {
 			@Override
 			public void onDropDown() {
 				new GetAppTask().execute();
 			}
 		});
-		
+
 		mClearEditText = (ClearEditText) v.findViewById(R.id.filter_edit);
         //根据输入框输入值的改变来过滤搜索
         mClearEditText.addTextChangedListener(new TextWatcher() {

@@ -9,18 +9,16 @@ package com.yhh.app.setttings;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
 import com.yhh.utils.ConstUtils;
@@ -54,7 +52,6 @@ public class SettingExcptionActivity extends Activity {
 	@SuppressLint("NewApi")
     @Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.i(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_monitor_exception_settings);
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -65,6 +62,7 @@ public class SettingExcptionActivity extends Activity {
         bar.setIcon(R.drawable.nav_back);
         initUI();
         readRefs();
+		Toast.makeText(this, "重构中,此功能后续开发", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override

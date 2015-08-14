@@ -20,6 +20,11 @@
     <color name="textcolor">#BEBEBE</color>
     <color name="main_tab_bg">#F7F7F8</color>
     <color name="actionbar_bg">#70c0ff</color>
+
+	<color name="close_btn_pressed">#00b0ff</color>
+	<color name="close_btn">#e8eaf6</color>
+
+	<color name="letter_txt">#454545</color>
     <!-- status analyser -->
     
     <!-- LDrawer start -->

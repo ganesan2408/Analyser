@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.utils.CommandUtils;
@@ -66,6 +67,7 @@ public class SettingShellActivity extends Activity {
         bar.setIcon(R.drawable.nav_back);
         initUI();
         readRefs();
+		Toast.makeText(this,"重构中,此功能后续开发", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override

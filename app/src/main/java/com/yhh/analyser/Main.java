@@ -77,7 +77,6 @@ public class Main extends FragmentActivity {
         initMenu();
         setDefaultView();
 
-        MobclickAgent.setDebugMode(true);
         MobclickAgent.updateOnlineConfig(this);
     }
 

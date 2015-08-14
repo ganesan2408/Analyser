@@ -79,6 +79,26 @@ public class ProcessInfo {
           }
       }
 	}
+
+    /**
+     * 获取指定包名的apk的详细信息
+     *
+     * @param context
+     * @param appInfo
+     * @return
+     */
+    public void getRunningPackage(Context context, AppInfo appInfo){
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
+
+        for (RunningAppProcessInfo running : runingApps) {
+            if ((running.processName != null) && running.processName.equals(appInfo.getPackageName())) {
+                appInfo.setPid(running.pid);
+                appInfo.setUid(running.uid);
+                break;
+            }
+        }
+    }
 	
 	public AppInfo getPackageInfo(Context context,String pkgName){
 	    AppInfo appInfo = new AppInfo();

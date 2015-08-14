@@ -14,10 +14,10 @@ import com.yhh.utils.FileUtils;
 class GpuInfo {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "GpuInfo";
     private boolean DEBUG =false;
-    
+
    public static final String GPU_CLK =  "/sys/class/kgsl/kgsl-3d0/gpuclk";
    public static final String GPU_BUSY = "/sys/class/kgsl/kgsl-3d0/gpubusy";
-    
+
     /**
      * get cpu clock
      * 
@@ -62,7 +62,7 @@ class GpuInfo {
         }
         return rate;
     }
-    
+
 //  public double getBimcClock(){
 //  double clk = -1;
 //  String gpuStr = FileUtils.getCommandNodeValue(CommandUtils.BIMC_CLOCK);

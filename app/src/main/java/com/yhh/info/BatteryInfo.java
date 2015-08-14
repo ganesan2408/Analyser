@@ -1,8 +1,8 @@
 /**
  * @author yuanhh1
- * 
+ *
  * @email yuanhh1@lenovo.com
- * 
+ *
  */
 package com.yhh.info;
 
@@ -22,22 +22,22 @@ class BatteryInfo {
     public Battery getBattery(){
         return  mBattery;
     }
-    
+
 
     public void init(Context context){
         mContext = context;
         mBattery = new Battery();
     }
-    
+
     public void register(){
         batteryBroadcast = new BatteryInfoBroadcastReceiver();
         mContext.registerReceiver(batteryBroadcast, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
     }
-    
+
     public void unregister(){
         mContext.unregisterReceiver(batteryBroadcast);
     }
-    
+
     class BatteryInfoBroadcastReceiver extends BroadcastReceiver {
 
         @Override

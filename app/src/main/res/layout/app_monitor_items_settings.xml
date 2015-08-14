@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/com.yhh.analyser"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -167,5 +167,11 @@
             app:stateDrawable="@drawable/selector_switch_state"
             app:stateMaskDrawable="@drawable/switch_state_mask"
             app:sliderDrawable="@drawable/selector_switch_slider"/>
+        <Button
+            android:id="@+id/btn_diy_monitor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="开始监控"/>
 	</LinearLayout>
 </ScrollView>

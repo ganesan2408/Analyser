@@ -8,20 +8,22 @@ package com.yhh.app.setttings;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
-import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import com.yhh.activity.BaseActivity;
 import com.yhh.analyser.R;
+import com.yhh.service.FloatService;
 import com.yhh.utils.ConstUtils;
 import com.yhh.widget.SwitchButton;
 
-public class SettingMonitorActivity extends Activity {
+public class SettingMonitorActivity extends BaseActivity {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingMonitorActivity";
 	private boolean DEBUG = true;
 	
@@ -55,7 +57,6 @@ public class SettingMonitorActivity extends Activity {
 	@SuppressLint("NewApi")
     @Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.i(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_monitor_items_settings);
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -82,9 +83,6 @@ public class SettingMonitorActivity extends Activity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView,
                         boolean isChecked) {
-                    if(DEBUG){
-                        Log.i(TAG, index+"# onCheckedChanged: "+isChecked);
-                    }
                     mEditor.putBoolean(PREF_MONITOR_ITEMS[index], isChecked);
                     mEditor.putBoolean(SettingFloatingActivity.PREF_FLOATING_ITEMS[index], isChecked);
                     mEditor.commit();
@@ -92,6 +90,18 @@ public class SettingMonitorActivity extends Activity {
 	        });
 	        
 	    }
+
+		//临时方案
+		findViewById(R.id.btn_diy_monitor).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent monitorService = new Intent();
+				monitorService.setClass(mContext, FloatService.class);
+				monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				mContext.startService(monitorService);
+			}
+		});
 	}
 	
 	@Override
