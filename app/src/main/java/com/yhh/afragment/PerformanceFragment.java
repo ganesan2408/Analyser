@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.fragment;
+package com.yhh.afragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,8 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
-import com.yhh.aafragment.performance.CpuGovernor;
-import com.yhh.aafragment.performance.GpuGovernor;
+import com.yhh.afragment.performance.CpuGovernor;
+import com.yhh.afragment.performance.GpuGovernor;
 import com.yhh.utils.ConstUtils;
 
 public class PerformanceFragment extends Fragment implements
@@ -78,7 +78,7 @@ public class PerformanceFragment extends Fragment implements
                 
 //            case R.id.main_perf_score:
 //                mScoreFragment = new BenchmarkFragment();
-//                aafragment = mScoreFragment;
+//                afragment = mScoreFragment;
 //                Log.i(TAG,"===SCORE");
 //                break;
                 

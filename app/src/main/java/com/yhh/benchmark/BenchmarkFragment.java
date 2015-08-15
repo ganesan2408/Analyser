@@ -40,7 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.aafragment.performance.MyPerf;
+import com.yhh.afragment.performance.MyPerf;
 import com.yhh.info.TempInfo;
 import com.yhh.info.app.PhoneInfo;
 import com.yhh.robot.Automatic;

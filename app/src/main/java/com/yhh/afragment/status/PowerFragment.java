@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.aafragment.status;
+package com.yhh.afragment.status;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

@@ -1,4 +1,4 @@
-package com.yhh.aafragment.performance;
+package com.yhh.afragment.performance;
 ///**
 // * @author yuanhh1
 // * 
@@ -155,13 +155,13 @@ package com.yhh.aafragment.performance;
 //    }
 //    
 //    
-//    void setFrag(Fragment aafragment){
-//        if(null == aafragment){
+//    void setFrag(Fragment afragment){
+//        if(null == afragment){
 //            return;
 //        }
 //        
 //        ft = fm.beginTransaction();
-//        ft.replace(R.id.perf_fragment,aafragment);
+//        ft.replace(R.id.perf_fragment,afragment);
 //        ft.commit();
 //    }
 //    

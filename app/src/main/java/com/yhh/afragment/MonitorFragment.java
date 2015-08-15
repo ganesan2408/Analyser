@@ -1,4 +1,4 @@
-package com.yhh.fragment;
+package com.yhh.afragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -148,16 +148,17 @@ public class MonitorFragment extends Fragment {
 
                 @Override
                 public void run() {
-                    mAppList = new ProcessInfo().getLaunchApps(mContext);
+					mAppList = new ProcessInfo().getLaunchApps(mContext);
                     mHandler.sendMessage(mHandler.obtainMessage(0));
                 }
-		        
+
+
 		    }).start();
            
         }else{
             mHandler.sendMessage(mHandler.obtainMessage(1));
         }
-		
+
 	}
 	
 	private Handler mHandler = new Handler(){

@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.aafragment.performance;
+package com.yhh.afragment.performance;
 
 import android.util.Log;
 
