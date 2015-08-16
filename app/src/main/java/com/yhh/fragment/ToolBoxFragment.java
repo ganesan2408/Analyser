@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.afragment;
+package com.yhh.fragment;
 
 import android.content.Context;
 import android.content.Intent;

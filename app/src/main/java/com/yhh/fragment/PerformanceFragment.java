@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.afragment;
+package com.yhh.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,8 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
-import com.yhh.afragment.performance.CpuGovernor;
-import com.yhh.afragment.performance.GpuGovernor;
+import com.yhh.fragment.performance.CpuGovernor;
+import com.yhh.fragment.performance.GpuGovernor;
 import com.yhh.utils.ConstUtils;
 
 public class PerformanceFragment extends Fragment implements

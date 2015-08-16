@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.afragment;
+package com.yhh.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,10 +18,10 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
-import com.yhh.afragment.status.BatteryFragment;
-import com.yhh.afragment.status.PowerFragment;
-import com.yhh.afragment.status.TopProcessFragment;
-import com.yhh.afragment.status.TopThreadFragment;
+import com.yhh.fragment.status.BatteryFragment;
+import com.yhh.fragment.status.PowerFragment;
+import com.yhh.fragment.status.TopProcessFragment;
+import com.yhh.fragment.status.TopThreadFragment;
 
 public class StatusViewerFragment extends Fragment implements
         OnCheckedChangeListener {

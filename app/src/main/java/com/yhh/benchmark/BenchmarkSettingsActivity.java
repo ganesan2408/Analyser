@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.afragment.performance.MyPerf;
+import com.yhh.fragment.performance.MyPerf;
 import com.yhh.robot.RootTools;
 import com.yhh.utils.ConstUtils;
 import com.yhh.widget.SwitchButton;

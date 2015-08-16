@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.afragment.log;
+package com.yhh.fragment.log;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

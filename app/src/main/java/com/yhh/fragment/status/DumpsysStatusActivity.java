@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.afragment.status;
+package com.yhh.fragment.status;
 
 import java.util.Arrays;
 import java.util.List;

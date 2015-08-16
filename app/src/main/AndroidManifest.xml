@@ -180,7 +180,7 @@
         <!-- android:screenOrientation="portrait"  /> -->
 
         <activity
-            android:name="com.yhh.afragment.status.DumpsysStatusActivity"
+            android:name="com.yhh.fragment.status.DumpsysStatusActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_status_analyser"
             android:screenOrientation="portrait" />
