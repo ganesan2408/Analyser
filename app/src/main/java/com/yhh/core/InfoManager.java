@@ -4,7 +4,7 @@
  * @email yuanhh1@lenovo.com
  * 
  */
-package com.yhh.business;
+package com.yhh.core;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,11 +14,10 @@ import android.util.Log;
 
 import com.yhh.analyser.R;
 import com.yhh.app.monitor.ExceptionMonitor;
-import com.yhh.app.setttings.SettingMonitorActivity;
-import com.yhh.service.FloatService;
 import com.yhh.config.AppConfig;
 import com.yhh.constant.MonitorConst;
 import com.yhh.info.InfoFactory;
+import com.yhh.service.FloatService;
 import com.yhh.utils.ConstUtils;
 import com.yhh.utils.FileUtils;
 import com.yhh.utils.TimeUtils;
@@ -41,8 +40,9 @@ public class InfoManager {
     
     public static final int CPU_USED_RARIO_COMMA=14;
     
-    private boolean[] mIsMonitorItem = new boolean[SettingMonitorActivity.MONITOR_ITEMS_COUNT];
-    
+//    private boolean[] mIsMonitorItem = new boolean[SettingMonitorActivity.MONITOR_ITEMS_COUNT];
+    private boolean[] mIsMonitorItem = new boolean[13];
+
     private HashMap<Integer,String> mMonitorInfo = new HashMap<Integer, String>();
     private Context mContext;
     private BufferedWriter bw;
@@ -73,9 +73,9 @@ public class InfoManager {
             Log.i(TAG,"INTO readPrefs");
         }
         mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext.getApplicationContext());
-        for(int i=0;i<SettingMonitorActivity.MONITOR_ITEMS_COUNT;i++){
-            mIsMonitorItem[i] = !mPreferences.getBoolean(SettingMonitorActivity.PREF_MONITOR_ITEMS[i], false);
-        }
+//        for(int i=0;i<SettingMonitorActivity.MONITOR_ITEMS_COUNT;i++){
+//            mIsMonitorItem[i] = !mPreferences.getBoolean(SettingMonitorActivity.PREF_MONITOR_ITEMS[i], false);
+//        }
     }
     
     @SuppressLint("UseSparseArrays")
@@ -268,7 +268,7 @@ public class InfoManager {
         String[] monitorItems = mContext.getResources().getStringArray(R.array.monitor_items);
         
         sb.append("时间, ");
-        for(int i=0;i<SettingMonitorActivity.MONITOR_ITEMS_COUNT-1;i++){
+        for(int i=0;i<13-1;i++){
             if(mIsMonitorItem[i]){
                 sb.append(monitorItems[i] +", ");
             }
@@ -288,7 +288,7 @@ public class InfoManager {
     private String monitorData2String(){
         StringBuilder sb = new StringBuilder();
         sb.append(mMonitorInfo.get(TIME_NOW)+",");
-        for(int i=0;i<SettingMonitorActivity.MONITOR_ITEMS_COUNT -1;i++){
+        for(int i=0;i<13 -1;i++){
             if(mIsMonitorItem[i]){
                     sb.append(mMonitorInfo.get(i)+",");
             }

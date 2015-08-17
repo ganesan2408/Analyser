@@ -68,7 +68,7 @@ public class MonitorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.main_monitor, null) ;
+        View v = inflater.inflate(R.layout.main_monitor, container, false) ;
         initViews(v);
         return v;
     }

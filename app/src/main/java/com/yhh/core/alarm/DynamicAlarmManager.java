@@ -1,4 +1,4 @@
-package com.yhh.business.alarm;
+package com.yhh.core.alarm;
 
 import com.yhh.constant.CommandConst;
 import com.yhh.utils.ShellUtils;

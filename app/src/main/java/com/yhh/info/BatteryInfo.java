@@ -12,21 +12,21 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 
-import com.yhh.model.Battery;
+import com.yhh.model.BatteryBean;
 
 class BatteryInfo {
-    private Battery mBattery;
+    private BatteryBean mBattery;
     private Context mContext;
     private BatteryInfoBroadcastReceiver batteryBroadcast;
 
-    public Battery getBattery(){
+    public BatteryBean getBattery(){
         return  mBattery;
     }
 
 
     public void init(Context context){
         mContext = context;
-        mBattery = new Battery();
+        mBattery = new BatteryBean();
     }
 
     public void register(){

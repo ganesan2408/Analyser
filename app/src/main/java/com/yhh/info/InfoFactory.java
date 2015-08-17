@@ -8,7 +8,7 @@ package com.yhh.info;
 
 import android.content.Context;
 
-import com.yhh.model.Battery;
+import com.yhh.model.BatteryBean;
 import com.yhh.utils.NumberUtils;
 
 import java.text.DecimalFormat;
@@ -32,7 +32,7 @@ public class InfoFactory {
     private TrafficInfo mTrafficInfo;
     private Context mContext;
 
-    private Battery mBattery;
+    private BatteryBean mBattery;
 
     private static InfoFactory mInfoFactory;
 

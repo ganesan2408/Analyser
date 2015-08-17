@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.business.alarm.AlarmManager;
-import com.yhh.business.alarm.FileAlarmManager;
+import com.yhh.core.alarm.AlarmManager;
+import com.yhh.core.alarm.FileAlarmManager;
 import com.yhh.model.AlarmInfo;
 
 import java.util.Collections;

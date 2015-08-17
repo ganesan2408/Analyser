@@ -22,7 +22,8 @@
             app:frameDrawable="@drawable/switch_frame"
             app:stateDrawable="@drawable/selector_switch_state"
             app:stateMaskDrawable="@drawable/switch_state_mask"
-            app:sliderDrawable="@drawable/selector_switch_slider"/>
+            app:sliderDrawable="@drawable/selector_switch_slider"
+            />
         <com.yhh.widget.SwitchButton
             android:id="@+id/monitor_settings_cpu"
             style="@style/item"
@@ -33,7 +34,8 @@
             app:frameDrawable="@drawable/switch_frame"
             app:stateDrawable="@drawable/selector_switch_state"
             app:stateMaskDrawable="@drawable/switch_state_mask"
-            app:sliderDrawable="@drawable/selector_switch_slider"/>
+            app:sliderDrawable="@drawable/selector_switch_slider"
+            />
         <com.yhh.widget.SwitchButton
             android:id="@+id/monitor_settings_cpu_freq"
             style="@style/item"
@@ -44,7 +46,8 @@
             app:frameDrawable="@drawable/switch_frame"
             app:stateDrawable="@drawable/selector_switch_state"
             app:stateMaskDrawable="@drawable/switch_state_mask"
-            app:sliderDrawable="@drawable/selector_switch_slider"/>
+            app:sliderDrawable="@drawable/selector_switch_slider"
+            />
         
         
         <com.yhh.widget.SwitchButton
@@ -58,7 +61,8 @@
             app:frameDrawable="@drawable/switch_frame"
             app:stateDrawable="@drawable/selector_switch_state"
             app:stateMaskDrawable="@drawable/switch_state_mask"
-            app:sliderDrawable="@drawable/selector_switch_slider"/>
+            app:sliderDrawable="@drawable/selector_switch_slider"
+            />
          <com.yhh.widget.SwitchButton
             android:id="@+id/monitor_settings_memory"
             style="@style/item"   
@@ -156,11 +160,22 @@
             app:sliderDrawable="@drawable/selector_switch_slider"/>
         
         <com.yhh.widget.SwitchButton
-            android:id="@+id/monitor_settings_traffic_speed"
+            android:id="@+id/monitor_settings_traffic_rev"
             android:layout_marginTop="16dp"
             style="@style/item"   
-            android:text="@string/monitor_traffic_speed"
-            android:background="@drawable/selector_preference_complete"
+            android:text="@string/monitor_traffic_rev"
+            android:background="@drawable/selector_preference_header"
+            android:checked="true"
+            app:withTextInterval="16dp"
+            app:frameDrawable="@drawable/switch_frame"
+            app:stateDrawable="@drawable/selector_switch_state"
+            app:stateMaskDrawable="@drawable/switch_state_mask"
+            app:sliderDrawable="@drawable/selector_switch_slider"/>
+        <com.yhh.widget.SwitchButton
+            android:id="@+id/monitor_settings_traffic_send"
+            style="@style/item"
+            android:text="@string/monitor_traffic_send"
+            android:background="@drawable/selector_preference_footer"
             android:checked="true"
             app:withTextInterval="16dp"
             app:frameDrawable="@drawable/switch_frame"

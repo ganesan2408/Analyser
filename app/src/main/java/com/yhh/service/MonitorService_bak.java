@@ -40,7 +40,7 @@ import com.yhh.app.monitor.ShellMonitor;
 import com.yhh.app.setttings.SettingFloatingActivity;
 import com.yhh.app.setttings.SettingMonitorActivity;
 import com.yhh.app.setttings.SettingsActivity;
-import com.yhh.business.InfoManager;
+import com.yhh.core.InfoManager;
 import com.yhh.config.AppConfig;
 import com.yhh.constant.MonitorConst;
 import com.yhh.info.InfoFactory;

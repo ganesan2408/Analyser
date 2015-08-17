@@ -1,4 +1,4 @@
-package com.yhh.business.alarm;
+package com.yhh.core.alarm;
 
 import com.yhh.model.AlarmInfo;
 import com.yhh.model.AlarmType;

@@ -12,11 +12,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
 import com.yhh.utils.ConstUtils;
@@ -71,29 +67,29 @@ public class SettingFloatingActivity extends Activity {
     }
 	
 	public void initUI(){
-	    for(int i=0; i<MONITOR_ITEMS_COUNT; i++){
-	        final int index = i;
-	        mMonitorBtn[i] = (SwitchButton) findViewById(mMonitorBtnIds[i]);
-	        if(mPreferences.getBoolean(SettingMonitorActivity.PREF_MONITOR_ITEMS[index], false)){
-	            mMonitorBtn[i].setVisibility(View.GONE);
-	            
-	        }else{
-	            mMonitorBtn[i].setVisibility(View.VISIBLE);
-    	        mMonitorBtn[i].setChecked(mPreferences.getBoolean(PREF_FLOATING_ITEMS[index], false));
-    	        mMonitorBtn[i].setOnCheckedChangeListener(new OnCheckedChangeListener(){
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView,
-                            boolean isChecked) {
-                        if(DEBUG){
-                            Log.i(TAG,index+"# onCheckedChanged: "+isChecked);
-                        }
-                        mEditor.putBoolean(PREF_FLOATING_ITEMS[index], isChecked);
-                        mEditor.commit();
-                    }
-    	        });
-	        }
-	        
-	    }
+//	    for(int i=0; i<MONITOR_ITEMS_COUNT; i++){
+//	        final int index = i;
+//	        mMonitorBtn[i] = (SwitchButton) findViewById(mMonitorBtnIds[i]);
+//	        if(mPreferences.getBoolean(SettingMonitorActivity.PREF_MONITOR_ITEMS[index], false)){
+//	            mMonitorBtn[i].setVisibility(View.GONE);
+//
+//	        }else{
+//	            mMonitorBtn[i].setVisibility(View.VISIBLE);
+//    	        mMonitorBtn[i].setChecked(mPreferences.getBoolean(PREF_FLOATING_ITEMS[index], false));
+//    	        mMonitorBtn[i].setOnCheckedChangeListener(new OnCheckedChangeListener(){
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView,
+//                            boolean isChecked) {
+//                        if(DEBUG){
+//                            Log.i(TAG,index+"# onCheckedChanged: "+isChecked);
+//                        }
+//                        mEditor.putBoolean(PREF_FLOATING_ITEMS[index], isChecked);
+//                        mEditor.commit();
+//                    }
+//    	        });
+//	        }
+//
+//	    }
 	    
 	}
 	

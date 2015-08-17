@@ -6,7 +6,7 @@
  */
 package com.yhh.model;
 
-public class Battery {
+public class BatteryBean {
 
     private String mLevel;
     private String mVoltage;

@@ -24,7 +24,7 @@ import com.yhh.app.monitor.ShellMonitor;
 import com.yhh.app.setttings.SettingFloatingActivity;
 import com.yhh.app.setttings.SettingMonitorActivity;
 import com.yhh.app.setttings.SettingsActivity;
-import com.yhh.business.InfoManager;
+import com.yhh.core.InfoManager;
 import com.yhh.common.FloatCreator;
 import com.yhh.config.AppConfig;
 import com.yhh.constant.MonitorConst;
@@ -132,7 +132,7 @@ public class FloatService extends Service{
 
     private void readPrefs(){
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        for(int i=0;i<SettingMonitorActivity.MONITOR_ITEMS_COUNT;i++){
+        for(int i=0;i<13;i++){
             mIsFloatingItem[i] = !mPreferences.getBoolean(SettingFloatingActivity.PREF_FLOATING_ITEMS[i], false);
         }
 

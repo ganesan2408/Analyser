@@ -13,7 +13,7 @@ public class TestBattery extends InstrumentationTestCase{
     }
 
     public void test(){
-        Battery b = new Battery();
+        BatteryBean b = new BatteryBean();
         b.setLevel("1");
         assertEquals("1", b.getLevel());
     }
