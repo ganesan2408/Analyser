@@ -5,7 +5,7 @@ import java.io.File;
 import android.content.Context;
 import android.util.Log;
 
-import com.yhh.utils.ConstUtils;
+import com.yhh.analyser.utils.ConstUtils;
 
 public class SmartTerm{
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "SmartTerm";

@@ -19,18 +19,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
-import com.yhh.activity.menu.AboutActivity;
-import com.yhh.activity.menu.FeedbackActivity;
-import com.yhh.activity.menu.MyFileActivity;
-import com.yhh.activity.menu.MyShotActivity;
-import com.yhh.fragment.MonitorFragment;
-import com.yhh.fragment.PerformanceFragment;
-import com.yhh.fragment.StatusViewerFragment;
-import com.yhh.fragment.ToolBoxFragment;
-import com.yhh.info.app.PhoneInfo;
-import com.yhh.utils.ConstUtils;
-import com.yhh.utils.DialogUtils;
-import com.yhh.widget.slidingmenu.SlidingMenu;
+import com.yhh.analyser.fragment.MainBoxFragment;
+import com.yhh.analyser.fragment.MainPerfFragment;
+import com.yhh.analyser.ui.AboutActivity;
+import com.yhh.analyser.ui.FeedbackActivity;
+import com.yhh.analyser.ui.MyFileActivity;
+import com.yhh.analyser.ui.MyShotActivity;
+import com.yhh.analyser.fragment.MainMonitorFragment;
+import com.yhh.analyser.fragment.MainStatusFragment;
+import com.yhh.analyser.bean.app.PhoneInfo;
+import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.DialogUtils;
+import com.yhh.analyser.widget.slidingmenu.SlidingMenu;
 
 public class Main extends FragmentActivity {
     private static final String TAG = ConstUtils.DEBUG_TAG+ "Main";
@@ -42,10 +42,10 @@ public class Main extends FragmentActivity {
 //    public static String MONITOR_PARENT_PATH;
     
     private final Class[] mFragments = {
-            MonitorFragment.class, 
-            StatusViewerFragment.class,
-            PerformanceFragment.class, 
-            ToolBoxFragment.class
+            MainMonitorFragment.class,
+            MainStatusFragment.class,
+            MainPerfFragment.class,
+            MainBoxFragment.class
     };
     
     private final int[] mRadioIds = {

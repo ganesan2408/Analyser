@@ -10,7 +10,7 @@
         android:hint="APP使用情况"
         android:layout_margin="10sp"
         android:scrollbars="vertical"/>
-    <com.yhh.widget.NoScrollListView
+    <com.yhh.analyser.widget.NoScrollListView
         android:id="@+id/log_analyser_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

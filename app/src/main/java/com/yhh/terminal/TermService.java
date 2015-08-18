@@ -27,7 +27,7 @@ import android.util.Log;
 import com.yhh.analyser.R;
 import com.yhh.terminal.emulatorview.TermSession;
 import com.yhh.terminal.util.SessionList;
-import com.yhh.utils.ConstUtils;
+import com.yhh.analyser.utils.ConstUtils;
 
 public class TermService extends Service implements TermSession.FinishCallback {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "TermService";

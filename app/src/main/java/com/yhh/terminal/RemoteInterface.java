@@ -33,7 +33,7 @@ import android.util.Log;
 import com.yhh.terminal.emulatorview.TermSession;
 import com.yhh.terminal.util.SessionList;
 import com.yhh.terminal.util.TermSettings;
-import com.yhh.utils.ConstUtils;
+import com.yhh.analyser.utils.ConstUtils;
 
 
 

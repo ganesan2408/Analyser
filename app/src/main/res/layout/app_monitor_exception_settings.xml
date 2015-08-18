@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin" >
-        <com.yhh.widget.SwitchButton
+        <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/app_exception_monitor_sb"
             style="@style/item"
             android:text="@string/app_exception_monitor_title"

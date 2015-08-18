@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.yhh.widget.SwitchButton
+    <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/thermal_control_btn"
             style="@style/item"
             android:text="@string/settings_thermal_control"
@@ -47,7 +47,7 @@
                 android:gravity="center"/>
         </LinearLayout>
         
-    <com.yhh.widget.SwitchButton
+    <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/loop_config_btn"
             style="@style/item"
             android:text="@string/settings_loop"
@@ -73,7 +73,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@id/cpu_big_title"/>
-	    <com.yhh.widget.rangebar.RangeBar 
+	    <com.yhh.analyser.widget.rangebar.RangeBar
 			xmlns:custom="http://schemas.android.com/apk/res-auto" 
 			android:id="@+id/cpu_big_num_bar" 
 			android:layout_below="@id/cpu_big_title"
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/cpu_small_title"/>
-        <com.yhh.widget.rangebar.RangeBar 
+        <com.yhh.analyser.widget.rangebar.RangeBar
             xmlns:custom="http://schemas.android.com/apk/res-auto" 
             android:id="@+id/cpu_small_num_bar" 
             android:layout_below="@id/cpu_small_title"
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/cpu_big_freq_title"/>
-        <com.yhh.widget.rangebar.RangeBar 
+        <com.yhh.analyser.widget.rangebar.RangeBar
             xmlns:custom="http://schemas.android.com/apk/res-auto" 
             android:id="@+id/cpu_big_freq_bar" 
             android:layout_below="@id/cpu_big_freq_title"
@@ -148,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/cpu_small_freq_title"/>
-        <com.yhh.widget.rangebar.RangeBar 
+        <com.yhh.analyser.widget.rangebar.RangeBar
             xmlns:custom="http://schemas.android.com/apk/res-auto" 
             android:id="@+id/cpu_small_freq_bar" 
             android:layout_below="@id/cpu_small_freq_title"
@@ -173,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/gpu_freq_title"/>
-        <com.yhh.widget.rangebar.RangeBar 
+        <com.yhh.analyser.widget.rangebar.RangeBar
             xmlns:custom="http://schemas.android.com/apk/res-auto" 
             android:id="@+id/gpu_freq_bar" 
             android:layout_below="@id/gpu_freq_title"

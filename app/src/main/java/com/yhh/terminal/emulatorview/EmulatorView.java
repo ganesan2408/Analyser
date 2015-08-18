@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
 
-import com.yhh.utils.ConstUtils;
+import com.yhh.analyser.utils.ConstUtils;
 
 import android.content.Context;
 import android.graphics.Canvas;

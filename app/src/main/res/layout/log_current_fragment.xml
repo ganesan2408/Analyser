@@ -4,8 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <com.yhh.widget.IndexableListView android:id="@+id/log_current_lv" 
+    <com.yhh.analyser.widget.IndexableListView
+        android:id="@+id/log_current_lv"
 	    android:layout_width="fill_parent" 
 	    android:layout_height="fill_parent">
-    </com.yhh.widget.IndexableListView>
+    </com.yhh.analyser.widget.IndexableListView>
 </LinearLayout>

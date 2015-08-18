@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:text="启动"
         />
-    <com.yhh.widget.numberprogressbar.NumberProgressBar
+    <com.yhh.analyser.widget.numberprogressbar.NumberProgressBar
         android:id="@+id/log_loading"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

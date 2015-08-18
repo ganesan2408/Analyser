@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <com.yhh.widget.letterlistview.ClearEditText
+    <com.yhh.analyser.widget.letterlistview.ClearEditText
         android:id="@+id/filter_edit"
         android:layout_marginTop="5dip"
         android:layout_width="fill_parent"
@@ -45,7 +45,7 @@
             android:textSize="40sp"
             android:visibility="invisible" />
 
-        <com.yhh.widget.letterlistview.SideBar
+        <com.yhh.analyser.widget.letterlistview.SideBar
             android:id="@+id/sidrbar"
             android:layout_width="30dp"
             android:layout_height="fill_parent"

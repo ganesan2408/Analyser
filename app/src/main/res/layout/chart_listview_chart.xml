@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.yhh.widget.NoScrollListView
+    <com.yhh.analyser.widget.NoScrollListView
         android:id="@+id/app_monitor_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

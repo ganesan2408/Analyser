@@ -7,7 +7,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-		<com.yhh.widget.IndexableListView
+		<com.yhh.analyser.widget.IndexableListView
 		    android:layout_width="fill_parent" 
 		    android:layout_height="fill_parent" 
 		    android:id="@+id/listview" />

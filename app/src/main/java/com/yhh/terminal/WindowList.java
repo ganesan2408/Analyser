@@ -33,7 +33,7 @@ import android.widget.ListView;
 
 import com.yhh.analyser.R;
 import com.yhh.terminal.util.SessionList;
-import com.yhh.utils.ConstUtils;
+import com.yhh.analyser.utils.ConstUtils;
 
 public class WindowList extends ListActivity {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "WindowList";

@@ -2,6 +2,8 @@ package com.yhh.model;
 
 import android.test.InstrumentationTestCase;
 
+import com.yhh.analyser.bean.BatteryBean;
+
 /**
  * Created by yuanhh1 on 2015/8/16.
  */

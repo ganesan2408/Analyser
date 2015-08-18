@@ -76,7 +76,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <com.yhh.widget.rangebar.RangeBar
+        <com.yhh.analyser.widget.rangebar.RangeBar
              xmlns:custom="http://schemas.android.com/apk/res-auto"
              android:id="@+id/cpu_big_freq_bar"
              android:layout_below="@id/cpu_num2_ll"
@@ -101,7 +101,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <com.yhh.widget.rangebar.RangeBar
+        <com.yhh.analyser.widget.rangebar.RangeBar
              xmlns:custom="http://schemas.android.com/apk/res-auto"
              android:id="@+id/cpu_small_freq_bar"
              android:layout_below="@id/cpu_freq2_ll"

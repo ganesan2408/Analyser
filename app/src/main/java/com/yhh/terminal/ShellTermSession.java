@@ -32,7 +32,7 @@ import android.util.Log;
 import com.yhh.terminal.emulatorview.ColorScheme;
 import com.yhh.terminal.emulatorview.TermSession;
 import com.yhh.terminal.util.TermSettings;
-import com.yhh.utils.ConstUtils;
+import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * A terminal session, consisting of a TerminalEmulator, a TranscriptScreen,

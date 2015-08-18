@@ -43,7 +43,7 @@
 
         <!-- umeng start -->
         <activity android:name="com.umeng.fb.ConversationActivity" />
-        <activity android:name="com.yhh.activity.menu.FeedbackActivity"
+        <activity android:name=".ui.FeedbackActivity"
             android:label="@string/menu_feedback"
             android:screenOrientation="portrait"/>
 
@@ -60,7 +60,7 @@
 
 
         <!-- <activity -->
-        <!-- android:name="com.yhh.widget.letterlistview.MainActivity" -->
+        <!-- android:name="com.yhh.analyser.widget.letterlistview.MainActivity" -->
         <!-- android:label="@string/main_app_analyser" -->
         <!-- android:windowSoftInputMode = "adjustPan" -->
         <!-- android:launchMode="singleTask" -->
@@ -75,80 +75,80 @@
         <!-- android:screenOrientation="portrait"> -->
         <!-- </activity> -->
         <activity
-            android:name="com.yhh.activity.AppMonitorActivity"
+            android:name=".ui.MonitorAppActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_app_analyser"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yhh.activity.SysMonitorActivity"
+            android:name=".ui.MonitorSysActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_sys_analyser"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yhh.app.setttings.SettingsActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:label="@string/setting"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.app.setttings.SettingMonitorActivity"
+            android:name=".ui.settings.SettingMonitorActivity"
             android:label="@string/app_monitor_item_title"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.app.setttings.SettingFloatingActivity"
+            android:name=".ui.settings.SettingFloatingActivity"
             android:label="@string/app_floating_item_title"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.app.setttings.SettingExcptionActivity"
+            android:name=".ui.settings.SettingExcptionActivity"
             android:label="@string/app_exception_monitor_title"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.app.setttings.SettingShellActivity"
+            android:name=".ui.settings.SettingShellActivity"
             android:label="@string/setting"
             android:screenOrientation="portrait" />
 
         <!-- App Monitor END -->
 
         <activity
-            android:name="com.yhh.activity.menu.HelpActivity"
+            android:name=".ui.HelpActivity"
             android:label="@string/menu_feedback"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.yhh.activity.menu.MyShotActivity"
+            android:name=".ui.MyShotActivity"
             android:label="@string/menu_shot"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.yhh.activity.menu.MyFileActivity"
+            android:name=".ui.MyFileActivity"
             android:label="@string/menu_file"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.yhh.activity.menu.AboutActivity"
+            android:name=".ui.AboutActivity"
             android:label="@string/menu_about"
             android:screenOrientation="portrait"/>
 
         <!-- Log Analyser START -->
         <activity
-            android:name="com.yhh.log.analyser.LogChart"
+            android:name=".ui.ChartLogActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.log.viewer.LogViewerActivity"
+            android:name=".ui.LogViewActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_log_analyser"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.log.analyser.MainLogAnalyser"
+            android:name=".ui.LogAnalyActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_log_analyser"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.log.viewer.ContentReaderActivity"
+            android:name=".ui.LogReaderActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
             android:label="@string/main_log_analyser"
             android:screenOrientation="portrait"
@@ -158,13 +158,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yhh.log.viewer.SleepLogReader"
+            android:name=".ui.LogSleepReaderActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
             android:label="@string/main_log_analyser"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name="com.yhh.log.viewer.SleepLogStatistics"
+            android:name=".ui.LogSleepStatActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_log_analyser"
             android:screenOrientation="portrait" />
@@ -180,7 +180,7 @@
         <!-- android:screenOrientation="portrait"  /> -->
 
         <activity
-            android:name="com.yhh.fragment.status.DumpsysStatusActivity"
+            android:name=".fragment.StatusDumpsysActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_status_analyser"
             android:screenOrientation="portrait" />
@@ -189,54 +189,54 @@
 
         <!-- Chart Analyser START -->
         <activity
-            android:name="com.yhh.chart.other.SleepChart"
+            android:name=".ui.ChartSleepActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
             android:label="@string/main_log_analyser"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.yhh.activity.WakeupActivity"
+            android:name=".ui.WakeupActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
             android:label="@string/toolbox_wakeup"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yhh.app.analyser.AppChartAnalyser"
+            android:name=".ui.ChartMonitorActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <!-- Chart Analyser END -->
 
 
-        <!-- Automatic START -->
+        <!-- AutoWorker START -->
         <activity
-            android:name="com.yhh.robot.AutomaticActivity"
+            android:name=".ui.AutoActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_automatic_robot"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
-        <!-- Automatic END -->
+        <!-- AutoWorker END -->
 
         <activity
-            android:name="com.yhh.toolbox.SuperBox"
+            android:name=".ui.BrightnessActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_tool_analyser"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yhh.toolbox.KernelTool"
+            android:name=".ui.KernelActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/toolbox_kernel"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yhh.toolbox.MoreActivity"
+            android:name=".ui.MoreActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/toolbox_more"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yhh.toolbox.NodeViewActivity"
+            android:name=".ui.NodeViewActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_node_viewer"
             android:screenOrientation="portrait"
@@ -252,7 +252,7 @@
         <!-- android:configChanges="orientation|screenSize"> -->
         <!-- </activity> -->
         <!-- <activity -->
-        <!-- android:name="aafragmentnt.performance.CpuGovernor" -->
+        <!-- android:name="aafragmentnt.performance.PerfCpuFragment" -->
         <!-- android:label="@string/main_perf" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- android:configChanges="orientation|screenSize"> -->
@@ -262,19 +262,19 @@
 
         <!-- Benchmark start -->
         <activity
-            android:name="com.yhh.benchmark.BenchmarkRunner"
+            android:name=".ui.BenchmarkActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_benchmark"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yhh.benchmark.BenchmarkChartAnalyser"
+            android:name=".ui.ChartBenchmarkActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_benchmark"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yhh.benchmark.BenchmarkSettingsActivity"
+            android:name=".ui.settings.BenchmarkSettingsActivity"
             android:label="@string/main_benchmark"
             android:screenOrientation="portrait" >
         </activity>
@@ -351,7 +351,7 @@
 
         <service android:name="com.yhh.terminal.TermService" />
 
-        <service android:name="com.yhh.service.FloatService"/>
+        <service android:name=".service.FloatService"/>
 
         <meta-data
             android:name="com.sec.android.support.multiwindow"

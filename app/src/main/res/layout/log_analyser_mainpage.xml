@@ -9,7 +9,7 @@
     android:gravity="bottom|center_horizontal|center_vertical"
     android:orientation="vertical" >
     
-    <com.yhh.widget.numberprogressbar.NumberProgressBar
+    <com.yhh.analyser.widget.numberprogressbar.NumberProgressBar
         android:id="@+id/log_loading"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

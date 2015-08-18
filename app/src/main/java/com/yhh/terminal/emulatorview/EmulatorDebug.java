@@ -16,7 +16,7 @@
 
 package com.yhh.terminal.emulatorview;
 
-import com.yhh.utils.ConstUtils;
+import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * Debug settings.
