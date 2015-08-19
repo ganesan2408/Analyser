@@ -58,16 +58,16 @@ public class PerfBean {
     }
     
     public int getLittleCpuFreq(int maxFreq,int minFreq){
-        int max = (int)(CPU_LITTER_FREQ[maxFreq]/10000);
-        int min = (int)(CPU_LITTER_FREQ[minFreq]/10000);
+        int max = CPU_LITTER_FREQ[maxFreq]/10000;
+        int min = CPU_LITTER_FREQ[minFreq]/10000;
         Log.i(TAG,"set little cpu frq ["+min+","+max+"]");
         int sources = (max << 24) | (min << 16) | 01 | (mSpecial<<8);
         return sources;
     }
     
     public int getBigCpuFreq(int maxFreq,int minFreq){
-        int max = (int)(CPU_BIG_FREQ[maxFreq]/10000);
-        int min = (int)(CPU_BIG_FREQ[minFreq]/10000);
+        int max = CPU_BIG_FREQ[maxFreq]/10000;
+        int min = CPU_BIG_FREQ[minFreq]/10000;
         Log.i(TAG,"set big cpu frq ["+min+","+max+"]");
         int sources = (max << 24) | (min << 16) |02 | (mSpecial<<8);
         return sources;

@@ -1,11 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     
-     <include layout="@layout/header"/> 
-    
+
     <FrameLayout
         android:id="@+id/realtabcontent"
         android:layout_width="fill_parent"
@@ -20,7 +18,7 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/tab_rb_1"
+            android:id="@+id/tab_rb_monitor"
             style="@style/tab_rb_style"
             android:checked="true"
             android:drawableTop="@drawable/main_monitor_status"
@@ -28,9 +26,17 @@
             android:paddingTop="5dp"
             android:text="@string/title_monitor" 
             />
+        <RadioButton
+            android:id="@+id/tab_rb_data"
+            style="@style/tab_rb_style"
+            android:drawableTop="@drawable/main_monitor_status"
+            android:textColor="@color/main_view_color"
+            android:paddingTop="5dp"
+            android:text="@string/title_data"
+            />
 
         <RadioButton
-            android:id="@+id/tab_rb_2"
+            android:id="@+id/tab_rb_status"
             style="@style/tab_rb_style"
             android:drawableTop="@drawable/main_view_status"
             android:textColor="@color/main_view_color"
@@ -38,7 +44,7 @@
             android:text="@string/title_view" />
 
         <RadioButton
-            android:id="@+id/tab_rb_3"
+            android:id="@+id/tab_rb_perf"
             style="@style/tab_rb_style"
             android:drawableTop="@drawable/main_perf_status"
             android:textColor="@color/main_view_color"
@@ -46,7 +52,7 @@
             android:text="@string/title_performance" />
 
         <RadioButton
-            android:id="@+id/tab_rb_4"
+            android:id="@+id/tab_rb_box"
             style="@style/tab_rb_style"
             android:drawableTop="@drawable/main_tool_status"
             android:textColor="@color/main_view_color"

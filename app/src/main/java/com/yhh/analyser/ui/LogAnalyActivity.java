@@ -4,9 +4,6 @@
  */
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +13,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -37,6 +33,7 @@ import com.yhh.analyser.provider.LogBatteryParser;
 import com.yhh.analyser.provider.LogPmParser;
 import com.yhh.analyser.provider.LogSleepParser;
 import com.yhh.analyser.provider.LogcatParser;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.FileUtils;
@@ -46,7 +43,7 @@ import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class LogAnalyActivity extends Activity {
+public class LogAnalyActivity extends BaseActivity {
     public static final String TAG = ConstUtils.DEBUG_TAG + "LogAnalyActivity";
     private boolean DEBUG = true;
 
@@ -72,7 +69,6 @@ public class LogAnalyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_analyser_mainpage);
 
-        initActionBar();
 
         sLogCacheDir = getApplicationContext().getFilesDir().getAbsolutePath() + "/log_cache";
         FileUtils.createFolder(sLogCacheDir);
@@ -178,7 +174,7 @@ public class LogAnalyActivity extends Activity {
                 });
                 DialogUtils.closeLoading();
             } else if (msg.what == 2) {
-                mHandler.sendMessage(mHandler.obtainMessage(3, (int) 100 / mTargetNum));
+                mHandler.sendMessage(mHandler.obtainMessage(3, 100 / mTargetNum));
             } else if (msg.what == 3) {
                 mNumberBar.incrementProgressBy(1);
                 if ((Integer) msg.obj > 1) {
@@ -191,7 +187,6 @@ public class LogAnalyActivity extends Activity {
             }
         }
 
-        ;
     };
 
 //    @Override
@@ -343,18 +338,4 @@ public class LogAnalyActivity extends Activity {
         RadioButton choiceButton;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressLint("NewApi")
-    private void initActionBar() {
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
 }

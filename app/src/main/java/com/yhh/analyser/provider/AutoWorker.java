@@ -168,7 +168,7 @@ public class AutoWorker {
 	}
 	
 	public interface OnAutomaticListener{
-	    public void onPrepareComplete();
-	    public void onRunComplete();
+	    void onPrepareComplete();
+	    void onRunComplete();
 	}
 }

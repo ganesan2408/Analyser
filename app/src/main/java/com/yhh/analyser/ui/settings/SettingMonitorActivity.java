@@ -11,14 +11,13 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import com.yhh.analyser.bean.MonitorSettings;
-import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.R;
-import com.yhh.analyser.service.FloatService;
+import com.yhh.analyser.bean.MonitorSettings;
+import com.yhh.analyser.service.MonitorSysService;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.widget.SwitchButton;
 
@@ -86,19 +85,11 @@ public class SettingMonitorActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent monitorService = new Intent();
-                monitorService.setClass(mContext, FloatService.class);
+                monitorService.setClass(mContext, MonitorSysService.class);
                 monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startService(monitorService);
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

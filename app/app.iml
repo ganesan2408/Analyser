@@ -98,7 +98,7 @@
     <orderEntry type="library" exported="" name="chartlib" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.6" level="project" />
-    <orderEntry type="module" module-name="library" exported="" />
+    <orderEntry type="module" module-name="swipemenulistview" exported="" />
     <orderEntry type="module" module-name="trineaandroidcommon" exported="" />
   </component>
 </module>

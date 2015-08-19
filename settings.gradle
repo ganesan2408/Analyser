@@ -1,2 +1,2 @@
-include ':app', ':library'
-include ':trineaandroidcommon'
+include ':app'
+include ':swipemenulistview', ':trineaandroidcommon'

@@ -14,14 +14,15 @@ public class MonitorSettings {
 
     private List<Boolean> mSettingList;
 
-    private static final int COUNT = 14;
+    public static final int COUNT = 13;
     private static final String[] KEY_MONITOR_ITEMS = {
-	    "mAppCpu", "mSysCpu", "mSysCpuFreq",
-	    "mAppMemory", "mSysMemory",
-	    "mSysGpu", "mSysGpuFreq",
-	    "mCurrent", "mBrightness",
-	    "mBatteryLevel", "mBatteryTemperature", "mBatteryVoltage",
-	    "trafficRev","trafficSend"
+	    "appCpu", "appMemory",
+        "sysCpu", "sysCpuFreq",
+	    "sysGpu", "sysGpuFreq",
+        "sysMemory","current",
+        "bright", "batteryLevel",
+        "batteryTemp", "batteryVolt",
+        "traffic"
 	};
 
 

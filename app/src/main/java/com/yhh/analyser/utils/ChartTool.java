@@ -16,8 +16,8 @@ public class ChartTool {
     
     private ChartTool(){
         init();
-    };
-    
+    }
+
     public static ChartTool getInstance(){
         if(null == mChartTool){
             mChartTool = new ChartTool();

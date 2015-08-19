@@ -80,7 +80,6 @@ public class ChartMonitorActivity extends ChartBaseActivity {
             }
         }
 
-        ;
     };
 
     @Override
@@ -281,7 +280,7 @@ public class ChartMonitorActivity extends ChartBaseActivity {
         int index = 0;
         for (java.util.Map.Entry<String, Float> entry : topApps.entrySet()) {
             xVals.add(entry.getKey());
-            yVals.add(new BarEntry((float) entry.getValue() / count, index++));
+            yVals.add(new BarEntry(entry.getValue() / count, index++));
         }
 
         BarDataSet set1 = new BarDataSet(yVals, title);
@@ -312,7 +311,7 @@ public class ChartMonitorActivity extends ChartBaseActivity {
                 continue;
             }
             xVals.add(entry.getKey());
-            yVals.add(new Entry((float) entry.getValue() / count, index++));
+            yVals.add(new Entry(entry.getValue() / count, index++));
         }
 
         PieDataSet dataSet = new PieDataSet(yVals, title);

@@ -6,14 +6,9 @@
  */
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,17 +17,18 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.terminal.Term;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.AppUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.FileUtils;
+import com.yhh.terminal.Term;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MoreActivity extends Activity{
+public class MoreActivity extends BaseActivity {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "MainBoxFragment";
     
     private final String[] mItemName = new String[]{
@@ -52,14 +48,11 @@ public class MoreActivity extends Activity{
     private List<Map<String, Object>> mDataList = new ArrayList<Map<String, Object>>();
     private SimpleAdapter mAdapter;
     private GridView mGridView;
-    private Context mContext;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toolbox_more);
-        mContext = MoreActivity.this;
-        initActionBar();
         getData();
         initView();
     }
@@ -77,8 +70,8 @@ public class MoreActivity extends Activity{
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 if(position == 4){
-                    Intent intent = new Intent(mContext, Term.class);
-                    mContext.startActivity(intent);
+                    Intent intent = new Intent(MoreActivity.this, Term.class);
+                    startActivity(intent);
                 }else{
                     startApp(position);
                 }
@@ -102,7 +95,7 @@ public class MoreActivity extends Activity{
     public void runApp( int rawId, String AppName, String pkgName, String ActName){
         if(AppUtils.isAppInstalled(mContext, pkgName)){
             //启动apk
-            AppUtils.startApp(mContext, pkgName, ActName);
+            AppUtils.startApp(MoreActivity.this, pkgName, ActName);
         }else{
             String path = Environment.getExternalStorageDirectory().toString() + "/systemAnalyzer/"+AppName+".apk";
             //资源拷贝
@@ -156,19 +149,5 @@ public class MoreActivity extends Activity{
                 break;
         }
     }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
+
 }

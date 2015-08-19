@@ -120,13 +120,13 @@
     <string name="introduction_performance">只针对X3手机功能,设置完成后点击更新即可</string>
     <string name="introduction_benchmark">请提前安装安兔兔v5.7.1 (运行结果保存至/sdcard/systemAnalyzer/)</string>
     
-    <!-- main start-->
+    <!-- activit_main start-->
     <string name="about_phone">手机版本</string>
     <string name="create_icon">创建桌面图标</string>
     <string name="create_icon_msg">是否创建桌面快捷图标？</string>
     <string name="help">关于System Analyzer</string>
     <string name="help_url">有任何建议或反馈，欢迎联系MBG BSP或邮件至yuanhh1@lenovo.com(袁辉辉)</string>
-    <!-- main end-->
+    <!-- activit_main end-->
     
     <!-- menu start-->
     <string name="menu_phone">手机型号</string>

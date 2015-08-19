@@ -59,9 +59,9 @@ public class ProcessInfo {
 		}
 		return progressList;
 	}
-	
+
 	/**
-	 * 获取指定包名的apk的详细信息
+	 * 获取指定package名的apk的详细信息
 	 * 
 	 * @param context
 	 * @param appInfo

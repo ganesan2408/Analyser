@@ -40,7 +40,7 @@ import android.os.Message;
  * they might point to a network socket.  Reader and writer threads will be
  * spawned to do I/O to these streams.  All other operations, including
  * processing of input and output in {@link #processInput processInput} and
- * {@link #write(byte[], int, int) write}, will be performed on the main thread.
+ * {@link #write(byte[], int, int) write}, will be performed on the activit_main thread.
  * <p>
  * Call {@link #setTermIn} and {@link #setTermOut} to connect the input and
  * output streams to the emulator.  When all of your initialization is
@@ -236,7 +236,7 @@ public class TermSession {
      * Write data to the terminal output.  The written data will be consumed by
      * the emulation client as input.
      * <p>
-     * <code>write</code> itself runs on the main thread.  The default
+     * <code>write</code> itself runs on the activit_main thread.  The default
      * implementation writes the data into a circular buffer and signals the
      * writer thread to copy it from there to the {@link OutputStream}.
      * <p>
@@ -506,7 +506,7 @@ public class TermSession {
 
     /**
      * Process input and send it to the terminal emulator.  This method is
-     * invoked on the main thread whenever new data is read from the
+     * invoked on the activit_main thread whenever new data is read from the
      * InputStream.
      * <p>
      * The default implementation sends the data straight to the terminal

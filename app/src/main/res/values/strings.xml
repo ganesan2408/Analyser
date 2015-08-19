@@ -46,9 +46,13 @@
 
     <!-- 首页start -->
     <string name="title_monitor">监控</string>
+    <string name="title_data">统计</string>
     <string name="title_view">查看</string>
     <string name="title_performance">性能</string>
     <string name="title_tool">工具箱</string>
+
+    <string name="analysis_monitor">监控表</string>
+    <string name="analysis_wakeup">唤醒榜</string>
 
     <string name="status_power">Power</string>
     <string name="status_battery">Battery</string>
@@ -69,6 +73,9 @@
     <string name="toolbox_log_viewer">查看Log</string>
     <string name="toolbox_log_parser">解析Log</string>
     <string name="toolbox_more">更多实用工具</string>
+    
+    
+    <string name="data_title_intr">左滑,可解析相应的数据项</string>
 	<!-- 首页end -->
 	
 	<string name="app_pkgname">包名: </string>
@@ -120,13 +127,13 @@
     <string name="introduction_performance">只针对X3手机功能,设置完成后点击更新即可</string>
     <string name="introduction_benchmark">请提前安装安兔兔v5.7.1 (运行结果保存至/sdcard/systemAnalyzer/)</string>
     
-    <!-- main start-->
+    <!-- activit_main start-->
     <string name="about_phone">手机版本</string>
     <string name="create_icon">创建桌面图标</string>
     <string name="create_icon_msg">是否创建桌面快捷图标？</string>
     <string name="help">关于System Analyzer</string>
     <string name="help_url">有任何建议或反馈，欢迎联系MBG BSP或邮件至yuanhh1@lenovo.com(袁辉辉)</string>
-    <!-- main end-->
+    <!-- activit_main end-->
     
     <!-- menu start-->
     <string name="menu_phone">手机型号</string>
@@ -142,7 +149,6 @@
 
     <string name="lenovo">Lenovo Phone RD SW Dev.I BSP 开发</string>
     <string name="shot_path">储存路径： /sdcard/systemAnalyzer/screenshot/</string>
-    <string name="monitor_file_path">监控文件路径： /sdcard/systemAnalyzer/monitor/</string>
 
     <string name="menu_monitor_setting">监控设置</string>
     <string name="menu_score_setting">跑分设置</string>
@@ -469,6 +475,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
   <!-- LDrawer end -->
   
 </resources>

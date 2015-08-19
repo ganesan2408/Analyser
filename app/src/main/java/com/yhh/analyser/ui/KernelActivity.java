@@ -6,13 +6,9 @@
  */
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,10 +17,11 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.RootUtils;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.RootUtils;
 
-public class KernelActivity extends Activity {
+public class KernelActivity extends BaseActivity {
 	private static String TAG= ConstUtils.DEBUG_TAG+"KernelActivity";
 	
 	private CheckBox mPanicCb;
@@ -35,8 +32,7 @@ public class KernelActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tool_kernel);
-		initActionBar();
-		
+
         initUI();
 	}
 	
@@ -83,20 +79,6 @@ public class KernelActivity extends Activity {
                     }
                 }).show();
     }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
+
 
 }

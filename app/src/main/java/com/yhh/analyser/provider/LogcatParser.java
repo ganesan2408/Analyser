@@ -161,7 +161,7 @@ public class LogcatParser extends LogParser{
                              foregroundTimes.add(curTime);
                              foregroundApps.add("WAKEUP");
                          }
-                     };
+                     }
                  }
                  tmpLine = line;
             }

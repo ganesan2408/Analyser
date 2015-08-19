@@ -26,8 +26,8 @@ public class MonitorExceptionStat {
     private static final String TOP_CMD = "top -m 5 -n 1 -d 1";
     
     private static MonitorExceptionStat mExceptionStat;
-    private MonitorExceptionStat(){};
-    
+    private MonitorExceptionStat(){}
+
     public static MonitorExceptionStat getInstance(){
         if(mExceptionStat ==null){
             mExceptionStat = new MonitorExceptionStat();
@@ -42,8 +42,8 @@ public class MonitorExceptionStat {
             public void run() {
                 if(DEBUG){
                     Log.i(TAG,"beginStatistic top cpu process.");
-                };
-                
+                }
+
                 String topStr = ShellUtils.execCommand(TOP_CMD, false).successMsg;
                 String[] topArr = topStr.split("\n");
                 int len = topArr.length;

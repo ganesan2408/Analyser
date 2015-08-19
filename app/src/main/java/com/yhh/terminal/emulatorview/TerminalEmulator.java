@@ -510,7 +510,7 @@ class TerminalEmulator {
             mAboutToAutoWrap = false;
 
             int end = altTranscriptText.length()-1;
-            /* Unlike for the main transcript below, don't trim off trailing
+            /* Unlike for the activit_main transcript below, don't trim off trailing
              * newlines -- the alternate transcript lacks a cursor marking, so
              * we might introduce an unwanted vertical shift in the screen
              * contents this way */

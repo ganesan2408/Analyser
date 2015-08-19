@@ -6,10 +6,6 @@
  */
 package com.yhh.analyser.fragment;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +22,10 @@ import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.ShellUtils;
 import com.yhh.analyser.utils.ShellUtils.CommandResult;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class StatusTopProcFragment extends Fragment
 {
@@ -67,7 +67,7 @@ public class StatusTopProcFragment extends Fragment
                }
                mTopProcessTv.setText((String)msg.obj);
            }
-       };
+       }
     };
   
   

@@ -39,10 +39,7 @@ public class FileUtils {
         }
         
         File dir = new File(path);
-        if(!dir.exists()){
-            return false;
-        }
-        return true;
+        return dir.exists();
     }
     
     
@@ -267,10 +264,7 @@ public class FileUtils {
             @Override
             public boolean accept(File dir, String filename) {
                 File current = new File(dir, filename);
-                if (current.isFile()) {
-                    return true;
-                }
-                return false;
+                return current.isFile();
             }
         });
         Arrays.sort(files, Collections.reverseOrder());
@@ -285,10 +279,7 @@ public class FileUtils {
             @Override
             public boolean accept(File dir, String filename) {
                 File current = new File(dir, filename);
-                if (current.isDirectory()) {
-                    return true;
-                }
-                return false;
+                return current.isDirectory();
             }
         }
     );

@@ -1,8 +1,5 @@
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -29,12 +25,13 @@ import com.umeng.fb.SyncListener;
 import com.umeng.fb.model.Conversation;
 import com.umeng.fb.model.Reply;
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class FeedbackActivity extends Activity {
+public class FeedbackActivity extends BaseActivity {
 
 	private ListView mListView;
 	private FeedbackAgent mAgent;
@@ -62,7 +59,6 @@ public class FeedbackActivity extends Activity {
 		setContentView(R.layout.activity_custom);
 		mContext = this;
 
-		initActionBar();
 		initView();
 		mAgent = new FeedbackAgent(this);
 		mComversation = new FeedbackAgent(this).getDefaultConversation();
@@ -253,21 +249,6 @@ public class FeedbackActivity extends Activity {
 			ImageView replyStateFailed;
 			TextView replyData;
 		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId() == android.R.id.home){
-			finish();
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	@SuppressLint("NewApi")
-	private void initActionBar(){
-		ActionBar bar = getActionBar();
-		bar.setHomeButtonEnabled(true);
-		bar.setIcon(R.drawable.nav_back);
 	}
 
 }

@@ -6,17 +6,6 @@
  */
 package com.yhh.analyser.ui;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,19 +28,28 @@ import android.widget.TextView;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.R.color;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.ShellUtils;
 import com.yhh.analyser.utils.ShellUtils.CommandResult;
 
-public class NodeViewActivity extends Activity {
-    private static final String TAG = ConstUtils.DEBUG_TAG+ "Shell";
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class NodeViewActivity extends BaseActivity {
+    private static final String TAG = ConstUtils.DEBUG_TAG+ "NodeView";
 
     private EditText autoKey;
     private LinearLayout mCatalogLayout;
     private ListView mNodeList;
     
-    private ArrayList<String> mNodeAdapter = new ArrayList<String>();
+    private ArrayList<String> mNodeAdapter = new ArrayList<>();
     private ArrayList<Boolean> mIsFile;
     
     private int mDepth=0;
@@ -70,7 +68,6 @@ public class NodeViewActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shell_terminal);
-        initActionBar();
         initUI();
         updateCatalog(mDepth);
     }
@@ -113,31 +110,31 @@ public class NodeViewActivity extends Activity {
         addCatalogView("/");
         
         // 点击具体节点
-        mNodeList.setOnItemClickListener(new OnItemClickListener(){
+        mNodeList.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
-                if(mIsFile.get(position)){
-                  final String nodePath =  mNodeAdapter.get(position);
-                  new Thread(new Runnable(){
+                                    int position, long id) {
+                if (mIsFile.get(position)) {
+                    final String nodePath = mNodeAdapter.get(position);
+                    new Thread(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        CommandResult cr = ShellUtils.execCommand("cat "+mRootPath+nodePath, false);
-                        Message msg = new Message();
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("CommandResult", cr);
-                        bundle.putString("title", nodePath);
-                        msg.what = 0x11;
-                        msg.setData(bundle);
-                        mHandler.sendMessage(msg);
-                    }
-                  }).start();
-                }else{
+                        @Override
+                        public void run() {
+                            CommandResult cr = ShellUtils.execCommand("cat " + mRootPath + nodePath, false);
+                            Message msg = new Message();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("CommandResult", cr);
+                            bundle.putString("title", nodePath);
+                            msg.what = 0x11;
+                            msg.setData(bundle);
+                            mHandler.sendMessage(msg);
+                        }
+                    }).start();
+                } else {
                     mDepth++;
-                    mRootPath += mNodeAdapter.get(position)+"/";
-                    addCatalogView(mNodeAdapter.get(position)+"/");
+                    mRootPath += mNodeAdapter.get(position) + "/";
+                    addCatalogView(mNodeAdapter.get(position) + "/");
                     autoKey.setText("");
                 }
             }
@@ -155,7 +152,7 @@ public class NodeViewActivity extends Activity {
                 Log.i(TAG,"title="+title);
                 DialogUtils.showAlergDialog(NodeViewActivity.this, title, cr.successMsg+" "+ cr.errorMsg);
             }
-        };
+        }
     };
 
     // 添加节点目录
@@ -167,16 +164,16 @@ public class NodeViewActivity extends Activity {
         tv.setLayoutParams(params);
         tv.setText(content);
         tv.setTextSize(25);
-        tv.setTextColor(color.dark_blue);
+        tv.setTextColor(getResources().getColor(color.dark_blue));
         tv.setPadding(5, 0, 5, 0);
         
         final int index = mDepth;
         tv.setOnClickListener(new View.OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
-                Log.i(TAG,"  index=" + index +", mDepth="+mDepth);
-                mCatalogLayout.removeViews(index+1, mDepth-index);
+                Log.i(TAG, "  index=" + index + ", mDepth=" + mDepth);
+                mCatalogLayout.removeViews(index + 1, mDepth - index);
                 mDepth = index;
                 updateCatalog(mDepth);
             }
@@ -367,11 +364,6 @@ public class NodeViewActivity extends Activity {
         }
     }
     
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
+
 
 }

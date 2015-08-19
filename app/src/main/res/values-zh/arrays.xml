@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+
     <!-- app monitor start -->
     <string-array name="monitor_items">
-        <item>CPU App</item>
+        <item>App CPU</item>
+        <item>App Memory</item>
         <item>CPU使用率</item>
         <item>CPU频率</item>
-        
-        <item>Memory App</item>
-        <item>Memory剩余量</item>
-        
+
         <item>GPU使用率</item>
         <item>GPU频率</item>
-        
+        <item>Memory剩余量</item>
         <item>电流</item>
+
         <item>亮度</item>
-        
         <item>电量</item>
         <item>温度</item>
         <item>电压</item>
         <item>发/收</item>
+
     </string-array>
-    
+
     <string-array name="monitor_unit_items">
         <item>%</item>
-        <item>%</item>
-        <item>MHz</item>
-        <item>MB</item>
         <item>MB</item>
         <item>%</item>
         <item>MHz</item>
+
+        <item>%</item>
+        <item>MHz</item>
+        <item>MB</item>
         <item>mA</item>
+
         <item></item>
         <item>%</item>
         <item>℃</item>

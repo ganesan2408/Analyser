@@ -89,7 +89,7 @@ public class StatusDumpsysActivity extends Activity {
                 mContentTv.setText(info);
             }
             
-        };
+        }
     };
     
     private void runDumpsys(final String params){

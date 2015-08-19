@@ -9,7 +9,7 @@
 	<color name="icons">#FFFFFF</color>
 	<color name="divider">#B6B6B6</color>
 
-    
+
   	<color name="white">#FFFFFF</color>
   	<color name="black">#000000</color>
   	<color name="light_black">#606060</color>
@@ -23,6 +23,8 @@
   	<color name="green">#1D9C00</color>
   	<color name="mix_gray">#CECED2</color>
   	<color name="orangered">#FF4500</color>
+
+	<color name="window_background">#EBEBEB</color>
   	
   	<!-- status analyser -->
   	<color name="textcolor_checked">#45C01A</color>

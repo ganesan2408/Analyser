@@ -29,7 +29,7 @@ class GpuInfo {
         String gpuStr = FileUtils.getCommandNodeValue(GPU_CLK);
         if(!gpuStr.trim().equals("")){
             try{
-                clk = (double) (Integer.valueOf(gpuStr.trim())/1000.0/1000.0);
+                clk = Integer.valueOf(gpuStr.trim())/1000.0/1000.0;
             }catch(NumberFormatException e){
                 Log.e(TAG,"getGpuClock NumberFormatException");
             }

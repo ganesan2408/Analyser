@@ -6,9 +6,7 @@
  */
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -28,13 +26,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.bean.app.AppInfo;
+import com.yhh.analyser.bean.app.ProcessInfo;
+import com.yhh.analyser.config.AppConfig;
+import com.yhh.analyser.service.MonitorSysService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.ui.settings.SettingMonitorActivity;
 import com.yhh.analyser.ui.settings.SettingsActivity;
-import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.bean.app.AppInfo;
-import com.yhh.analyser.bean.app.ProcessInfo;
-import com.yhh.analyser.service.FloatService;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 
@@ -81,7 +79,6 @@ public class MonitorAppActivity extends BaseActivity {
 		setContentView(R.layout.app_detailed_info);
 	    
         getAppInfo();
-		initActionBar();
 		initUI();
         getData();
         initGridView();
@@ -154,7 +151,7 @@ public class MonitorAppActivity extends BaseActivity {
 	
     private void initUI(){
 	   monitorService = new Intent();
-       monitorService.setClass(MonitorAppActivity.this, FloatService.class);
+       monitorService.setClass(MonitorAppActivity.this, MonitorSysService.class);
 	   
 //       mMonitorBtn = (Button) findViewById(R.id.app_monitor_btn);
 //       mViewMonitorBtn = (Button) findViewById(R.id.app_monitor_view);
@@ -271,8 +268,8 @@ public class MonitorAppActivity extends BaseActivity {
                 monitorService.putExtra("startActivity", mStartActivity);
                 startService(monitorService);
 	        }
-	    };
-	};
+	    }
+    };
 	
 	 /**
      * wait for monitor application started.
@@ -340,10 +337,7 @@ public class MonitorAppActivity extends BaseActivity {
             @Override
             public boolean accept(File dir, String filename) {
                 File current = new File(dir, filename);
-                if (current.isFile()) {
-                    return true;
-                }
-                return false;
+                return current.isFile();
             }
         });
         if(files ==null || files.length <=0){
@@ -366,22 +360,11 @@ public class MonitorAppActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }else if(item.getItemId() == R.id.menu_settings){
+        if(item.getItemId() == R.id.menu_settings){
             Intent monitorIntent = new Intent(this, SettingsActivity.class);
             startActivity(monitorIntent);
         }
         return super.onOptionsItemSelected(item);
-    }
-    
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        if(bar !=null) {
-            bar.setHomeButtonEnabled(true);
-            bar.setIcon(R.drawable.nav_back);
-        }
     }
     
 }

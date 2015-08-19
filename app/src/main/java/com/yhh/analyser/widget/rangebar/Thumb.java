@@ -178,10 +178,7 @@ class Thumb {
      */
     boolean isInTargetZone(float x, float y) {
 
-        if (Math.abs(x - mX) <= mTargetRadiusPx && Math.abs(y - mY) <= mTargetRadiusPx) {
-            return true;
-        }
-        return false;
+        return Math.abs(x - mX) <= mTargetRadiusPx && Math.abs(y - mY) <= mTargetRadiusPx;
     }
 
     /**

@@ -13,5 +13,6 @@
            android:layout_margin="10sp"
            android:scrollbars="horizontal"
            android:scrollHorizontally="true"
+           android:textColor="@color/black"
             />    
 </ScrollView>

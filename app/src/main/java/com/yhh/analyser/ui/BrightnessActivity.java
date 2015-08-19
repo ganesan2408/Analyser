@@ -6,9 +6,6 @@
  */
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +18,6 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,10 +28,11 @@ import android.widget.TextView;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.BrightnessInfo;
-import com.yhh.analyser.utils.RootUtils;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.RootUtils;
 
-public class BrightnessActivity extends Activity {
+public class BrightnessActivity extends BaseActivity {
 	private static String TAG= ConstUtils.DEBUG_TAG+"BrightnessActivity";
 	
 	private TextView mWifiStatusTv;
@@ -59,8 +56,7 @@ public class BrightnessActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tool_box);
-		initActionBar();
-		
+
 		mBrightnessInfo = new BrightnessInfo(this);
 		mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
@@ -135,9 +131,9 @@ public class BrightnessActivity extends Activity {
              mSimStatusTv.setText(asu2dbm(mSimAsu)+" / " + mSimAsu+"asu");
          }
       }
-    };
-    
-    public void autoRefresh(){
+    }
+
+	public void autoRefresh(){
         mHandler.sendEmptyMessage(1);
     }
     
@@ -204,7 +200,7 @@ public class BrightnessActivity extends Activity {
 	public boolean setVolume(int volume){
 		if(volume<=10 && volume >=0){
 			AudioManager am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-			am.setStreamVolume(AudioManager.STREAM_MUSIC, (int)(am.getStreamMaxVolume(AudioManager.STREAM_MUSIC)*volume/10), 0);
+			am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC)*volume/10, 0);
 			Log.d(TAG,"set media volume: "+volume);
 			return true;
 		}else{
@@ -219,7 +215,7 @@ public class BrightnessActivity extends Activity {
 	public boolean setRingVolume(int volume){
 		if(volume<=10 && volume >=0){
 			AudioManager am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-			am.setStreamVolume(AudioManager.STREAM_RING, (int)(am.getStreamMaxVolume(AudioManager.STREAM_RING)*volume/10), 0);
+			am.setStreamVolume(AudioManager.STREAM_RING, am.getStreamMaxVolume(AudioManager.STREAM_RING)*volume/10, 0);
 			Log.d(TAG,"set Ring volume: "+volume);
 			return true;
 		}else{
@@ -242,20 +238,6 @@ public class BrightnessActivity extends Activity {
                     }
                 }).show();
     }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
+
 
 }

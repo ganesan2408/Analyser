@@ -6,7 +6,6 @@
  */
 package com.yhh.analyser.ui;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -24,8 +23,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 
-public class LogSleepStatActivity extends Activity implements OnGestureListener {
+public class LogSleepStatActivity extends BaseActivity implements OnGestureListener {
     private static final int ROW_PER_PAGE = 3;
     private static final int HOUR_PER_ROW = 2;
     private static final int DOT_PER_PAGE = 3600 / 4 * 2 * 3;
@@ -68,12 +68,8 @@ public class LogSleepStatActivity extends Activity implements OnGestureListener 
             return;
         }
         startDrawIndex = 0;
-        // StatisticforDraw(logContent_sta);
 
-        /*
-         * date.setTime(logstartTime); logStartHour = date.getHours();
-         * logStartMin = date.getMinutes(); logStartSec = date.getSeconds();
-         */
+
         logstartTime = logStartHour * 3600 + logStartMin * 60 + logStartSec;
         // Log.i("before format","**************************");
         // //dispTime_sta = formatTime(logstartTime,true);
@@ -288,42 +284,7 @@ public class LogSleepStatActivity extends Activity implements OnGestureListener 
         }
     }
 
-    /*
-     * private void StatisticforDraw(String logcontent) { drawraw = ""; int len;
-     * int startTime = 0,endTime=0,total=0,index=0; int elapseTime=0;
-     * logstartTime=0; len = logcontent.length(); for(int i=0;i<len;i++) {
-     * if(logcontent.charAt(i) == '>'){ startTime=getTime(logcontent,i);
-     * if(i==0){ logstartTime=startTime; logStartHour =
-     * Integer.parseInt(logContent_sta.substring(24, 26)); logStartMin =
-     * Integer.parseInt(logContent_sta.substring(27, 29)); logStartSec =
-     * Integer.parseInt(logContent_sta.substring(30, 32)); } } else
-     * if(logcontent.charAt(i) == '<'){ endTime=getTime(logcontent,i);
-     * total=endTime-startTime; elapseTime=startTime - logstartTime; for(int
-     * j=index;j<elapseTime/5;j++){ drawraw += '1'; } index=elapseTime/5;
-     * for(int k=0;k<total/5;k++){ drawraw +='0'; dispTime_sta =
-     * formatTime(logstartTime+drawHour*3600,true); index++; }
-     * 
-     * } }
-     * 
-     * }
-     */
-    /*
-     * private int getTime(String s,int currentIndex) { int startIndex,endIndex;
-     * String time_s=""; int time_i=0; startIndex = findCharInString(s, '[',
-     * currentIndex)+1; endIndex = findCharInString(s, ']', currentIndex); //
-     * Toast.makeText(this,
-     * getResources().getText(R.string.logformat_err).toString(),
-     * Toast.LENGTH_SHORT).show();
-     * //Log.i(String.valueOf(startIndex)+"******"+String
-     * .valueOf(endIndex),"**************"); time_s = s.substring(startIndex,
-     * endIndex); time_i = Integer.parseInt(time_s);
-     * 
-     * return time_i; }
-     * 
-     * private int findCharInString(String s,char c,int currentIndex) { int
-     * i=currentIndex; for(;i<s.length();i++) { if(s.charAt(i)==c)break;
-     * }dispTime_sta = formatTime(logstartTime+drawHour*3600,true); return i; }
-     */
+
     public static String formatTime(int elapsedSeconds, boolean isdrawTime) {
         int hours = 0;
         int minutes = 0;
@@ -355,7 +316,6 @@ public class LogSleepStatActivity extends Activity implements OnGestureListener 
             sMinute = "00";
         } else if (minutes > 0 && minutes < 10) {
             sMinute = "0" + Integer.toString(minutes);
-            ;
         } else {
             sMinute = Integer.toString(minutes);
         }
@@ -363,7 +323,6 @@ public class LogSleepStatActivity extends Activity implements OnGestureListener 
             sSecond = "00";
         } else if (seconds > 0 && seconds < 10) {
             sSecond = "0" + Integer.toString(seconds);
-            ;
         } else {
             sSecond = Integer.toString(seconds);
         }

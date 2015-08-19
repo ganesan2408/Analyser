@@ -69,7 +69,7 @@ public class PerfCpuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.performance_cpu, container, false);  
+        View view = inflater.inflate(R.layout.performance_cpu, null);
         mCpuBigNumBar = (RatingBar) view.findViewById(R.id.cpu_big_number_bar);
         mCpuBigNumTv = (TextView) view.findViewById(R.id.cpu_big_number_tv);
         mCpuBigFreqBar = (RangeBar) view.findViewById(R.id.cpu_big_freq_bar);
@@ -97,8 +97,8 @@ public class PerfCpuFragment extends Fragment {
                 Log.i(TAG,"reflash compeletely.");
                 mReflashing = false;
             }
-        };
-     };
+        }
+    };
     
     private void initListener(){
         mCpuBigNumBar.setMax(PerfBean.CPU_BIG_NUM);

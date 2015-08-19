@@ -44,6 +44,29 @@ public class ScreenShot {
         return b;
     }
 
+    public static Bitmap takeScreenShot(View view) {
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap b1 = view.getDrawingCache();
+
+        // get screen heigh and width
+        int width =  view.getWidth();
+        int height = view.getHeight();
+
+        Bitmap b = Bitmap.createBitmap(b1, 0, 0, width, height);
+        view.destroyDrawingCache();
+        return b;
+    }
+
+    public static boolean shoot(View v) {
+        String shotPath = createFile(TimeUtils.getTime());
+        if(shotPath ==null || shotPath.equals("")){
+            return false;
+        }
+        return ScreenShot.savePic(ScreenShot.takeScreenShot(v), shotPath);
+    }
+
+
     // save to sdcard
     private static boolean savePic(Bitmap b, String strFileName) {
         boolean rtn = false;
@@ -80,7 +103,7 @@ public class ScreenShot {
         }
         boolean ret = ScreenShot.savePic(ScreenShot.takeScreenShot(a), shotPath);
         if(ret){
-           Toast.makeText(a, "截图成功"+shotPath, Toast.LENGTH_SHORT).show();
+           Toast.makeText(a, "截图成功!左侧菜单-->我的截图-->点击即可查看,"+shotPath, Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(a, "截图失败", Toast.LENGTH_SHORT).show();
         }
@@ -88,8 +111,12 @@ public class ScreenShot {
     
     private static String createDiffFile(String shotName, int index) throws IOException{
         String shotPath;
-        shotPath = AppConfig.SCREEN_SHOT_DIR + shotName +"("+ index +").png";
-        
+        if(index==0){
+            shotPath = AppConfig.SCREEN_SHOT_DIR + shotName +".png";
+        }else {
+            shotPath = AppConfig.SCREEN_SHOT_DIR + shotName + "(" + index + ").png";
+        }
+
         File file = new File(shotPath);  
         if (!file.exists()) {  
             if(!file.createNewFile()){

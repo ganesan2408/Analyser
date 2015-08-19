@@ -6,9 +6,14 @@
  */
 package com.yhh.analyser.bean;
 
+import android.os.Build;
+import android.util.Log;
+
+import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.FileUtils;
+
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
@@ -17,19 +22,13 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import android.os.Build;
-import android.util.Log;
-
-import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
-
 /**
  * CPU information
  * 
  */
-class CpuInfo {
+public class CpuInfo {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "CpuInfo";
-	private boolean DEBUG = false;
+	private boolean DEBUG = true;
 	
 	/** process ratio*/
     private String processCpuRatio = "";
@@ -37,14 +36,14 @@ class CpuInfo {
 	private long processCpu;
 	private long processCpu2;
 	
-	/** tatol ratio*/
-    private ArrayList<String> totalCpuRatio = new ArrayList<String>();
+	/** total ratio*/
+    private ArrayList<String> totalCpuRatio = new ArrayList<>();
 	/** idle cpu*/
-	private ArrayList<Long> idleCpuList = new ArrayList<Long>();
-	private ArrayList<Long> idleCpu2List = new ArrayList<Long>();
-	/** tatol cpu*/
-	private ArrayList<Long> totalCpuList = new ArrayList<Long>();
-	private ArrayList<Long> totalCpu2List = new ArrayList<Long>();
+	private ArrayList<Long> idleCpuList = new ArrayList<>();
+	private ArrayList<Long> idleCpu2List = new ArrayList<>();
+	/** total cpu*/
+	private ArrayList<Long> totalCpuList = new ArrayList<>();
+	private ArrayList<Long> totalCpu2List = new ArrayList<>();
 	
 	private DecimalFormat formart;
 	
@@ -55,6 +54,8 @@ class CpuInfo {
     /** CPU node*/
     public static final String CPU_INFO_PATH = "/proc/cpuinfo";
     public static final String CPU_STAT = "/proc/stat";
+
+	private int mCpuNum;
     
 	public CpuInfo() {
 	    formart = new DecimalFormat();
@@ -62,6 +63,7 @@ class CpuInfo {
 	    formart.setGroupingUsed(false);
 	    formart.setMaximumFractionDigits(2);
 	    formart.setMinimumFractionDigits(1);
+		mCpuNum = getCpuNum();
 	}
 
 	private void readCpuStatByPid(int pid) {
@@ -80,29 +82,26 @@ class CpuInfo {
 			}
 			String[] tok = stringBuffer.toString().split(" ");
 			processCpu = Long.parseLong(tok[13]) + Long.parseLong(tok[14]);
-			if(DEBUG){
-                Log.d(TAG,"processCpu:" +processCpu);
-            }
 			processCpuInfo.close();
-		} catch (FileNotFoundException e) {
-			Log.e(TAG, "FileNotFoundException: " + e.getMessage());
-		} catch (IOException e) {
-		    Log.e(TAG, "IOException: " + e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	private void readTotalCpuStat() {
 		try {
 			// monitor total and idle cpu stat of certain process
-			RandomAccessFile cpuInfo = new RandomAccessFile(CPU_STAT, "r");
-			String line = "";
-			while ((null != (line = cpuInfo.readLine())) && line.startsWith("cpu")) {
+			RandomAccessFile cpuFile = new RandomAccessFile(CPU_STAT, "r");
+			String line;
+			while ((null != (line = cpuFile.readLine())) && line.startsWith("cpu")) {
 				String[] toks = line.split("\\s+");
 				idleCpuList.add(Long.parseLong(toks[4]));
-				totalCpuList.add(Long.parseLong(toks[1]) + Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
-						+ Long.parseLong(toks[5]) + Long.parseLong(toks[6]) + Long.parseLong(toks[7]));
+				totalCpuList.add(Long.parseLong(toks[1]) + Long.parseLong(toks[2])
+						+ Long.parseLong(toks[3]) + Long.parseLong(toks[4])
+						+ Long.parseLong(toks[5]) + Long.parseLong(toks[6])
+						+ Long.parseLong(toks[7]));
 			}
-			cpuInfo.close();
+			cpuFile.close();
 			if(DEBUG){
 			    StringBuilder sb = new StringBuilder();
 			    StringBuilder sb2 = new StringBuilder();
@@ -113,20 +112,22 @@ class CpuInfo {
 			    Log.d(TAG,"total idleCpuList:" +sb.toString());
 			    Log.d(TAG,"total CpuList:" +sb2.toString());
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		}  catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	public void updateCpuStat(int pid){
-	    idleCpuList.clear();
-        totalCpuList.clear();
-        totalCpuRatio.clear();
-        
 	    readCpuStatByPid(pid);
-	    readTotalCpuStat();
+	}
+
+	public void updateCpuStat(){
+		idleCpuList.clear();
+		totalCpuList.clear();
+		totalCpuRatio.clear();
+
+		readTotalCpuStat();
 	}
 	
     public String getCpuName() {
@@ -179,11 +180,15 @@ class CpuInfo {
 			return cpuList;
 		}
 	}
-	
+
+	/**
+	 * 获取Cpu频率列表
+	 *
+	 * @return
+	 */
 	public String getCpuFreqList(){
        StringBuilder freqBuilder  = new StringBuilder();
-        int len = getCpuNum();
-        for(int i= 0;i<len;i++){
+        for(int i= 0; i<mCpuNum; i++){
             Long curFreq = -1L;
             String node = CPU_DIR_PATH+"cpu"+i+"/cpufreq/scaling_cur_freq";
             
@@ -192,7 +197,7 @@ class CpuInfo {
                 curFreq = Long.valueOf(curFreqStr.trim())/1000;
             }
             
-            if(i == len-1){
+            if(i == mCpuNum-1){
                 freqBuilder.append(curFreq);
             }else{
                 freqBuilder.append(curFreq+"/");
@@ -200,9 +205,44 @@ class CpuInfo {
         }
         return freqBuilder.toString();
     }
-	
+
+	/**
+	 * 获取使用率
+	 *
+	 * @return
+	 */
+	public ArrayList<String> getRatioList() {
+		int len = (null == totalCpu2List? 0: totalCpu2List.size());
+		int loops = totalCpuList.size() > totalCpu2List.size() ? totalCpu2List.size() : totalCpuList.size();
+		String cpuRatio = "0";
+		if(len >0){
+			for(int i=0; i< loops;i++){
+				if (totalCpuList.get(i) - totalCpu2List.get(i) > 0) {
+					cpuRatio = formart.format(100 * ((double) ((totalCpuList.get(i) - idleCpuList.get(i))
+							- (totalCpu2List.get(i) - idleCpu2List.get(i)))
+							/ (double) (totalCpuList.get(i) - totalCpu2List.get(i))));
+				}
+				totalCpuRatio.add(cpuRatio);
+			}
+		}else {
+			totalCpuRatio.add(cpuRatio);
+			totalCpu2List = (ArrayList<Long>) totalCpuList.clone();
+			idleCpu2List = (ArrayList<Long>) idleCpuList.clone();
+		}
+		if(DEBUG){
+			Log.i(TAG,"totalCpuRatio length="+totalCpuRatio.size());
+		}
+		totalCpu2List = (ArrayList<Long>) totalCpuList.clone();
+		idleCpu2List = (ArrayList<Long>) idleCpuList.clone();
+		return totalCpuRatio;
+	}
+
+	/**
+	 * 获取使用率
+	 *
+	 * @return
+	 */
     public ArrayList<String> getTotalCpuRatio() {
-		
         if (null != totalCpu2List && totalCpu2List.size() > 0) {
             for (int i = 0; i < (totalCpuList.size() > totalCpu2List.size() ? totalCpu2List.size() : totalCpuList.size()); i++) {
                 String cpuRatio = "0";
@@ -242,10 +282,7 @@ class CpuInfo {
     class CpuFilter implements FileFilter {
         @Override
         public boolean accept(File pathname) {
-            if (Pattern.matches("cpu[0-9]", pathname.getName())) {
-                return true;
-            }
-            return false;
-        }
+			return Pattern.matches("cpu[0-9]", pathname.getName());
+		}
     }
 }

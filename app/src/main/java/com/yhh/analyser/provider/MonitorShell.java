@@ -23,7 +23,7 @@ public class MonitorShell {
     
     public static final int CONDITIONS_COUNT = 1;
     private String[] mThresholdValues;
-    public static final int[] CONDITIONS_ITEMS = new int[]{MonitorConst.BATTERY_TEMPERATURE};
+    public static final int[] CONDITIONS_ITEMS = new int[]{MonitorConst.BATTERY_TEMP};
     
     public MonitorShell(Context context){
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());

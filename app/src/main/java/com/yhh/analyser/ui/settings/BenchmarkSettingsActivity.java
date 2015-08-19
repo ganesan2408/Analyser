@@ -21,12 +21,13 @@ import android.widget.TextView;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.PerfBean;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.RootUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.widget.SwitchButton;
 import com.yhh.analyser.widget.rangebar.RangeBar;
 
-public class BenchmarkSettingsActivity extends Activity {
+public class BenchmarkSettingsActivity extends BaseActivity {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "BenchmarkSettingsActivity";
     private boolean DEBUG = true;
 
@@ -90,10 +91,6 @@ public class BenchmarkSettingsActivity extends Activity {
         setContentView(R.layout.benchmark_settings);
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mEditor = mPref.edit();
-        
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
         
         initUI();
         readRefs();
@@ -239,12 +236,5 @@ public class BenchmarkSettingsActivity extends Activity {
         writeRefs();
         super.onPause();
     }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }

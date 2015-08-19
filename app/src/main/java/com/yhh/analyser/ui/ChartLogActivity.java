@@ -95,7 +95,7 @@ public class ChartLogActivity extends ChartBaseActivity {
                     mforeAppTv.setVisibility(View.VISIBLE);
                 }
             }
-        };
+        }
     };
     
     @Override

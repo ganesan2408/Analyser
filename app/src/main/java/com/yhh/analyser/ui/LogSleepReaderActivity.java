@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 
 import java.io.BufferedReader;
@@ -24,7 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-public class LogSleepReaderActivity extends Activity {
+public class LogSleepReaderActivity extends BaseActivity {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "LogSleepReaderActivity";
     private static final int DOT_PER_SEC = 4;
 

@@ -3,8 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/tv_tool_wakeup_info"
+        android:id="@+id/tv_wakeup_time_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_margin="8dp"
+        />
+    <ListView
+        android:id="@+id/lv_analysis_wakeup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:headerDividersEnabled="true"
+        android:footerDividersEnabled="true"
+        />
 </LinearLayout>

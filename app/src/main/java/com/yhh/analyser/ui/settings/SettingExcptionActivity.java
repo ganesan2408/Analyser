@@ -7,24 +7,22 @@
 package com.yhh.analyser.ui.settings;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.widget.SwitchButton;
 
-public class SettingExcptionActivity extends Activity {
+public class SettingExcptionActivity extends BaseActivity {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingExcptionActivity";
 	private boolean DEBUG = true;
 
@@ -57,9 +55,6 @@ public class SettingExcptionActivity extends Activity {
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		mEditor = mPreferences.edit();
 		
-		ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
         initUI();
         readRefs();
 		Toast.makeText(this, "重构中,此功能后续开发", Toast.LENGTH_LONG).show();
@@ -106,7 +101,7 @@ public class SettingExcptionActivity extends Activity {
                     }
                 }
 	        });
-	    };
+	    }
 	}
 	
 	public void readRefs(){
@@ -132,12 +127,4 @@ public class SettingExcptionActivity extends Activity {
 	    super.onPause();
 	}
 	
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    if(item.getItemId() == android.R.id.home){
-	        finish();
-	    }
-	    return super.onOptionsItemSelected(item);
-	}
 }

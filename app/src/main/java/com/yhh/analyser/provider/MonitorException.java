@@ -25,7 +25,7 @@ public class MonitorException {
     
     public static final int CONDITIONS_COUNT = 3;
     private String[] mThresholdValues;
-    public static final int[] CONDITIONS_ITEMS = new int[]{MonitorConst.BATTERY_TEMPERATURE,
+    public static final int[] CONDITIONS_ITEMS = new int[]{MonitorConst.BATTERY_TEMP,
             MonitorConst.CPU_USED_RATIO,
             MonitorConst.POWER_CURRENT};
     

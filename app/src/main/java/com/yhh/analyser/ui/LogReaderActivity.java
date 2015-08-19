@@ -7,10 +7,8 @@
 package com.yhh.analyser.ui;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -41,6 +39,7 @@ import android.widget.ViewFlipper;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.LogInfo;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 
@@ -50,7 +49,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class LogReaderActivity extends Activity implements TabListener{
+public class LogReaderActivity extends BaseActivity implements TabListener{
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "LogReader";
     private ViewFlipper mViewFlipper;
     private GestureDetector mDetector;
@@ -67,8 +66,7 @@ public class LogReaderActivity extends Activity implements TabListener{
     private static final int MODE_SLOG = 1;
     
     private MyHandler mHandler;
-    private ActionBar mActionBar;
-    
+
     /** 页码内容*/
     private TextView mPageTv;
     /** 搜索关键字内容*/
@@ -93,7 +91,7 @@ public class LogReaderActivity extends Activity implements TabListener{
         mSLog = new LogInfo();
         
         initLogUI();
-        initActionBar();
+//        initActionBar();
     }
     
     @Override
@@ -117,50 +115,32 @@ public class LogReaderActivity extends Activity implements TabListener{
                     mSearchLayout.setVisibility(View.VISIBLE);
                 }
                 break;
-                
-//            case R.id.menu_special:
-//                if(logPath.contains(ConstUtils.LOG_SLEEP)){
-//                    Log.i(TAG,"BEGIN SLEEP PARSER");
-//                    LogSleepAbtractLogSleepParser sd = new LogSleepAbtractLogSleepParser(LogAnalyActivity.sCurrentLogDir);
-//                    sd.parseTarget(new File(logPath));
-//                    String sta = sd.statistic();
-//                    DialogUtils.showAlergDialog(LogReaderActivity.this, "休眠与唤醒统计", sta);
-//                }else if(logPath.contains(ConstUtils.LOG_INTERRUPTES)){
-//                    Log.i(TAG,"BEGIN LOG_INTERRUPTES PARSER");
-//                    LogInterruptParser ip = new LogInterruptParser(logPath);
-//                    Log.i(TAG,"85->"+ip.getInterruptName(85));
-//                    Log.i(TAG,"75->"+ip.getInterruptName(75));
-//                }else{
-//                    Toast.makeText(this, "此Log暂没开放此功能", Toast.LENGTH_SHORT).show();
-//                }
-//            break;
         }
         
         return super.onOptionsItemSelected(item);
     }
     
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        mActionBar = getActionBar();
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setIcon(R.drawable.nav_back);
+//    @SuppressLint("NewApi")
+//    private void initActionBar(){
+//        mActionBar.setHomeButtonEnabled(true);
+//        mActionBar.setIcon(R.drawable.nav_back);
         
-        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        mActionBar.addTab(mActionBar.newTab().setText("全部Log")
-                .setTabListener(this));
-        mActionBar.addTab(mActionBar.newTab().setText("搜索Log")
-                .setTabListener(this));
-    }
+//        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//        mActionBar.addTab(mActionBar.newTab().setText("全部Log")
+//                .setTabListener(this));
+//        mActionBar.addTab(mActionBar.newTab().setText("搜索Log")
+//                .setTabListener(this));
+//    }
     
-    public void addTabs(ArrayList<String> tabNames){
-        if(null != mActionBar && null != tabNames){
-            for(String tabName: tabNames){
-                mActionBar.removeAllTabs();
-                mActionBar.addTab(mActionBar.newTab().setText(tabName)
-                        .setTabListener(this));
-            }
-        }
-    }
+//    public void addTabs(ArrayList<String> tabNames){
+//        if(null != mActionBar && null != tabNames){
+//            for(String tabName: tabNames){
+//                mActionBar.removeAllTabs();
+//                mActionBar.addTab(mActionBar.newTab().setText(tabName)
+//                        .setTabListener(this));
+//            }
+//        }
+//    }
     
     public void showPrev(){
         showDisplayId(MODE_ALOG);
@@ -203,7 +183,7 @@ public class LogReaderActivity extends Activity implements TabListener{
                 DialogUtils.closeLoading();
                 Toast.makeText(LogReaderActivity.this, "权限不够", Toast.LENGTH_SHORT).show();
             }
-        };
+        }
     }
     
     private void beginSearch(final String key){
@@ -335,7 +315,7 @@ public class LogReaderActivity extends Activity implements TabListener{
             }
             if(list.size() >0){
                 mALog.appendLog(list);
-            };
+            }
             Log.i(TAG,"alog max:"+mALog.getMaxNum());
             mHandler.sendMessage(mHandler.obtainMessage(0x12));
         } catch (Exception e) {
@@ -388,7 +368,7 @@ public class LogReaderActivity extends Activity implements TabListener{
         }
         if(aList.size() >0){
             mSLog.appendLog(aList);
-        };
+        }
         mHandler.sendMessage(mHandler.obtainMessage(0x12));
     }
     
@@ -425,8 +405,8 @@ public class LogReaderActivity extends Activity implements TabListener{
     
     /**
     * 
-    * @param mode
-    *            mode=0:显示全部log; mode=1:显示搜索到的log.
+    * @param
+    *
     */
    private void updateLogUI() {
        if(mMode == MODE_ALOG){

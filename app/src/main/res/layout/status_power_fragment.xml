@@ -11,5 +11,6 @@
 		   android:layout_height="wrap_content"
 		   android:text="@string/status_loading"
 		   android:layout_margin="10sp"
+		   android:textColor="@color/black"
 	    /> 
 </ScrollView>

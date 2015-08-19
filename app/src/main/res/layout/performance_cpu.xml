@@ -13,11 +13,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="@string/cpu_big_number"/>
             <TextView
                 android:id="@+id/cpu_big_number_tv" 
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <RatingBar 
@@ -41,12 +43,15 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="@string/cpu_small_number"/>
             <TextView
                 android:id="@+id/cpu_small_number_tv" 
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                />
         </LinearLayout>
         <RatingBar 
             android:id="@+id/cpu_small_number_bar"
@@ -69,11 +74,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="@string/cpu_big_freq"/>
             <TextView
                 android:id="@+id/cpu_big_freq_tv" 
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <com.yhh.analyser.widget.rangebar.RangeBar
@@ -94,11 +101,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="@string/cpu_small_freq"/>
             <TextView
                 android:id="@+id/cpu_small_freq_tv" 
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <com.yhh.analyser.widget.rangebar.RangeBar

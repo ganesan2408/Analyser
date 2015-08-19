@@ -6,8 +6,6 @@
  */
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,13 +17,13 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.config.AppConfig;
+import com.yhh.analyser.service.MonitorSysService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.ui.settings.SettingExcptionActivity;
 import com.yhh.analyser.ui.settings.SettingMonitorActivity;
 import com.yhh.analyser.ui.settings.SettingShellActivity;
 import com.yhh.analyser.ui.settings.SettingsActivity;
-import com.yhh.analyser.service.FloatService;
-import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.utils.DebugLog;
 
 import java.util.ArrayList;
@@ -51,7 +49,6 @@ public class MonitorSysActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sys_detailed_info);
 	    
-		initActionBar();
         initGridView();
 
 	}
@@ -70,7 +67,7 @@ public class MonitorSysActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                if(!FloatService.sMonitorIsRunning) {
+                if(!MonitorSysService.sMonitorIsRunning) {
                     if(position==7){
                         Intent diy = new Intent(mContext, SettingShellActivity.class);
                         startActivity(diy);
@@ -90,7 +87,7 @@ public class MonitorSysActivity extends BaseActivity {
 
                     AppConfig.TYPE = position;
                     Intent monitorService = new Intent();
-                    monitorService.setClass(mContext, FloatService.class);
+                    monitorService.setClass(mContext, MonitorSysService.class);
                     monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     mContext.startService(monitorService);
@@ -119,21 +116,11 @@ public class MonitorSysActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }else if(item.getItemId() == R.id.menu_settings){
+        if(item.getItemId() == R.id.menu_settings){
             Intent monitorIntent = new Intent(this, SettingsActivity.class);
             startActivity(monitorIntent);
         }
         return super.onOptionsItemSelected(item);
     }
     
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        if(bar !=null) {
-            bar.setHomeButtonEnabled(true);
-            bar.setIcon(R.drawable.nav_back);
-        }
-    }
 }

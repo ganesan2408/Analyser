@@ -52,7 +52,7 @@ public class PerfGpuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.performance_gpu, container, false);  
+        View view = inflater.inflate(R.layout.performance_gpu, null);
         mGpuFreqBar = (RangeBar) view.findViewById(R.id.gpu_freq_bar);
         mGpufreqTv = (TextView) view.findViewById(R.id.gpu_freq_tv);
         
@@ -73,8 +73,8 @@ public class PerfGpuFragment extends Fragment {
                 Toast.makeText(mContext, R.string.reflash_comlepte, Toast.LENGTH_SHORT).show();
                 mReflashing = false;
             }
-        };
-     };
+        }
+    };
     
     private void initListener(){
         mGpuFreqBar.setTickCount(PerfBean.GPU_FREQ_NUM);

@@ -16,7 +16,7 @@ public enum MeasureSpecMode {
 
     private final int mModeValue;
 
-    private MeasureSpecMode(int modeValue) {
+    MeasureSpecMode(int modeValue) {
         mModeValue = modeValue;
     }
 

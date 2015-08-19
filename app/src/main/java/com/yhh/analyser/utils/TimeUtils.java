@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class TimeUtils {
     public static final SimpleDateFormat STANDARD_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd_HHmmss");
+    public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 
     public static String getTime(long timeInMillis, SimpleDateFormat dateFormat) {
         return dateFormat.format(new Date(timeInMillis));

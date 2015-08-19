@@ -4,12 +4,14 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class AppUtils {
 
@@ -48,11 +50,18 @@ public class AppUtils {
         }
         return installed;
     }
-    
+
+    /**
+     * 启动app
+     *
+     * @param context
+     * @param pkgName
+     * @param ActivityName
+     */
     public static void startApp(Context context, String pkgName, String ActivityName){
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);           
-        ComponentName cn = new ComponentName(pkgName, ActivityName);           
+        ComponentName cn = new ComponentName(pkgName, ActivityName);
         intent.setComponent(cn);
         context.startActivity(intent);
     }
@@ -88,4 +97,17 @@ public class AppUtils {
         Method method = Class.forName("android.app.ActivityManager").getMethod("forceStopPackage",String.class);
         method.invoke(am, pkgName);
     }
+
+    public static String getLableByPkgName(Context context, String pkgName){
+        PackageManager pm = context.getApplicationContext().getPackageManager();
+        List<ApplicationInfo> appList = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
+
+        for (ApplicationInfo info:appList) {
+            if(info.packageName.equalsIgnoreCase(pkgName)){
+                return info.loadLabel(pm).toString();
+            }
+        }
+        return  pkgName;
+    }
+
 }

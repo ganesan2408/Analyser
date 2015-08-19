@@ -7,18 +7,16 @@
 package com.yhh.analyser.ui.settings;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.widget.SwitchButton;
 
-public class SettingFloatingActivity extends Activity {
+public class SettingFloatingActivity extends BaseActivity {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingFloating";
 	private boolean DEBUG = true;
 	
@@ -55,9 +53,6 @@ public class SettingFloatingActivity extends Activity {
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		mEditor = mPreferences.edit();
 		
-		ActionBar bar = this.getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
 	}
 	
 	@Override
@@ -93,11 +88,4 @@ public class SettingFloatingActivity extends Activity {
 	    
 	}
 	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    if(item.getItemId() == android.R.id.home){
-	        finish();
-	    }
-	    return super.onOptionsItemSelected(item);
-	}
 }

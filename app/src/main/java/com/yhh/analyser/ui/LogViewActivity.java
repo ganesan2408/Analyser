@@ -7,8 +7,6 @@
 package com.yhh.analyser.ui;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -25,15 +23,16 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.app.PhoneInfo;
+import com.yhh.analyser.fragment.LogCurrentFragment;
+import com.yhh.analyser.fragment.LogHistoryFragment;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.utils.TimeUtils;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu;
-import com.yhh.analyser.fragment.LogCurrentFragment;
-import com.yhh.analyser.fragment.LogHistoryFragment;
 
-public class LogViewActivity extends Activity {
+public class LogViewActivity extends BaseActivity {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "LogViewActivity";
     private static final int DELETE_CURRENT_LOG = 1;
     private static final int DELETE_HISTORY_LOG = 2;
@@ -50,7 +49,6 @@ public class LogViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_analyser_main);
         
-        initActionBar();
         initMenu();
         
         fm =  this.getFragmentManager();
@@ -79,9 +77,7 @@ public class LogViewActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }else if(item.getItemId() == R.id.introduction_doc){
+       if(item.getItemId() == R.id.introduction_doc){
             DialogUtils.showAlergDialog(this,getString(R.string.introduction_title),
                     getString(R.string.introduction_log_viewer));
         }
@@ -102,7 +98,7 @@ public class LogViewActivity extends Activity {
                     showHistoryLog();
                     break;
             }
-        };
+        }
     };
     
     
@@ -225,10 +221,5 @@ public class LogViewActivity extends Activity {
         }
     }
     
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
+
 }

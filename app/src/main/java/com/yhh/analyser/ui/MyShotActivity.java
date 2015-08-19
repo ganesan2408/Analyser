@@ -1,8 +1,5 @@
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -12,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,6 +22,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DensityUtils;
 import com.yhh.analyser.utils.FileUtils;
@@ -37,7 +34,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MyShotActivity extends Activity {
+public class MyShotActivity extends BaseActivity {
     private final static String TAG = ConstUtils.DEBUG_TAG + "MyShotActivity";
     private List<String> mShotList;
     private ShotAdapter mAdapter;
@@ -48,7 +45,6 @@ public class MyShotActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_myshot);
-        initActionBar();
 
         createSwipeListView();
     }
@@ -159,10 +155,7 @@ public class MyShotActivity extends Activity {
             @Override
             public boolean accept(File dir, String filename) {
                 File current = new File(dir, filename);
-                if (filename.endsWith("png")) {
-                    return true;
-                }
-                return false;
+                return filename.endsWith("png");
             }
         });
         if(files ==null || files.length<1){
@@ -221,20 +214,6 @@ public class MyShotActivity extends Activity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
 
     private void showImage(String path){
         View view =LayoutInflater.from(this).inflate(R.layout.image_floating_view, null);

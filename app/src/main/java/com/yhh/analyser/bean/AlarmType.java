@@ -40,6 +40,7 @@ public class AlarmType {
 
     @Override
     public String toString() {
-        return " type:"+getType()+", run:"+getRunningTime() +", wakeups:"+ getWakeups();
+        return  getRunningTime() +"  |  "+ getWakeups() + "  |  " + getType();
+
     }
 }

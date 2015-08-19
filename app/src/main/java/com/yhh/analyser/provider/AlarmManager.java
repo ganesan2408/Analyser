@@ -1,7 +1,10 @@
 package com.yhh.analyser.provider;
 
+import android.content.Context;
+
 import com.yhh.analyser.bean.AlarmBean;
 import com.yhh.analyser.bean.AlarmType;
+import com.yhh.analyser.utils.AppUtils;
 import com.yhh.analyser.utils.DebugLog;
 import com.yhh.analyser.utils.StringUtils;
 
@@ -23,7 +26,7 @@ public abstract class AlarmManager {
      * 开始解析alarm信息
      *
      */
-    public void parse(){
+    public void parse(Context context){
         String rawInfo = getDumpsysAlarm();
 
         if(rawInfo ==null){
@@ -47,10 +50,10 @@ public abstract class AlarmManager {
                 if(alarmBean !=null){
                     alarmBeanList.add(alarmBean);
                 }
-                alarmBean = getAlarmInfo(rawInfoArr[i]);
+                alarmBean = getAlarmInfo(context, rawInfoArr[i]);
             }else{
                 AlarmType alarmType = getAlarmType(rawInfoArr[i]);
-//                DebugLog.d(alarmType.toString());
+                alarmBean.addAlarmType(alarmType);
             }
 
         }
@@ -122,7 +125,7 @@ public abstract class AlarmManager {
      * @param line
      * @return
      */
-    private AlarmBean getAlarmInfo(String line){
+    private AlarmBean getAlarmInfo(Context context, String line){
         AlarmBean alarmBean = new AlarmBean();
         if(StringUtils.isBlank(line)){
             DebugLog.e(line+"is blank");
@@ -136,6 +139,7 @@ public abstract class AlarmManager {
             alarmBean.setName(subArr[1]);
             alarmBean.setRunningTime(arr[1].substring(1));
             alarmBean.setWakeups(Integer.valueOf(arr[3].trim()));
+            alarmBean.setAppName(AppUtils.getLableByPkgName(context, alarmBean.getName()));
         }
 
         return alarmBean;

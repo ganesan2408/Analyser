@@ -6,7 +6,6 @@
  */
 package com.yhh.analyser.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,17 +24,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.ui.settings.BenchmarkSettingsActivity;
 import com.yhh.analyser.bean.PerfBean;
 import com.yhh.analyser.bean.TempInfo;
 import com.yhh.analyser.bean.app.PhoneInfo;
 import com.yhh.analyser.provider.AutoWorker;
-import com.yhh.analyser.utils.UploadUtils;
+import com.yhh.analyser.ui.base.BaseActivity;
+import com.yhh.analyser.ui.settings.BenchmarkSettingsActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.FileMediaScanner;
 import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.utils.ShellUtils;
+import com.yhh.analyser.utils.UploadUtils;
 import com.yhh.analyser.utils.Utils;
 
 import java.io.BufferedWriter;
@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BenchmarkActivity extends Activity{
+public class BenchmarkActivity extends BaseActivity {
     private static final String TAG = ConstUtils.DEBUG_TAG +"BenchmarkActivity";
     
     private Button mRobotBtn;
@@ -332,7 +332,7 @@ public class BenchmarkActivity extends Activity{
                 String[] files = listFiles();
                 upload(files[0]);
             }
-        };
+        }
     };
     
     private String setPerf(int cpuBigNum, int cpuSmallNum, int cpuBigFreq, int cpuSmallFreq, int gpuFreq){
@@ -513,10 +513,7 @@ public class BenchmarkActivity extends Activity{
             @Override
             public boolean accept(File dir, String filename) {
                 File current = new File(dir, filename);
-                if (current.isFile() && filename.endsWith(".csv")) {
-                    return true;
-                }
-                return false;
+                return current.isFile() && filename.endsWith(".csv");
             }
         });
         if(files ==null || files.length <=0){

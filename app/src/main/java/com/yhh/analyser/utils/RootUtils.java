@@ -17,8 +17,8 @@ public class RootUtils {
     private static final String PATH_SHELL = "/data/system_analyser.sh";
     
     private static RootUtils mMyRoot;
-    private RootUtils(){};
-    
+    private RootUtils(){}
+
     public static RootUtils getInstance(){
         if(null == mMyRoot){
             mMyRoot = new RootUtils();
@@ -93,10 +93,7 @@ public class RootUtils {
 //    }
     
     public boolean rootPrepareRobot(){
-        if(setSystemProperty(KEY_AUTOMATIC, "1")){
-            return true;
-        }
-        return false;
+        return setSystemProperty(KEY_AUTOMATIC, "1");
     }
     
     public boolean startThermalEngine(boolean isOn){

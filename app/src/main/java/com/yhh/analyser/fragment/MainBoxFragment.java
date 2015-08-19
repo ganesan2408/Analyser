@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yhh.analyser.ui.LogAnalyActivity;
-import com.yhh.analyser.ui.WakeupActivity;
 import com.yhh.analyser.R;
 import com.yhh.analyser.ui.BenchmarkActivity;
 import com.yhh.analyser.ui.LogViewActivity;
@@ -33,7 +32,6 @@ public class MainBoxFragment extends Fragment{
     private int[] viewIds= new int[]{
             R.id.tool_node_rl,
             R.id.tool_bright_rl,
-            R.id.tool_wakeup_rl,
             R.id.tool_kernel_rl,
             
             R.id.tool_logviewer_rl,
@@ -47,7 +45,6 @@ public class MainBoxFragment extends Fragment{
     private Class[] targetClasses = new Class[]{
             NodeViewActivity.class,
             BrightnessActivity.class,
-            WakeupActivity.class,
             KernelActivity.class,
             
             LogViewActivity.class,

@@ -6,7 +6,6 @@
  */
 package com.yhh.analyser.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -115,7 +114,7 @@ public class AutoCaseSettings {
 	    
 	    LayoutInflater inflater = LayoutInflater.from(mContext); 
 	    View view = inflater.inflate(R.layout.case_settings, null);
-	    mPreferences = ((Activity)mContext).getSharedPreferences("robot_config", 0);
+	    mPreferences = mContext.getSharedPreferences("robot_config", 0);
         mEditor = mPreferences.edit();
         
         mCaseParamLv = (ListView) view.findViewById(R.id.case_settings_lv);

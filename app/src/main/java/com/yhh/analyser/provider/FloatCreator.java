@@ -56,7 +56,6 @@ public class FloatCreator {
         titleParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         titleParams.alpha = 1.0f;
         windowManager.addView(floatingTitle, titleParams);
-
         floatingTitle.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 x = event.getRawX();

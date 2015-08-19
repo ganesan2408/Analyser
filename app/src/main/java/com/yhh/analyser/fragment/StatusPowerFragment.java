@@ -6,10 +6,6 @@
  */
 package com.yhh.analyser.fragment;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,6 +21,10 @@ import com.yhh.analyser.bean.InfoFactory;
 import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.FileUtils;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class StatusPowerFragment extends Fragment
@@ -65,7 +65,7 @@ public class StatusPowerFragment extends Fragment
                }
                mPowerTv.setText((String)msg.obj);
            }
-       };
+       }
     };
   
     public void start() {

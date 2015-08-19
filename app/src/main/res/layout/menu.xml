@@ -27,6 +27,7 @@
     <RelativeLayout
         android:id="@+id/mmenu_device_info"
         android:layout_below="@id/mmenu_phone"
+        android:layout_marginTop="24dp"
         style="@style/item"
         android:clickable="true"
         android:onClick="menuClick">
@@ -51,37 +52,10 @@
             />
     </RelativeLayout>
 
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/mmenu_screenshot"-->
-        <!--android:layout_below="@id/mmenu_create_icon"-->
-        <!--style="@style/item"-->
-        <!--android:clickable="true"-->
-        <!--android:onClick="menuClick">-->
-        <!--<TextView-->
-            <!--style="@style/slide_menu_left_center_title"-->
-            <!--android:text="@string/menu_screenshot"-->
-            <!--android:textColor="@color/black"-->
-            <!--/>-->
-    <!--</RelativeLayout>-->
-    
-    <RelativeLayout
-        android:id="@+id/mmenu_my_file"
-        android:layout_below="@id/mmenu_create_icon"
-        style="@style/item"
-        android:layout_marginTop="15dp"
-        android:clickable="true"
-        android:onClick="menuClick">
-        <TextView
-            style="@style/slide_menu_left_center_title"
-            android:id="@+id/push_ppt_id"
-            android:text="@string/menu_file"
-            android:textColor="@color/black"
-            />
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/mmenu_my_shot"
-        android:layout_below="@id/mmenu_my_file"
+        android:layout_below="@id/mmenu_create_icon"
         style="@style/item"
         android:clickable="true"
         android:layout_marginTop="15dp"

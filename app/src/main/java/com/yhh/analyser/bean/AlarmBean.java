@@ -12,9 +12,22 @@ public class AlarmBean implements Comparable<AlarmBean>{
 
     private String uid;
 
+    /** 唤醒次数 */
     private int wakeups;
 
+    /** 运行时间*/
     private String runningTime;
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    /** App名称*/
+    private String appName;
 
     private List<AlarmType> alarmTypeList;
 
@@ -47,6 +60,7 @@ public class AlarmBean implements Comparable<AlarmBean>{
         this.wakeups = wakeups;
     }
 
+
     public String getRunningTime() {
         return runningTime;
     }
@@ -70,6 +84,14 @@ public class AlarmBean implements Comparable<AlarmBean>{
 
     public String toEasyString(){
         return getName()  +" ==> "+getWakeups();
+    }
+
+    public String getAlarmTypeString(){
+        StringBuffer sb = new StringBuffer();
+        for(AlarmType type: alarmTypeList){
+            sb.append(type.toString()).append("\n\n");
+        }
+        return sb.toString();
     }
 
     @Override

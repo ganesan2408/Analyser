@@ -1249,7 +1249,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
         }
 
         return super.onKeyPreIme(keyCode, event);
-    };
+    }
 
 
     private boolean handleHardwareControlKey(int keyCode, KeyEvent event) {

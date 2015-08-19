@@ -35,9 +35,9 @@ public class MonitorDataProvider {
     private String[] mTitle;
     
     public MonitorDataProvider(Context context){
-        mTimes = new ArrayList<String>();
+        mTimes = new ArrayList<>();
         mMonitorData = new ArrayList<ArrayList<Entry>>();
-        mMulCpuFreq = new ArrayList<BarEntry>();
+        mMulCpuFreq = new ArrayList<>();
     }
     
     public void parseNewest(){

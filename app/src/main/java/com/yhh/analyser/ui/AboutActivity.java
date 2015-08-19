@@ -1,10 +1,7 @@
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,11 +19,14 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_about);
-        initActionBar();
         initView();
         initListener();
     }
 
+    @Override
+    protected boolean hasBackButton() {
+        return true;
+    }
 
     private void initView(){
         mLogoInfotv = (TextView) findViewById(R.id.tv_about_logo_name);
@@ -50,23 +50,6 @@ public class AboutActivity extends BaseActivity {
             }
         });
 
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
     }
 
 }

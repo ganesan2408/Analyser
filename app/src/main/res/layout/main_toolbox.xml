@@ -36,20 +36,6 @@
             android:contentDescription="@string/right_into_description"/>
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/tool_wakeup_rl"
-        style="@style/item"
-        android:background="@drawable/selector_preference_footer"
-        >
-        <TextView
-            style="@style/slide_menu_left_center_title"
-            android:textColor="@color/black"
-            android:text="@string/toolbox_wakeup"/>
-        <ImageView
-            style="@style/slide_menu_right_image"
-            android:src="@drawable/right_into"
-            android:contentDescription="@string/right_into_description"/>
-    </RelativeLayout>
-    <RelativeLayout
         android:id="@+id/tool_kernel_rl"
         style="@style/item"
         android:background="@drawable/selector_preference_footer"

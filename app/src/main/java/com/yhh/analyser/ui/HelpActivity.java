@@ -1,33 +1,29 @@
 package com.yhh.analyser.ui;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 
-public class HelpActivity extends Activity {
+public class HelpActivity extends BaseActivity {
     TextView mHelpTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_help);
-        initActionBar();
         initView();
         setHelp();
     }
 
 
-    private void initView(){
+    private void initView() {
         mHelpTv = (TextView) findViewById(R.id.help_tv);
 
     }
 
-    private void setHelp(){
+    private void setHelp() {
         StringBuffer sb = new StringBuffer();
         sb.append("1.如何监控系统？").append("\n");
         sb.append("答：监控-->点击系统监控-->启动。").append("\n\n");
@@ -66,19 +62,4 @@ public class HelpActivity extends Activity {
         mHelpTv.setText(sb.toString());
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressLint("NewApi")
-    private void initActionBar(){
-        ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
-    }
 }

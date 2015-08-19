@@ -78,7 +78,7 @@ public class StatusBatteryFragment extends Fragment
                 Log.i(TAG,"battery recevie");
                 mBatteryTv.setText((String)msg.obj);
             }
-        };
+        }
     };
 	
 	private void registerBatteryReceiver() {

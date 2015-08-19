@@ -6,11 +6,10 @@
  */
 package com.yhh.analyser.ui;
 
-import android.support.v4.app.FragmentActivity;
-
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 
-public abstract class ChartBaseActivity extends FragmentActivity {
+public abstract class ChartBaseActivity extends BaseActivity {
     public String mLogType;
     //abondan
     public int mDataType;

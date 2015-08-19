@@ -19,10 +19,7 @@ public class StringUtils {
     }
     
     public static boolean match(char value, char keyword) {
-        if(value == keyword || value - keyword == 32){
-            return true;
-        }
-        return false;
+        return value == keyword || value - keyword == 32;
     }
 
     /**

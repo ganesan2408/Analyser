@@ -436,7 +436,7 @@ public class Term extends Activity implements UpdateCallback {
                 sessions.addCallback(adapter);
                 sessions.addTitleChangedListener(adapter);
                 mViewFlipper.addCallback(adapter);
-                mActionBar.setListNavigationCallbacks(adapter, (OnNavigationListener) mWinListItemSelected);
+                mActionBar.setListNavigationCallbacks(adapter, mWinListItemSelected);
             } else {
                 adapter.setSessions(mTermSessions);
             }

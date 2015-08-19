@@ -95,7 +95,7 @@ public class FileMediaScanner {
 
     }
     interface ScannerEventListener {
-        public void onComplete();
+        void onComplete();
     }
     
 //}

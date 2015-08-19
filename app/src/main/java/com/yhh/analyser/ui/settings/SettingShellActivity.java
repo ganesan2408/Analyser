@@ -120,7 +120,7 @@ public class SettingShellActivity extends Activity {
                     }
                 }
 	        });
-	    };
+	    }
 	}
 	
 	public void readRefs(){

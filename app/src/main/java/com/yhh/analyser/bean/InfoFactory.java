@@ -49,7 +49,7 @@ public class InfoFactory {
         mFormat.setGroupingUsed(false);
         mFormat.setMaximumFractionDigits(2);
         mFormat.setMinimumFractionDigits(2);
-    };
+    }
 
     public static InfoFactory getInstance(){
         if(null == mInfoFactory){

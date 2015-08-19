@@ -64,7 +64,7 @@ public class ChartBenchmarkActivity extends ChartBaseActivity {
                 mChartLv.setAdapter(mChartDataAdapter);
                 DialogUtils.closeLoading();
             }
-        };
+        }
     };
     
     @Override

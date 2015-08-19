@@ -118,7 +118,7 @@ public class ChartSleepActivity extends ChartBaseActivity implements  OnChartVal
                 mChart.notifyDataSetChanged();
                 mChart.invalidate();
             }
-        };
+        }
     };
     
     private void setData() {
