@@ -11,7 +11,7 @@ import android.util.Log;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.FileUtils;
 
-class GpuInfo {
+public class GpuInfo {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "GpuInfo";
     private boolean DEBUG =false;
 

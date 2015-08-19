@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -19,8 +20,10 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
+import com.yhh.analyser.core.Monitor;
+import com.yhh.analyser.core.MonitorApp;
+import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.provider.FloatCreator;
-import com.yhh.analyser.provider.Monitor;
 import com.yhh.analyser.ui.MonitorSysActivity;
 import com.yhh.analyser.ui.settings.SettingsActivity;
 import com.yhh.analyser.utils.ScreenShot;
@@ -83,7 +86,13 @@ public class MonitorSysService extends Service{
         mFloatCreator.createFloatingWindow(viFloatingTitle, viFloatingWindow);
         initNotification(startId);
 
-        mMonitor = new CpuMonitor(mContext);
+        int type = intent.getIntExtra("type",1);
+        if(type==20){
+            int pid = intent.getIntExtra("pid",0);
+            mMonitor = new MonitorApp(mContext, pid);
+        }else {
+            mMonitor = MonitorFactory.newInstance(mContext, type);
+        }
         readPrefs();
         handler.post(task);
 
@@ -197,7 +206,7 @@ public class MonitorSysService extends Service{
 
         handler.removeCallbacks(task);
         mFloatCreator.removeView(viFloatingTitle, viFloatingWindow);
-        mMonitor.close();
+        mMonitor.onDestory();
         stopForeground(true);
 
         super.onDestroy();
@@ -210,100 +219,29 @@ public class MonitorSysService extends Service{
     private Runnable task = new Runnable() {
 
         public void run() {
-            if (!sMonitorIsRunning) {
+            if (sMonitorIsRunning) {
+                new MonitorTask().execute();
+            }else{
                 stopSelf();
-                return;
             }
 
-            mFloatLv.setText(mMonitor.monitor());
-            handler.postDelayed(task, AppConfig.MONITOR_DELAY_TIME);
         }
     };
 
 
+    class MonitorTask extends AsyncTask<String, Integer, String> {
 
-    // 临时方案
-//    ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-//    private MonitorShell mShellMonitor;
-//    private  String adbRes="";
-//
-//    private void topTask(){
-//        if(sMonitorIsRunning){
-//            singleThreadExecutor.execute(new Runnable(){
-//                public void run() {
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    adbRes = mShellMonitor.execTop(8);
-//                    mShellHandler.sendMessage(mShellHandler.obtainMessage());
-//                }
-//            });
-//        }
-//    }
-//
-//    private Handler mShellHandler = new Handler(){
-//        public void handleMessage(Message msg) {
-//            if(!mIsHide) {
-//                mFloatLv.setText(adbRes);
-//            }
-//            topTask();
-//        }
-//    };
-//
-//
-//
-//    public static final int CPU_TYPE = 0;
-//    public static final int GPU_TYPE = 1;
-//    public static final int MEMORY_TYPE = 2;
-//    public static final int TOP_TYPE = 3;
-//    public static final int CURRENT_TYPE = 4;
-//    public static final int BATTERY_TYPE = 5;
-//    public static final int EXCEPTION_TYPE = 6;
-//    public static final int DIY_TYPE = 7;
-//    public static final int ALL_TYPE = 8;
-//    public static final int CHOOSE_TYPE = 9;
-//
-//    public static final int APP_TYPE = 11;
-//
-//    private String getReflashData(int type){
-//        switch (type){
-//            case APP_TYPE:
-//                return getTargetString(3);
-//
-//            case CPU_TYPE:
-//                return getTargetString(1,2);
-//
-//            case MEMORY_TYPE:
-//                return getTargetString(4);
-//
-//            case GPU_TYPE:
-//                return  getTargetString(5,6);
-//
-//            case TOP_TYPE:
-//            return getTargetString();
-//
-//            case CURRENT_TYPE:
-//            return getTargetString(7,8);
-//
-//            case BATTERY_TYPE:
-//            return getTargetString(9,10,11);
-//
-//            case ALL_TYPE:
-//            return getTargetString(0,1,2,3,4,5,6,7,8,9,10,11,12);
-//
-//        }
-//        return "";
-//    }
-//
-//    private String getTargetString(int... index){
-//        StringBuffer sb = new StringBuffer();
-//        for(int i:index) {
-//            sb.append(itemTitles[i]+": ");
-//            sb.append(monitorInfo.get(i));
-//            sb.append(itemUnitTitles[i]+"\n");
-//        }
-//        return  sb.toString();
-//    }
+        @Override
+        protected String doInBackground(String... params) {
+            return mMonitor.monitor();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            mFloatLv.setText(s);
+            handler.postDelayed(task, AppConfig.MONITOR_DELAY_TIME);
+        }
+    }
+
 }

@@ -74,7 +74,7 @@ public class InfoFactory {
 
     /******* CPU *********/
     public String getCpuPidUsedRatio(int pid){
-        mCpuInfo.updateCpuStat(pid);
+        mCpuInfo.updateCpu(pid);
         return mCpuInfo.getProcessCpuRatio(pid);
     }
 

@@ -7,36 +7,25 @@
 package com.yhh.analyser.ui.settings;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.widget.SwitchButton;
 
-public class SettingShellActivity extends Activity {
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingShellActivity";
+public class SettingShellActivity extends BaseActivity {
+	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingShell";
 	private boolean DEBUG = true;
 
-	private SharedPreferences mPreferences;
-	private SharedPreferences.Editor mEditor;
-	
-	private SwitchButton mShellMonitorSb;
 	private Button mTopBtn;
 	public static final String KEY_IS_MONITOR = "shellMonitor";
 	
@@ -59,15 +48,9 @@ public class SettingShellActivity extends Activity {
 		Log.i(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_monitor_shell_settings);
-		mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		mEditor = mPreferences.edit();
-		
-		ActionBar bar = getActionBar();
-        bar.setHomeButtonEnabled(true);
-        bar.setIcon(R.drawable.nav_back);
+
         initUI();
-        readRefs();
-		Toast.makeText(this,"重构中,此功能后续开发", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "此功能正在重构中..", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
@@ -85,16 +68,7 @@ public class SettingShellActivity extends Activity {
             }
 	        
 	    });
-	    mShellMonitorSb = (SwitchButton) findViewById(R.id.shell_monitor_sb);
-	    mShellMonitorSb.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-            
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                    boolean isChecked) {
-                mPreferences.edit().putBoolean(SettingShellActivity.KEY_IS_MONITOR, isChecked).commit();
-            }
-        });
- 
+
 	    for(int i=0; i< LIMIT_ITEMS_COUNT; i++){
 	        final int index = i;
 	        mThresholdEt[i] = (EditText)findViewById(mItemIds[i]);
@@ -121,37 +95,5 @@ public class SettingShellActivity extends Activity {
                 }
 	        });
 	    }
-	}
-	
-	public void readRefs(){
-        boolean isShellMonitor = mPreferences.getBoolean(KEY_IS_MONITOR, true);
-        mShellMonitorSb.setChecked(isShellMonitor);
-        
-        for(int i=0; i<LIMIT_ITEMS_COUNT;i++){
-            String value = mPreferences.getString(PREF_EXCEPTION_ITEMS[i], "");
-            mThresholdEt[i].setText(value);
-        }
-    }
-	
-	public void writeRefs(){
-	    for(int i=0; i<LIMIT_ITEMS_COUNT;i++){
-            mEditor.putString(PREF_EXCEPTION_ITEMS[i], mThresholdValues[i]);
-        }
-	    mEditor.commit();
-	}
-	
-	@Override
-	protected void onPause() {
-	    writeRefs();
-	    super.onPause();
-	}
-	
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    if(item.getItemId() == android.R.id.home){
-	        finish();
-	    }
-	    return super.onOptionsItemSelected(item);
 	}
 }

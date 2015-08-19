@@ -20,7 +20,7 @@ public class SettingFloatingActivity extends BaseActivity {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingFloating";
 	private boolean DEBUG = true;
 	
-	private final int MONITOR_ITEMS_COUNT = 14;
+	private final int MONITOR_ITEMS_COUNT = 13;
 	private SwitchButton[] mMonitorBtn = new SwitchButton[MONITOR_ITEMS_COUNT];
 	
 	// In proper order with xml is very important
@@ -30,7 +30,7 @@ public class SettingFloatingActivity extends BaseActivity {
             R.id.monitor_settings_gpu, R.id.monitor_settings_gpu_freq,
             R.id.monitor_settings_current, R.id.monitor_settings_brightness,
             R.id.monitor_settings_battery_level, R.id.monitor_settings_battery_temperature, R.id.monitor_settings_battery_voltage,
-            R.id.monitor_settings_traffic_rev, R.id.monitor_settings_traffic_send
+            R.id.monitor_settings_traffic
     };
     
     public static final String[] PREF_FLOATING_ITEMS = {

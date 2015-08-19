@@ -11,7 +11,7 @@ import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.FileUtils;
 
-class PowerInfo {
+public class PowerInfo {
     static String mCurrentCmd;
     static {
         if(PhoneInfo.getPhoneType().contains(PhoneInfo.ZOOM) ||

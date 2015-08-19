@@ -255,8 +255,7 @@
     <string name="monitor_battery_level">电池电量</string>
     <string name="monitor_battery_temperature">电池温度</string>
     <string name="monitor_battery_voltage">电池电压</string>
-    <string name="monitor_traffic_rev">接收流量</string>
-    <string name="monitor_traffic_send">发送流量</string>
+    <string name="monitor_traffic">接/发流量</string>
 
     <string name="save">保存</string>
     <string name="calculating">计算中...</string>

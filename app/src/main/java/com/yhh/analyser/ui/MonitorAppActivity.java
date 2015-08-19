@@ -153,8 +153,6 @@ public class MonitorAppActivity extends BaseActivity {
 	   monitorService = new Intent();
        monitorService.setClass(MonitorAppActivity.this, MonitorSysService.class);
 	   
-//       mMonitorBtn = (Button) findViewById(R.id.app_monitor_btn);
-//       mViewMonitorBtn = (Button) findViewById(R.id.app_monitor_view);
        mAppLogIv = (ImageView) findViewById(R.id.app_logo_view);
        mAppNameTv = (TextView) findViewById(R.id.app_name);
        mPkgNameTv = (TextView) findViewById(R.id.app_pkg_value);
@@ -162,60 +160,8 @@ public class MonitorAppActivity extends BaseActivity {
        mPidTv = (TextView) findViewById(R.id.app_pid_value);
        mUidTv = (TextView) findViewById(R.id.app_uid_value);
 
-
        setView();
 
-//       mMonitorBtn.setOnClickListener(new OnClickListener() {
-//           @Override
-//           public void onClick(View v) {
-//               if (getString(R.string.start_monitor).equals(mMonitorBtn.getText().toString())) {
-//                   if (!mAppInfo.getName().equals("-1") && !mAppInfo.getName().equals("系统监控")) {
-//                       Toast.makeText(AppMonitorActivity.this, mAppInfo.getName() + "启动中", Toast.LENGTH_SHORT).show();
-//                       Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
-//                       try {
-//                           mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
-//                           startActivity(intent);
-//                       } catch (Exception e) {
-//                           Toast.makeText(AppMonitorActivity.this, getString(R.string.can_not_start_app_toast), Toast.LENGTH_SHORT).show();
-//                           return;
-//                       }
-//                       new Thread(new Runnable() {
-//
-//                           @Override
-//                           public void run() {
-//                               waitForAppStart(mAppInfo.getPackageName());
-//                           }
-//
-//                       }).start();
-//                   } else {
-//                       monitorService.putExtra("appName", -1);
-//                       monitorService.putExtra("pid", -1);
-//                       monitorService.putExtra("uid", -1);
-//                       monitorService.putExtra("packageName", -1);
-//                       monitorService.putExtra("startActivity", -1);
-//
-//                       monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                       monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                       startService(monitorService);
-//                   }
-//                   MonitorService.isServiceStoped = false;
-//                   mMonitorBtn.setText(getString(R.string.stop_monitor));
-//
-//               } else {
-//                   MonitorService.isServiceStoped = true;
-//                   mMonitorBtn.setText(getString(R.string.start_monitor));
-//                   stopService(monitorService);
-//               }
-//           }
-//       });
-//
-//       mViewMonitorBtn.setOnClickListener(new OnClickListener() {
-//
-//           @Override
-//           public void onClick(View v) {
-//               showMonitorDataDialog();
-//           }
-//       });
 	}
 
 
@@ -242,17 +188,7 @@ public class MonitorAppActivity extends BaseActivity {
         }
     }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		Log.d(TAG, "onResume");
-//		if (MonitorService.isServiceStoped) {
-//            mMonitorBtn.setText(getString(R.string.start_monitor));
-//		}else{
-//		    mMonitorBtn.setText(getString(R.string.stop_monitor));
-//		}
-	}
-	
+
 	Handler mHandler = new Handler(){
 	    public void handleMessage(android.os.Message msg) {
 	        if(msg.what ==0x1){
@@ -260,7 +196,7 @@ public class MonitorAppActivity extends BaseActivity {
                 DialogUtils.closeLoading();
 	        }else if(msg.what ==0x2){  //start floating windows
 	            Log.d(TAG, "begin startup float window.");
-                AppConfig.TYPE = 11;
+                monitorService.putExtra("type",20);
 	            monitorService.putExtra("appName", mAppInfo.getName());
                 monitorService.putExtra("pid", mAppInfo.getPid());
                 monitorService.putExtra("uid", mAppInfo.getUid());

@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  */
 public class CpuInfo {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "CpuInfo";
-	private boolean DEBUG = true;
+	private boolean DEBUG = false;
 	
 	/** process ratio*/
     private String processCpuRatio = "";
@@ -90,7 +90,6 @@ public class CpuInfo {
 
 	private void readTotalCpuStat() {
 		try {
-			// monitor total and idle cpu stat of certain process
 			RandomAccessFile cpuFile = new RandomAccessFile(CPU_STAT, "r");
 			String line;
 			while ((null != (line = cpuFile.readLine())) && line.startsWith("cpu")) {
@@ -118,15 +117,18 @@ public class CpuInfo {
 	}
 
 
-	public void updateCpuStat(int pid){
-	    readCpuStatByPid(pid);
-	}
-
-	public void updateCpuStat(){
+	public void updateCpu(int pid){
 		idleCpuList.clear();
 		totalCpuList.clear();
 		totalCpuRatio.clear();
+	    readCpuStatByPid(pid);
+		readTotalCpuStat();
+	}
 
+	public void updateAllCpu(){
+		idleCpuList.clear();
+		totalCpuList.clear();
+		totalCpuRatio.clear();
 		readTotalCpuStat();
 	}
 	
@@ -276,6 +278,7 @@ public class CpuInfo {
             processCpu2 = processCpu;
         }
         processCpu2 = processCpu;
+		totalCpu2List = (ArrayList<Long>) totalCpuList.clone();
         return processCpuRatio;
     }
     

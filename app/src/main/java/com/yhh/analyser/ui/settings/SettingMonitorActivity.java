@@ -5,7 +5,6 @@
 package com.yhh.analyser.ui.settings;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -28,7 +27,7 @@ public class SettingMonitorActivity extends BaseActivity {
     private boolean DEBUG = true;
 
     // add items, need change
-	public static final int MONITOR_ITEMS_COUNT = 14;
+	public static final int MONITOR_ITEMS_COUNT = 13;
 	private SwitchButton[] mMonitorBtn = new SwitchButton[MONITOR_ITEMS_COUNT];
 
 	// In proper order with xml is very important. add items, need change
@@ -40,7 +39,7 @@ public class SettingMonitorActivity extends BaseActivity {
 	        R.id.monitor_settings_current, R.id.monitor_settings_brightness,
 	        R.id.monitor_settings_battery_level, R.id.monitor_settings_battery_temperature,
             R.id.monitor_settings_battery_voltage,
-	        R.id.monitor_settings_traffic_rev, R.id.monitor_settings_traffic_send
+	        R.id.monitor_settings_traffic
     };
 
     private MonitorSettings mMonitorSettings;
@@ -61,11 +60,6 @@ public class SettingMonitorActivity extends BaseActivity {
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void initUI() {
-        ActionBar bar = this.getActionBar();
-        if (bar != null) {
-            bar.setHomeButtonEnabled(true);
-            bar.setIcon(R.drawable.nav_back);
-        }
 
         List<Boolean> checkedList = mMonitorSettings.getCheckedList();
         for (int i = 0; i < MONITOR_ITEMS_COUNT; i++) {

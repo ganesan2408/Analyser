@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 
-class BatteryInfo {
+public class BatteryInfo {
     private BatteryBean mBattery;
     private Context mContext;
     private BatteryInfoBroadcastReceiver batteryBroadcast;

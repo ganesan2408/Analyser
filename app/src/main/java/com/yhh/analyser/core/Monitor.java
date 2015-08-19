@@ -1,4 +1,4 @@
-package com.yhh.analyser.provider;
+package com.yhh.analyser.core;
 
 import android.content.Context;
 import android.util.Log;
@@ -23,26 +23,34 @@ public abstract class Monitor {
     public static String resultFilePath;
     private BufferedWriter bw;
 
-    private Context mContext;
+    protected Context mContext;
     private String[] itemTitles;
     private String[] itemUnitTitles;
 
     public Monitor(Context context){
         mContext = context;
+        onStart();
+    }
+
+    public void onStart(){
         createMonitorFile();
         writeTitle2File();
         initResouces();
     }
 
+    public void onDestory(){
+        return;
+    };
+
     /**
      * 获取监控信息的头信息
      */
-    protected abstract String getMonitorTitle();
+    public abstract String getMonitorTitle();
 
     /**
      * 开始监控
      */
-    protected abstract String monitor();
+    public abstract String monitor();
 
     /**
      * 将信息持久化到文件中

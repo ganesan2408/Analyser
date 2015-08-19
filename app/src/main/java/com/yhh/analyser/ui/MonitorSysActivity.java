@@ -37,11 +37,10 @@ public class MonitorSysActivity extends BaseActivity {
     private SimpleAdapter mAdapter;
     private List<Map<String, Object>> mDataList = new ArrayList<>();
     private final String[] mMonitorItems = new String[]{
-            "CPU", "GPU",
-            "内存", "Top",
-            "电流", "电池",
-            "异常监控", "自定义监控",
-            "全监控" , "可选监控"
+            "CPU", "GPU&Memory",
+            "电池", "Top",
+            "全监控" , "组合监控",
+            "异常监控", "高级监控"
     };
 
 
@@ -72,7 +71,7 @@ public class MonitorSysActivity extends BaseActivity {
                         Intent diy = new Intent(mContext, SettingShellActivity.class);
                         startActivity(diy);
                         return;
-                    }else if(position==9){
+                    }else if(position==5){
                         Intent diy = new Intent(mContext, SettingMonitorActivity.class);
                         startActivity(diy);
                         return;
@@ -87,6 +86,7 @@ public class MonitorSysActivity extends BaseActivity {
 
                     AppConfig.TYPE = position;
                     Intent monitorService = new Intent();
+                    monitorService.putExtra("type", position);
                     monitorService.setClass(mContext, MonitorSysService.class);
                     monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

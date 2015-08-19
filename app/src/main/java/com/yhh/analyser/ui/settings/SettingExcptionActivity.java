@@ -57,7 +57,7 @@ public class SettingExcptionActivity extends BaseActivity {
 		
         initUI();
         readRefs();
-		Toast.makeText(this, "重构中,此功能后续开发", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "此功能正在重构中..", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override

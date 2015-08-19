@@ -6,22 +6,22 @@
  */
 package com.yhh.analyser.bean;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-import com.yhh.analyser.utils.ConstUtils;
-
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Debug;
 import android.util.Log;
 
+import com.yhh.analyser.utils.ConstUtils;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * operate memory information
  * 
  */
-class MemoryInfo {
+public class MemoryInfo {
 	private static final String LOG_TAG =  ConstUtils.DEBUG_TAG+ "MemoryInfo";
 	
     /** memory node*/

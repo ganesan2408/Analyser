@@ -7,18 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin" >
-        <com.yhh.analyser.widget.SwitchButton
-            android:id="@+id/shell_monitor_sb"
-            style="@style/item"
-            android:text="@string/shell_monitor_title"
-            android:background="@drawable/selector_preference_complete"
-            android:checked="true"
-            app:withTextInterval="6dp"
-            app:frameDrawable="@drawable/switch_frame"
-            app:stateDrawable="@drawable/selector_switch_state"
-            app:stateMaskDrawable="@drawable/switch_state_mask"
-            app:sliderDrawable="@drawable/selector_switch_slider"/>    
-    
+
        <LinearLayout
             android:layout_marginTop="16dp"
             android:layout_width="fill_parent"

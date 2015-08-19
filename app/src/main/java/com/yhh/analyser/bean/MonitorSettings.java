@@ -36,7 +36,7 @@ public class MonitorSettings {
     private void readPrefs(){
        boolean defaultValue = false;
         for (int i = 0; i < COUNT; i++) {
-            mSettingList.set(i, mPrefs.getBoolean(KEY_MONITOR_ITEMS[i],defaultValue));
+            mSettingList.add(mPrefs.getBoolean(KEY_MONITOR_ITEMS[i],defaultValue));
         }
     }
     

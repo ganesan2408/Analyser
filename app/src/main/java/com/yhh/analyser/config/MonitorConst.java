@@ -19,4 +19,6 @@ public class MonitorConst {
     public static final int BATTERY_TEMP = 10;
     public static final int BATTERY_VOLT = 11;
     public static final int TRAFFIC_SPEED = 12;
+
+    public static final int TOP = 20;
 }
