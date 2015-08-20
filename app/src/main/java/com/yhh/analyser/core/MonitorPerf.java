@@ -5,6 +5,7 @@ import android.content.Context;
 import com.yhh.analyser.bean.GpuInfo;
 import com.yhh.analyser.bean.MemoryInfo;
 import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/19.
@@ -17,7 +18,8 @@ public class MonitorPerf extends Monitor {
     public String getMonitorTitle() {
         return MonitorConst.GPU_USED_RATIO +","
                 + MonitorConst.GPU_CLOCK +","
-                + MonitorConst.MEM_FREE;
+                + MonitorConst.MEM_FREE
+                + ConstUtils.LINE_END;
     }
 
     public MonitorPerf(Context context) {

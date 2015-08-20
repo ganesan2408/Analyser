@@ -15,7 +15,7 @@
         <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/monitor_settings_app_cpu"
             style="@style/item"
-            android:text="@string/monitor_app_cpu"
+            android:text="1"
             android:background="@drawable/selector_preference_header"
             android:checked="true"
             app:withTextInterval="6dp"
@@ -27,8 +27,8 @@
         <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/monitor_settings_cpu"
             style="@style/item"
-            android:text="@string/monitor_cpu"
-            android:background="@drawable/selector_preference_center"
+            android:text="2"
+            android:background="@drawable/selector_preference_footer"
             android:checked="true"
             app:withTextInterval="16dp"
             app:frameDrawable="@drawable/switch_frame"
@@ -39,8 +39,9 @@
         <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/monitor_settings_cpu_freq"
             style="@style/item"
-            android:text="@string/monitor_cpu_freq"
-            android:background="@drawable/selector_preference_footer"
+            android:text="3"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_preference_header"
             android:checked="true"
             app:withTextInterval="16dp"
             app:frameDrawable="@drawable/switch_frame"
@@ -51,10 +52,9 @@
         
         
         <com.yhh.analyser.widget.SwitchButton
-            android:layout_marginTop="16dp"
             android:id="@+id/monitor_settings_app_memory"
             style="@style/item"
-            android:text="@string/monitor_app_memory"
+            android:text="4"
             android:background="@drawable/selector_preference_header"
             android:checked="true"
             app:withTextInterval="16dp"
@@ -66,7 +66,7 @@
          <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/monitor_settings_memory"
             style="@style/item"   
-            android:text="@string/monitor_memory"
+            android:text="5"
             android:background="@drawable/selector_preference_footer"
             android:checked="true"
             app:withTextInterval="16dp"
@@ -77,10 +77,9 @@
         
         
         <com.yhh.analyser.widget.SwitchButton
-            android:layout_marginTop="16dp"
             android:id="@+id/monitor_settings_gpu"
             style="@style/item"
-            android:text="@string/monitor_gpu"
+            android:text="6"
             android:background="@drawable/selector_preference_header"
             android:checked="true"
             app:withTextInterval="16dp"
@@ -93,7 +92,7 @@
             style="@style/item"
             android:background="@drawable/selector_preference_footer"
             android:checked="true"
-            android:text="@string/monitor_gpu_freq"
+            android:text="7"
             app:frameDrawable="@drawable/switch_frame"
             app:sliderDrawable="@drawable/selector_switch_slider"
             app:stateDrawable="@drawable/selector_switch_state"
@@ -104,7 +103,7 @@
             android:id="@+id/monitor_settings_current"
             style="@style/item"
             android:layout_marginTop="16dp"
-            android:text="@string/monitor_current"
+            android:text="8"
             android:background="@drawable/selector_preference_header"
             android:checked="true"
             app:withTextInterval="16dp"
@@ -115,7 +114,7 @@
         <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/monitor_settings_brightness"
             style="@style/item"
-            android:text="@string/monitor_brightness"
+            android:text="9"
             android:background="@drawable/selector_preference_center"
             android:checked="true"
             app:withTextInterval="16dp"
@@ -126,7 +125,7 @@
         <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/monitor_settings_battery_level"
             style="@style/item"
-            android:text="@string/monitor_battery_level"
+            android:text="10"
             android:background="@drawable/selector_preference_center"
             android:checked="true"
             app:withTextInterval="16dp"
@@ -140,7 +139,7 @@
             style="@style/item"
             android:background="@drawable/selector_preference_center"
             android:checked="true"
-            android:text="@string/monitor_battery_temperature"
+            android:text="11"
             app:frameDrawable="@drawable/switch_frame"
             app:sliderDrawable="@drawable/selector_switch_slider"
             app:stateDrawable="@drawable/selector_switch_state"
@@ -150,7 +149,7 @@
         <com.yhh.analyser.widget.SwitchButton
             android:id="@+id/monitor_settings_battery_voltage"
             style="@style/item"   
-            android:text="@string/monitor_battery_voltage"
+            android:text="12"
             android:background="@drawable/selector_preference_footer"
             android:checked="true"
             app:withTextInterval="16dp"
@@ -163,8 +162,8 @@
             android:id="@+id/monitor_settings_traffic"
             android:layout_marginTop="16dp"
             style="@style/item"   
-            android:text="@string/monitor_traffic"
-            android:background="@drawable/selector_preference_header"
+            android:text="13"
+            android:background="@drawable/selector_preference_complete"
             android:checked="true"
             app:withTextInterval="16dp"
             app:frameDrawable="@drawable/switch_frame"

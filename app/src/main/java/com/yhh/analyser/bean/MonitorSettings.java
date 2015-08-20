@@ -54,4 +54,10 @@ public class MonitorSettings {
         commitBoolPref(KEY_MONITOR_ITEMS[index], checked);
     }
 
+    public void setAllChecked(boolean checked){
+        for(int i=0; i<COUNT; i++){
+            setItemChecked(i, checked);
+        }
+    }
+
 }

@@ -6,13 +6,13 @@
  */
 package com.yhh.analyser.utils;
 
-import java.util.HashMap;
-
 import com.yhh.analyser.bean.app.PhoneInfo;
+
+import java.util.HashMap;
 
 public class ConstUtils {
     public static final String DEBUG_TAG = "sa_";
-    public static final String LINE_END = "\r\n";
+    public static final String LINE_END = "\n";
     public static final String MY_PACKAGE_NAME = "com.yhh.analyser";
     
     public static final String CPU_FREQ_TITLE = "CPU频率";

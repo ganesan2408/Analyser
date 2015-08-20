@@ -206,7 +206,7 @@ public class MonitorSysService extends Service{
 
         handler.removeCallbacks(task);
         mFloatCreator.removeView(viFloatingTitle, viFloatingWindow);
-        mMonitor.onDestory();
+        mMonitor.onDestroy();
         stopForeground(true);
 
         super.onDestroy();

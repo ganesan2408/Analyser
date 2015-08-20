@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ChartMonitorActivity extends ChartBaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "AppChartAnalyser";
+    private static final String TAG = ConstUtils.DEBUG_TAG + "ChartMonitor";
     private boolean DEBUG = true;
 
     private MonitorDataProvider mMonitorDataProvider;

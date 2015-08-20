@@ -5,6 +5,7 @@ import android.content.Context;
 import com.yhh.analyser.bean.CpuInfo;
 import com.yhh.analyser.bean.MemoryInfo;
 import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/19.
@@ -16,7 +17,7 @@ public class MonitorApp extends Monitor {
 
     @Override
     public String getMonitorTitle() {
-        return MonitorConst.APP_CPU_USED_RATIO +"," + MonitorConst.APP_MEM_USED;
+        return MonitorConst.APP_CPU_USED_RATIO +"," + MonitorConst.APP_MEM_USED + ConstUtils.LINE_END;
     }
 
     @Override

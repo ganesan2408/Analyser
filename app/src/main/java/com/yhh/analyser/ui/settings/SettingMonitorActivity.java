@@ -6,15 +6,13 @@ package com.yhh.analyser.ui.settings;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.CompoundButton;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.MonitorSettings;
+import com.yhh.analyser.bean.MonitorChoice;
 import com.yhh.analyser.service.MonitorSysService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
@@ -29,6 +27,7 @@ public class SettingMonitorActivity extends BaseActivity {
     // add items, need change
 	public static final int MONITOR_ITEMS_COUNT = 13;
 	private SwitchButton[] mMonitorBtn = new SwitchButton[MONITOR_ITEMS_COUNT];
+    private String[] itemTitles;
 
 	// In proper order with xml is very important. add items, need change
 	private int[] mMonitorBtnIds ={
@@ -42,14 +41,15 @@ public class SettingMonitorActivity extends BaseActivity {
 	        R.id.monitor_settings_traffic
     };
 
-    private MonitorSettings mMonitorSettings;
+//    private MonitorSettings mMonitorSettings;
+
+    private MonitorChoice monitorChoice = MonitorChoice.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_monitor_items_settings);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        mMonitorSettings = new MonitorSettings(prefs);
+        itemTitles= getResources().getStringArray(R.array.monitor_items);
     }
 
     @Override
@@ -61,15 +61,16 @@ public class SettingMonitorActivity extends BaseActivity {
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void initUI() {
 
-        List<Boolean> checkedList = mMonitorSettings.getCheckedList();
+        List<Boolean> checkedList = monitorChoice.getCheckedList();
         for (int i = 0; i < MONITOR_ITEMS_COUNT; i++) {
             final int index = i;
             mMonitorBtn[i] = (SwitchButton) findViewById(mMonitorBtnIds[i]);
-            mMonitorBtn[i].setChecked(checkedList.get(i));
+            mMonitorBtn[i].setChecked(!checkedList.get(i));
+            mMonitorBtn[i].setText(itemTitles[i]);
             mMonitorBtn[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mMonitorSettings.setItemChecked(index, isChecked);
+                    monitorChoice.setItemChecked(index, !isChecked);
                 }
             });
         }
@@ -80,8 +81,8 @@ public class SettingMonitorActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent monitorService = new Intent();
                 monitorService.setClass(mContext, MonitorSysService.class);
+                monitorService.putExtra("type", 5);
                 monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startService(monitorService);
             }
         });

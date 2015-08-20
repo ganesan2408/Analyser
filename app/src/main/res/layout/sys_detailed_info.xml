@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridView
-    android:id="@+id/monitor_gv"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:numColumns="2"
-    android:verticalSpacing="1px"
-    android:horizontalSpacing="1px"
-    android:paddingLeft="1px"
-    android:stretchMode="columnWidth"
-    android:gravity="center"
-    android:background="@color/light_gray"
-    />
+    android:background="@color/primary_dark"
+    >
+    <GridView
+        android:id="@+id/monitor_gv"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:gravity="center"
+        android:horizontalSpacing="1px"
+        android:numColumns="2"
+        android:paddingLeft="1px"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1px" />
+</RelativeLayout>

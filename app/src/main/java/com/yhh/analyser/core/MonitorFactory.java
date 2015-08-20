@@ -2,6 +2,8 @@ package com.yhh.analyser.core;
 
 import android.content.Context;
 
+import com.yhh.analyser.bean.MonitorChoice;
+
 /**
  * Created by yuanhh1 on 2015/8/20.
  */
@@ -20,7 +22,15 @@ public class MonitorFactory {
             case 3:
                 return new MonitorTop(context);
 
+            case 4:
+                MonitorChoice.getInstance().setAllChecked(true);
+                return new MonitorDiy(context);
+
+            case 5:
+                return new MonitorDiy(context);
+
+            default:
+                return new MonitorTop(context);
         }
-        return new MonitorCpu(context);
     }
 }

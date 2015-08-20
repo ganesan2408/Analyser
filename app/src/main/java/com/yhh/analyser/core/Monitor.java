@@ -6,6 +6,7 @@ import android.util.Log;
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.DebugLog;
 import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.utils.TimeUtils;
 
@@ -38,8 +39,8 @@ public abstract class Monitor {
         initResouces();
     }
 
-    public void onDestory(){
-        return;
+    public void onDestroy(){
+        close();
     };
 
     /**
@@ -59,10 +60,13 @@ public abstract class Monitor {
      */
     protected void write2File(String... infos){
         StringBuffer sb = new StringBuffer();
+        sb.append(TimeUtils.getStandardTime()+",");
+
         for (String info: infos ) {
             sb.append(info).append(",");
         }
         sb.append(ConstUtils.LINE_END);
+        DebugLog.d("Body: "+sb.toString());
         try {
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -100,7 +104,9 @@ public abstract class Monitor {
     private void writeTitle2File(){
         try {
             bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultFilePath)));
-            bw.write(getMonitorTitle());
+            String title = getMonitorTitle();
+            bw.write(title);
+            DebugLog.d("Write title="+ title);
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
         }

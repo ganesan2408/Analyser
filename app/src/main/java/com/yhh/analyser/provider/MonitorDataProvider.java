@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.LogUtils;
@@ -33,8 +34,13 @@ public class MonitorDataProvider {
     private ArrayList<BarEntry> mMulCpuFreq;
     
     private String[] mTitle;
-    
+    private Context mContext;
+    private String[] mResTitle;
+
     public MonitorDataProvider(Context context){
+        mContext = context;
+        mResTitle = mContext.getResources().getStringArray(R.array.monitor_items);
+
         mTimes = new ArrayList<>();
         mMonitorData = new ArrayList<ArrayList<Entry>>();
         mMulCpuFreq = new ArrayList<>();
@@ -59,10 +65,10 @@ public class MonitorDataProvider {
                 return;
             }
             int start = line.indexOf(",");
-            mTitle = line.substring(start+1).split(",");
+            mTitle = line.split(",");
             int itemLen = mTitle.length;
             for(int i=0;i<itemLen;i++){
-                mTitle[i] = mTitle[i].trim();
+                mTitle[i] = mResTitle[Integer.valueOf(mTitle[i])];
             }
             
             int cpuFreqNum = findItemByTitle(ConstUtils.CPU_FREQ_TITLE);
@@ -117,7 +123,7 @@ public class MonitorDataProvider {
     
     private int findItemByTitle(String title){
         for(int i=0;i<mTitle.length;i++){
-            if(mTitle[i].equals(title)){
+            if( mTitle[i].equals(title)){
                 return i;
             }
         }

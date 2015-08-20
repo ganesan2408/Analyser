@@ -17,8 +17,8 @@ import android.widget.TextView;
 import com.yhh.analyser.R;
 import com.yhh.analyser.adapter.WakupRankAdapter;
 import com.yhh.analyser.bean.AlarmBean;
-import com.yhh.analyser.provider.AlarmFileManager;
 import com.yhh.analyser.provider.AlarmManager;
+import com.yhh.analyser.provider.AlarmShellManager;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DebugLog;
 import com.yhh.analyser.utils.DialogUtils;
@@ -39,8 +39,8 @@ public class AnalysisWakeupFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DebugLog.d("BEGIN");
-        alarmManager = new AlarmFileManager("sdcard/log/2015_01_16_04_19_16/alarm.txt");
-//        AlarmManager alarmManager = new AlarmShellManager();
+//        alarmManager = new AlarmFileManager("sdcard/log/2015_01_16_04_19_16/alarm.txt");
+        alarmManager = new AlarmShellManager();
         alarmManager.parse(mContext);
         mAlarmList = alarmManager.getAlarmList();
         Collections.sort(mAlarmList);

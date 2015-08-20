@@ -6,6 +6,7 @@ import com.yhh.analyser.bean.BatteryBean;
 import com.yhh.analyser.bean.BatteryInfo;
 import com.yhh.analyser.bean.PowerInfo;
 import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/19.
@@ -19,7 +20,8 @@ public class MonitorBattery extends Monitor {
         return MonitorConst.POWER_CURRENT +","
                 + MonitorConst.BATTERY_LEVEL +","
                 + MonitorConst.BATTERY_TEMP + ","
-                + MonitorConst.BATTERY_VOLT;
+                + MonitorConst.BATTERY_VOLT
+                + ConstUtils.LINE_END;
     }
 
     public MonitorBattery(Context context) {
@@ -38,8 +40,8 @@ public class MonitorBattery extends Monitor {
     }
 
     @Override
-    public void onDestory() {
-        super.onDestory();
+    public void onDestroy() {
+        super.onDestroy();
         mBatteryInfo.unregister();
     }
 
@@ -51,6 +53,7 @@ public class MonitorBattery extends Monitor {
                 bean.getTemperature(), bean.getVoltage());
 
         StringBuffer sb = new StringBuffer();
+
         sb.append(getItemName(MonitorConst.POWER_CURRENT)).append(":");
         sb.append(String.valueOf(mPowerInfo.getcurrent()));
         sb.append(getItemUnit(MonitorConst.POWER_CURRENT)).append("\n");

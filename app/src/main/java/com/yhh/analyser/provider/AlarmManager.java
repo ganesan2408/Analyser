@@ -26,19 +26,19 @@ public abstract class AlarmManager {
      * 开始解析alarm信息
      *
      */
-    public void parse(Context context){
+    public boolean parse(Context context){
         String rawInfo = getDumpsysAlarm();
 
         if(rawInfo ==null){
             DebugLog.e("dumpsys alarm is null");
-            return;
+            return false;
         }
         String[] rawInfoArr = rawInfo.split("\\n");
         DebugLog.d(rawInfoArr.length+"");
         int beginLine = getAlarmStatsLine(rawInfoArr);
         if(beginLine == -1){
             DebugLog.e("dumpsys alarm don't have useful information.");
-            return;
+            return false;
         }
         setelapsedTime(rawInfoArr[1]);
 
@@ -61,6 +61,7 @@ public abstract class AlarmManager {
             alarmBeanList.add(alarmBean);
         }
         DebugLog.i(""+getAlarmList().size());
+        return true;
     }
 
     /**

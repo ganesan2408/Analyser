@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.yhh.analyser.bean.CpuInfo;
 import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DebugLog;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class MonitorCpu extends Monitor {
 
     @Override
     public String getMonitorTitle() {
-        return MonitorConst.CPU_USED_RATIO +"," + MonitorConst.CPU_CLOCK;
+        return MonitorConst.CPU_USED_RATIO +"," + MonitorConst.CPU_CLOCK
+                + ConstUtils.LINE_END;
     }
 
     @Override
