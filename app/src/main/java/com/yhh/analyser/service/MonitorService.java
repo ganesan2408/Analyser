@@ -13,15 +13,18 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
+import com.yhh.analyser.config.MonitorConst;
 import com.yhh.analyser.core.Monitor;
 import com.yhh.analyser.core.MonitorApp;
+import com.yhh.analyser.core.MonitorAppDiy;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.provider.FloatCreator;
 import com.yhh.analyser.ui.MonitorSysActivity;
@@ -31,7 +34,7 @@ import com.yhh.analyser.utils.ScreenShot;
 /**
  * Created by yuanhh1 on 2015/8/14.
  */
-public class MonitorSysService extends Service{
+public class MonitorService extends Service{
 
     private Context mContext;
 
@@ -42,9 +45,6 @@ public class MonitorSysService extends Service{
 
     /** 记录浮窗显示内容*/
     private TextView mFloatLv;
-
-    /** 是否隐藏浮窗体*/
-    private Button mFloatHideBtn;
 
     /**记录当前浮窗颜色 */
     private static  int sColorIndex =0;
@@ -61,14 +61,20 @@ public class MonitorSysService extends Service{
     /** 监控是否正在运行*/
     public static boolean sMonitorIsRunning = false;
 
-    /** 是否隐藏浮窗*/
-    private boolean mIsHide;
 
     /** 监控器*/
     private Monitor mMonitor;
 
     /** 循环监控处理 */
     private Handler handler;
+
+    private TextView mFloatHideBtn;
+    private TextView floatColorBtn;
+    private TextView floatStopBtn;
+    private TextView floatShotBtn;
+
+    private TextView mShowAllTv;
+    private RelativeLayout mFloatTitleRl;
 
     @Override
     public void onCreate() {
@@ -87,12 +93,17 @@ public class MonitorSysService extends Service{
         initNotification(startId);
 
         int type = intent.getIntExtra("type",1);
-        if(type==20){
+        if(type== MonitorConst.MONITOR_APP){
             int pid = intent.getIntExtra("pid",0);
             mMonitor = new MonitorApp(mContext, pid);
+        }else if(type== MonitorConst.MONITOR_APP_DIY){
+            int pid = intent.getIntExtra("pid",0);
+            mMonitor = new MonitorAppDiy(mContext, pid);
         }else {
             mMonitor = MonitorFactory.newInstance(mContext, type);
         }
+        mMonitor.onStart();
+
         readPrefs();
         handler.post(task);
 
@@ -121,16 +132,37 @@ public class MonitorSysService extends Service{
         mFloatLv.setText(R.string.calculating);
         setFloatColor();
 
-        mFloatHideBtn = (Button) viFloatingTitle.findViewById(R.id.float_hide_btn);
+        mShowAllTv = (TextView) viFloatingTitle.findViewById(R.id.tv_show_all);
+        mFloatTitleRl = (RelativeLayout) viFloatingTitle.findViewById(R.id.rl_float_title);
+
+        mShowAllTv.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        hideFloat(false);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        mFloatHideBtn = (TextView) viFloatingTitle.findViewById(R.id.float_hide_btn);
         mFloatHideBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                hideFloat();
+                hideFloat(true);
             }
         });
 
 
-        Button floatStopBtn = (Button) viFloatingTitle.findViewById(R.id.float_stop_btn);
+        floatStopBtn = (TextView) viFloatingTitle.findViewById(R.id.float_stop_btn);
         floatStopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +170,7 @@ public class MonitorSysService extends Service{
             }
         });
 
-        Button floatColorBtn = (Button) viFloatingTitle.findViewById(R.id.float_change_btn);
+        floatColorBtn = (TextView) viFloatingTitle.findViewById(R.id.float_change_btn);
         floatColorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,14 +178,14 @@ public class MonitorSysService extends Service{
             }
         });
 
-        Button floatShotBtn = (Button) viFloatingTitle.findViewById(R.id.float_screenshot_btn);
+        floatShotBtn = (TextView) viFloatingTitle.findViewById(R.id.float_screenshot_btn);
         floatShotBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(ScreenShot.shoot(viFloatingWindow)) {
                     Toast.makeText(mContext, "截图成功", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(MonitorSysService.this, "截图失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MonitorService.this, "截图失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -183,22 +215,31 @@ public class MonitorSysService extends Service{
         mFloatLv.setTextColor(COLORS[sColorIndex%7]);
     }
 
-    private void hideFloat(){
-        if (isHide()) {
-            mIsHide = false;
-            mFloatHideBtn.setText(mContext.getString(R.string.float_fold));
-            viFloatingWindow.setVisibility(View.VISIBLE);
-
-        }else{
-            mIsHide = true;
-            mFloatHideBtn.setText(mContext.getString(R.string.float_unfold));
+    private void hideFloat(boolean isHide){
+        if (isHide) {
             viFloatingWindow.setVisibility(View.GONE);
+//            mFloatTitleRl.setVisibility(View.GONE);
+
+            mFloatHideBtn.setVisibility(View.GONE);
+            floatColorBtn.setVisibility(View.GONE);
+            floatStopBtn.setVisibility(View.GONE);
+            floatShotBtn.setVisibility(View.GONE);
+
+
+
+            mShowAllTv.setVisibility(View.VISIBLE);
+        }else{
+            viFloatingWindow.setVisibility(View.VISIBLE);
+//            mFloatTitleRl.setVisibility(View.VISIBLE);
+            mFloatHideBtn.setVisibility(View.VISIBLE);
+            floatColorBtn.setVisibility(View.VISIBLE);
+            floatStopBtn.setVisibility(View.VISIBLE);
+            floatShotBtn.setVisibility(View.VISIBLE);
+
+            mShowAllTv.setVisibility(View.GONE);
         }
     }
 
-    private boolean isHide(){
-        return mContext.getString(R.string.float_unfold).equals(mFloatHideBtn.getText());
-    }
 
     @Override
     public void onDestroy() {
@@ -213,7 +254,7 @@ public class MonitorSysService extends Service{
     }
 
     /**
-     * 后台计算过程
+     * 后台监控服务
      *
      */
     private Runnable task = new Runnable() {

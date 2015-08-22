@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class MonitorChoice {
     private List<Boolean> mSettingList;
-    public static final int COUNT = 13;
+    private int mCount = 13;
 
     private static MonitorChoice mChoice;
 
@@ -20,10 +20,39 @@ public class MonitorChoice {
     }
 
     private MonitorChoice(){
-        mSettingList = new ArrayList<>(COUNT);
+        mSettingList = new ArrayList<>(mCount);
         initAllChecked();
     }
 
+    public Integer[] getSysItems(){
+        ArrayList<Integer> checkedItem = new ArrayList<>();
+        for (int i = 2; i < mCount; i++) {
+            if(mSettingList.get(i)){
+                checkedItem.add(i);
+            }
+        }
+        int len = checkedItem.size();
+        Integer[] checkedArr = new Integer[len];
+        checkedItem.toArray(checkedArr);
+        return checkedArr;
+    }
+
+    public Integer[] getAppItems(){
+        ArrayList<Integer> checkedItem = new ArrayList<>();
+        for (int i = 0; i < mCount; i++) {
+            if(mSettingList.get(i)){
+                checkedItem.add(i);
+            }
+        }
+        int len = checkedItem.size();
+        Integer[] checkedArr = new Integer[len];
+        checkedItem.toArray(checkedArr);
+        return checkedArr;
+    }
+
+    public int getCount(){
+        return mCount;
+    }
 
     public List<Boolean> getCheckedList(){
         return mSettingList;
@@ -34,13 +63,13 @@ public class MonitorChoice {
     }
 
     public void setAllChecked(boolean checked){
-        for(int i=0; i<COUNT; i++){
+        for(int i=0; i< mCount; i++){
             setItemChecked(i, checked);
         }
     }
 
     private void initAllChecked(){
-        for(int i=0; i<COUNT; i++){
+        for(int i=0; i< mCount; i++){
             mSettingList.add(false);
         }
     }

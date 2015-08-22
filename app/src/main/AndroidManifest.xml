@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yhh.analyser"
-    android:sharedUserId="android.uid.system">
+    package="com.yhh.analyser">
+    <!--android:sharedUserId="android.uid.system">-->
 
-	<uses-permission android:name="android.permission.RETRIEVE_WINDOW_CONTENT"/>
+	<!--<uses-permission android:name="android.permission.RETRIEVE_WINDOW_CONTENT"/>-->
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -35,7 +35,7 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-               <!--<category android:name="android.intent.category.LAUNCHER" />-->
+               <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!-- Main Analyser END -->
@@ -196,12 +196,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ui.MoreActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/toolbox_more"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".ui.NodeViewActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/main_node_viewer"
@@ -301,7 +295,7 @@
 
         <service android:name="com.yhh.terminal.TermService" />
 
-        <service android:name=".service.MonitorSysService"/>
+        <service android:name=".service.MonitorService"/>
 
         <meta-data
             android:name="com.sec.android.support.multiwindow"

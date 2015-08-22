@@ -16,7 +16,7 @@
 //import com.yhh.analyser.bean.InfoFactory;
 //import com.yhh.analyser.config.AppConfig;
 //import com.yhh.analyser.config.MonitorConst;
-//import com.yhh.analyser.service.MonitorSysService;
+//import com.yhh.analyser.service.MonitorService;
 //import com.yhh.analyser.utils.ConstUtils;
 //import com.yhh.analyser.utils.FileUtils;
 //import com.yhh.analyser.utils.TimeUtils;
@@ -158,36 +158,36 @@
 //
 //
 //        // CPU Item
-//        if(type == MonitorSysService.CPU_TYPE){
+//        if(type == MonitorService.CPU_TYPE){
 //            mMonitorInfo.put(MonitorConst.CPU_CLOCK, mInfoFactory.getCpuFreqList());
 //        }
 //
 //        // MEMORY Item
-//        if(type == MonitorSysService.MEMORY_TYPE){
+//        if(type == MonitorService.MEMORY_TYPE){
 //            mMonitorInfo.put(MonitorConst.MEM_FREE, mInfoFactory.getMemoryUnusedSize(mContext));
 //        }
 //
 //        // GPU Item
-//        if(type == MonitorSysService.GPU_TYPE){
+//        if(type == MonitorService.GPU_TYPE){
 //            mMonitorInfo.put(MonitorConst.GPU_USED_RATIO, mInfoFactory.getGpuRate());
 //            mMonitorInfo.put(MonitorConst.GPU_CLOCK, mInfoFactory.getGpuClock());
 //        }
 //
 //        // POWER Item
-//        if(type == MonitorSysService.CURRENT_TYPE){
+//        if(type == MonitorService.CURRENT_TYPE){
 //            mMonitorInfo.put(MonitorConst.POWER_CURRENT , mInfoFactory.getPowerCurrent());
 //            mMonitorInfo.put(MonitorConst.SCREEN_BRIGHTNESS , mInfoFactory.getScreenBrightness());
 //        }
 //
 //        // BATTERY Item
-//        if(type == MonitorSysService.BATTERY_TYPE){
+//        if(type == MonitorService.BATTERY_TYPE){
 //            mMonitorInfo.put(MonitorConst.BATTERY_LEVEL, mInfoFactory.getBatteryLevel());
 //            mMonitorInfo.put(MonitorConst.BATTERY_TEMPERATURE, mInfoFactory.getBatteryTemperature());
 //            mMonitorInfo.put(MonitorConst.BATTERY_VOLTAGE, mInfoFactory.getBatteryVoltage());
 //        }
 //
 //        // app Item
-//        if(type == MonitorSysService.APP_TYPE){
+//        if(type == MonitorService.APP_TYPE){
 //            mMonitorInfo.put(MonitorConst.APP_CPU_USED_RATIO, mInfoFactory.getCpuPidUsedRatio(pid));
 //            mMonitorInfo.put(MonitorConst.CPU_USED_RATIO, mInfoFactory.getCpuTotalUsedRatio().get(0));
 //            mMonitorInfo.put(MonitorConst.APP_MEM_USED, mInfoFactory.getMemoryPidUsedSize(pid, mContext));
@@ -195,7 +195,7 @@
 //        }
 //
 //        // TRAFFIC Item
-//        if(type == MonitorSysService.ALL_TYPE){
+//        if(type == MonitorService.ALL_TYPE){
 //            mMonitorInfo.put(MonitorConst.APP_CPU_USED_RATIO, mInfoFactory.getCpuPidUsedRatio(pid));
 //            mMonitorInfo.put(MonitorConst.CPU_USED_RATIO, mInfoFactory.getCpuTotalUsedRatio().get(0));
 //            mMonitorInfo.put(MonitorConst.CPU_CLOCK, mInfoFactory.getCpuFreqList());
@@ -218,7 +218,7 @@
 //        }
 //
 //        // EXCEPTION Item
-//        if(type == MonitorSysService.EXCEPTION_TYPE){
+//        if(type == MonitorService.EXCEPTION_TYPE){
 //            HashMap<Integer, String> conditions = new HashMap<Integer, String>();
 //            for(int i=0;i< MonitorException.CONDITIONS_COUNT;i++){
 //                conditions.put(MonitorException.CONDITIONS_ITEMS[i],

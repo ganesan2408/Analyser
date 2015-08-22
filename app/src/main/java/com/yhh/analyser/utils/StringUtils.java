@@ -28,7 +28,7 @@ public class StringUtils {
      * @param str
      * @return
      */
-    public static boolean isEmpty(String str) {
+    public static boolean isNull(String str) {
         return (str == null || str.length() == 0);
     }
 

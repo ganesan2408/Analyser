@@ -78,6 +78,10 @@ public class InfoFactory {
         return mCpuInfo.getProcessCpuRatio(pid);
     }
 
+    public CpuInfo getCpuInfo(){
+        return mCpuInfo;
+    }
+
     /**
      * 0: total cpu
      * 1-8: cpu 0~7

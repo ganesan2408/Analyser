@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.service.MonitorSysService;
+import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.ui.settings.SettingExcptionActivity;
 import com.yhh.analyser.ui.settings.SettingMonitorActivity;
@@ -37,9 +37,9 @@ public class MonitorSysActivity extends BaseActivity {
     private SimpleAdapter mAdapter;
     private List<Map<String, Object>> mDataList = new ArrayList<>();
     private final String[] mMonitorItems = new String[]{
-            "CPU", "GPU&Memory",
-            "电池", "Top",
-            "全监控" , "组合监控",
+             "性能", "电池",
+            "CPU频率","Top",
+            "全监控" , "自定义监控",
             "异常监控", "高级监控"
     };
 
@@ -66,12 +66,8 @@ public class MonitorSysActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                if(!MonitorSysService.sMonitorIsRunning) {
-                    if(position==7){
-                        Intent diy = new Intent(mContext, SettingShellActivity.class);
-                        startActivity(diy);
-                        return;
-                    }else if(position==5){
+                if(!MonitorService.sMonitorIsRunning) {
+                   if(position==5){
                         Intent diy = new Intent(mContext, SettingMonitorActivity.class);
                         startActivity(diy);
                         return;
@@ -79,18 +75,23 @@ public class MonitorSysActivity extends BaseActivity {
                         Intent diy = new Intent(mContext, SettingExcptionActivity.class);
                         startActivity(diy);
                         return;
-                    }
+                    }else  if(position==7){
+                       Intent diy = new Intent(mContext, SettingShellActivity.class);
+                       startActivity(diy);
+                       return;
+                   }else
 
-                    DebugLog.d("startup monitor");
+                       DebugLog.d("startup monitor");
                     Toast.makeText(mContext,"启动监控", Toast.LENGTH_SHORT).show();
 
                     AppConfig.TYPE = position;
                     Intent monitorService = new Intent();
                     monitorService.putExtra("type", position);
-                    monitorService.setClass(mContext, MonitorSysService.class);
+                    monitorService.setClass(mContext, MonitorService.class);
                     monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     monitorService.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     mContext.startService(monitorService);
+                    finish();
 
                 }else{
                     Toast.makeText(mContext, "监控已启动,请勿重复开启", Toast.LENGTH_SHORT).show();

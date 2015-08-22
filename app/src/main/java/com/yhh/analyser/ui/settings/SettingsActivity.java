@@ -69,7 +69,7 @@ public class SettingsActivity extends BaseActivity {
 	public void readRefs(){
 	    int interval = preferences.getInt(KEY_INTERVAL, 2);
         mMonitorFreqTv.setText(String.valueOf(interval));
-        mMonitorFreqSb.setProgress(interval);
+        mMonitorFreqSb.setProgress(interval-1);
 	}
 	
 	public void settingHandler(View v){

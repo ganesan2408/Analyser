@@ -13,26 +13,28 @@ import java.util.List;
 /**
  * Created by yuanhh1 on 2015/8/19.
  */
-public class MonitorDiy extends Monitor {
+public class MonitorAppDiy extends Monitor {
     private InfoFactory mInfoFactory;
 
     private ArrayList<String> mContentList;
 
     private List<Boolean> mCheckedList;
 
+    private int pid;
+
     @Override
     public Integer[] getItems() {
-        return MonitorChoice.getInstance().getSysItems();
+        return MonitorChoice.getInstance().getAppItems();
     }
 
-    public MonitorDiy(Context context) {
+    public MonitorAppDiy(Context context, int pid) {
         super(context);
-
+        this.pid = pid;
     }
 
     @Override
     public String getFileType() {
-        return "";
+        return "_App2";
     }
 
     @Override
@@ -64,9 +66,20 @@ public class MonitorDiy extends Monitor {
     private void getMonitors(){
 
         mContentList.clear();
+        if(mCheckedList.get(MonitorConst.APP_CPU_USED_RATIO)){
+            mInfoFactory.getCpuInfo().updateCpu(pid);
+        }else if(mCheckedList.get(MonitorConst.CPU_USED_RATIO)){
+            mInfoFactory.getCpuInfo().updateAllCpu();
+        }
+
+        if(mCheckedList.get(MonitorConst.APP_CPU_USED_RATIO)){
+            mContentList.add(mInfoFactory.getCpuPidUsedRatio(pid));
+        }
+        if(mCheckedList.get(MonitorConst.APP_MEM_USED)){
+            mContentList.add(mInfoFactory.getMemoryPidUsedSize(pid, mContext));
+        }
 
         if(mCheckedList.get(MonitorConst.CPU_USED_RATIO)){
-            mInfoFactory.getCpuInfo().updateAllCpu();
             mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
         }
         if(mCheckedList.get(MonitorConst.CPU_CLOCK)){

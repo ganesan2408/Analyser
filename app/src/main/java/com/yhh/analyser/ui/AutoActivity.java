@@ -93,7 +93,7 @@ public class AutoActivity extends BaseActivity {
 		
 		mShowCases = this.getResources().getStringArray(R.array.case_show_names);
 		final String[] backupCases = this.getResources().getStringArray(R.array.case_backup_names);
-		mListProgramLv.setAdapter(new AutoCaseAdapter(mShowCases));
+		mListProgramLv.setAdapter(new AutoCaseAdapter(this, mShowCases));
 		mListProgramLv.setOnItemClickListener(new OnItemClickListener(){
 
             @Override
@@ -111,7 +111,6 @@ public class AutoActivity extends BaseActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                //
                 AutoCaseSettings cs = new AutoCaseSettings(AutoActivity.this, position);
                 return false;
             }

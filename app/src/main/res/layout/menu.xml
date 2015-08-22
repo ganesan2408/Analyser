@@ -31,10 +31,16 @@
         style="@style/item"
         android:clickable="true"
         android:onClick="menuClick">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_device"/>
         <TextView
             style="@style/slide_menu_left_center_title"
             android:text="@string/menu_device_info"
             android:textColor="@color/black"
+
             />
     </RelativeLayout>
     <RelativeLayout
@@ -44,6 +50,11 @@
         style="@style/item"
         android:clickable="true"
         android:onClick="menuClick">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_shortcut"/>
        <TextView
             style="@style/slide_menu_left_center_title"
             android:id="@+id/pull_ppt_id"
@@ -60,6 +71,11 @@
         android:clickable="true"
         android:layout_marginTop="15dp"
         android:onClick="menuClick">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_screenshot"/>
         <TextView
             style="@style/slide_menu_left_center_title"
             android:text="@string/menu_shot"
@@ -74,6 +90,11 @@
         android:layout_marginTop="15dp"
         android:clickable="true"
         android:onClick="menuClick">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_feedback"/>
         <TextView
             style="@style/slide_menu_left_center_title"
             android:id="@+id/admin_ppt_id"
@@ -92,6 +113,11 @@
         android:clickable="true"
         android:onClick="menuClick"
         >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_about"/>
         <TextView
             style="@style/slide_menu_left_center_title"
             android:text="@string/menu_about"

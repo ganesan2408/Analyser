@@ -6,7 +6,8 @@ import com.yhh.analyser.bean.BatteryBean;
 import com.yhh.analyser.bean.BatteryInfo;
 import com.yhh.analyser.bean.PowerInfo;
 import com.yhh.analyser.config.MonitorConst;
-import com.yhh.analyser.utils.ConstUtils;
+
+import java.util.ArrayList;
 
 /**
  * Created by yuanhh1 on 2015/8/19.
@@ -15,18 +16,26 @@ public class MonitorBattery extends Monitor {
     private BatteryInfo mBatteryInfo;
     private PowerInfo mPowerInfo;
 
-    @Override
-    public String getMonitorTitle() {
-        return MonitorConst.POWER_CURRENT +","
-                + MonitorConst.BATTERY_LEVEL +","
-                + MonitorConst.BATTERY_TEMP + ","
-                + MonitorConst.BATTERY_VOLT
-                + ConstUtils.LINE_END;
-    }
+    private ArrayList<String> mContentList;
 
     public MonitorBattery(Context context) {
         super(context);
 
+    }
+
+    @Override
+    public Integer[] getItems() {
+        return new Integer[]{
+                MonitorConst.POWER_CURRENT,
+                MonitorConst.BATTERY_LEVEL,
+                MonitorConst.BATTERY_TEMP,
+                MonitorConst.BATTERY_VOLT
+        };
+    }
+
+    @Override
+    public String getFileType() {
+        return "_Battery";
     }
 
     @Override
@@ -37,6 +46,7 @@ public class MonitorBattery extends Monitor {
         mBatteryInfo.init(mContext);
         mBatteryInfo.register();
 
+        mContentList = new ArrayList<>();
     }
 
     @Override
@@ -47,33 +57,16 @@ public class MonitorBattery extends Monitor {
 
     @Override
     public String monitor() {
-
         BatteryBean bean = mBatteryInfo.getBattery();
-        write2File(String.valueOf(mPowerInfo.getcurrent()), bean.getLevel(),
-                bean.getTemperature(), bean.getVoltage());
 
-        StringBuffer sb = new StringBuffer();
+        mContentList.clear();
+        mContentList.add(String.valueOf(mPowerInfo.getcurrent()));
+        mContentList.add(bean.getLevel());
+        mContentList.add(bean.getTemperature());
+        mContentList.add(bean.getVoltage());
 
-        sb.append(getItemName(MonitorConst.POWER_CURRENT)).append(":");
-        sb.append(String.valueOf(mPowerInfo.getcurrent()));
-        sb.append(getItemUnit(MonitorConst.POWER_CURRENT)).append("\n");
+        write2File(mContentList);
 
-        sb.append(getItemName(MonitorConst.BATTERY_LEVEL)).append(":");
-        sb.append(bean.getLevel());
-        sb.append(getItemUnit(MonitorConst.BATTERY_LEVEL)).append("\n");
-
-        sb.append(getItemName(MonitorConst.BATTERY_TEMP)).append(":");
-        sb.append(bean.getTemperature());
-        sb.append(getItemUnit(MonitorConst.BATTERY_TEMP)).append("\n");
-
-        sb.append(getItemName(MonitorConst.BATTERY_TEMP)).append(":");
-        sb.append(bean.getVoltage());
-        sb.append(getItemUnit(MonitorConst.BATTERY_TEMP)).append("\n");
-
-        return sb.toString();
+        return getFloatBody(mContentList);
     }
-
-
-
-
 }

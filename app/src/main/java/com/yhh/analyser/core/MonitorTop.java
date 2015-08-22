@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.yhh.analyser.config.MonitorConst;
 import com.yhh.analyser.provider.MonitorShell;
-import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/19.
@@ -12,9 +11,28 @@ import com.yhh.analyser.utils.ConstUtils;
 public class MonitorTop extends Monitor {
     private MonitorShell mShellMonitor;
 
+
+    public MonitorTop(Context context){
+        super(context);
+
+    }
+
     @Override
-    public String getMonitorTitle() {
-        return MonitorConst.TOP + ConstUtils.LINE_END;
+    public Integer[] getItems() {
+        return new Integer[]{
+                MonitorConst.TOP
+        };
+    }
+
+    @Override
+    public String getFileType() {
+        return "_Top";
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mShellMonitor = new MonitorShell(mContext);
     }
 
     @Override
@@ -24,9 +42,5 @@ public class MonitorTop extends Monitor {
     }
 
 
-    public MonitorTop(Context context){
-        super(context);
-        mShellMonitor = new MonitorShell(context);
-    }
 
 }

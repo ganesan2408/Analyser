@@ -11,13 +11,13 @@ public class MonitorFactory {
     public static Monitor newInstance(Context context, int type){
         switch (type){
             case 0:
-                return new MonitorCpu(context);
-
-            case 1:
                 return new MonitorPerf(context);
 
-            case 2:
+            case 1:
                 return new MonitorBattery(context);
+
+            case 2:
+                return new MonitorCpu(context);
 
             case 3:
                 return new MonitorTop(context);

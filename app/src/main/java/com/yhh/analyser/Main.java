@@ -59,7 +59,7 @@ public class Main extends BaseActivity {
 
     private final int[] mTitles = {
             R.string.title_monitor,
-            R.string.title_data,
+            R.string.title_analyzer,
             R.string.title_view,
             R.string.title_performance,
             R.string.title_tool

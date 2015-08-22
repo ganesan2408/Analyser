@@ -2,10 +2,12 @@ package com.yhh.analyser.core;
 
 import android.content.Context;
 
+import com.yhh.analyser.bean.CpuInfo;
 import com.yhh.analyser.bean.GpuInfo;
 import com.yhh.analyser.bean.MemoryInfo;
 import com.yhh.analyser.config.MonitorConst;
-import com.yhh.analyser.utils.ConstUtils;
+
+import java.util.ArrayList;
 
 /**
  * Created by yuanhh1 on 2015/8/19.
@@ -13,13 +15,23 @@ import com.yhh.analyser.utils.ConstUtils;
 public class MonitorPerf extends Monitor {
     private MemoryInfo mMemoryInfo;
     private GpuInfo mGpuInfo;
+    private CpuInfo mCpuInfo;
+
+    private ArrayList<String> mContentList;
 
     @Override
-    public String getMonitorTitle() {
-        return MonitorConst.GPU_USED_RATIO +","
-                + MonitorConst.GPU_CLOCK +","
-                + MonitorConst.MEM_FREE
-                + ConstUtils.LINE_END;
+    public Integer[] getItems() {
+        return new Integer[]{
+                MonitorConst.CPU_USED_RATIO,
+                MonitorConst.GPU_USED_RATIO,
+                MonitorConst.GPU_CLOCK,
+                MonitorConst.MEM_FREE,
+        };
+    }
+
+    @Override
+    public String getFileType() {
+        return "_Performance";
     }
 
     public MonitorPerf(Context context) {
@@ -30,40 +42,24 @@ public class MonitorPerf extends Monitor {
     @Override
     public void onStart() {
         super.onStart();
+        mContentList = new ArrayList<>();
         mMemoryInfo = new MemoryInfo();
         mGpuInfo = new GpuInfo();
-
-
+        mCpuInfo = new CpuInfo();
     }
-
-
 
     @Override
     public String monitor() {
-        String gpuRate = String.valueOf(mGpuInfo.getGpuRate());
-        String gpuClock = String.valueOf(mGpuInfo.getGpuClock());
-        String freeMemory  = String.valueOf(mMemoryInfo.getFreeMemorySize(mContext)/1024);
+        mCpuInfo.updateAllCpu();
 
-        write2File(gpuRate, gpuClock, freeMemory);
+        mContentList.clear();
+        mContentList.add(String.valueOf(mCpuInfo.getRatioList().get(0)));
+        mContentList.add(String.valueOf(mGpuInfo.getGpuRate()));
+        mContentList.add(String.valueOf(mGpuInfo.getGpuClock()));
+        mContentList.add(String.valueOf(mMemoryInfo.getFreeMemorySize(mContext) / 1024));
 
-        StringBuffer sb = new StringBuffer();
-        sb.append(getItemName(MonitorConst.GPU_USED_RATIO)).append(":");
-        sb.append(gpuRate);
-        sb.append(getItemUnit(MonitorConst.GPU_USED_RATIO)).append("\n");
+        write2File(mContentList);
 
-        sb.append(getItemName(MonitorConst.GPU_CLOCK)).append(":");
-        sb.append(gpuClock);
-        sb.append(getItemUnit(MonitorConst.GPU_CLOCK)).append("\n");
-
-        sb.append(getItemName(MonitorConst.MEM_FREE)).append(":");
-        sb.append(freeMemory);
-        sb.append(getItemUnit(MonitorConst.MEM_FREE)).append("\n");
-
-
-        return sb.toString();
+        return getFloatBody(mContentList);
     }
-
-
-
-
 }

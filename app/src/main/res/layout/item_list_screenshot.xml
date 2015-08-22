@@ -5,9 +5,9 @@
 
     <ImageView
         android:id="@+id/shotitem_icon_iv"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/file_logo" />
 
     <TextView
         android:id="@+id/shotitem_name_tv"
@@ -18,6 +18,6 @@
         android:layout_toRightOf="@id/shotitem_icon_iv"
         android:text="name"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

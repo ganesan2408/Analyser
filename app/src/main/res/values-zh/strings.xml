@@ -46,7 +46,7 @@
 
     <!-- 首页start -->
     <string name="title_monitor">监控</string>
-    <string name="title_data">统计</string>
+    <string name="title_analyzer">分析</string>
     <string name="title_view">查看</string>
     <string name="title_performance">性能</string>
     <string name="title_tool">工具箱</string>
@@ -139,7 +139,7 @@
     <string name="menu_phone_version">当前手机版本</string>
     
     <string name="menu_device_info">设备参数</string>
-    <string name="menu_create_icon">创建桌面图标</string>
+    <string name="menu_create_icon">创建桌面</string>
     <string name="menu_file">我的文件</string>
     <string name="menu_shot">我的截图</string>
     <string name="menu_feedback">意见反馈</string>

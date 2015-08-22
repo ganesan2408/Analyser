@@ -78,7 +78,7 @@ public class BaseActivity extends AppCompatActivity{
 
     /**设置标题栏 名字*/
     public void setActionBarTitle(String title) {
-        if (StringUtils.isEmpty(title)) {
+        if (StringUtils.isNull(title)) {
             title = getString(R.string.app_name);
         }
         if (hasActionBar() && mActionBar != null) {

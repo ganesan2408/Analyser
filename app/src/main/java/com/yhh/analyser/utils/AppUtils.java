@@ -76,7 +76,7 @@ public class AppUtils {
         String versionName="";
         try {
             versionName =context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-            if(StringUtils.isEmpty(versionName)){
+            if(StringUtils.isNull(versionName)){
                 return "";
             }
         } catch (PackageManager.NameNotFoundException e) {

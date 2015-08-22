@@ -29,7 +29,8 @@ import com.yhh.analyser.R;
 import com.yhh.analyser.bean.app.AppInfo;
 import com.yhh.analyser.bean.app.ProcessInfo;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.service.MonitorSysService;
+import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.ui.settings.SettingMonitorActivity;
 import com.yhh.analyser.ui.settings.SettingsActivity;
@@ -133,6 +134,7 @@ public class MonitorAppActivity extends BaseActivity {
 
                 } else {
                     Intent diy = new Intent(mContext, SettingMonitorActivity.class);
+                    diy.putExtra("type", MonitorConst.MONITOR_APP_DIY);
                     startActivity(diy);
                 }
             }
@@ -151,7 +153,7 @@ public class MonitorAppActivity extends BaseActivity {
 	
     private void initUI(){
 	   monitorService = new Intent();
-       monitorService.setClass(MonitorAppActivity.this, MonitorSysService.class);
+       monitorService.setClass(MonitorAppActivity.this, MonitorService.class);
 	   
        mAppLogIv = (ImageView) findViewById(R.id.app_logo_view);
        mAppNameTv = (TextView) findViewById(R.id.app_name);
@@ -196,13 +198,14 @@ public class MonitorAppActivity extends BaseActivity {
                 DialogUtils.closeLoading();
 	        }else if(msg.what ==0x2){  //start floating windows
 	            Log.d(TAG, "begin startup float window.");
-                monitorService.putExtra("type",20);
+                monitorService.putExtra("type", MonitorConst.MONITOR_APP);
 	            monitorService.putExtra("appName", mAppInfo.getName());
                 monitorService.putExtra("pid", mAppInfo.getPid());
                 monitorService.putExtra("uid", mAppInfo.getUid());
                 monitorService.putExtra("packageName", mAppInfo.getPackageName());
                 monitorService.putExtra("startActivity", mStartActivity);
                 startService(monitorService);
+                finish();
 	        }
 	    }
     };

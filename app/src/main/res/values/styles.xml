@@ -96,7 +96,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#fff</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginLeft">32dp</item>
     </style>
     <!-- 菜单项左侧的项目名样式(含description) -->
     <style name="slide_menu_left_title2"  parent="slide_menu_left">
