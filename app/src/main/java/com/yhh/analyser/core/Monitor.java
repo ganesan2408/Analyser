@@ -37,6 +37,7 @@ public abstract class Monitor {
         mContext = context;
     }
 
+
     public void onStart(){
         monitorItems = getItems();
         initResources();

@@ -22,8 +22,12 @@ public class MonitorConst {
     public static final int TRAFFIC_SPEED = 12;
 
     public static final int TOP = 20;
+    public static final int SHELL = 21;
 
     public static final int MONITOR_APP =101;
     public static final int MONITOR_APP_DIY =102;
+    public static final int MONITOR_DIY =103;
+    public static final int MONITOR_SHELL =104;
+    public static final int MONITOR_EXCEPTION =105;
 
 }

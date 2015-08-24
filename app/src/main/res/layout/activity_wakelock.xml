@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/partical_wake_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/partical_wake"
+        android:onClick="ClickHandler" />
+    <Button
+        android:id="@+id/screen_wake_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/screen_wake"
+        android:onClick="ClickHandler" />
+    <Button
+        android:id="@+id/unlock_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/unlock"
+        android:onClick="ClickHandler" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/dark_blue"
+        android:text="@string/wake_lock_status"/>
+
+</LinearLayout>

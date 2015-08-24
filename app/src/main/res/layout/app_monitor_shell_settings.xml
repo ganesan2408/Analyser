@@ -7,7 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin" >
-
+    <TextView
+        android:id="@+id/txt_monitot_shell_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shell_monitor_example"
+        android:gravity="center"
+        android:layout_gravity="center"/>
        <LinearLayout
             android:layout_marginTop="16dp"
             android:layout_width="fill_parent"
@@ -26,9 +32,11 @@
                 android:background="@drawable/rounded_edittext"
                 android:gravity="center"/>
         </LinearLayout>
-        <Button
-                android:id="@+id/shell_top"
-                android:text="@string/shell_top_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_senior_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="开始监控"/>
 </LinearLayout>

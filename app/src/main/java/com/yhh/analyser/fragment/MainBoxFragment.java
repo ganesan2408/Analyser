@@ -27,6 +27,7 @@ import com.yhh.analyser.ui.KernelActivity;
 import com.yhh.analyser.ui.LogAnalyActivity;
 import com.yhh.analyser.ui.LogViewActivity;
 import com.yhh.analyser.ui.NodeViewActivity;
+import com.yhh.analyser.ui.WakeLockActivity;
 import com.yhh.analyser.utils.AppUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.FileUtils;
@@ -49,7 +50,7 @@ public class MainBoxFragment extends Fragment{
     private final int[] mItemImage = new int[]{
             R.drawable.box_view_node,
             R.drawable.box_brightness,
-            R.drawable.box_kernel,
+            R.drawable.box_wakelock,
 
             R.drawable.box_parse_log,
             R.drawable.box_view_log,
@@ -57,7 +58,8 @@ public class MainBoxFragment extends Fragment{
 
             R.drawable.box_antutu,
             R.drawable.box_auto,
-            R.drawable.box_wakelock,
+            R.drawable.box_kernel,
+
 
             R.drawable.box_cpu,
             R.drawable.box_io,
@@ -65,9 +67,9 @@ public class MainBoxFragment extends Fragment{
     };
 
     private final String[] mItemName = new String[]{
-            "查看节点","调节亮度","模拟死机",
+            "查看节点","调节亮度","唤醒锁",
             "解析Log","查看Log","模拟终端",
-            "安兔兔跑分","自动化Case","唤醒锁",
+            "安兔兔跑分","自动化Case","模拟死机",
             "CPU压测", "IO压测", "震动微调器"
     };
 
@@ -75,14 +77,16 @@ public class MainBoxFragment extends Fragment{
     private Class[] targetClasses = new Class[]{
             NodeViewActivity.class,
             BrightnessActivity.class,
-            KernelActivity.class,
+            WakeLockActivity.class,
+
             
             LogAnalyActivity.class,
             LogViewActivity.class,
             Term.class,
 
             BenchmarkActivity.class,
-            AutoActivity.class
+            AutoActivity.class,
+            KernelActivity.class
     };
     
     @Override
@@ -123,7 +127,7 @@ public class MainBoxFragment extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 final int index = position;
-                if (position <= 7) {
+                if (position <= 8) {
                     Intent intent = new Intent(mContext, targetClasses[index]);
                     mContext.startActivity(intent);
                 } else {
@@ -154,14 +158,6 @@ public class MainBoxFragment extends Fragment{
         int rawId;
 
         switch(index){
-            case 0:
-                rawId = R.raw.wakelock_tool;
-                AppName = "wakelock_tool";
-                pkgName = "com.lenovo.wakelocktools";
-                ActName = "com.lenovo.wakelocktools.MainActivity";
-                runApp(rawId, AppName, pkgName, ActName);
-                break;
-
             case 1:
                 rawId = R.raw.cputiger;
                 AppName = "cputiger";

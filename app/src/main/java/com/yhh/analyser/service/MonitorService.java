@@ -96,9 +96,11 @@ public class MonitorService extends Service{
         if(type== MonitorConst.MONITOR_APP){
             int pid = intent.getIntExtra("pid",0);
             mMonitor = new MonitorApp(mContext, pid);
+
         }else if(type== MonitorConst.MONITOR_APP_DIY){
             int pid = intent.getIntExtra("pid",0);
             mMonitor = new MonitorAppDiy(mContext, pid);
+
         }else {
             mMonitor = MonitorFactory.newInstance(mContext, type);
         }

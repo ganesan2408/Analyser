@@ -267,6 +267,9 @@ public class FileUtils {
                 return current.isFile();
             }
         });
+        if(files ==null || files.length<1){
+            return null;
+        }
         Arrays.sort(files, Collections.reverseOrder());
         return files;
     }

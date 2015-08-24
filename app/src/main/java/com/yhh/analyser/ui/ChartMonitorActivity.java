@@ -28,18 +28,18 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.provider.MonitorDataProvider;
-import com.yhh.analyser.utils.ScreenShot;
 import com.yhh.analyser.provider.MonitorException;
 import com.yhh.analyser.provider.MonitorExceptionStat;
+import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.DebugLog;
+import com.yhh.analyser.utils.DialogUtils;
+import com.yhh.analyser.utils.LogUtils;
+import com.yhh.analyser.utils.ScreenShot;
+import com.yhh.analyser.widget.NoScrollListView;
 import com.yhh.analyser.widget.chart.custom.MyValueFormatter;
 import com.yhh.analyser.widget.chart.items.ChartItem;
 import com.yhh.analyser.widget.chart.items.LineChartItem;
-import com.yhh.analyser.widget.chart.items.PieChartItem;
 import com.yhh.analyser.widget.chart.items.StackedBarChartItem;
-import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.DialogUtils;
-import com.yhh.analyser.utils.LogUtils;
-import com.yhh.analyser.widget.NoScrollListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -139,9 +139,6 @@ public class ChartMonitorActivity extends ChartBaseActivity {
                 if (mMonitorPath == null || "".equals(mMonitorPath)) {
                     mMonitorPath = LogUtils.getDateNewestLog(AppConfig.MONITOR_DIR);
                 }
-                if (DEBUG) {
-                    Log.d(TAG, "mMonitorPath=" + mMonitorPath);
-                }
                 mMonitorDataProvider.parse(AppConfig.MONITOR_DIR + "/" + mMonitorPath);
 
                 updateAdapter();
@@ -182,7 +179,11 @@ public class ChartMonitorActivity extends ChartBaseActivity {
         ArrayList<String> xVals = mMonitorDataProvider.getXValues();
         ArrayList<ArrayList<Entry>> monitorData = mMonitorDataProvider.getMonitorData();
         String[] monitorTitle = mMonitorDataProvider.getTitles();
-        int len = monitorTitle.length;
+        int len = monitorTitle==null?0:monitorTitle.length;
+        if(monitorData ==null){
+            DebugLog.w("monitorData ==NULL");
+            return;
+        }
         if (DEBUG) {
             Log.d(TAG, "monitor title length:" + len);
             Log.d(TAG, "monitor data length:" + monitorData.size());
@@ -202,11 +203,10 @@ public class ChartMonitorActivity extends ChartBaseActivity {
         }
 
         MonitorException exceptionMonitor = new MonitorException(this);
-        if (exceptionMonitor.isEnabled()) {
-            String topTitle = "异常监控";
-            HashMap<String, Float> topApps = MonitorExceptionStat.getInstance().getTopCpuApps();
-            mChartItems.add(new PieChartItem(generatePieData(topApps, topTitle), getApplicationContext(), false));
-        }
+
+//        String topTitle = "异常监控";
+//        HashMap<String, Float> topApps = MonitorExceptionStat.getInstance().getTopCpuApps();
+//        mChartItems.add(new PieChartItem(generatePieData(topApps, topTitle), getApplicationContext(), false));
 
         mChartDataAdapter = new ChartDataAdapter(getApplicationContext(), mChartItems);
     }

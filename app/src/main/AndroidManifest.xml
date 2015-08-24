@@ -155,6 +155,7 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/main_status_analyser"
             android:screenOrientation="portrait" />
+
         <!-- Status Analyser START -->
 
 
@@ -193,6 +194,12 @@
             android:name=".ui.KernelActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/toolbox_kernel"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ui.WakeLockActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/toolbox_wakeup"
             android:screenOrientation="portrait" >
         </activity>
         <activity

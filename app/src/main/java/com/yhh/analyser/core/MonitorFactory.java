@@ -3,6 +3,9 @@ package com.yhh.analyser.core;
 import android.content.Context;
 
 import com.yhh.analyser.bean.MonitorChoice;
+import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.provider.MonitorException;
+import com.yhh.analyser.provider.MonitorShell;
 
 /**
  * Created by yuanhh1 on 2015/8/20.
@@ -27,7 +30,14 @@ public class MonitorFactory {
                 return new MonitorDiy(context);
 
             case 5:
+            case MonitorConst.MONITOR_DIY:
                 return new MonitorDiy(context);
+
+            case MonitorConst.MONITOR_SHELL:
+                return new MonitorShell(context);
+
+            case  MonitorConst.MONITOR_EXCEPTION:
+                return new MonitorException(context);
 
             default:
                 return new MonitorTop(context);

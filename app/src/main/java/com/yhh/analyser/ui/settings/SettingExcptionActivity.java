@@ -7,44 +7,43 @@
 package com.yhh.analyser.ui.settings;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.ui.base.BaseActivity;
-import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.widget.SwitchButton;
 
 public class SettingExcptionActivity extends BaseActivity {
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingExcptionActivity";
-	private boolean DEBUG = true;
 
 	private SharedPreferences mPreferences;
 	private SharedPreferences.Editor mEditor;
 	
-	private SwitchButton mExceptionMonitorSb;
 	public static final String KEY_IS_MONITOR = "exceptionMonitor";
 	
-	public static final int LIMIT_ITEMS_COUNT = 3;
+	public static final int LIMIT_ITEMS_COUNT = 2;
     private int[] mItemIds ={
             R.id.exception_temperature_limit,
-            R.id.exception_cpu_limit,
             R.id.exception_current_limit
     };
     
     public static final String[] PREF_EXCEPTION_ITEMS = {
-        "exception_temp", "exception_cpu", "exception_current"
+        "exception_temp",  "exception_current"
     };
     
     private EditText[] mThresholdEt = new EditText[LIMIT_ITEMS_COUNT];
     private String[]  mThresholdValues = new String[LIMIT_ITEMS_COUNT];
+
+    private Button mStartBtn;
 	
 	
 	@SuppressLint("NewApi")
@@ -66,16 +65,20 @@ public class SettingExcptionActivity extends BaseActivity {
 	}
 	
 	public void initUI(){
-	    mExceptionMonitorSb = (SwitchButton) findViewById(R.id.app_exception_monitor_sb);
-	    mExceptionMonitorSb.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-            
+        mStartBtn = (Button) findViewById(R.id.btn_exception_monitor);
+        mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                    boolean isChecked) {
-                mPreferences.edit().putBoolean(SettingExcptionActivity.KEY_IS_MONITOR, isChecked).commit();
+            public void onClick(View v) {
+                Toast.makeText(SettingExcptionActivity.this, "异常监控已启动", Toast.LENGTH_SHORT).show();
+                Intent monitorService = new Intent();
+                monitorService.setClass(mContext, MonitorService.class);
+                monitorService.putExtra("type", MonitorConst.MONITOR_EXCEPTION);
+                monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startService(monitorService);
+                finish();
             }
         });
- 
+
 	    for(int i=0; i< LIMIT_ITEMS_COUNT; i++){
 	        final int index = i;
 	        mThresholdEt[i] = (EditText)findViewById(mItemIds[i]);
@@ -105,9 +108,7 @@ public class SettingExcptionActivity extends BaseActivity {
 	}
 	
 	public void readRefs(){
-        boolean isExceptionMonitor = mPreferences.getBoolean(KEY_IS_MONITOR, true);
-        mExceptionMonitorSb.setChecked(isExceptionMonitor);
-        
+
         for(int i=0; i<LIMIT_ITEMS_COUNT;i++){
             String value = mPreferences.getString(PREF_EXCEPTION_ITEMS[i], "");
             mThresholdEt[i].setText(value);

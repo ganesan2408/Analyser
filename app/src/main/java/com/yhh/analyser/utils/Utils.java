@@ -85,6 +85,7 @@ public class Utils {
 	public static void sendMessage(){
 		runShell("input keyevent 22");
 		runShell("input keyevent 66");
+		
 	}
 	
 	/**

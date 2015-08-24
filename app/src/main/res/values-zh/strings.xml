@@ -68,7 +68,7 @@
 	<string name="toolbox_auto">自动化Case</string>
 	<string name="toolbox_bright">亮度调节</string>
 	<string name="toolbox_kernel">Kernel</string>
-	<string name="toolbox_wakeup">唤醒统计</string>
+	<string name="toolbox_wakeup">唤醒锁</string>
 
     <string name="toolbox_log_viewer">查看Log</string>
     <string name="toolbox_log_parser">解析Log</string>
@@ -176,7 +176,18 @@
     <string name="settings_benchmark_temp">启动温度 </string>
     <string name="settings_benchmark_temp_hint">不大于则启动</string>
     <!-- #### CPU END -->
-    
+
+    <!-- wake lock -->
+    <string name="wake_lock_status">设置休眠锁</string>
+    <string name="partical_wake">保持CPU不休眠</string>
+    <string name="screen_wake">保持CPU不休眠，同时屏幕常亮</string>
+    <string name="unlock">恢复CPU可休眠状态</string>
+
+    <string name="partical_status">注意：CPU不再休眠，无法进入待机状态</string>
+    <string name="screen_status">注意：CPU不再休眠同时屏幕常亮，手机无法进入灭屏状态</string>
+    <string name="unlock_status">释放所有的休眠锁，手机恢复正常状态</string>
+    <!-- wake lock end -->
+
     
     <!-- #########   app monitor           #########               --> 
     <string name="setting">设置</string>
@@ -227,6 +238,7 @@
     <string name="shell_monitor_title">浮窗显示Adb</string>
     <string name="shell_monitor_description">浮窗显示指定adb指令</string>
     <string name="shell_monitor_hint">Please input adb command</string>
+    <string name="shell_monitor_example">例如：cat /sys/class/leds/lcd-backlight/brightness</string>
     <string name="shell_top_title">Top Process</string>
     
 

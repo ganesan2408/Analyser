@@ -7,6 +7,7 @@
 package com.yhh.analyser.ui.settings;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,29 +19,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.config.MonitorConst;
+import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.ui.base.BaseActivity;
-import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.StringUtils;
 
 public class SettingShellActivity extends BaseActivity {
 	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SettingShell";
 	private boolean DEBUG = true;
 
-	private Button mTopBtn;
-	public static final String KEY_IS_MONITOR = "shellMonitor";
-	
-	public static final int LIMIT_ITEMS_COUNT = 1;
-    private int[] mItemIds ={
-            R.id.shell_command,
-    };
-    
-    public static final String[] PREF_EXCEPTION_ITEMS = {
-        "shell_command",
-    };
-    
-    private EditText[] mThresholdEt = new EditText[LIMIT_ITEMS_COUNT];
-    private String[]  mThresholdValues = new String[LIMIT_ITEMS_COUNT];
-	
+	private Button mMonitorBtn;
+    private EditText mCmdEdit;
+    public static String sCommand;
+
 	
 	@SuppressLint("NewApi")
     @Override
@@ -50,7 +42,6 @@ public class SettingShellActivity extends BaseActivity {
 		setContentView(R.layout.app_monitor_shell_settings);
 
         initUI();
-        Toast.makeText(this, "此功能正在重构中..", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
@@ -59,41 +50,59 @@ public class SettingShellActivity extends BaseActivity {
 	}
 	
 	public void initUI(){
-	    mTopBtn = (Button) findViewById(R.id.shell_top);
-	    mTopBtn.setOnClickListener(new OnClickListener(){
+	    mMonitorBtn = (Button) findViewById(R.id.btn_senior_monitor);
+	    mMonitorBtn.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                mThresholdEt[0].setText(CommandUtils.CMD_TOP_PROCESS);
+                if(StringUtils.isBlank(sCommand)){
+                    Toast.makeText(SettingShellActivity.this, "adb指令不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent monitorService = new Intent();
+                monitorService.setClass(mContext, MonitorService.class);
+                monitorService.putExtra("type", MonitorConst.MONITOR_SHELL);
+                monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startService(monitorService);
+                finish();
             }
-	        
-	    });
 
-	    for(int i=0; i< LIMIT_ITEMS_COUNT; i++){
-	        final int index = i;
-	        mThresholdEt[i] = (EditText)findViewById(mItemIds[i]);
-	        mThresholdEt[i].addTextChangedListener(new TextWatcher() {
+        });
 
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count,
-                        int after) {
-                }
+        mCmdEdit = (EditText)findViewById(R.id.shell_command);
+        mCmdEdit.addTextChangedListener(new TextWatcher() {
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before,
-                        int count) {
-                    
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    sCommand = s.toString();
+                } catch (Exception e) {
+                    sCommand = "";
                 }
-    
-                @Override
-                public void afterTextChanged(Editable s) {
-                    try{
-                        mThresholdValues[index] = s.toString();
-                    }catch(Exception e){
-                        mThresholdValues[index] = "";
-                    }
-                }
-	        });
-	    }
+            }
+        });
+
+        findViewById(R.id.txt_monitot_shell_title).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCmdEdit.setText("cat /sys/class/leds/lcd-backlight/brightness");
+            }
+        });
+
+        if(!StringUtils.isBlank(sCommand)){
+            mCmdEdit.setText(sCommand);
+        }
+
 	}
 }

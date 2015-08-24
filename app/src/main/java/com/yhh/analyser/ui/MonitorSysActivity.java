@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
+import com.yhh.analyser.config.MonitorConst;
 import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.ui.settings.SettingExcptionActivity;
@@ -69,6 +70,7 @@ public class MonitorSysActivity extends BaseActivity {
                 if(!MonitorService.sMonitorIsRunning) {
                    if(position==5){
                         Intent diy = new Intent(mContext, SettingMonitorActivity.class);
+                       diy.putExtra("type", MonitorConst.MONITOR_DIY);
                         startActivity(diy);
                         return;
                     }else if(position==6){

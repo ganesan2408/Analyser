@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_purple"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin" >
-        <com.yhh.analyser.widget.SwitchButton
-            android:id="@+id/app_exception_monitor_sb"
-            style="@style/item"
-            android:text="@string/app_exception_monitor_title"
-            android:layout_margin="5sp"
-            android:background="@drawable/selector_preference_complete"
-            android:checked="true"
-            app:withTextInterval="6dp"
-            app:frameDrawable="@drawable/switch_frame"
-            app:stateDrawable="@drawable/selector_switch_state"
-            app:stateMaskDrawable="@drawable/switch_state_mask"
-            app:sliderDrawable="@drawable/selector_switch_slider"/>    
-    
        <LinearLayout
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
@@ -52,39 +38,7 @@
                 android:textSize="20sp"
                 android:text="@string/app_tempearture_unit"/>
         </LinearLayout>
-        
-       <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_preference_center"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:text="@string/app_exception_cpu"/>
-            <EditText
-                android:id="@+id/exception_cpu_limit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10sp"
-                android:textSize="20sp"
-                android:background="@drawable/rounded_edittext"
-                android:inputType="number"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                android:layout_marginRight="20sp"
-                android:textSize="20sp"
-                android:text="@string/app_percent_unit"/>
-        </LinearLayout>
-        
+
        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,4 +70,11 @@
                 android:textSize="20sp"
                 android:text="@string/app_current_unit"/>
         </LinearLayout>
+    <Button
+        android:id="@+id/btn_exception_monitor"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_monitor"/>
 </LinearLayout>

@@ -53,7 +53,12 @@ public class AnalysisMonitorFragment extends BaseFragment {
     }
 
     private void createSwipeListView(View v){
-        mShotList = Arrays.asList(FileUtils.listFiles(AppConfig.MONITOR_DIR));
+        String[] fileArray = FileUtils.listFiles(AppConfig.MONITOR_DIR);
+        if(fileArray ==null){
+            return;
+        }
+
+        mShotList = Arrays.asList(fileArray);
         mListView = (SwipeMenuListView) v.findViewById(R.id.shot_swipe_ll);
         if(mShotList !=null) {
             mAdapter = new MonitorFileAdapter(mShotList);
@@ -146,7 +151,8 @@ public class AnalysisMonitorFragment extends BaseFragment {
     }
 
     private void refresh(){
-        mShotList = Arrays.asList(FileUtils.listFiles(AppConfig.MONITOR_DIR));
+        String[] array =  FileUtils.listFiles(AppConfig.MONITOR_DIR);
+        mShotList = array ==null? null: Arrays.asList(array);
         mAdapter = new MonitorFileAdapter(mShotList);
         mListView.setAdapter(mAdapter);
 
