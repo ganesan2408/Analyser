@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">分析中心</string>
-	
+	<string name="app_secret_code">( 暗码 *#*#9999#*#* )</string>
+
 	<string name="system_analyzer">系统分析</string>
 	<string name="main_sys_analyser">系统监控器</string>
 	<string name="main_app_analyser">App监控器</string>
@@ -130,11 +131,11 @@
     <!-- activit_main start-->
     <string name="about_phone">手机版本</string>
     <string name="create_icon">创建桌面图标</string>
-    <string name="create_icon_msg">是否创建桌面快捷图标？</string>
+    <string name="create_icon_msg">手机桌面将生成“分析中心”的App图标，不再需要通过暗码，可直接点击图标启动，是否创建？</string>
     <string name="help">关于System Analyzer</string>
     <string name="help_url">有任何建议或反馈，欢迎联系MBG BSP或邮件至yuanhh1@lenovo.com(袁辉辉)</string>
     <!-- activit_main end-->
-    
+
     <!-- menu start-->
     <string name="menu_phone">手机型号</string>
     <string name="menu_phone_version">当前手机版本</string>
@@ -153,7 +154,8 @@
     <string name="menu_monitor_setting">监控设置</string>
     <string name="menu_score_setting">跑分设置</string>
     
-    <string name="menu_about">关于分析中心</string>
+    <string name="menu_about">关于 ( *#*#9999#*#* )</string>
+    <string name="menu_about_title">关于</string>
     <!-- menu end-->
     
     <!-- #### CPU START -->

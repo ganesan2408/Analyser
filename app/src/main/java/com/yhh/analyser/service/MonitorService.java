@@ -214,7 +214,7 @@ public class MonitorService extends Service{
     }
 
     private void setFloatColor(){
-        mFloatLv.setTextColor(COLORS[sColorIndex%7]);
+        mFloatLv.setTextColor(COLORS[sColorIndex % 7]);
     }
 
     private void hideFloat(boolean isHide){
@@ -254,6 +254,7 @@ public class MonitorService extends Service{
 
         super.onDestroy();
     }
+
 
     /**
      * 后台监控服务

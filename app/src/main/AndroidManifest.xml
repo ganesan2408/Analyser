@@ -107,7 +107,7 @@
 
         <activity
             android:name=".ui.AboutActivity"
-            android:label="@string/menu_about"
+            android:label="@string/menu_about_title"
             android:screenOrientation="portrait"/>
 
         <!-- Log Analyser START -->
@@ -303,6 +303,7 @@
         <service android:name="com.yhh.terminal.TermService" />
 
         <service android:name=".service.MonitorService"/>
+        <service android:name=".service.LaunchService"/>
 
         <meta-data
             android:name="com.sec.android.support.multiwindow"
