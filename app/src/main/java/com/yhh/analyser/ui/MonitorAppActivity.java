@@ -36,9 +36,11 @@ import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.ui.settings.SettingMonitorActivity;
 import com.yhh.analyser.ui.settings.SettingsActivity;
+import com.yhh.analyser.utils.AppUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.StringUtils;
+import com.yhh.analyser.utils.TimeUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -80,6 +82,7 @@ public class MonitorAppActivity extends BaseActivity {
     };
 
     private MyReceiver mMyReceiver;
+    private String  mClickTime;
 
     public static String ACTION = "com.yhh.app.launchService";
 
@@ -96,6 +99,12 @@ public class MonitorAppActivity extends BaseActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION);
         mContext.registerReceiver(mMyReceiver, filter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LaunchService.setLaunch(false);
     }
 
     private void getAppInfo() {
@@ -138,6 +147,7 @@ public class MonitorAppActivity extends BaseActivity {
                     Intent sintent = new Intent(mContext, LaunchService.class);
                     sintent.putExtra("startActivity", mAppInfo.getPackageName());
                     startService(sintent);
+                    mClickTime = TimeUtils.getMsTime() +" 点击";
 
                 } else if (position == 1) {
                     Toast.makeText(MonitorAppActivity.this, mAppInfo.getName() + "启动中", Toast.LENGTH_SHORT).show();
@@ -348,9 +358,12 @@ public class MonitorAppActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
            String str = intent.getExtras().getString("launch");
             if(!StringUtils.isBlank(str)){
-                mLaunchTv.setText(str);
-                DialogUtils.showDialog(mContext, str);
+                mLaunchTv.setText(mClickTime + "\n" + str);
+            }else{
+                mLaunchTv.setText("启动时间过长");
             }
+
+            AppUtils.stopActivity(mAppInfo.getName());
         }
     }
 

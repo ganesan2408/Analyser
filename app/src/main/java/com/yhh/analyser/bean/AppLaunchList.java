@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class AppLaunchList {
     private List<AppLaunchBean> appLaunchBeans;
+    private int maxLaunches;
 
     public AppLaunchList() {
         appLaunchBeans = new ArrayList<>();
@@ -27,6 +28,7 @@ public class AppLaunchList {
     public int getSize() {
         return appLaunchBeans==null?0:appLaunchBeans.size();
     }
+
 
     @Override
     public String toString() {

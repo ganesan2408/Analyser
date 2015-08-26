@@ -20,6 +20,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.ui.AdbWirelessActivity;
 import com.yhh.analyser.ui.AutoActivity;
 import com.yhh.analyser.ui.BenchmarkActivity;
 import com.yhh.analyser.ui.BrightnessActivity;
@@ -51,26 +52,29 @@ public class MainBoxFragment extends Fragment{
             R.drawable.box_view_node,
             R.drawable.box_brightness,
             R.drawable.box_wakelock,
+            R.drawable.box_adbwireless,
 
             R.drawable.box_parse_log,
             R.drawable.box_view_log,
             R.drawable.box_terminal,
-
             R.drawable.box_antutu,
+
             R.drawable.box_auto,
             R.drawable.box_kernel,
-
-
             R.drawable.box_cpu,
             R.drawable.box_io,
-            R.drawable.box_vibrator
+
+            R.drawable.box_vibrator,
+            R.drawable.box_1,
+            R.drawable.box_2,
+            R.drawable.box_more
     };
 
     private final String[] mItemName = new String[]{
-            "查看节点","调节亮度","唤醒锁",
-            "解析Log","查看Log","模拟终端",
-            "安兔兔跑分","自动化Case","模拟死机",
-            "CPU压测", "IO压测", "震动微调器"
+            "查看节点","调节亮度","唤醒锁","远程ADB",
+            "解析Log","查看Log","模拟终端", "安兔兔跑分",
+            "自动化Case","模拟死机", "CPU压测", "IO压测",
+            "震动微调器","+1","+2","更多"
     };
 
 
@@ -78,13 +82,13 @@ public class MainBoxFragment extends Fragment{
             NodeViewActivity.class,
             BrightnessActivity.class,
             WakeLockActivity.class,
-
+            AdbWirelessActivity.class,
             
             LogAnalyActivity.class,
             LogViewActivity.class,
             Term.class,
-
             BenchmarkActivity.class,
+
             AutoActivity.class,
             KernelActivity.class
     };
@@ -127,11 +131,11 @@ public class MainBoxFragment extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 final int index = position;
-                if (position <= 8) {
+                if (position <= 9) {
                     Intent intent = new Intent(mContext, targetClasses[index]);
                     mContext.startActivity(intent);
                 } else {
-                    startApp(position-8);
+                    startApp(position-9);
                 }
             }
 

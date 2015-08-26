@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
  * Created by yuanhh1 on 2015/8/25.
  */
 public class LaunchService extends Service {
-    private boolean isLaunching;
+    private static boolean isLaunching;
 
     private Handler mHandler;
     private String startActivity;
@@ -73,10 +73,15 @@ public class LaunchService extends Service {
     };
 
     private boolean checkOk(){
-        if(isLaunching && currentCount <7 && mAppLaunchList.getSize()<2) {
+        if(isLaunching && currentCount <3 && mAppLaunchList.getSize()<2) {
             return true;
         }
         return false;
+    }
+
+    @Deprecated
+    public static void setLaunch(boolean b){
+        isLaunching = b;
     }
 
     private void processStartTimeFromLogcat(String startActivity) {
@@ -117,7 +122,7 @@ public class LaunchService extends Service {
         }
         AppLaunchBean bean = new AppLaunchBean();
         bean.setCompleteTime(line.substring(startIndex-2, startIndex + 10));
-        bean.setActivityName((line.substring(line.lastIndexOf(".") + 1, line.lastIndexOf(":"))));
+        bean.setActivityName((line.substring(line.lastIndexOf("/") + 1, line.lastIndexOf(":"))));
         bean.setSpendTime((line.substring(line.lastIndexOf("+") + 1, line.lastIndexOf("ms") + 2)));
 
         return  bean;

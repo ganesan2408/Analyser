@@ -86,7 +86,7 @@ public class AppUtils {
     }
 
     /**
-     * 强制停止某个App
+     * 强制彻底停止 某个App
      *
      * @param context
      * @param pkgName
@@ -94,10 +94,19 @@ public class AppUtils {
      */
     public static void forceStopApp(Context context, String pkgName) throws Exception {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        Method method = Class.forName("android.app.ActivityManager").getMethod("forceStopPackage",String.class);
+        Method method = Class.forName("android.app.ActivityManager").getMethod("forceStopPackage", String.class);
         method.invoke(am, pkgName);
     }
 
+    /**
+     * 通过包名  获取app名
+     *
+     * @param context
+     *
+     * @param pkgName
+     *
+     * @return
+     */
     public static String getLableByPkgName(Context context, String pkgName){
         PackageManager pm = context.getApplicationContext().getPackageManager();
         List<ApplicationInfo> appList = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
@@ -108,6 +117,34 @@ public class AppUtils {
             }
         }
         return  pkgName;
+    }
+
+
+    /**
+     * 启动指定app
+     *
+     * @param packageName
+     * 		package name
+     * @param activityName
+     * 		activity name
+     * @return
+     */
+    public static boolean startActivity(String packageName, String activityName){
+        String command = "am start -n "+ packageName+ "/" + activityName;
+        return Utils.runShell(command);
+    }
+
+
+    /**
+     * 结束指定app
+     *
+     * @param packageName
+     * 		package name
+     * @return
+     */
+    public static boolean stopActivity(String packageName){
+        String command = "am force-stop "+ packageName;
+        return Utils.runShell(command);
     }
 
 }

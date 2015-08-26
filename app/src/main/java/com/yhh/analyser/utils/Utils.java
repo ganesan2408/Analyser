@@ -134,7 +134,6 @@ public class Utils {
 	public static boolean stopActivity(String packageName){
 		String command = "am force-stop "+ packageName;
 		return runShell(command);
-//		return runShell(command, false);
 	}
 	
 	

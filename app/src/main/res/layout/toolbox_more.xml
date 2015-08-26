@@ -8,11 +8,11 @@
 	    android:id="@+id/more_gv"
 	    android:layout_width="fill_parent" 
 	    android:layout_height="wrap_content"
-	    android:numColumns="3"
+	    android:numColumns="4"
 	    android:verticalSpacing="1px"
 	    android:horizontalSpacing="1px"
 	    android:stretchMode="columnWidth"
 	    android:gravity="center"
-	    android:background="#555"
+	    android:background="#666"
     />
 </LinearLayout>

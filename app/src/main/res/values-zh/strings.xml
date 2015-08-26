@@ -14,6 +14,7 @@
     <string name="main_node_viewer">节点查看器</string>
     <string name="main_node_viewer_sub">查看节点值</string>
 	<string name="main_shell_analyser">超级终端</string>
+    <string name="main_adb_wireless">ADB wireless</string>
 	<string name="main_shell_analyser_sub">进入命令行模式</string>
     <string name="main_automatic_robot">自动化</string>
     <string name="main_automatic_robot_sub">自动化运行用户场景</string>
@@ -74,6 +75,8 @@
     <string name="toolbox_log_viewer">查看Log</string>
     <string name="toolbox_log_parser">解析Log</string>
     <string name="toolbox_more">更多实用工具</string>
+
+    <string name="adb_tips">    注意：请确保手机与电脑处于同一局域网(联想望京园区建议使用lenovo-RD)</string>
 
     <string name="data_title_intr">左滑,可解析相应的数据项</string>
 	<!-- 首页end -->

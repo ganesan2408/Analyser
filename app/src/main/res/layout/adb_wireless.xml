@@ -1,0 +1,28 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+   <TextView
+       android:id="@+id/txt_adb_tips"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:text="@string/adb_tips"/>
+
+    <ToggleButton
+        android:id="@+id/cb_adb_controller"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_adb_tips"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/txt_adb_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/cb_adb_controller"
+        />
+</RelativeLayout>
