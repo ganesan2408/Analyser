@@ -50,6 +50,7 @@ public class AdbWirelessActivity extends BaseActivity {
 
     private void stopAdbWireless(){
         RootUtils.getInstance().setSystemProperty("service.adb.tcp.port", "0");
+        ShellUtils.execCommand(new String[]{"stop adbd", "start adbd"}, false);
     }
 
     private String getWifiIp(){

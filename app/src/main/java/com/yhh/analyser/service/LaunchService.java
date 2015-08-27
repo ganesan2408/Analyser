@@ -73,7 +73,7 @@ public class LaunchService extends Service {
     };
 
     private boolean checkOk(){
-        if(isLaunching && currentCount <3 && mAppLaunchList.getSize()<2) {
+        if(isLaunching && currentCount <10 && mAppLaunchList.getSize()<2) {
             return true;
         }
         return false;
