@@ -38,7 +38,7 @@ import java.util.List;
 import cn.trinea.android.common.view.DropDownListView;
 
 public class MainMonitorFragment extends Fragment {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "MainMonitorFragment";
+    private static final String TAG =  ConstUtils.DEBUG_TAG+ "mmf";
     
     private Context mContext;
     private static List<AppInfo> mAppList;

@@ -278,9 +278,22 @@ public class CpuInfo {
             processCpu2 = processCpu;
         }
         processCpu2 = processCpu;
-		totalCpu2List = (ArrayList<Long>) totalCpuList.clone();
         return processCpuRatio;
     }
+
+	public String getProcessCpuRatioComplete(int pid) {
+
+		if (null != totalCpu2List && totalCpu2List.size() > 0) {
+			processCpuRatio = formart.format(100 * ((double) (processCpu - processCpu2)
+					/ ((double) (totalCpuList.get(0) - totalCpu2List.get(0)))));
+		} else {
+			processCpuRatio = "0";
+			processCpu2 = processCpu;
+		}
+		processCpu2 = processCpu;
+		totalCpu2List = (ArrayList<Long>) totalCpuList.clone();
+		return processCpuRatio;
+	}
     
     class CpuFilter implements FileFilter {
         @Override

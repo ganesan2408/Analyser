@@ -114,7 +114,7 @@ public class MonitorAppActivity extends BaseActivity {
         mAppInfo.setName(appName);
         mAppInfo.setPackageName(pkgName);
 
-        mProcessInfo.getRunningApp(this, mAppInfo);
+        mProcessInfo.getRunningInfo(this, mAppInfo);
 
         AppInfo pkgInfo = mProcessInfo.getPackageInfo(this, mAppInfo.getPackageName());
         mAppInfo.setVersionName(pkgInfo.getVersionName());
@@ -136,13 +136,8 @@ public class MonitorAppActivity extends BaseActivity {
                                     int position, long id) {
                 if (position == 0) {
                     Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
-                    try {
-                        mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        Toast.makeText(MonitorAppActivity.this, getString(R.string.can_not_start_app_toast), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+                    mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
+                    startActivity(intent);
 
                     Intent sintent = new Intent(mContext, LaunchService.class);
                     sintent.putExtra("startActivity", mAppInfo.getPackageName());
@@ -152,13 +147,9 @@ public class MonitorAppActivity extends BaseActivity {
                 } else if (position == 1) {
                     Toast.makeText(MonitorAppActivity.this, mAppInfo.getName() + "启动中", Toast.LENGTH_SHORT).show();
                     Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
-                    try {
-                        mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        Toast.makeText(MonitorAppActivity.this, getString(R.string.can_not_start_app_toast), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+                    mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
+                    startActivity(intent);
+
                     new Thread(new Runnable() {
 
                         @Override
@@ -172,6 +163,8 @@ public class MonitorAppActivity extends BaseActivity {
                 } else {
                     Intent diy = new Intent(mContext, SettingMonitorActivity.class);
                     diy.putExtra("type", MonitorConst.MONITOR_APP_DIY);
+                    diy.putExtra("pkgname", mAppInfo.getPackageName());
+
                     startActivity(diy);
                 }
             }
@@ -258,7 +251,7 @@ public class MonitorAppActivity extends BaseActivity {
         long startTime = System.currentTimeMillis();
 
         while (System.currentTimeMillis() < startTime + TIMEOUT) {
-            mProcessInfo.getRunningPackage(this, mAppInfo);
+            mProcessInfo.getRunningInfoByEqual(this, mAppInfo);
             if (mAppInfo.getPid() != 0) {
                 break;
             }

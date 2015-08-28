@@ -93,6 +93,7 @@ public class MonitorService extends Service{
         initNotification(startId);
 
         int type = intent.getIntExtra("type",1);
+
         if(type== MonitorConst.MONITOR_APP){
             int pid = intent.getIntExtra("pid",0);
             mMonitor = new MonitorApp(mContext, pid);
@@ -104,6 +105,7 @@ public class MonitorService extends Service{
         }else {
             mMonitor = MonitorFactory.newInstance(mContext, type);
         }
+
         mMonitor.onStart();
 
         readPrefs();

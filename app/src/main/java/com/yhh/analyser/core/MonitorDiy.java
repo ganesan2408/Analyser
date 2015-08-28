@@ -5,7 +5,6 @@ import android.content.Context;
 import com.yhh.analyser.bean.InfoFactory;
 import com.yhh.analyser.bean.MonitorChoice;
 import com.yhh.analyser.config.MonitorConst;
-import com.yhh.analyser.utils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,6 @@ public class MonitorDiy extends Monitor {
     @Override
     public String monitor() {
         getMonitors();
-        DebugLog.i("mContentList size= "+mContentList.size());
         write2File(mContentList);
         return getFloatBody(mContentList);
     }
@@ -65,10 +63,12 @@ public class MonitorDiy extends Monitor {
 
         mContentList.clear();
 
+        /**更新CPU节点值 */
         if(mCheckedList.get(MonitorConst.CPU_USED_RATIO)){
             mInfoFactory.getCpuInfo().updateAllCpu();
             mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
         }
+
         if(mCheckedList.get(MonitorConst.CPU_CLOCK)){
             mContentList.add(mInfoFactory.getCpuFreqList());
         }

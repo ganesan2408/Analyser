@@ -5,7 +5,6 @@ import android.content.Context;
 import com.yhh.analyser.bean.InfoFactory;
 import com.yhh.analyser.bean.MonitorChoice;
 import com.yhh.analyser.config.MonitorConst;
-import com.yhh.analyser.utils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +56,6 @@ public class MonitorAppDiy extends Monitor {
     @Override
     public String monitor() {
         getMonitors();
-        DebugLog.i("mContentList size= "+mContentList.size());
         write2File(mContentList);
         return getFloatBody(mContentList);
     }
@@ -66,22 +64,36 @@ public class MonitorAppDiy extends Monitor {
     private void getMonitors(){
 
         mContentList.clear();
+
+        /**更新CPU节点值 */
         if(mCheckedList.get(MonitorConst.APP_CPU_USED_RATIO)){
             mInfoFactory.getCpuInfo().updateCpu(pid);
+
+            if(mCheckedList.get(MonitorConst.CPU_USED_RATIO)){
+                mContentList.add(mInfoFactory.getCpuPidUsedRatio(pid));
+                mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
+            }else{
+                mContentList.add(mInfoFactory.getCpuPidUsedRatioComplete(pid));
+            }
+//
+//            mInfoFactory.getCpuInfo().updateCpu(pid);
+//            DebugLog.d("update pid="+pid);
         }else if(mCheckedList.get(MonitorConst.CPU_USED_RATIO)){
             mInfoFactory.getCpuInfo().updateAllCpu();
+            mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
+//            DebugLog.d("update sys");
         }
 
-        if(mCheckedList.get(MonitorConst.APP_CPU_USED_RATIO)){
-            mContentList.add(mInfoFactory.getCpuPidUsedRatio(pid));
-        }
+//        if(mCheckedList.get(MonitorConst.APP_CPU_USED_RATIO)){
+//            mContentList.add(mInfoFactory.getCpuPidUsedRatio(pid));
+//        }
         if(mCheckedList.get(MonitorConst.APP_MEM_USED)){
             mContentList.add(mInfoFactory.getMemoryPidUsedSize(pid, mContext));
         }
 
-        if(mCheckedList.get(MonitorConst.CPU_USED_RATIO)){
-            mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
-        }
+//        if(mCheckedList.get(MonitorConst.CPU_USED_RATIO)){
+//            mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
+//        }
         if(mCheckedList.get(MonitorConst.CPU_CLOCK)){
             mContentList.add(mInfoFactory.getCpuFreqList());
         }

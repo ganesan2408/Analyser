@@ -216,6 +216,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
+        <activity
+            android:name=".ui.OneKeySleepActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/txt_onekey_sleep"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
 
 
         <!-- Benchmark start -->

@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.DebugLog;
 import com.yhh.analyser.utils.StringUtils;
 
 /**
@@ -25,6 +24,7 @@ public class BaseActivity extends AppCompatActivity{
         mContext = getApplicationContext();
 
         mActionBar = getSupportActionBar();
+
         if (hasActionBar()) {
             initActionBar(mActionBar);
         }else{
@@ -90,16 +90,15 @@ public class BaseActivity extends AppCompatActivity{
     private void initActionBar(ActionBar actionBar) {
         if (actionBar == null)
             return;
+
         if (hasBackButton()) {
             actionBar.setHomeAsUpIndicator(R.drawable.actionbar_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-            DebugLog.d("set back");
         }else if(hasMenuButton()){
             actionBar.setHomeAsUpIndicator(R.drawable.actionbar_menu);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-            DebugLog.i("set menu");
         }else {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
             actionBar.setDisplayUseLogoEnabled(false);

@@ -76,8 +76,11 @@
     <string name="toolbox_log_parser">解析Log</string>
     <string name="toolbox_more">更多实用工具</string>
 
-    <string name="adb_tips">    注意：请确保手机与电脑处于同一局域网(联想望京园区建议使用lenovo-RD)</string>
+    <string name="adb_tips">有了远程ADB，从此ADB再也不不用数据线.\n 1.手机与电脑处同一局域网\n(联想望京园区请使用lenovo-RD)\n
+        2.点击启动按钮，在电脑端输入下方ADB指令即可。</string>
 
+    <string name="txt_onekey_sleep">一键休眠</string>
+    <string name="txt_onekey_complete">完成</string>
 
     
     

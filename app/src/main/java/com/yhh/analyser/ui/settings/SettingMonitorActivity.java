@@ -8,14 +8,18 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.CompoundButton;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.MonitorChoice;
+import com.yhh.analyser.bean.app.AppInfo;
+import com.yhh.analyser.bean.app.ProcessInfo;
 import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.StringUtils;
 import com.yhh.analyser.widget.SwitchButton;
 
 import java.util.List;
@@ -44,6 +48,7 @@ public class SettingMonitorActivity extends BaseActivity {
 //    private MonitorSettings mMonitorSettings;
 
     private MonitorChoice mChoice;
+    private static final int TIMEOUT = 10000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,13 +87,67 @@ public class SettingMonitorActivity extends BaseActivity {
         findViewById(R.id.btn_diy_monitor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent monitorService = new Intent();
-                monitorService.setClass(mContext, MonitorService.class);
-                monitorService.putExtra("type", getIntent().getIntExtra("type",-1));
-                monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startService(monitorService);
-                finish();
+                final String pkgname = getIntent().getStringExtra("pkgname");
+                if (!StringUtils.isBlank(pkgname)) {
+                    Intent appIntent = getPackageManager().getLaunchIntentForPackage(pkgname);
+                    startActivity(appIntent);
+
+                    new Thread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            waitForAppStart(pkgname);
+                        }
+
+                    }).start();
+
+                } else {
+
+                    Intent monitorService = new Intent();
+                    monitorService.setClass(mContext, MonitorService.class);
+                    monitorService.putExtra("type", getIntent().getIntExtra("type", -1));
+                    monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startService(monitorService);
+                    finish();
+                }
             }
         });
+    }
+
+    Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            Intent monitorService = new Intent();
+            monitorService.setClass(mContext, MonitorService.class);
+            monitorService.putExtra("type", getIntent().getIntExtra("type", -1));
+            monitorService.putExtra("pid", Integer.valueOf(msg.what));
+            monitorService.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startService(monitorService);
+            finish();
+        }
+    };
+
+    /**
+     * wait for monitor application started.
+     *
+     * @param packageName package name of monitor application
+     */
+    private void waitForAppStart(String packageName) {
+        long startTime = System.currentTimeMillis();
+
+        AppInfo appInfo = new AppInfo();
+        appInfo.setPackageName(packageName);
+        ProcessInfo processInfo = new ProcessInfo();
+        while (System.currentTimeMillis() < startTime + TIMEOUT) {
+            processInfo.getRunningInfoByEqual(this, appInfo);
+            if (appInfo.getPid() != 0) {
+                break;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        mHandler.sendMessage(mHandler.obtainMessage(appInfo.getPid()));
     }
 }

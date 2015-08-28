@@ -4,13 +4,12 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.RootUtils;
 import com.yhh.analyser.utils.ShellUtils;
+import com.yhh.analyser.widget.SwitchButton;
 
 public class AdbWirelessActivity extends BaseActivity {
 
@@ -27,20 +26,22 @@ public class AdbWirelessActivity extends BaseActivity {
     }
 
     private void initView(){
-        ToggleButton adbToggle = (ToggleButton)findViewById(R.id.cb_adb_controller);
-        final TextView statusTxt = (TextView) findViewById(R.id.txt_adb_status);
-        adbToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        final SwitchButton adbSBtn = (SwitchButton)findViewById(R.id.cb_adb_controller);
+//        final TextView statusTxt = (TextView) findViewById(R.id.txt_adb_status);
+        adbSBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if(!isChecked) {
                     startAdbWireless();
-                    statusTxt.setText("CMD:  adb connect " + getWifiIp());
+                    adbSBtn.setText("adb connect " + getWifiIp());
                 }else {
                     stopAdbWireless();
-                    statusTxt.setText("已关闭");
+                    adbSBtn.setText("已关闭");
+
                 }
             }
         });
+
     }
 
     private void startAdbWireless(){

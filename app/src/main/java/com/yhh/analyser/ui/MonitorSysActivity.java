@@ -68,16 +68,16 @@ public class MonitorSysActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 if(!MonitorService.sMonitorIsRunning) {
-                   if(position==5){
+                   if(position==5){ //自定义监控
                         Intent diy = new Intent(mContext, SettingMonitorActivity.class);
-                       diy.putExtra("type", MonitorConst.MONITOR_DIY);
+                        diy.putExtra("type", MonitorConst.MONITOR_DIY);
                         startActivity(diy);
                         return;
-                    }else if(position==6){
+                    }else if(position==6){ //异常监控
                         Intent diy = new Intent(mContext, SettingExcptionActivity.class);
                         startActivity(diy);
                         return;
-                    }else  if(position==7){
+                    }else  if(position==7){ //高级监控
                        Intent diy = new Intent(mContext, SettingShellActivity.class);
                        startActivity(diy);
                        return;

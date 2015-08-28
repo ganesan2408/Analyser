@@ -28,6 +28,7 @@ import com.yhh.analyser.ui.KernelActivity;
 import com.yhh.analyser.ui.LogAnalyActivity;
 import com.yhh.analyser.ui.LogViewActivity;
 import com.yhh.analyser.ui.NodeViewActivity;
+import com.yhh.analyser.ui.OneKeySleepActivity;
 import com.yhh.analyser.ui.WakeLockActivity;
 import com.yhh.analyser.utils.AppUtils;
 import com.yhh.analyser.utils.ConstUtils;
@@ -74,7 +75,7 @@ public class MainBoxFragment extends Fragment{
             "查看节点","调节亮度","唤醒锁","远程ADB",
             "解析Log","查看Log","模拟终端", "安兔兔跑分",
             "自动化Case","模拟死机", "CPU压测", "IO压测",
-            "震动微调器","+1","+2","更多"
+            "震动微调器","一键休眠","+2","更多"
     };
 
 
@@ -90,7 +91,9 @@ public class MainBoxFragment extends Fragment{
             BenchmarkActivity.class,
 
             AutoActivity.class,
-            KernelActivity.class
+            KernelActivity.class,
+
+            OneKeySleepActivity.class //临时的
     };
     
     @Override
@@ -185,6 +188,11 @@ public class MainBoxFragment extends Fragment{
                 pkgName = "com.lenovo.vibratortool";
                 ActName = "com.lenovo.vibratortool.MainActivity";
                 runApp(rawId, AppName, pkgName, ActName);
+                break;
+
+            case 4:
+                Intent intent = new Intent(mContext, targetClasses[10]);
+                mContext.startActivity(intent);
                 break;
 
             default:

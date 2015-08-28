@@ -52,7 +52,7 @@ public class ProcessInfo {
 	            appInfo.setName(tmpName);
 	            appInfo.setLogo(ainfo.loadIcon(pm));
 	            appInfo.setPackageName(ainfo.packageName);
-                getRunningApp(context, appInfo);
+                getRunningInfo(context, appInfo); //设置pid, uid
 
 	            progressList.add(appInfo);
 		    }
@@ -60,14 +60,49 @@ public class ProcessInfo {
 		return progressList;
 	}
 
+    /**
+     * 获取所有能够启动的APP集合
+     *
+     * @param context
+     * @return
+     */
+    public List<AppInfo> getAllRunningApp(Context context) {
+        List<AppInfo> progressList = new ArrayList<AppInfo>();
+        PackageManager pm = context.getApplicationContext().getPackageManager();
+        List<ApplicationInfo> appList = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
+
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
+
+        String tmpName;
+        for (ApplicationInfo ainfo : appList) {
+            for(RunningAppProcessInfo running:runingApps) {
+                tmpName = ainfo.loadLabel(pm).toString();
+                if ((running.processName != null) && running.processName.equals(ainfo.packageName) &&  !tmpName.equals("分析中心")) {
+
+                    AppInfo appInfo = new AppInfo();
+                    appInfo.setName(tmpName);
+                    appInfo.setLogo(ainfo.loadIcon(pm));
+                    appInfo.setPackageName(ainfo.packageName);
+                    progressList.add(appInfo);
+                    break;
+                }
+            }
+        }
+        return progressList;
+    }
+
+
+
+
 	/**
-	 * 获取指定package名的apk的详细信息
+	 * 根据APP包名，增加app的pid, uid
 	 * 
 	 * @param context
 	 * @param appInfo
 	 * @return
 	 */
-	public void getRunningApp(Context context, AppInfo appInfo){
+	public void getRunningInfo(Context context, AppInfo appInfo){
 	  ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 	  List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
 
@@ -81,13 +116,13 @@ public class ProcessInfo {
 	}
 
     /**
-     * 获取指定包名的apk的详细信息
+     * 根据APP包名，增加app的pid, uid
      *
      * @param context
      * @param appInfo
      * @return
      */
-    public void getRunningPackage(Context context, AppInfo appInfo){
+    public void getRunningInfoByEqual(Context context, AppInfo appInfo){
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
 
@@ -99,7 +134,14 @@ public class ProcessInfo {
             }
         }
     }
-	
+
+    /**
+     * 根据APP包名，获取app的版本号，logo
+     *
+     * @param context
+     * @param pkgName
+     * @return
+     */
 	public AppInfo getPackageInfo(Context context,String pkgName){
 	    AppInfo appInfo = new AppInfo();
 	    PackageManager pm = context.getPackageManager();    
