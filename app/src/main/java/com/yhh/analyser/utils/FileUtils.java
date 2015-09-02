@@ -48,6 +48,7 @@ public class FileUtils {
         FileOutputStream fo = null;
         FileChannel in = null;
         FileChannel out = null;
+
         try{
             fi = new FileInputStream(src);
             fo = new FileOutputStream(des);
@@ -71,7 +72,7 @@ public class FileUtils {
                     out.close();
                 }
             }catch(IOException e){
-                Log.i(TAG,"close copyFileByChannel failure",e);
+                Log.i(TAG, "close copyFileByChannel failure", e);
             }
         }
     }
@@ -145,7 +146,7 @@ public class FileUtils {
     }
     
     public static boolean createFile(String destFileName){
-        File file = new File(destFileName);  
+        File file = new File(destFileName);
         if(!file.getParentFile().exists()){
             if(!file.getParentFile().mkdirs()){
                 Log.e(TAG,"create folder error");
@@ -199,30 +200,42 @@ public class FileUtils {
         }
         return stringBuffer.toString();
     }
-    
-    public static void deleteFile(String path){
-        if(checkPath(path)){
-            deleteFile(new File(path));
+
+    /**
+     * 遍历删除文件或目录
+     *
+     * @param file
+     * @return
+     */
+    public static boolean deleteFile(String path){
+        if(StringUtils.isBlank(path)){
+            return true;
         }
+        return deleteFile(new File(path));
     }
-    
-    public static void deleteFile(File dirFile){
-        if(dirFile.isFile()){
-            dirFile.delete();
-            return;
+
+    /**
+     * 遍历删除文件或目录
+     *
+     * @param file
+     * @return
+     */
+    public static boolean deleteFile(File file){
+        if(file.isFile()){
+            return file.delete();
         }
-        
-        if(dirFile.isDirectory()){
-            File[] childFiles = dirFile.listFiles();
+
+        if(file.isDirectory()){
+            File[] childFiles = file.listFiles();
             if(childFiles ==null || childFiles.length ==0){
-                dirFile.delete();
-                return;
+                return file.delete();
             }
             for(File f:childFiles){
                 deleteFile(f);
             }
-            dirFile.delete();
+            return file.delete();
         }
+        return false;
     }
     
 
