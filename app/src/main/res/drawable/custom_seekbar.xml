@@ -9,7 +9,7 @@
     <item>
         <clip>
             <shape>
-                <solid android:color="@color/drawer_arrow_second_color" />
+                <solid android:color="@color/textcolor_checked" />
             </shape>
         </clip>
     </item>

@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/light_purple"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/activity_vertical_margin" >
-    <TextView
-        android:id="@+id/txt_monitot_shell_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/shell_monitor_example"
-        android:gravity="center"
-        android:layout_gravity="center"/>
-       <LinearLayout
-            android:layout_marginTop="16dp"
-            android:layout_width="fill_parent"
-            android:layout_height="150sp"
-            android:background="@drawable/selector_preference_complete"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/shell_command"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingLeft="10sp"
-                android:layout_margin="15sp"
-                android:textSize="20sp"
-                android:hint="@string/shell_monitor_hint"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"/>
-        </LinearLayout>
+    android:background="@color/light_purple"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <Button
-        android:id="@+id/btn_senior_monitor"
+    <EditText
+        android:id="@+id/shell_command"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:gravity="center"
+        android:hint="@string/shell_monitor_hint"
+        android:paddingLeft="8dp"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_command"
+        android:layout_below="@id/shell_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="开始监控"/>
-</LinearLayout>
+        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_store_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="收藏" />
+
+        <Button
+            android:layout_toRightOf="@id/btn_store_up"
+            android:id="@+id/btn_senior_monitor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="监控" />
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/lv_shell"
+        android:layout_below="@id/rl_command"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

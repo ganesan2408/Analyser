@@ -9,7 +9,7 @@ package com.yhh.analyser.provider;
 import android.os.Handler;
 import android.util.Log;
 
-import com.yhh.analyser.ui.LogAnalyActivity;
+import com.yhh.analyser.view.activity.LogAnalyActivity;
 import com.yhh.analyser.bean.app.PhoneInfo;
 import com.yhh.analyser.utils.ConstUtils;
 

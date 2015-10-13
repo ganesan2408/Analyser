@@ -16,7 +16,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.util.Log;
 
+import com.yhh.analyser.config.OneKeyConfig;
 import com.yhh.analyser.utils.ConstUtils;
 
 import java.util.ArrayList;
@@ -75,10 +77,17 @@ public class ProcessInfo {
         List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
 
         String tmpName;
+        ArrayList<String> whiteList = OneKeyConfig.getWhiteList();
         for (ApplicationInfo ainfo : appList) {
             for(RunningAppProcessInfo running:runingApps) {
                 tmpName = ainfo.loadLabel(pm).toString();
-                if ((running.processName != null) && running.processName.equals(ainfo.packageName) &&  !tmpName.equals("分析中心")) {
+                if ((running.processName != null) && running.processName.equals(ainfo.packageName)) {
+                    Log.i(ConstUtils.DEBUG_TAG, tmpName+ ": "+ainfo.packageName);
+
+                    //过滤白名单的应用程序
+                    if(whiteList.contains(ainfo.packageName)){
+                        continue;
+                    }
 
                     AppInfo appInfo = new AppInfo();
                     appInfo.setName(tmpName);
@@ -91,8 +100,6 @@ public class ProcessInfo {
         }
         return progressList;
     }
-
-
 
 
 	/**

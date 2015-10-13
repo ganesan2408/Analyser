@@ -7,16 +7,15 @@
 package com.yhh.analyser.utils;
 
 public class CommandUtils {
-    /** GPU freq*/
-    public static final String GPU_CLOCK = "/sys/kernel/debug/clk/gcc_oxili_gfx3d_clk/measure";
-    /** bimc freq*/
-    public static final String BIMC_CLOCK = "/sys/kernel/debug/clk/bimc_clk/measure";
-    /** afab freq*/
-    public static final String AFAB_CLOCK = "sys/kernel/debug/clk/snoc_clk/measure";
+//    /** GPU freq*/
+//    public static final String GPU_CLOCK = "/sys/kernel/debug/clk/gcc_oxili_gfx3d_clk/measure";
+//    /** bimc freq*/
+//    public static final String BIMC_CLOCK = "/sys/kernel/debug/clk/bimc_clk/measure";
+//    /** afab freq*/
+//    public static final String AFAB_CLOCK = "sys/kernel/debug/clk/snoc_clk/measure";
     
     /** pm status*/
     public static final String CMD_POWER_STATUS = "/sys/private/pm_status";
-    public static final String CMD_TEMP_NOW = "/sys/devices/virtual/thermal/thermal_zone0/temp";
     public static final String CMD_CURRENT_NOW = "/sys/class/power_supply/battery/current_now";
     public static final String CMD_CURRENT_NEW = "/sys/module/qpnp_fg/parameters/update_curr";
     public static final String CMD_BRIGHTNESS_NOW = "/sys/class/leds/lcd-backlight/brightness";
@@ -31,6 +30,6 @@ public class CommandUtils {
     /** phone version info*/
     public static final String CMD_VERSION_CONF = "/system/etc/version.conf";
     
-    public static final String CMD_CAT = "cat ";
+//    public static final String CMD_CAT = "cat ";
     
 }

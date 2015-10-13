@@ -1,6 +1,6 @@
 package com.yhh.analyser.provider;
 
-import com.yhh.analyser.config.CommandConst;
+import com.yhh.analyser.config.CommandConfig;
 import com.yhh.analyser.utils.ShellUtils;
 
 /**
@@ -14,7 +14,7 @@ public class AlarmShellManager extends AlarmManager{
 
     @Override
     String getDumpsysAlarm() {
-        return ShellUtils.execCommand(CommandConst.DUMPSYS_ALARM, false).successMsg;
+        return ShellUtils.execCommand(CommandConfig.DUMPSYS_ALARM, false).successMsg;
     }
 
 

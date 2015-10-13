@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.yhh.analyser.bean.AppLaunchBean;
 import com.yhh.analyser.bean.AppLaunchList;
-import com.yhh.analyser.ui.MonitorAppActivity;
+import com.yhh.analyser.view.activity.MonitorAppActivity;
 import com.yhh.analyser.utils.DebugLog;
 
 import java.io.BufferedReader;

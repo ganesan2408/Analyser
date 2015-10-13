@@ -19,17 +19,17 @@ import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 import com.yhh.analyser.bean.app.PhoneInfo;
-import com.yhh.analyser.fragment.MainAnalysisFragment;
-import com.yhh.analyser.fragment.MainBoxFragment;
-import com.yhh.analyser.fragment.MainMonitorFragment;
-import com.yhh.analyser.fragment.MainPerfFragment;
-import com.yhh.analyser.fragment.MainStatusFragment;
-import com.yhh.analyser.ui.AboutActivity;
-import com.yhh.analyser.ui.FeedbackActivity;
-import com.yhh.analyser.ui.MyShotActivity;
-import com.yhh.analyser.ui.base.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
+import com.yhh.analyser.view.BaseActivity;
+import com.yhh.analyser.view.activity.AboutActivity;
+import com.yhh.analyser.view.activity.FeedbackActivity;
+import com.yhh.analyser.view.activity.MyShotActivity;
+import com.yhh.analyser.view.fragment.MainAnalysisFragment;
+import com.yhh.analyser.view.fragment.MainBoxFragment;
+import com.yhh.analyser.view.fragment.MainPerfFragment;
+import com.yhh.analyser.view.fragment.MainStatusFragment;
+import com.yhh.analyser.view.fragment.MainMonitorFragment;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu;
 
 public class Main extends BaseActivity {
@@ -130,7 +130,6 @@ public class Main extends BaseActivity {
                 for (int i = 0; i < count; i++) {
                     if (mRadioIds[i] == checkedId) {
                         mTabHost.setCurrentTab(i);
-//                        appNameTv.setText(mTitles[i]);
                         break;
                     }
                 }
@@ -142,7 +141,6 @@ public class Main extends BaseActivity {
 
     //设置默认选中的Tab
     private void setDefaultView() {
-//        appNameTv.setText(mTitles[0]);
         mTabHost.setCurrentTab(0);
     }
 
@@ -288,7 +286,7 @@ public class Main extends BaseActivity {
             editor.putBoolean("First", false);
             editor.commit();
 
-            menuMenu.toggle();
+//            menuMenu.toggle();
         }
     }
 }

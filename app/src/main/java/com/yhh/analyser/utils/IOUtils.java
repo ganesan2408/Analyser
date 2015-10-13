@@ -1,4 +1,4 @@
-package com.yhh.androidutils.utils;
+package com.yhh.analyser.utils;
 
 import java.io.Closeable;
 import java.io.IOException;

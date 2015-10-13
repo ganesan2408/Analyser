@@ -26,7 +26,7 @@ public class DialogUtils {
      * 显示等待加载的窗口
      * 
      * @param context
-     * @param content
+     * @param text
      */
     public static void showLoading(Context context, String text) {
         sProgressDialog = new Dialog(context, R.style.progress_dialog);

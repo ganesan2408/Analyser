@@ -2,8 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/primary_dark"
-    >
+    android:background="@color/primary_dark">
+
+    <LinearLayout
+        android:id="@+id/ll_freq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/monitor_gv"
+        android:layout_marginBottom="36dp">
+        <TextView
+            android:id="@+id/tv_freq_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_collecting_frequency"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_freq_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textSize="12dp"
+            android:layout_gravity="center_vertical"/>
+
+        <SeekBar
+            android:id="@+id/seekbar_freq"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:max="9"
+            android:maxHeight="3dp"
+            android:minHeight="3dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:progress="1"
+            android:progressDrawable="@drawable/custom_seekbar"/>
+    </LinearLayout>
+
+
+
     <GridView
         android:id="@+id/monitor_gv"
         android:layout_alignParentBottom="true"
@@ -12,7 +49,7 @@
         android:background="@color/light_gray"
         android:gravity="center"
         android:horizontalSpacing="1px"
-        android:numColumns="2"
+        android:numColumns="3"
         android:paddingLeft="1px"
         android:stretchMode="columnWidth"
         android:verticalSpacing="1px" />

@@ -179,7 +179,13 @@
         <item name="android:singleLine">true</item>
     </style>
     <!-- status analyser -->
-    
+
+    <!--<style name="ratingbar_style">-->
+        <!--<item name="progress_unreached_color">#CCCCCC</item>-->
+        <!--<item name="progress_reached_color">#3498DB</item>-->
+        <!--<item name="progress_text_color">#3498DB</item>-->
+    <!--</style>-->
+
     <!-- NumberProgressBar start -->
     <style name="NumberProgressBar_Default">
         <item name="android:layout_height">wrap_content</item>
@@ -320,7 +326,7 @@
         <item name="android:layout_weight" >1</item>
         <item name="android:button" >@null</item>
   <!--      <item name="android:textColor" >@color/green</item>-->
-        <item name="android:textSize" >16sp</item>
+        <item name="android:textSize" >12sp</item>
         <item name="android:gravity" >center_horizontal|bottom</item>
         <item name="android:layout_gravity" >bottom</item>
   <!--       <item name="android:background" >@drawable/tab_selector_checked_bg</item> -->

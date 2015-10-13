@@ -427,6 +427,7 @@ public class Utils {
 	public static String getCurrentTime(){
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		Date date = new Date(System.currentTimeMillis());
+
 		return formatter.format(date);
 	}
 	

@@ -12,8 +12,8 @@ import android.net.TrafficStats;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.yhh.analyser.ui.settings.SettingsActivity;
 import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.view.activity.MonitorSysActivity;
 
 /**
  * information of network traffic
@@ -28,7 +28,7 @@ public class TrafficInfo {
     
 	public void init(Context context) {
 	    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-	    timeSpan = pref.getInt(SettingsActivity.KEY_INTERVAL, 1);
+	    timeSpan = pref.getInt(MonitorSysActivity.KEY_INTERVAL, 1);
 	    revKbs = (float) (TrafficStats.getTotalRxBytes()/1024.0);
 	    sendKbs = (float) (TrafficStats.getTotalTxBytes()/1024.0);  
 	    if(DEBUG){

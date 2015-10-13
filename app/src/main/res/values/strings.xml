@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">分析中心</string>
+    <string name="app_name">Analytic Center</string>
 	<string name="app_secret_code">( 暗码 *#*#9999#*#* )</string>
 
-	<string name="system_analyzer">系统分析</string>
-	<string name="main_sys_analyser">系统监控器</string>
-	<string name="main_app_analyser">App监控器</string>
+	<string name="system_analyzer">System Analyzer</string>
+	<string name="main_sys_analyser">System Monitor</string>
+	<string name="main_app_analyser">Ap Monitor</string>
     <string name="main_app_analyser_sub">实时监控CPU/GPU/内存/电流/温度等状态</string>
-    <string name="main_log_analyser">Log分析器</string>
+    <string name="main_log_analyser">Log Analyzer</string>
     <string name="main_log_analyser_sub">查看Log,智能解析Log并可视化展现信息</string>
-    <string name="main_status_analyser">状态监控器</string>
+    <string name="main_status_analyser">Status Monitor</string>
     <string name="main_status_analyser_sub">可查看手机各种状态信息</string>
-    <string name="main_node_viewer">节点查看器</string>
+    <string name="main_node_viewer">Node Viewer</string>
     <string name="main_node_viewer_sub">查看节点值</string>
 	<string name="main_shell_analyser">超级终端</string>
 	<string name="main_adb_wireless">ADB wireless</string>
 	<string name="main_shell_analyser_sub">进入命令行模式</string>
-    <string name="main_automatic_robot">自动化</string>
+    <string name="main_automatic_robot">Automatic</string>
     <string name="main_automatic_robot_sub">自动化运行用户场景</string>
-	<string name="main_tool_analyser">工具箱</string>
+	<string name="main_tool_analyser">Tool Box</string>
     <string name="main_tool_analyser_sub">背光调节，Wifi信号等</string>
-    <string name="main_perf">性能调度器</string>
+    <string name="main_perf">Performance</string>
     <string name="main_perf_sub">性能优化调节CPU/GPU/温控等各种参数(开发中)</string>
     <string name="main_benchmark">性能跑分</string>
     <string name="main_benchmark_sub">自动化跑分并统计分数</string>
-    
+
+    <string name="monitor_shell">高级监控</string>
+    <string name="monitor_app">App监控</string>
+
     <string name="main_cpu_governor">CPU Governor</string>
     <string name="main_cpu_governor_sub">调节CPU核数，CPU频率(开发中)</string>
     
@@ -48,6 +51,7 @@
 
     <!-- 首页start -->
     <string name="title_monitor">监控</string>
+    <string name="title_app_monitor">应用监控</string>
     <string name="title_analyzer">分析</string>
     <string name="title_view">查看</string>
     <string name="title_performance">性能</string>
@@ -79,7 +83,9 @@
     <string name="adb_tips">有了远程ADB，从此ADB再也不不用数据线.\n 1.手机与电脑处同一局域网\n(联想望京园区请使用lenovo-RD)\n
         2.点击启动按钮，在电脑端输入下方ADB指令即可。</string>
 
+    <string name="txt_sync_time">时钟微调</string>
     <string name="txt_onekey_sleep">一键休眠</string>
+    <string name="txt_onekey_info">提示：能彻底强杀所有的应用程序，包含部分系统程序</string>
     <string name="txt_onekey_complete">完成</string>
 
     
@@ -97,6 +103,7 @@
 	<string name="about_version">软件版本</string>
 	<string name="yes_str">确定</string>
 	<string name="no_str">取消</string>
+	<string name="close_str">关闭</string>
 	<string name="rtn">返回</string>
 	<string name="right_into_description">into</string>   
 	<string name="log_search">搜索</string>
@@ -162,16 +169,16 @@
     <string name="menu_monitor_setting">监控设置</string>
     <string name="menu_score_setting">跑分设置</string>
     
-    <string name="menu_about">关于 ( *#*#9999#*#* )</string>
+    <string name="menu_about">关于</string>
     <string name="menu_about_title">关于</string>
     <!-- menu end-->
     
     <!-- #### CPU START -->
-    <string name="cpu_big_number">CPU大核 个数</string>
-    <string name="cpu_small_number">CPU小核 个数</string>
-    <string name="cpu_big_freq">CPU大核 频率(M)</string>
-    <string name="cpu_small_freq">CPU小核频率(M)</string>
-    <string name="gpu_freq_tv">GPU频率(M)</string>
+    <string name="cpu_big_number">大核数:&#160;&#160;</string>
+    <string name="cpu_small_number">小核数:&#160;&#160;</string>
+    <string name="cpu_big_freq">大核频率(M):&#160;&#160;</string>
+    <string name="cpu_small_freq">小核频率(M):&#160;&#160;</string>
+    <string name="gpu_freq_tv">GPU频率(M):&#160;&#160;</string>
     <string name="reflash_btn">更新</string>
     <string name="reflash_working">正在执行中。。。</string>
     <string name="reflash_comlepte">执行完成</string>
@@ -227,7 +234,7 @@
 
     <string name="btn_app_close">关闭</string>
 
-    <string name="app_collecting_frequency">监控频率(s)</string>
+    <string name="app_collecting_frequency">监控频率(s):&#160;&#160; </string>
     <string name="monitor_system_app">显示系统APP</string>
     
     <string name="app_monitor_item_title">设置监控项</string>
@@ -252,16 +259,19 @@
     <string name="shell_monitor_example">例如：cat /sys/class/leds/lcd-backlight/brightness</string>
     <string name="shell_top_title">Top Process</string>
     
+    <string name="et_offset">offset time</string>
+    <string name="tv_ms">ms</string>
+    <string name="btn_sync">更新</string>
 
+    
     <string name="update_at">更新于</string>
     
     <string name="app_tempearture_unit"> ℃ </string>
     <string name="app_percent_unit"> % </string>
     <string name="app_current_unit"> mA </string>
     
-    <string name="app_exception_tempearture">温度     ≥</string>
-    <string name="app_exception_cpu">CPU     ≥</string>
-    <string name="app_exception_current">电流     ≥</string>
+    <string name="app_exception_tempearture">温度 ≥ </string>
+    <string name="app_exception_suffix">℃时, 触发温度异常监控</string>
     
     <string name="app_automatic_window">开启自动化</string>
 
@@ -495,7 +505,7 @@
   <string name="drawer_close">drawer_close</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">创建一键休眠快捷方式</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

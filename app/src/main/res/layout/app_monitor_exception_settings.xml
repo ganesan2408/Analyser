@@ -10,71 +10,44 @@
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/selector_preference_header"
             android:gravity="center"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
-                android:layout_weight="1"
-                android:textSize="20sp"
+                android:textSize="12sp"
                 android:text="@string/app_exception_tempearture"/>
             <EditText
-                android:id="@+id/exception_temperature_limit"
+                android:id="@+id/et_temp_limit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="10sp"
                 android:textSize="20sp"
+                android:text="38"
                 android:background="@drawable/rounded_edittext"
                 android:inputType="number"
                 android:gravity="center"/>
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="1"
                 android:layout_marginRight="20sp"
-                android:textSize="20sp"
-                android:text="@string/app_tempearture_unit"/>
+                android:textSize="12sp"
+                android:text="@string/app_exception_suffix"/>
         </LinearLayout>
 
-       <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_preference_footer"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:text="@string/app_exception_current"/>
-            <EditText
-                android:id="@+id/exception_current_limit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10sp"
-                android:textSize="20sp"
-                android:background="@drawable/rounded_edittext"
-                android:inputType="number"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                android:layout_marginRight="20sp"
-                android:textSize="20sp"
-                android:text="@string/app_current_unit"/>
-        </LinearLayout>
+
     <Button
         android:id="@+id/btn_exception_monitor"
-        android:layout_margin="16dp"
+        android:layout_margin="60dp"
+        android:paddingLeft="90dp"
+        android:paddingRight="90dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:background="@color/primary_dark"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:text="@string/start_monitor"/>
 </LinearLayout>

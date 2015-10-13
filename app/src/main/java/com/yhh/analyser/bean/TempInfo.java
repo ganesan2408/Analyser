@@ -26,5 +26,9 @@ public class TempInfo {
         }
 		return temp;
 	}
-	
+
+    public static int getTemp() {
+        return Integer.parseInt(FileUtils.getCommandNodeValue(TMEM_PATH).trim());
+    }
+
 }

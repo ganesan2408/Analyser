@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,33 +22,43 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.config.MonitorConst;
-import com.yhh.analyser.core.Monitor;
-import com.yhh.analyser.core.MonitorApp;
-import com.yhh.analyser.core.MonitorAppDiy;
 import com.yhh.analyser.core.MonitorFactory;
+import com.yhh.analyser.core.monitor.Monitor;
+import com.yhh.analyser.core.monitor.MonitorApp;
+import com.yhh.analyser.core.monitor.MonitorAppDiy;
+import com.yhh.analyser.core.monitor.MonitorException;
 import com.yhh.analyser.provider.FloatCreator;
-import com.yhh.analyser.ui.MonitorSysActivity;
-import com.yhh.analyser.ui.settings.SettingsActivity;
+import com.yhh.analyser.core.monitor.MonitorShell;
+import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.ScreenShot;
+import com.yhh.analyser.view.activity.MonitorSysActivity;
 
 /**
  * Created by yuanhh1 on 2015/8/14.
  */
-public class MonitorService extends Service{
+public class MonitorService extends Service {
+    private static final String TAG = ConstUtils.DEBUG_TAG + "ms";
 
     private Context mContext;
 
-    /** 浮窗体*/
+    /**
+     * 浮窗体
+     */
     private View viFloatingWindow;
-    /** 浮窗头*/
+    /**
+     * 浮窗头
+     */
     private View viFloatingTitle;
 
-    /** 记录浮窗显示内容*/
+    /**
+     * 记录浮窗显示内容
+     */
     private TextView mFloatLv;
 
-    /**记录当前浮窗颜色 */
-    private static  int sColorIndex =0;
+    /**
+     * 记录当前浮窗颜色
+     */
+    private static int sColorIndex = 0;
     private int[] COLORS = new int[]{
             Color.GREEN, Color.YELLOW,
             Color.CYAN, Color.MAGENTA,
@@ -55,17 +66,25 @@ public class MonitorService extends Service{
             Color.BLUE
     };
 
-    /**浮窗生成器 */
+    /**
+     * 浮窗生成器
+     */
     private FloatCreator mFloatCreator;
 
-    /** 监控是否正在运行*/
+    /**
+     * 监控是否正在运行
+     */
     public static boolean sMonitorIsRunning = false;
 
 
-    /** 监控器*/
+    /**
+     * 监控器
+     */
     private Monitor mMonitor;
 
-    /** 循环监控处理 */
+    /**
+     * 循环监控处理
+     */
     private Handler handler;
 
     private TextView mFloatHideBtn;
@@ -79,6 +98,7 @@ public class MonitorService extends Service{
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.i(TAG, "onCreate");
         mContext = this.getApplicationContext();
         mFloatCreator = new FloatCreator(mContext);
         handler = new Handler();
@@ -89,20 +109,27 @@ public class MonitorService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(TAG, "onStartCommand");
         mFloatCreator.createFloatingWindow(viFloatingTitle, viFloatingWindow);
         initNotification(startId);
 
-        int type = intent.getIntExtra("type",1);
+        int type = intent.getIntExtra("type", 1);
 
-        if(type== MonitorConst.MONITOR_APP){
-            int pid = intent.getIntExtra("pid",0);
+        if (type == MonitorFactory.TYPE_APP) {
+            int pid = intent.getIntExtra("pid", 0);
             mMonitor = new MonitorApp(mContext, pid);
 
-        }else if(type== MonitorConst.MONITOR_APP_DIY){
-            int pid = intent.getIntExtra("pid",0);
+        } else if (type == MonitorFactory.TYPE_APP_DIY) {
+            int pid = intent.getIntExtra("pid", 0);
             mMonitor = new MonitorAppDiy(mContext, pid);
 
-        }else {
+        } else if (type == MonitorFactory.TYPE_SHELL) {
+            String commands = intent.getStringExtra("command");
+            mMonitor = new MonitorShell(mContext, commands);
+        } else if (type == MonitorFactory.TYPE_EXCEPTION) {
+            int limit = intent.getIntExtra("limit", 38);
+            mMonitor = new MonitorException(mContext, limit);
+        } else {
             mMonitor = MonitorFactory.newInstance(mContext, type);
         }
 
@@ -117,14 +144,15 @@ public class MonitorService extends Service{
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.i(TAG, "onBind");
         return null;
     }
 
 
-    private void readPrefs(){
+    private void readPrefs() {
         SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        int interval = mPreferences.getInt(SettingsActivity.KEY_INTERVAL, 1);
+        int interval = mPreferences.getInt(MonitorSysActivity.KEY_INTERVAL, 1);
         AppConfig.MONITOR_DELAY_TIME = interval * 1000;
     }
 
@@ -158,7 +186,7 @@ public class MonitorService extends Service{
         });
 
         mFloatHideBtn = (TextView) viFloatingTitle.findViewById(R.id.float_hide_btn);
-        mFloatHideBtn.setOnClickListener(new View.OnClickListener(){
+        mFloatHideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hideFloat(true);
@@ -186,9 +214,9 @@ public class MonitorService extends Service{
         floatShotBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ScreenShot.shoot(viFloatingWindow)) {
+                if (ScreenShot.shoot(viFloatingWindow)) {
                     Toast.makeText(mContext, "截图成功", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(MonitorService.this, "截图失败", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -198,7 +226,7 @@ public class MonitorService extends Service{
     }
 
 
-    private void initNotification(int startId){
+    private void initNotification(int startId) {
         PendingIntent contentIntent = PendingIntent.getActivity(getBaseContext(), 0,
                 new Intent(this, MonitorSysActivity.class), 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
@@ -210,16 +238,16 @@ public class MonitorService extends Service{
     }
 
 
-    private void autoChangeFloatColor(){
+    private void autoChangeFloatColor() {
         sColorIndex++;
         setFloatColor();
     }
 
-    private void setFloatColor(){
+    private void setFloatColor() {
         mFloatLv.setTextColor(COLORS[sColorIndex % 7]);
     }
 
-    private void hideFloat(boolean isHide){
+    private void hideFloat(boolean isHide) {
         if (isHide) {
             viFloatingWindow.setVisibility(View.GONE);
 //            mFloatTitleRl.setVisibility(View.GONE);
@@ -230,9 +258,8 @@ public class MonitorService extends Service{
             floatShotBtn.setVisibility(View.GONE);
 
 
-
             mShowAllTv.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             viFloatingWindow.setVisibility(View.VISIBLE);
 //            mFloatTitleRl.setVisibility(View.VISIBLE);
             mFloatHideBtn.setVisibility(View.VISIBLE);
@@ -247,6 +274,7 @@ public class MonitorService extends Service{
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "onDestroy");
         sMonitorIsRunning = false;
 
         handler.removeCallbacks(task);
@@ -260,20 +288,18 @@ public class MonitorService extends Service{
 
     /**
      * 后台监控服务
-     *
      */
     private Runnable task = new Runnable() {
 
         public void run() {
             if (sMonitorIsRunning) {
                 new MonitorTask().execute();
-            }else{
+            } else {
                 stopSelf();
             }
 
         }
     };
-
 
     class MonitorTask extends AsyncTask<String, Integer, String> {
 

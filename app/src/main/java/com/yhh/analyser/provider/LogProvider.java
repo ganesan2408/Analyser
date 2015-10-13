@@ -12,7 +12,7 @@ import android.util.Log;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.yhh.analyser.bean.app.PhoneInfo;
-import com.yhh.analyser.ui.LogAnalyActivity;
+import com.yhh.analyser.view.activity.LogAnalyActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.Utils;
 import com.yhh.analyser.utils.ChartTool;

@@ -38,6 +38,7 @@
             android:layout_centerVertical="true"
 	        android:layout_marginLeft="16dp"
             android:textSize="16dp"
+            android:textColor="@color/black"
             android:text="Test"/>
         <TextView
             android:id="@+id/txt_app_close"
