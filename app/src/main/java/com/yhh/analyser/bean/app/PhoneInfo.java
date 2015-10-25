@@ -11,7 +11,7 @@ import android.telephony.TelephonyManager;
 
 import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.androidutils.FileUtils;
 
 public class PhoneInfo {
     public static String ZOOM = "Z90";
@@ -58,7 +58,7 @@ public class PhoneInfo {
     public static String getInternalVersion() {
         String phoneVersion = null;
         
-        String value= FileUtils.getCommandNodeValue(CommandUtils.CMD_VERSION_CONF);
+        String value= FileUtils.readFile(CommandUtils.CMD_VERSION_CONF);
         String[] versionArr = value.split("\\n");
         for (String s : versionArr) {
             if (s.contains(ConstUtils.STR_VERSION_SIGN)) {

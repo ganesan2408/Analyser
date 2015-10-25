@@ -23,14 +23,15 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.app.PhoneInfo;
-import com.yhh.analyser.view.fragment.LogCurrentFragment;
-import com.yhh.analyser.view.fragment.LogHistoryFragment;
-import com.yhh.analyser.view.BaseActivity;
+import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
-import com.yhh.analyser.utils.FileUtils;
-import com.yhh.analyser.utils.TimeUtils;
+import com.yhh.analyser.view.BaseActivity;
+import com.yhh.analyser.view.fragment.LogCurrentFragment;
+import com.yhh.analyser.view.fragment.LogHistoryFragment;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.TimeUtils;
 
 public class LogViewActivity extends BaseActivity {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "LogViewActivity";
@@ -142,7 +143,7 @@ public class LogViewActivity extends BaseActivity {
             @Override
             public void run() {
                 String srcDir = ConstUtils.LOG_DIR;
-                String desDir = FileUtils.PATH_SD_LOG +"/aplog_"+ TimeUtils.getTime();
+                String desDir = AppConfig.PATH_SD_LOG +"/aplog_"+ TimeUtils.getCurrentTime(TimeUtils.DATETIME_UNDERLINE_FORMAT);
                 FileUtils.copyFolder(srcDir, desDir);
                 mHandler.sendEmptyMessage(0x11);
             }
@@ -163,7 +164,7 @@ public class LogViewActivity extends BaseActivity {
      */
     public void deleteHistoryLog(){
         Log.d(TAG,"deleteHistoryLog");
-        FileUtils.deleteFile(FileUtils.PATH_SD_LOG);
+        FileUtils.deleteFile(AppConfig.PATH_SD_LOG);
     }
     
     /**

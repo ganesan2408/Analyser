@@ -9,7 +9,6 @@ package com.yhh.analyser.bean;
 import android.util.Log;
 
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.TimeUtils;
 import com.yhh.analyser.provider.LogInterruptParser;
 
 import java.text.DecimalFormat;
@@ -118,8 +117,8 @@ public class LogWakeupList {
         mWakeupRatio = (float)mWakeUpTotalTime/(mWakeUpTotalTime + mSleepTotalTime)*100;
         StringBuilder sb = new StringBuilder();
         sb.append("总唤醒次数:   "+getWakekupCount());
-        sb.append("\n总唤醒时间:   "+TimeUtils.seconds2Hhmmss(getWakeUpTotalTime()));
-        sb.append("\n总休眠时间:   "+ TimeUtils.seconds2Hhmmss(getSleepTotalTime()));
+        sb.append("\n总唤醒时间:   "+seconds2Hhmmss(getWakeUpTotalTime()));
+        sb.append("\n总休眠时间:   "+ seconds2Hhmmss(getSleepTotalTime()));
         sb.append("\n唤醒比重:     "+df.format(getWakeupRatio())+"% \n\n");
         
         sb.append("中断号:次数, 平均间隔, 平均时长, 中断名\n");
@@ -136,5 +135,16 @@ public class LogWakeupList {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+        public  String seconds2Hhmmss(float seconds){
+        StringBuilder hhmmss = new StringBuilder();
+        int ss = (int)seconds;
+        hhmmss.append(seconds2Hhmmss(ss));
+        int ms = (int) ((seconds - ss)*1000);
+        if(ms>0){
+            hhmmss.append(ms+"ms");
+        }
+        return hhmmss.toString();
     }
 }

@@ -18,20 +18,20 @@ import com.yhh.analyser.bean.app.AppInfo;
 import com.yhh.analyser.bean.app.ProcessInfo;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
-import com.yhh.analyser.utils.TimeUtils;
 import com.yhh.analyser.view.BaseActivity;
+import com.yhh.analyser.widget.DropDownListView;
 import com.yhh.analyser.widget.letterlistview.CharacterParser;
 import com.yhh.analyser.widget.letterlistview.ClearEditText;
 import com.yhh.analyser.widget.letterlistview.PinyinComparator;
 import com.yhh.analyser.widget.letterlistview.SideBar;
 import com.yhh.analyser.widget.letterlistview.SideBar.OnTouchingLetterChangedListener;
 import com.yhh.analyser.widget.letterlistview.SortAdapter;
+import com.yhh.androidutils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import cn.trinea.android.common.view.DropDownListView;
 
 public class MonitorAppMainActivity extends BaseActivity {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "mama";
@@ -93,15 +93,10 @@ public class MonitorAppMainActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 									int position, long id) {
-//				if (position <= 1) {
-//					Intent intent = new Intent(mContext, MonitorSysActivity.class);
-//					startActivity(intent);
-//				} else {
 					Intent intent = new Intent(mContext, com.yhh.analyser.view.activity.MonitorAppActivity.class);
 					intent.putExtra("appName", ((AppInfo) adapter.getItem(position-1)).getName());
 					intent.putExtra("packageName", ((AppInfo) adapter.getItem(position-1)).getPackageName());
 					startActivity(intent);
-//				}
 			}
 		});
 
@@ -133,7 +128,7 @@ public class MonitorAppMainActivity extends BaseActivity {
 		});
 		
 		if(null == mAppList){
-			DialogUtils.showDialog(mContext,"正在加载中...");
+			DialogUtils.showLoading(this);
 		    new Thread(new Runnable(){
 
                 @Override
@@ -233,7 +228,7 @@ public class MonitorAppMainActivity extends BaseActivity {
 		@Override
 		protected void onPostExecute(String[] strings) {
 			sortListView.setAdapter(adapter);
-			sortListView.onDropDownComplete(getString(R.string.update_at)+ TimeUtils.getStandardTime());
+			sortListView.onDropDownComplete(getString(R.string.update_at) + TimeUtils.getCurrentTime(TimeUtils.DATE_TIME_FORMAT));
 
 			super.onPostExecute(strings);
 		}

@@ -6,18 +6,19 @@ import android.util.Log;
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.DebugLog;
-import com.yhh.analyser.utils.FileUtils;
-import com.yhh.analyser.utils.TimeUtils;
+import com.yhh.androidutils.DebugLog;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.TimeUtils;
 
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 /**
+ * Monitor
+ *
  * Created by yuanhh1 on 2015/8/19.
  */
 public abstract class Monitor {
@@ -119,7 +120,7 @@ public abstract class Monitor {
     private String getContentBody(ArrayList<String> infoList){
         int len = infoList.size();
         StringBuffer sb = new StringBuffer();
-        sb.append(TimeUtils.getStandardTime()+",");
+        sb.append(TimeUtils.getCurrentTime(TimeUtils.DATE_TIME_FORMAT)+",");
         for(int i=0; i<len; i++){
             sb.append(infoList.get(i) + ",");
         }
@@ -153,11 +154,12 @@ public abstract class Monitor {
 
     private void createMonitorFile() {
         String fileType = getFileType()==null ? "" : getFileType();
-        String fileFullName = AppConfig.MONITOR_DIR + "/" + TimeUtils.getTime() + fileType;
-        FileUtils.createFile(fileFullName);
+        String fileFullName = AppConfig.MONITOR_DIR + "/" + TimeUtils.getCurrentTime(TimeUtils.DATETIME_UNDERLINE_FORMAT) + fileType;
+
         try {
+            FileUtils.createFile(fileFullName);
             bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileFullName)));
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

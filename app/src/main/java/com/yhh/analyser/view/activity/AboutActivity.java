@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.umeng.update.UmengUpdateAgent;
 import com.yhh.analyser.R;
 import com.yhh.analyser.view.BaseActivity;
-import com.yhh.analyser.utils.AppUtils;
+import com.yhh.androidutils.AppUtils;
 
 public class AboutActivity extends BaseActivity {
     TextView mLogoInfotv;
@@ -46,7 +46,7 @@ public class AboutActivity extends BaseActivity {
         findViewById(R.id.about_update).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AboutActivity.this,"已是最新版本", Toast.LENGTH_SHORT).show();
+                UmengUpdateAgent.update(AboutActivity.this); //更新umeng
             }
         });
 

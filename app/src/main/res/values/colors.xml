@@ -43,5 +43,12 @@
     <color name="drawer_arrow_second_color">#303f9f</color>
     <color name="ldrawer_color">#FFFFFF</color>
     <!-- LDrawer end -->
+
+	<!-- drop down list header font color -->
+	<color name="drop_down_list_header_font_color">#000000</color>
+	<!-- drop down list header second font color -->
+	<color name="drop_down_list_header_second_font_color">#000000</color>
+	<!-- drop down list footer font color -->
+	<color name="drop_down_list_footer_font_color">#000000</color>
     
 </resources>

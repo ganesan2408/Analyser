@@ -9,7 +9,8 @@ package com.yhh.analyser.bean;
 import com.yhh.analyser.bean.app.PhoneInfo;
 import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.StringUtils;
 
 class ScreenInfo {
     
@@ -22,9 +23,9 @@ class ScreenInfo {
 	    }else{
 	        cmd = CommandUtils.CMD_BRIGHTNESS_NOW;
 	    }
-	    
-        String str = FileUtils.getCommandNodeValue(cmd);
-        if(str !=null && !"".equals(str)){
+
+		String str = FileUtils.readFile(cmd);
+		if (!StringUtils.isBlank(str)) {
             brightness =  Integer.valueOf(str.trim());
         }
 		return brightness;

@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.utils.RootUtils;
-import com.yhh.analyser.utils.ShellUtils;
+import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.widget.SwitchButton;
+import com.yhh.androidutils.ShellUtils;
 
 public class AdbWirelessActivity extends BaseActivity {
 

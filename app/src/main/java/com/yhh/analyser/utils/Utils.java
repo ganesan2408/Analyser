@@ -6,13 +6,6 @@
  */
 package com.yhh.analyser.utils;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ComponentInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.os.Environment;
 import android.util.Log;
 
@@ -30,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,17 +31,17 @@ public class Utils {
 	private static final String TAG= ConstUtils.DEBUG_TAG + "Utils";
 	public static long firstTime;
 	
-	public static String getAppName(Context context, String packageName){
-        String applicationName = packageName;
-        PackageManager packageManager = context.getApplicationContext().getPackageManager(); 
-        try {
-            ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
-            applicationName =  (String) packageManager.getApplicationLabel(appInfo); 
-//            Log.i(TAG,"applicationName="+applicationName);
-        } catch (NameNotFoundException e) {
-        }
-        return applicationName;
-    }
+//	public static String getAppName(Context context, String packageName){
+//        String applicationName = packageName;
+//        PackageManager packageManager = context.getApplicationContext().getPackageManager();
+//        try {
+//            ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
+//            applicationName =  (String) packageManager.getApplicationLabel(appInfo);
+////            Log.i(TAG,"applicationName="+applicationName);
+//        } catch (NameNotFoundException e) {
+//        }
+//        return applicationName;
+//    }
 	
 	
 	/**
@@ -100,56 +92,56 @@ public class Utils {
 	}
 	
 	/**
-	 * 启动指定app
-	 * @param packageName
-	 * 		package name
-	 * @param activityName
-	 * 		activity name
-	 * @return
-	 */
-	public static boolean startActivity(String packageName, String activityName){		
-		String command = "am start -n "+ packageName+ "/" + activityName;
-		return runShell(command);
-	}
+//	 * 启动指定app
+//	 * @param packageName
+//	 * 		package name
+//	 * @param activityName
+//	 * 		activity name
+//	 * @return
+//	 */
+//	public static boolean startActivity(String packageName, String activityName){
+//		String command = "am start -n "+ packageName+ "/" + activityName;
+//		return runShell(command);
+//	}
 	
-	/**
-	 * 重启指定app
-	 * @param packageName
-	 * 		package name
-	 * @param activityName
-	 * 		activity name
-	 * @return
-	 */
-	public static boolean restartActivity(String packageName, String activityName){		
-		String command = "am start -S -n "+ packageName+ "/" + activityName;
-		return runShell(command);
-	}
+//	/**
+//	 * 重启指定app
+//	 * @param packageName
+//	 * 		package name
+//	 * @param activityName
+//	 * 		activity name
+//	 * @return
+//	 */
+//	public static boolean restartActivity(String packageName, String activityName){
+//		String command = "am start -S -n "+ packageName+ "/" + activityName;
+//		return runShell(command);
+//	}
 	
-	/**
-	 * 结束指定app
-	 * @param packageName
-	 * 		package name
-	 * @return
-	 */
-	public static boolean stopActivity(String packageName){
-		String command = "am force-stop "+ packageName;
-		return runShell(command);
-	}
-	
-	
-	static boolean runShell(String command, boolean isWaitFor){
-		if(!isWaitFor){
-			try {
-				Runtime.getRuntime().exec(command);
-			} catch (IOException e) {
-				Log.e(TAG,"runShell failure.",e);
-				return false;
-			}
-		}else{
-			return runShell(command);
-		}
-		return true;
-	}
+//	/**
+//	 * 结束指定app
+//	 * @param packageName
+//	 * 		package name
+//	 * @return
+//	 */
+//	public static boolean stopActivity(String packageName){
+//		String command = "am force-stop "+ packageName;
+//		return runShell(command);
+//	}
+//
+//
+//	static boolean runShell(String command, boolean isWaitFor){
+//		if(!isWaitFor){
+//			try {
+//				Runtime.getRuntime().exec(command);
+//			} catch (IOException e) {
+//				Log.e(TAG,"runShell failure.",e);
+//				return false;
+//			}
+//		}else{
+//			return runShell(command);
+//		}
+//		return true;
+//	}
 	
 	
 	/**
@@ -163,7 +155,7 @@ public class Utils {
 		Process process = null;
 		try {
 			process = Runtime.getRuntime().exec(command);
-			b = showProcessErrorStream(process);
+//			b = showProcessErrorStream(process);
 			process.waitFor(); //花费0.8s
 		} catch (Exception e) {
 			b = false;
@@ -179,73 +171,73 @@ public class Utils {
 
 	
 	
-	/**
-	 * 运行adb指令
-	 * @param command
-	 * 		指令
-	 * @return
-	 */
-	static String runShellwithResult(String command){
-		Process process = null;
-		String str = null;
-		try {
-			process = Runtime.getRuntime().exec(command);
-			str = readProcessInfoStream(process);
-			process.waitFor();
-		} catch (Exception e) {
-			Log.e(TAG,"runShell failure.",e);
-		}finally{
-			if(process != null){
-				process.destroy();
-			}
-		}
-		return str;
-	}
+//	/**
+//	 * 运行adb指令
+//	 * @param command
+//	 * 		指令
+//	 * @return
+//	 */
+//	static String runShellwithResult(String command){
+//		Process process = null;
+//		String str = null;
+//		try {
+//			process = Runtime.getRuntime().exec(command);
+//			str = readProcessInfoStream(process);
+//			process.waitFor();
+//		} catch (Exception e) {
+//			Log.e(TAG,"runShell failure.",e);
+//		}finally{
+//			if(process != null){
+//				process.destroy();
+//			}
+//		}
+//		return str;
+//	}
+//
+//	private static boolean showProcessErrorStream(Process process){
+//		BufferedReader br = null;
+//		String line = null;
+//		boolean noError=true;
+//		try{
+//			br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//			while((line = br.readLine())!=null){
+//				if(line.contains("Error type 3")){
+//					noError = false;
+//				}
+//				Log.d(TAG,"error stream: "+line);
+//			}
+//		}catch(IOException e){
+//			Log.d(TAG, "showProcessErrorStream IOException");
+//		}finally{
+//			try {
+//				br.close();
+//			} catch (IOException e) {
+//				Log.d(TAG, "close showProcessErrorStream IOException");
+//			}
+//		}
+//		return noError;
+//	}
 	
-	private static boolean showProcessErrorStream(Process process){
-		BufferedReader br = null;
-		String line = null;
-		boolean noError=true;
-		try{
-			br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-			while((line = br.readLine())!=null){
-				if(line.contains("Error type 3")){
-					noError = false;
-				}
-				Log.d(TAG,"error stream: "+line);
-			}
-		}catch(IOException e){
-			Log.d(TAG, "showProcessErrorStream IOException");
-		}finally{
-			try {
-				br.close();
-			} catch (IOException e) {
-				Log.d(TAG, "close showProcessErrorStream IOException");
-			}
-		}
-		return noError;
-	}
-	
-	private static String readProcessInfoStream(Process process){
-		BufferedReader br = null;
-		StringBuffer sb = new StringBuffer();
-		String line = null;
-		try{
-			br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			while((line = br.readLine())!=null){
-				sb.append(line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				br.close();
-			} catch (IOException e) {
-				Log.d(TAG, "close showProcessInfoStream IOException");
-			}
-		}
-		return sb.toString();
-	}
+//	private static String readProcessInfoStream(Process process){
+//		BufferedReader br = null;
+//		StringBuffer sb = new StringBuffer();
+//		String line = null;
+//		try{
+//			br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//			while((line = br.readLine())!=null){
+//				sb.append(line);
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}finally{
+//			try {
+//				br.close();
+//			} catch (IOException e) {
+//				Log.d(TAG, "close showProcessInfoStream IOException");
+//			}
+//		}
+//		return sb.toString();
+//	}
 	
 	/**
 	 * 解析XML文件
@@ -431,24 +423,24 @@ public class Utils {
 		return formatter.format(date);
 	}
 	
-	/**
-	 * 根据 应用程序名，获取包名和activity名
-	 */
-	public static List<String> getAppInfoByName(Context context,String label){
-		ArrayList<String> packageAndActivity = new ArrayList<String>();
-		PackageManager manager = context.getPackageManager();
-		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-		List<ResolveInfo> apps = manager.queryIntentActivities(mainIntent, 0);
-		// 将获取到的APP的信息按名字进行排序
-		for (ResolveInfo info : apps) {
-			ComponentInfo ci = info.activityInfo;
-			if(manager.getApplicationLabel(ci.applicationInfo).equals(label)){
-				packageAndActivity.add(ci.packageName);
-				packageAndActivity.add(ci.name);
-				break;
-			}
-		}
-		return packageAndActivity;
-	}
+//	/**
+//	 * 根据 应用程序名，获取包名和activity名
+//	 */
+//	public static List<String> getAppInfoByName(Context context,String label){
+//		ArrayList<String> packageAndActivity = new ArrayList<String>();
+//		PackageManager manager = context.getPackageManager();
+//		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+//		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+//		List<ResolveInfo> apps = manager.queryIntentActivities(mainIntent, 0);
+//		// 将获取到的APP的信息按名字进行排序
+//		for (ResolveInfo info : apps) {
+//			ComponentInfo ci = info.activityInfo;
+//			if(manager.getApplicationLabel(ci.applicationInfo).equals(label)){
+//				packageAndActivity.add(ci.packageName);
+//				packageAndActivity.add(ci.name);
+//				break;
+//			}
+//		}
+//		return packageAndActivity;
+//	}
 }

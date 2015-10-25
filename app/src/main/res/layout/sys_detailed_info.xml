@@ -30,7 +30,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
-            android:max="9"
+            android:max="29"
             android:maxHeight="3dp"
             android:minHeight="3dp"
             android:paddingLeft="12dp"

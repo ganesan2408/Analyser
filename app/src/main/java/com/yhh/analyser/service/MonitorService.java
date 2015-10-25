@@ -103,13 +103,13 @@ public class MonitorService extends Service {
         mFloatCreator = new FloatCreator(mContext);
         handler = new Handler();
         initView();
-
         sMonitorIsRunning = true;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "onStartCommand");
+        sMonitorIsRunning = true;
         mFloatCreator.createFloatingWindow(viFloatingTitle, viFloatingWindow);
         initNotification(startId);
 
@@ -121,6 +121,7 @@ public class MonitorService extends Service {
 
         } else if (type == MonitorFactory.TYPE_APP_DIY) {
             int pid = intent.getIntExtra("pid", 0);
+            Log.i(TAG,"pid=" + pid);
             mMonitor = new MonitorAppDiy(mContext, pid);
 
         } else if (type == MonitorFactory.TYPE_SHELL) {

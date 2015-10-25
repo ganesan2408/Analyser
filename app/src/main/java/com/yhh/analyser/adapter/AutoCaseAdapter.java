@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.DebugLog;
+import com.yhh.androidutils.DebugLog;
 
 public class AutoCaseAdapter extends BaseAdapter {
     int checkedPosition = -1;

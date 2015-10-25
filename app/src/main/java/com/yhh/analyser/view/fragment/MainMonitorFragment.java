@@ -24,12 +24,12 @@ import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.MonitorService;
-import com.yhh.analyser.utils.DebugLog;
 import com.yhh.analyser.view.BaseFragment;
 import com.yhh.analyser.view.activity.MonitorAppMainActivity;
 import com.yhh.analyser.view.activity.MonitorDiyActivity;
 import com.yhh.analyser.view.activity.MonitorExceptionActivity;
 import com.yhh.analyser.view.activity.MonitorShellActivity;
+import com.yhh.androidutils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,6 +110,7 @@ public class MainMonitorFragment extends BaseFragment {
                                     int position, long id) {
                 if (MonitorService.sMonitorIsRunning) {
                     Toast.makeText(mContext, "监控已启动,请勿重复开启", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 if(position == MonitorFactory.TYPE_DIY) { //可选监控

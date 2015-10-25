@@ -20,8 +20,7 @@ import android.widget.TextView;
 import com.yhh.analyser.R;
 import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.ShellUtils;
-import com.yhh.analyser.utils.ShellUtils.CommandResult;
+import com.yhh.androidutils.ShellUtils;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -79,7 +78,7 @@ public class StatusTopProcFragment extends Fragment
         mScheService.scheduleAtFixedRate(new Runnable(){
             @Override
             public void run() {
-                CommandResult cr = ShellUtils.execCommand(CommandUtils.CMD_TOP_PROCESS, false);
+                ShellUtils.CommandResult cr = ShellUtils.execCommand(CommandUtils.CMD_TOP_PROCESS, false);
                 mHandler.sendMessage(mHandler.obtainMessage(1,cr.successMsg + "\n" + cr.errorMsg));
             }
         },  0, INTERVAL_TIME, TimeUnit.SECONDS);

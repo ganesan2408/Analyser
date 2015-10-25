@@ -5,6 +5,8 @@
 package com.yhh.analyser.view.activity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,9 +24,9 @@ import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.MyFileUtils;
-import com.yhh.analyser.utils.StringUtils;
 import com.yhh.analyser.view.BaseActivity;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +103,7 @@ public class MonitorShellActivity extends BaseActivity {
             mShellList = new ArrayList<>();
         }
 
-        mShellLv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mShellList));
+        mShellLv.setAdapter(new ArrayAdapter<>(this, R.layout.auto_comlete_drop_down, mShellList));
         mShellLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -109,18 +111,18 @@ public class MonitorShellActivity extends BaseActivity {
             }
         });
 
-//        mShellLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                return false;
-//            }
-//        });
+        mShellLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                isDeleteDialog(position);
+                return false;
+            }
+        });
 
     }
 
     private List<String> getData() {
-        return MyFileUtils.readFile2List(AppConfig.ADB_SHELL_FILE);
+        return FileUtils.readFile2List(AppConfig.ADB_SHELL_FILE);
     }
 
     private void updateData() {
@@ -130,25 +132,41 @@ public class MonitorShellActivity extends BaseActivity {
         }
 
         mShellList.add(newCmd);
-        MyFileUtils.writeFile(AppConfig.ADB_SHELL_FILE, MyFileUtils.NEW_LINE + newCmd, true);
+        FileUtils.writeFile(AppConfig.ADB_SHELL_FILE, FileUtils.NEW_LINE + newCmd, true);
 
         if (mShellList != null) {
             mShellLv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, mShellList));
         }
     }
 
-    private void deleteData(){
-        String newCmd = mCmdEdit.getText().toString();
-        if (StringUtils.isBlank(newCmd) || mShellList.contains(newCmd)) {
-            return;
-        }
-
-        mShellList.remove(newCmd);
-        MyFileUtils.writeFile(AppConfig.ADB_SHELL_FILE, MyFileUtils.NEW_LINE + newCmd, true);
+    private void deleteData(int index){
+        mShellList.remove(index);
+        FileUtils.writeFile(AppConfig.ADB_SHELL_FILE, mShellList, false);
 
         if (mShellList != null) {
-            mShellLv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, mShellList));
+            mShellLv.setAdapter(new ArrayAdapter<>(this,  R.layout.auto_comlete_drop_down, mShellList));
         }
     }
 
+
+
+    public  void isDeleteDialog(final int index){
+        new AlertDialog.Builder(MonitorShellActivity.this)
+                .setTitle(R.string.reminder_alert)
+                .setMessage(mShellList.get(index)+ getString(R.string.delete_alert))
+                .setPositiveButton(R.string.yes_str, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteData(index);
+                    }
+                })
+                .setNegativeButton(R.string.no_str, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+    }
 }

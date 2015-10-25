@@ -9,9 +9,10 @@ package com.yhh.analyser.core.monitor;
 import android.content.Context;
 
 import com.yhh.analyser.core.MonitorFactory;
-import com.yhh.analyser.utils.DebugLog;
-import com.yhh.analyser.utils.ShellUtils;
-import com.yhh.analyser.utils.StringUtils;
+import com.yhh.androidutils.DebugLog;
+import com.yhh.androidutils.ShellUtils;
+import com.yhh.androidutils.StringUtils;
+
 
 public class MonitorShell  extends Monitor {
     String[] commands;
@@ -20,7 +21,7 @@ public class MonitorShell  extends Monitor {
         super(context);
         commands = parseCommand(cmds);
         for(String cmd:commands){
-            DebugLog.d("----"+cmd);
+            DebugLog.d("----" + cmd);
         }
     }
     

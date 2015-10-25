@@ -12,10 +12,10 @@ import android.util.Log;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.yhh.analyser.bean.app.PhoneInfo;
-import com.yhh.analyser.view.activity.LogAnalyActivity;
-import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.Utils;
 import com.yhh.analyser.utils.ChartTool;
+import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.view.activity.LogAnalyActivity;
+import com.yhh.androidutils.AppUtils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -129,7 +129,7 @@ public class LogProvider {
             while ((line = br.readLine()) != null) {
                 String[] split = line.split("#");
                 appStart.add(split[0]);
-                appName.add(Utils.getAppName(mContext, split[1]));
+                appName.add(AppUtils.getAppName(mContext, split[1]));
 //                Log.i(TAG,split[1]+" ==> "+Utils.getAppName(mContext, split[1]));
             }
             mForeApps.add(appStart);

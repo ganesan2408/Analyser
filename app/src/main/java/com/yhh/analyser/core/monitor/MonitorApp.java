@@ -48,10 +48,10 @@ public class MonitorApp extends Monitor {
 
     @Override
     public String monitor() {
-        mCpuInfo.updateCpu(pid);
-
         mContentList.clear();
-        mContentList.add(mCpuInfo.getProcessCpuRatio(pid));
+
+        mCpuInfo.updateCpu(pid);
+        mContentList.add(mCpuInfo.getCpuRatioComplete());
         mContentList.add( mMemoryInfo.getPidMemorySize(pid, mContext)/1024 +"");
 
         write2File(mContentList);

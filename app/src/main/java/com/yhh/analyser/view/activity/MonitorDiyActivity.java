@@ -17,10 +17,10 @@ import com.yhh.analyser.bean.MonitorChoice;
 import com.yhh.analyser.bean.app.AppInfo;
 import com.yhh.analyser.bean.app.ProcessInfo;
 import com.yhh.analyser.service.MonitorService;
-import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.StringUtils;
+import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.widget.SwitchButton;
+import com.yhh.androidutils.StringUtils;
 
 import java.util.List;
 

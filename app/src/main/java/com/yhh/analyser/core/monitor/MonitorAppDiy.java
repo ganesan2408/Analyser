@@ -71,29 +71,20 @@ public class MonitorAppDiy extends Monitor {
 
             if(mCheckedList.get(MonitorFactory.CPU_USED_RATIO)){
                 mContentList.add(mInfoFactory.getCpuPidUsedRatio(pid));
-                mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
+                mContentList.add(mInfoFactory.getCpuRatioList().get(0));
             }else{
                 mContentList.add(mInfoFactory.getCpuPidUsedRatioComplete(pid));
             }
-//
-//            mInfoFactory.getCpuInfo().updateCpu(pid);
-//            DebugLog.d("update pid="+pid);
+
         }else if(mCheckedList.get(MonitorFactory.CPU_USED_RATIO)){
             mInfoFactory.getCpuInfo().updateAllCpu();
-            mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
-//            DebugLog.d("update sys");
+            mContentList.add(mInfoFactory.getCpuRatioList().get(0));
         }
 
-//        if(mCheckedList.get(MonitorFactory.APP_CPU_USED_RATIO)){
-//            mContentList.add(mInfoFactory.getCpuPidUsedRatio(pid));
-//        }
         if(mCheckedList.get(MonitorFactory.APP_MEM_USED)){
             mContentList.add(mInfoFactory.getMemoryPidUsedSize(pid, mContext));
         }
 
-//        if(mCheckedList.get(MonitorFactory.CPU_USED_RATIO)){
-//            mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
-//        }
         if(mCheckedList.get(MonitorFactory.CPU_CLOCK)){
             mContentList.add(mInfoFactory.getCpuFreqList());
         }

@@ -6,9 +6,9 @@
  */
 package com.yhh.analyser.bean;
 
-import com.yhh.analyser.utils.FileUtils;
 
-
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.StringUtils;
 
 public class TempInfo {
     private static final String TMEM_PATH = "/sys/class/power_supply/battery/temp";
@@ -19,16 +19,16 @@ public class TempInfo {
      */
 	public static float get() {
 	    float temp = 0;
-	    String tempStr = FileUtils.getCommandNodeValue(TMEM_PATH);
+	    String tempStr = FileUtils.readFile(TMEM_PATH);
         
-        if(tempStr !=null){
+        if(!StringUtils.isBlank(tempStr)){
             temp = (float) (Integer.valueOf(tempStr.trim()) *1.0/10);
         }
 		return temp;
 	}
 
     public static int getTemp() {
-        return Integer.parseInt(FileUtils.getCommandNodeValue(TMEM_PATH).trim());
+        return Integer.parseInt(FileUtils.readFile(TMEM_PATH));
     }
 
 }

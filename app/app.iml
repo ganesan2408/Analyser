@@ -95,10 +95,10 @@
     <orderEntry type="library" exported="" name="qilibrary" level="project" />
     <orderEntry type="library" exported="" name="com.umeng.fb.5.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.1.1" level="project" />
+    <orderEntry type="library" exported="" name="umeng-update-v2.6.0.1" level="project" />
     <orderEntry type="library" exported="" name="chartlib" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.6" level="project" />
-    <orderEntry type="module" module-name="swipemenulistview" exported="" />
-    <orderEntry type="module" module-name="trineaandroidcommon" exported="" />
+    <orderEntry type="module" module-name="androidutils" exported="" />
   </component>
 </module>

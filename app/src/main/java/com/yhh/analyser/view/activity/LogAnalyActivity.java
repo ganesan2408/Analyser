@@ -29,15 +29,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.provider.LogBatteryParser;
 import com.yhh.analyser.provider.LogPmParser;
 import com.yhh.analyser.provider.LogSleepParser;
 import com.yhh.analyser.provider.LogcatParser;
-import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.widget.numberprogressbar.NumberProgressBar;
+import com.yhh.androidutils.FileUtils;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
@@ -213,7 +214,7 @@ public class LogAnalyActivity extends BaseActivity {
     }
 
     public void showChooseLogDialog() {
-        final String[] files = FileUtils.listFolders(FileUtils.PATH_SD_LOG);
+        final String[] files = FileUtils.listFolders(AppConfig.PATH_SD_LOG);
         Log.i(TAG, "files.LEN=" + (files == null ? 0 : files.length));
 
         new AlertDialog.Builder(this)
@@ -240,7 +241,7 @@ public class LogAnalyActivity extends BaseActivity {
                         if (files == null || files.length < 1) {
                             return;
                         }
-                        mParseDir = FileUtils.PATH_SD_LOG + "/" + files[selectedFileIndex];
+                        mParseDir = AppConfig.PATH_SD_LOG + "/" + files[selectedFileIndex];
 
                         if (FileUtils.checkPath(mParseDir + "/aplog")) {
                             mParseDir += "/aplog";

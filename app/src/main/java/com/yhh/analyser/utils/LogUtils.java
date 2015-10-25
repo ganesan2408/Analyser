@@ -1,8 +1,8 @@
 /**
  * @author yuanhh1
- * 
+ *
  * @email yuanhh1@lenovo.com
- * 
+ *
  */
 package com.yhh.analyser.utils;
 
@@ -22,7 +22,7 @@ public class LogUtils {
     public static final String LOG_SMD = "smd";
     public static final String LOG_WAKEUP = "wklog";
     public static final String LOG_WLAN = "wlan"; // filter out
-    
+
     public static String getNewestLog(String dir,String prex){
         String path =null;
         if(prex == LOG_PMLOG){
@@ -32,14 +32,14 @@ public class LogUtils {
         }
         return path;
     }
-    
+
     private static String getLasterLog(String dir, String prex){
         boolean haveFound =false;
         String regex = "^"+prex+"\\w*\\d{8}";
         Pattern p = Pattern.compile(regex);
         String newestPath =prex;
-        File logDir = new File(dir);  
-        if (logDir.exists()) {  
+        File logDir = new File(dir);
+        if (logDir.exists()) {
            String tempPath = null;
            File[] files = logDir.listFiles();
            for(File f:files){
@@ -56,11 +56,11 @@ public class LogUtils {
             return null;
         }
     }
-    
+
     public static String getDateNewestLog(String dir){
-        File logDir = new File(dir);  
+        File logDir = new File(dir);
         String newsetPath ="";
-        if (logDir.exists()) {  
+        if (logDir.exists()) {
            String tempPath = null;
            File[] files = logDir.listFiles();
            for(File f:files){

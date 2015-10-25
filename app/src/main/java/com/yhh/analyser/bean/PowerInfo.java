@@ -9,7 +9,8 @@ package com.yhh.analyser.bean;
 import com.yhh.analyser.bean.app.PhoneInfo;
 import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.StringUtils;
 
 public class PowerInfo {
     static String mCurrentCmd;
@@ -26,13 +27,13 @@ public class PowerInfo {
         float current = 0;
         if(PhoneInfo.getBrand().contains(ConstUtils.BRAND_HUAWEI)){
             String cmd = CommandUtils.CMD_CURRENT_NOW_HUAWEI;
-            String str = FileUtils.getCommandNodeValue(cmd);
-            if(str !=null && !"".equals(str)){
+            String str = FileUtils.readFile(cmd);
+            if(!StringUtils.isBlank(str)){
                 current = -1*Integer.valueOf(str.trim());
             }
         }else{
-            String str = FileUtils.getCommandNodeValue(mCurrentCmd);
-            if(str !=null && !"".equals(str)){
+            String str = FileUtils.readFile(mCurrentCmd);
+            if(!StringUtils.isBlank(str)){
                 current = (float) (Integer.valueOf(str.trim())/1000.0);
             }
         }

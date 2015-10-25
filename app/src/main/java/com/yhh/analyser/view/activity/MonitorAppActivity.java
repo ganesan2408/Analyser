@@ -5,10 +5,8 @@
 package com.yhh.analyser.view.activity;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
@@ -26,31 +24,26 @@ import android.widget.Toast;
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.app.AppInfo;
 import com.yhh.analyser.bean.app.ProcessInfo;
-import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.LaunchService;
 import com.yhh.analyser.service.MonitorService;
-import com.yhh.analyser.utils.AppUtils;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
-import com.yhh.analyser.utils.StringUtils;
-import com.yhh.analyser.utils.TimeUtils;
 import com.yhh.analyser.view.BaseActivity;
+import com.yhh.androidutils.AppUtils;
+import com.yhh.androidutils.StringUtils;
+import com.yhh.androidutils.TimeUtils;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MonitorAppActivity extends BaseActivity {
 
-    private static final String TAG = ConstUtils.DEBUG_TAG + "SingleAppMonitor";
+    private static final String TAG = ConstUtils.DEBUG_TAG + "AppMonitorA";
 
-    private Intent monitorService;
+//    private Intent monitorService;
 
     private ImageView mAppLogIv;
     private TextView mAppNameTv;
@@ -62,22 +55,25 @@ public class MonitorAppActivity extends BaseActivity {
 
     private ProcessInfo mProcessInfo = new ProcessInfo();
     private AppInfo mAppInfo;
-    private String mStartActivity;
+//    private String mStartActivity;
 
     private static final int TIMEOUT = 10000;
-    private int selectedFileIndex; //查看统计数据的索引
+//    private int selectedFileIndex; //查看统计数据的索引
     public static final String MONITOR_PATH = "monitor_path";
+
+    private static final int PREPARE_COMPLETE = 1;
+    private static final int START_FLOAT_WINDOW = 2;
 
 
     private GridView mGridView;
     private SimpleAdapter mAdapter;
-    private List<Map<String, Object>> mDataList = new ArrayList<Map<String, Object>>();
+    private List<Map<String, Object>> mDataList = new ArrayList<>();
     private final String[] mMonitorItems = new String[]{
             "Launch监控", "APP监控", "可选监控"
     };
 
     private MyReceiver mMyReceiver;
-    private String  mClickTime;
+    private String mClickTime;
 
     public static String ACTION = "com.yhh.app.launchService";
 
@@ -131,25 +127,29 @@ public class MonitorAppActivity extends BaseActivity {
                                     int position, long id) {
                 if (position == 0) {
                     Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
-                    mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
+//                    mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
                     startActivity(intent);
 
                     Intent sintent = new Intent(mContext, LaunchService.class);
                     sintent.putExtra("startActivity", mAppInfo.getPackageName());
                     startService(sintent);
-                    mClickTime = TimeUtils.getMsTime() +" 点击";
+                    mClickTime = TimeUtils.getCurrentTime(TimeUtils.DATA_MS_FORMAT) + " 点击";
 
                 } else if (position == 1) {
                     Toast.makeText(MonitorAppActivity.this, mAppInfo.getName() + "启动中", Toast.LENGTH_SHORT).show();
                     Intent intent = getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
-                    mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
+//                    mStartActivity = intent.resolveActivity(getPackageManager()).getShortClassName();
                     startActivity(intent);
 
                     new Thread(new Runnable() {
 
                         @Override
                         public void run() {
-                            waitForAppStart(mAppInfo.getPackageName());
+                            try {
+                                waitForAppStart(mAppInfo.getPackageName());
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                     }).start();
@@ -177,8 +177,6 @@ public class MonitorAppActivity extends BaseActivity {
     }
 
     private void initUI() {
-        monitorService = new Intent();
-        monitorService.setClass(MonitorAppActivity.this, MonitorService.class);
 
         mAppLogIv = (ImageView) findViewById(R.id.app_logo_view);
         mAppNameTv = (TextView) findViewById(R.id.app_name);
@@ -219,17 +217,14 @@ public class MonitorAppActivity extends BaseActivity {
 
     Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
-            if (msg.what == 0x1) {
+            if (msg.what == PREPARE_COMPLETE) {
                 getActionBar().setTitle(getResources().getString(R.string.main_app_analyser));
                 DialogUtils.closeLoading();
-            } else if (msg.what == 0x2) {  //start floating windows
-                Log.d(TAG, "begin startup float window.");
+
+            } else if (msg.what == START_FLOAT_WINDOW) {
+                Intent monitorService = new Intent(MonitorAppActivity.this, MonitorService.class);
                 monitorService.putExtra("type", MonitorFactory.TYPE_APP);
-                monitorService.putExtra("appName", mAppInfo.getName());
-                monitorService.putExtra("pid", mAppInfo.getPid());
-                monitorService.putExtra("uid", mAppInfo.getUid());
-                monitorService.putExtra("packageName", mAppInfo.getPackageName());
-                monitorService.putExtra("startActivity", mStartActivity);
+                monitorService.putExtra("pid", (int) msg.obj);
                 startService(monitorService);
                 finish();
             }
@@ -241,80 +236,77 @@ public class MonitorAppActivity extends BaseActivity {
      *
      * @param packageName package name of monitor application
      */
-    private void waitForAppStart(String packageName) {
+    private void waitForAppStart(String packageName) throws InterruptedException {
         Log.d(TAG, "wait for app start");
         long startTime = System.currentTimeMillis();
 
+        int pid = 0;
         while (System.currentTimeMillis() < startTime + TIMEOUT) {
-            mProcessInfo.getRunningInfoByEqual(this, mAppInfo);
-            if (mAppInfo.getPid() != 0) {
+            Thread.sleep(100);
+            pid = mProcessInfo.getApkPid(this, packageName);
+            if (pid > 0) {
+                Log.i(TAG,"waitForAppStart pid="+pid);
                 break;
             }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
-        mHandler.sendMessage(mHandler.obtainMessage(0x2));
+        mHandler.sendMessage(mHandler.obtainMessage(START_FLOAT_WINDOW, pid));
     }
 
 
 
+//    public void showMonitorDataDialog() {
+//        final String[] files = listMonitorFiles();
+//
+//        new AlertDialog.Builder(this)
+//                .setTitle(R.string.dialog_choose_title)
+//                .setSingleChoiceItems(files, -1, new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        selectedFileIndex = which;
+//                    }
+//                })
+//                .setNegativeButton(R.string.no_str, new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                })
+//                .setPositiveButton(R.string.yes_str, new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Log.i(TAG, "selectedFileIndex=" + selectedFileIndex);
+//                        if (files == null || files.length < 1) {
+//                            return;
+//                        }
+//                        Intent intent = new Intent(MonitorAppActivity.this, ChartMonitorActivity.class);
+//                        intent.putExtra(MONITOR_PATH, files[selectedFileIndex]);
+//                        startActivity(intent);
+//                    }
+//                }).show();
+//    }
 
-    public void showMonitorDataDialog() {
-        final String[] files = listMonitorFiles();
-
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_choose_title)
-                .setSingleChoiceItems(files, -1, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        selectedFileIndex = which;
-                    }
-                })
-                .setNegativeButton(R.string.no_str, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .setPositiveButton(R.string.yes_str, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.i(TAG, "selectedFileIndex=" + selectedFileIndex);
-                        if (files == null || files.length < 1) {
-                            return;
-                        }
-                        Intent intent = new Intent(MonitorAppActivity.this, ChartMonitorActivity.class);
-                        intent.putExtra(MONITOR_PATH, files[selectedFileIndex]);
-                        startActivity(intent);
-                    }
-                }).show();
-    }
-
-    private String[] listMonitorFiles() {
-        File parentDir = new File(AppConfig.MONITOR_DIR);
-        String[] files = parentDir.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String filename) {
-                File current = new File(dir, filename);
-                return current.isFile();
-            }
-        });
-        if (files == null || files.length <= 0) {
-            return null;
-        }
-        Arrays.sort(files, Collections.reverseOrder());
-        return files;
-    }
+//    private String[] listMonitorFiles() {
+//        File parentDir = new File(AppConfig.MONITOR_DIR);
+//        String[] files = parentDir.list(new FilenameFilter() {
+//            @Override
+//            public boolean accept(File dir, String filename) {
+//                File current = new File(dir, filename);
+//                return current.isFile();
+//            }
+//        });
+//        if (files == null || files.length <= 0) {
+//            return null;
+//        }
+//        Arrays.sort(files, Collections.reverseOrder());
+//        return files;
+//    }
 
     @Override
     protected void onDestroy() {
-        if(mMyReceiver !=null) {
+        if (mMyReceiver != null) {
             mContext.unregisterReceiver(mMyReceiver);
         }
 
@@ -322,13 +314,13 @@ public class MonitorAppActivity extends BaseActivity {
     }
 
 
-    public class MyReceiver extends BroadcastReceiver{
+    public class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-           String str = intent.getExtras().getString("launch");
-            if(!StringUtils.isBlank(str)){
+            String str = intent.getExtras().getString("launch");
+            if (!StringUtils.isBlank(str)) {
                 mLaunchTv.setText(mClickTime + "\n" + str);
-            }else{
+            } else {
                 mLaunchTv.setText("启动时间过长");
             }
 

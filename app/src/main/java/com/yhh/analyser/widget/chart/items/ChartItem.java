@@ -10,7 +10,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.github.mikephil.charting.data.ChartData;
-import com.yhh.analyser.utils.NumberUtils;
+import com.yhh.androidutils.NumberUtils;
 
 /**
  * baseclass of the chart-listview items
@@ -48,7 +48,7 @@ public abstract class ChartItem {
     public String[] getFormattedStatistic(){
         String[] formattedValues = new String[3];
         for(int i=0;i<3;i++){
-            formattedValues[i] = NumberUtils.formatDecimal(mStatisticValues[i], 2, mIsPercentData);
+            formattedValues[i] = NumberUtils.format(mStatisticValues[i], 2, mIsPercentData);
         }
         return formattedValues;
     }
@@ -56,7 +56,7 @@ public abstract class ChartItem {
     public String[] getFormattedStatistic(int digit){
         String[] formattedValues = new String[3];
         for(int i=0;i<3;i++){
-            formattedValues[i] = NumberUtils.formatDecimal(mStatisticValues[i], digit, mIsPercentData);
+            formattedValues[i] = NumberUtils.format(mStatisticValues[i], digit, mIsPercentData);
         }
         return formattedValues;
     }

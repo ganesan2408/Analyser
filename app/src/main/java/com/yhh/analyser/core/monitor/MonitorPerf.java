@@ -6,6 +6,7 @@ import com.yhh.analyser.bean.CpuInfo;
 import com.yhh.analyser.bean.GpuInfo;
 import com.yhh.analyser.bean.MemoryInfo;
 import com.yhh.analyser.core.MonitorFactory;
+import com.yhh.androidutils.NumberUtils;
 
 import java.util.ArrayList;
 
@@ -53,8 +54,8 @@ public class MonitorPerf extends Monitor {
         mCpuInfo.updateAllCpu();
 
         mContentList.clear();
-        mContentList.add(String.valueOf(mCpuInfo.getRatioList().get(0)));
-        mContentList.add(String.valueOf(mGpuInfo.getGpuRate()));
+        mContentList.add(String.valueOf(mCpuInfo.getCpuRatioList().get(0)));
+        mContentList.add(String.valueOf(NumberUtils.format(mGpuInfo.getGpuRate(), 2)));
         mContentList.add(String.valueOf(mGpuInfo.getGpuClock()));
         mContentList.add(String.valueOf(mMemoryInfo.getFreeMemorySize(mContext) / 1024));
 

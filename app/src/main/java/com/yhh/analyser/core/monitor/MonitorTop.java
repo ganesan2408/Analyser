@@ -3,7 +3,7 @@ package com.yhh.analyser.core.monitor;
 import android.content.Context;
 
 import com.yhh.analyser.core.MonitorFactory;
-import com.yhh.analyser.utils.ShellUtils;
+import com.yhh.androidutils.ShellUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/19.
@@ -46,7 +46,7 @@ public class MonitorTop extends Monitor {
     }
 
     private String parseTopResult(String result){
-        StringBuffer topRtn =new StringBuffer();
+        StringBuilder topRtn =new StringBuilder();
         String[] lines = result.split("\n");
         int len = lines.length;
         String[] words;

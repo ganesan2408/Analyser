@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.StringUtils;
+import com.yhh.androidutils.StringUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/13.

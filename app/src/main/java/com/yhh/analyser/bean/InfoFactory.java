@@ -8,7 +8,7 @@ package com.yhh.analyser.bean;
 
 import android.content.Context;
 
-import com.yhh.analyser.utils.NumberUtils;
+import com.yhh.androidutils.NumberUtils;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -74,11 +74,11 @@ public class InfoFactory {
 
     /******* CPU *********/
     public String getCpuPidUsedRatio(int pid){
-        return mCpuInfo.getProcessCpuRatio(pid);
+        return mCpuInfo.getCpuRatio();
     }
 
     public String getCpuPidUsedRatioComplete(int pid) {
-        return mCpuInfo.getProcessCpuRatioComplete(pid);
+        return mCpuInfo.getCpuRatioComplete();
     }
 
 
@@ -92,24 +92,24 @@ public class InfoFactory {
      *
      * @return
      */
-    public ArrayList<String> getCpuTotalUsedRatio(){
-        return mCpuInfo.getTotalCpuRatio();
+    public ArrayList<String> getCpuRatioList(){
+        return mCpuInfo.getCpuRatioList();
     }
 
     public String getCpuUsedRatioBySeperate(){
-        ArrayList<String> cpuRatios = mCpuInfo.getTotalCpuRatio();
+        ArrayList<String> cpuRatios = mCpuInfo.getCpuRatioList();
         StringBuffer cpuRatioArray = new StringBuffer();
         for(int i=1; i<cpuRatios.size();i++){
             cpuRatioArray.append(cpuRatios.get(i) + "/");
         }
-        for (int i = 0; i < mCpuInfo.getCpuNum() - cpuRatios.size() + 1; i++) {
+        for (int i = 0; i < mCpuInfo.getCpuNums() - cpuRatios.size() + 1; i++) {
             cpuRatioArray.append("0.00,");
         }
         return cpuRatioArray.toString();
     }
 
     public String getCpuFreqList(){
-        return mCpuInfo.getCpuFreqList();
+        return mCpuInfo.getCpuFreqs();
     }
 
     /******* GPU *********/
@@ -157,10 +157,10 @@ public class InfoFactory {
 
     /********Traffic*********/
     public String getTrafficSendSpeed(){
-        return NumberUtils.formatDecimal(mTrafficInfo.getSendSpeed(), 2, false);
+        return NumberUtils.format(mTrafficInfo.getSendSpeed(), 2);
     }
 
     public String getTrafficRevSpeed(){
-        return NumberUtils.formatDecimal(mTrafficInfo.getRevSpeed(), 2, false);
+        return NumberUtils.format(mTrafficInfo.getRevSpeed(), 2);
     }
 }

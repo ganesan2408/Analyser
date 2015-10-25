@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 import com.yhh.analyser.bean.app.PhoneInfo;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
@@ -27,9 +28,9 @@ import com.yhh.analyser.view.activity.FeedbackActivity;
 import com.yhh.analyser.view.activity.MyShotActivity;
 import com.yhh.analyser.view.fragment.MainAnalysisFragment;
 import com.yhh.analyser.view.fragment.MainBoxFragment;
+import com.yhh.analyser.view.fragment.MainMonitorFragment;
 import com.yhh.analyser.view.fragment.MainPerfFragment;
 import com.yhh.analyser.view.fragment.MainStatusFragment;
-import com.yhh.analyser.view.fragment.MainMonitorFragment;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu;
 
 public class Main extends BaseActivity {
@@ -96,6 +97,8 @@ public class Main extends BaseActivity {
         firstCreateShortCut();
 
         MobclickAgent.updateOnlineConfig(this);
+
+        UmengUpdateAgent.update(this); //更新umeng
     }
 
     @Override

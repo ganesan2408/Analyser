@@ -22,8 +22,8 @@ import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.MonitorService;
-import com.yhh.analyser.utils.DebugLog;
 import com.yhh.analyser.view.BaseActivity;
+import com.yhh.androidutils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;

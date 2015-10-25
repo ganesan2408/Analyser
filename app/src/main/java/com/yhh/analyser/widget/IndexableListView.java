@@ -16,7 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 
-import com.yhh.analyser.utils.StringUtils;
+import com.yhh.androidutils.StringUtils;
 
 import java.util.List;
 
@@ -120,7 +120,7 @@ public class IndexableListView extends ListView {
                 for (int j = 0; j < getCount(); j++) {
                     if (i == 0) {
                         for (int k = 0; k <= 9; k++) {
-                            if (StringUtils.match(getItem(j).charAt(0),(char)k))
+                            if (StringUtils.match(getItem(j).charAt(0), (char) k))
                                 return j;
                         }
                     } else {

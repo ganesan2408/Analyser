@@ -19,9 +19,10 @@ import android.widget.AdapterView;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.widget.IndexableListView;
 import com.yhh.analyser.view.activity.LogReaderActivity;
+import com.yhh.androidutils.ArrayUtils;
+import com.yhh.androidutils.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class LogCurrentFragment extends Fragment {
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.log_current_fragment, container, false);  
         mLogLv = (IndexableListView) view.findViewById(R.id.log_current_lv);
-        mLogNameList =FileUtils.listAllFiles(ConstUtils.LOG_DIR);
+        mLogNameList = ArrayUtils.toList(FileUtils.listFolderOrFile(ConstUtils.LOG_DIR));
         if(mLogNameList != null && mLogNameList.size() >0){
         Collections.sort(mLogNameList);
         IndexableListView.ContentAdapter adapter = mLogLv.new ContentAdapter(this.getActivity(),

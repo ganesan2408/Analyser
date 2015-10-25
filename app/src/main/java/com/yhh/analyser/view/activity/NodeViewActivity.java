@@ -32,13 +32,14 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.R.color;
+import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
-import com.yhh.analyser.utils.ShellUtils;
-import com.yhh.analyser.utils.ShellUtils.CommandResult;
 import com.yhh.analyser.view.BaseActivity;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.ShellUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -127,7 +128,7 @@ public class NodeViewActivity extends BaseActivity {
 
                         @Override
                         public void run() {
-                            CommandResult cr = ShellUtils.execCommand("cat " + mRootPath + nodePath, false);
+                            ShellUtils.CommandResult cr = ShellUtils.execCommand("cat " + mRootPath + nodePath, false);
                             Message msg = new Message();
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("CommandResult", cr);
@@ -160,6 +161,9 @@ public class NodeViewActivity extends BaseActivity {
         
     }
 
+    public void save2File(String cmd){
+        FileUtils.writeFile(AppConfig.ADB_SHELL_FILE, FileUtils.NEW_LINE + cmd, true);
+    }
 
     public void beginMonitor(String cmd){
         if (MonitorService.sMonitorIsRunning) {
@@ -176,7 +180,7 @@ public class NodeViewActivity extends BaseActivity {
     public Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0x11) {
-                ShellUtils.CommandResult cr = (CommandResult) msg.getData()
+                ShellUtils.CommandResult cr = (ShellUtils.CommandResult) msg.getData()
                         .getSerializable("CommandResult");
                 String title = msg.getData().getString("title");
                 Log.i(TAG,"title="+title);
@@ -188,7 +192,7 @@ public class NodeViewActivity extends BaseActivity {
 
     public void showAlergDialog(Context context, String title,
                                        String message) {
-        final String cmd = "cat " +mRootPath + title;
+        final String cmd = "cat " + mRootPath + title;
 
         new AlertDialog.Builder(context)
                 .setTitle(title)
@@ -197,6 +201,12 @@ public class NodeViewActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         beginMonitor(cmd);
+                    }
+                })
+                .setNegativeButton(R.string.save_str,new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        save2File(cmd);
                     }
                 })
                 .setPositiveButton(R.string.close_str,

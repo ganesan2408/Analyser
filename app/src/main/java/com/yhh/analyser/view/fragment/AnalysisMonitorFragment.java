@@ -15,19 +15,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.yhh.analyser.R;
 import com.yhh.analyser.adapter.MonitorFileAdapter;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.DensityUtils;
-import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.view.BaseFragment;
 import com.yhh.analyser.view.activity.ChartMonitorActivity;
 import com.yhh.analyser.view.activity.MonitorAppActivity;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenu;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuCreator;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuItem;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuListView;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.ScreenUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -75,7 +75,7 @@ public class AnalysisMonitorFragment extends BaseFragment {
                 openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
                 // set item width
-                openItem.setWidth(DensityUtils.dip2px(mContext, 90));
+                openItem.setWidth(ScreenUtils.dp2px(mContext, 90));
                 // set item title
                 openItem.setTitle("解析");
                 // set item title font size
@@ -92,7 +92,7 @@ public class AnalysisMonitorFragment extends BaseFragment {
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
                 // set item width
-                deleteItem.setWidth(DensityUtils.dip2px(mContext, 90));
+                deleteItem.setWidth(ScreenUtils.dp2px(mContext, 90));
                 // set a icon
                 deleteItem.setIcon(R.drawable.ic_delete);
                 // add to menu

@@ -9,7 +9,7 @@ package com.yhh.analyser.bean;
 import android.util.Log;
 
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.androidutils.FileUtils;
 
 import java.lang.reflect.Method;
 //import org.codeaurora.Performance;
@@ -145,7 +145,7 @@ public class PerfBean {
     ///////////////////////////////////
     private static int getNodeValue(String cmd){
         int value=1;
-        String cmdStr = FileUtils.getCommandNodeValue(cmd);
+        String cmdStr = FileUtils.readFile(cmd);
         if(!cmdStr.equals("")){
             try{
                 value = Integer.valueOf(cmdStr.trim());
@@ -178,7 +178,7 @@ public class PerfBean {
     
     public static int[] getCpuOnline(String onlineCmd){
         int status[] = new int[2];
-        String cmdStr = FileUtils.getCommandNodeValue(onlineCmd);
+        String cmdStr = FileUtils.readFile(onlineCmd);
         if(cmdStr.equals("")){
             return status;
         }

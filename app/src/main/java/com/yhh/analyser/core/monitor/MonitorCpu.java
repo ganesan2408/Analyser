@@ -43,7 +43,7 @@ public class MonitorCpu extends Monitor {
     public String monitor() {
 
         mContentList.clear();
-        mContentList.add(mCpuInfo.getCpuFreqList());
+        mContentList.add(mCpuInfo.getCpuFreqs());
 
         write2File(mContentList);
 

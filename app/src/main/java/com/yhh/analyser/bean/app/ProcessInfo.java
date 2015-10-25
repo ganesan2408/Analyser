@@ -18,7 +18,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
 
-import com.yhh.analyser.config.OneKeyConfig;
 import com.yhh.analyser.utils.ConstUtils;
 
 import java.util.ArrayList;
@@ -77,15 +76,15 @@ public class ProcessInfo {
         List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
 
         String tmpName;
-        ArrayList<String> whiteList = OneKeyConfig.getWhiteList();
+//        ArrayList<String> whiteList = OneKeyConfig.getWhiteList();
+        Log.i(TAG,"appList.size()="+appList.size() + ", runingApps.size()="+runingApps.size());
         for (ApplicationInfo ainfo : appList) {
             for(RunningAppProcessInfo running:runingApps) {
-                tmpName = ainfo.loadLabel(pm).toString();
                 if ((running.processName != null) && running.processName.equals(ainfo.packageName)) {
-                    Log.i(ConstUtils.DEBUG_TAG, tmpName+ ": "+ainfo.packageName);
-
-                    //过滤白名单的应用程序
-                    if(whiteList.contains(ainfo.packageName)){
+                    tmpName = ainfo.loadLabel(pm).toString();
+                    Log.i(TAG, tmpName+ "   "+ainfo.packageName+"  "+ (ainfo.flags& ApplicationInfo.FLAG_SYSTEM));
+                    //过滤分析中心的应用程序
+                    if(ainfo.packageName.equals("com.yhh.analyser")){
                         continue;
                     }
 
@@ -140,6 +139,18 @@ public class ProcessInfo {
                 break;
             }
         }
+    }
+
+    public int getApkPid(Context context, String pkgName){
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<RunningAppProcessInfo> runingApps = am.getRunningAppProcesses();
+
+        for (RunningAppProcessInfo running : runingApps) {
+            if ((running.processName != null) && running.processName.equals(pkgName)) {
+                return running.pid;
+            }
+        }
+        return  -1;
     }
 
     /**

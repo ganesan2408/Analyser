@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.yhh.analyser.bean.AlarmBean;
 import com.yhh.analyser.bean.AlarmType;
-import com.yhh.analyser.utils.AppUtils;
-import com.yhh.analyser.utils.DebugLog;
-import com.yhh.analyser.utils.StringUtils;
+import com.yhh.androidutils.AppUtils;
+import com.yhh.androidutils.DebugLog;
+import com.yhh.androidutils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +140,7 @@ public abstract class AlarmManager {
             alarmBean.setName(subArr[1]);
             alarmBean.setRunningTime(arr[1].substring(1));
             alarmBean.setWakeups(Integer.valueOf(arr[3].trim()));
-            alarmBean.setAppName(AppUtils.getLableByPkgName(context, alarmBean.getName()));
+            alarmBean.setAppName(AppUtils.getAppName(context, alarmBean.getName()));
         }
 
         return alarmBean;

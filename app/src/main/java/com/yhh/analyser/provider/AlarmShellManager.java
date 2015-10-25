@@ -1,7 +1,7 @@
 package com.yhh.analyser.provider;
 
 import com.yhh.analyser.config.CommandConfig;
-import com.yhh.analyser.utils.ShellUtils;
+import com.yhh.androidutils.ShellUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/12.

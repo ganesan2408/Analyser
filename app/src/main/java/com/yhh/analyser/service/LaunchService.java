@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import com.yhh.analyser.bean.AppLaunchBean;
 import com.yhh.analyser.bean.AppLaunchList;
 import com.yhh.analyser.view.activity.MonitorAppActivity;
-import com.yhh.analyser.utils.DebugLog;
+import com.yhh.androidutils.DebugLog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class LaunchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         startActivity  = intent.getStringExtra("startActivity");
 
-        DebugLog.d("startActivity="+startActivity);
+        DebugLog.d("startActivity=" + startActivity);
 
         mHandler.post(task);
 
@@ -73,10 +73,7 @@ public class LaunchService extends Service {
     };
 
     private boolean checkOk(){
-        if(isLaunching && currentCount <10 && mAppLaunchList.getSize()<2) {
-            return true;
-        }
-        return false;
+        return isLaunching && currentCount < 10 && mAppLaunchList.getSize() < 2;
     }
 
     @Deprecated

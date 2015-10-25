@@ -16,16 +16,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.DensityUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.analyser.view.BaseActivity;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenu;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuCreator;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuItem;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuListView;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.ScreenUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -66,7 +66,7 @@ public class MyShotActivity extends BaseActivity {
                 openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
                 // set item width
-                openItem.setWidth(DensityUtils.dip2px(MyShotActivity.this, 90));
+                openItem.setWidth(ScreenUtils.dp2px(MyShotActivity.this, 90));
                 // set item title
                 openItem.setTitle("Open");
                 // set item title fontsize
@@ -83,7 +83,7 @@ public class MyShotActivity extends BaseActivity {
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
                 // set item width
-                deleteItem.setWidth(DensityUtils.dip2px(MyShotActivity.this, 90));
+                deleteItem.setWidth(ScreenUtils.dp2px(MyShotActivity.this, 90));
                 // set a icon
                 deleteItem.setIcon(R.drawable.ic_delete);
                 // add to menu

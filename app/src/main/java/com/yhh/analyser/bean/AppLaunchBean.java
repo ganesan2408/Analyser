@@ -34,10 +34,7 @@ public class AppLaunchBean {
 
 
     public boolean isEqual(AppLaunchBean bean){
-        if(getCompleteTime().equals(bean.getCompleteTime())){
-            return true;
-        }
-        return false;
+        return getCompleteTime().equals(bean.getCompleteTime());
     }
 
     @Override

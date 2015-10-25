@@ -1,8 +1,6 @@
 /**
  * @author yuanhh1
- * 
  * @email yuanhh1@lenovo.com
- * 
  */
 package com.yhh.analyser.view.fragment;
 
@@ -20,96 +18,96 @@ import com.yhh.analyser.R;
 import com.yhh.analyser.bean.InfoFactory;
 import com.yhh.analyser.utils.CommandUtils;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.StringUtils;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
-public class StatusPowerFragment extends Fragment
-{
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "Power";
+public class StatusPowerFragment extends Fragment {
+    private static final String TAG = ConstUtils.DEBUG_TAG + "Power";
     private boolean DEBUG = false;
-    
+
     private TextView mPowerTv;
     private int INTERVAL_TIME = 3;
-    private ScheduledExecutorService  mScheService;
-    
-  
+    private ScheduledExecutorService mScheService;
+
+
     @Override
     public void onStart() {
         start();
         super.onStart();
     }
-    
+
     @Override
     public void onStop() {
         stop();
         super.onStop();
     }
-    
+
     @Override
-    public View onCreateView(LayoutInflater inflater , ViewGroup container , Bundle savedInstanceState)
-    {
-        View v = inflater.inflate(R.layout.status_power_fragment, null) ;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.status_power_fragment, null);
         mPowerTv = (TextView) v.findViewById(R.id.status_power_tv);
-        return v ;
+        return v;
     }
-  
-    private Handler mHandler = new Handler(){
-       public void handleMessage(Message msg) {
-           if(msg.what == 1){
-               if(DEBUG){
-                   Log.i(TAG,"on receive power");
-               }
-               mPowerTv.setText((String)msg.obj);
-           }
-       }
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                if (DEBUG) {
+                    Log.i(TAG, "on receive power");
+                }
+                mPowerTv.setText((String) msg.obj);
+            }
+        }
     };
-  
+
     public void start() {
-        if(DEBUG){
-            Log.i(TAG,"power start");
+        if (DEBUG) {
+            Log.i(TAG, "power start");
         }
         mScheService = Executors.newScheduledThreadPool(1);
-        mScheService.scheduleAtFixedRate(new Runnable(){
+        mScheService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 StringBuilder sb = new StringBuilder();
                 String value;
-                
+
                 String ci = InfoFactory.getInstance().getPowerCurrent();
                 sb.append("当前电流：");
                 sb.append(ci + "mA \n");
-               
+
                 String bi = InfoFactory.getInstance().getScreenBrightness();
                 sb.append("当前亮度：");
                 sb.append(bi + " \n");
-                
+
 
                 sb.append("GPU clock：");
-                value= FileUtils.getCommandNodeValue(CommandUtils.CMD_GPU_CLK);
-                if(value !=null && !value.equals("")){
+                value = FileUtils.readFile(CommandUtils.CMD_GPU_CLK);
+                if (!StringUtils.isBlank(value)) {
                     sb.append(Long.valueOf(value.trim()) / 1000.0 / 1000.0
-                        + "MHz \n\n");
-                }else{
+                            + "MHz \n\n");
+                } else {
                     sb.append("\n\n");
                 }
-                
-                value= FileUtils.getCommandNodeValue(CommandUtils.CMD_POWER_STATUS);
-                if(value !=null && !value.equals("")){
+
+
+                value = FileUtils.readFile(CommandUtils.CMD_POWER_STATUS);
+                if (!StringUtils.isBlank(value)) {
                     sb.append(value + " \n");
                 }
-                
-                mHandler.sendMessage(mHandler.obtainMessage(1,sb.toString()));
+
+                mHandler.sendMessage(mHandler.obtainMessage(1, sb.toString()));
             }
-        },  0, INTERVAL_TIME, TimeUnit.SECONDS);
+        }, 0, INTERVAL_TIME, TimeUnit.SECONDS);
     }
-    
+
     public void stop() {
-        if(DEBUG){
-            Log.i(TAG,"power onStop");
+        if (DEBUG) {
+            Log.i(TAG, "power onStop");
         }
         if (mScheService != null) {
             mScheService.shutdownNow();

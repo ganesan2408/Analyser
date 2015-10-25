@@ -48,6 +48,15 @@
     <dimen name="ldrawer_middleBarArrowSize">16dp</dimen>
     <dimen name="navdrawer_width">260dp</dimen>
     <!-- LDrawer end -->
+
+
+    <dimen name="drop_down_list_header_padding_top">8dp</dimen>
+    <dimen name="drop_down_list_header_padding_bottom">12dp</dimen>
+    <dimen name="drop_down_list_header_release_min_distance">20dp</dimen>
+    <dimen name="drop_down_list_header_progress_bar_height">24dp</dimen>
+    <dimen name="drop_down_list_footer_progress_bar_height">36dp</dimen>
+    <dimen name="drop_down_list_footer_button_margin_left">8dp</dimen>
+    <dimen name="drop_down_list_footer_button_height">48dp</dimen>
     
 
 </resources>

@@ -9,7 +9,8 @@ package com.yhh.analyser.bean;
 import android.util.Log;
 
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.StringUtils;
 
 public class GpuInfo {
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "GpuInfo";
@@ -26,8 +27,8 @@ public class GpuInfo {
      */
     public double getGpuClock(){
         double clk = -1;
-        String gpuStr = FileUtils.getCommandNodeValue(GPU_CLK);
-        if(!gpuStr.trim().equals("")){
+        String gpuStr = FileUtils.readFile(GPU_CLK);
+        if(!StringUtils.isBlank(gpuStr)){
             try{
                 clk = Integer.valueOf(gpuStr.trim())/1000.0/1000.0;
             }catch(NumberFormatException e){
@@ -39,7 +40,10 @@ public class GpuInfo {
     
     public double getGpuRate(){
         double rate = -1;
-        String gpuStr = FileUtils.getCommandNodeValue(GPU_BUSY);
+        String gpuStr = FileUtils.readFile(GPU_BUSY);
+        if(StringUtils.isBlank(gpuStr)){
+            return rate;
+        }
         String[] arr = gpuStr.trim().split("\\s+");
         if(arr !=null && arr.length >=2){
             try{

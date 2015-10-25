@@ -18,9 +18,8 @@ import android.widget.TextView;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.ShellUtils;
-import com.yhh.analyser.utils.ShellUtils.CommandResult;
 import com.yhh.analyser.widget.IndexableListView;
+import com.yhh.androidutils.ShellUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -96,7 +95,7 @@ public class StatusDumpsysActivity extends Activity {
         fixedThreadPool.execute(new Runnable(){
             @Override
             public void run() {
-                CommandResult cr = ShellUtils.execCommand("dumpsys "+params, false);
+                ShellUtils.CommandResult cr = ShellUtils.execCommand("dumpsys " + params, false);
                 mHandler.sendMessage(mHandler.obtainMessage(1,cr.successMsg));
             }
         });

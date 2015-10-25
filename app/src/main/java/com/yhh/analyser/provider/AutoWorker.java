@@ -12,12 +12,15 @@ import android.util.Log;
 import com.yhh.analyser.R;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
-import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.utils.RootUtils;
-import com.yhh.analyser.utils.ShellUtils;
-import com.yhh.analyser.utils.ShellUtils.CommandResult;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.IOUtils;
+import com.yhh.androidutils.ShellUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class AutoWorker {
 	public static final String TAG =  ConstUtils.DEBUG_TAG+ "AutoWorker";
@@ -64,10 +67,10 @@ public class AutoWorker {
         }
 	    
 	    String jarPath = ROBOT_ROOT_PATH + ROBOT_JAR_NAME;
-        if(!FileUtils.copyRaw2Local(mContext,R.raw.myrobot,jarPath)){
+        if(!copyRaw2Local(mContext,R.raw.myrobot,jarPath)){
             return false;
         }
-        if(!FileUtils.copyRaw2Local(mContext,R.raw.robot_config, mConfigPath)){
+        if(!copyRaw2Local(mContext,R.raw.robot_config, mConfigPath)){
             return false;
         }
         if(mOnAutomaticListener !=null){
@@ -75,6 +78,41 @@ public class AutoWorker {
         }
 	    return true;
 	}
+
+        public boolean copyRaw2Local(Context context, int rawId, String targetPath) {
+        File file = new File(targetPath);
+        //资源已经拷贝,无需重复拷贝
+        if (file.exists()) {
+            return true;
+        }
+
+            try {
+                if (!FileUtils.createFile(targetPath)) {
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return  false;
+            }
+
+            InputStream is = null;
+        FileOutputStream fos = null;
+        try {
+            is = context.getResources().openRawResource(rawId);
+            fos = new FileOutputStream(targetPath);
+            byte[] buffer = new byte[2048];
+            int count;
+            while ((count = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, count);
+            }
+            return true;
+        } catch (IOException e) {
+            Log.e(TAG, "copyRaw2Local Exception ", e);
+        } finally {
+            IOUtils.closeQuietly(fos, is);
+        }
+        return false;
+    }
 	
 	private void autoRun(String caseName, String configPath){
 	    if(DEBUG){
@@ -98,7 +136,7 @@ public class AutoWorker {
 
             @Override
             public void run() {
-                ShellUtils.runShell(cmd);
+                ShellUtils.execCommand(cmd);
                 if(null !=mOnAutomaticListener){
                     mOnAutomaticListener.onRunComplete();
                 }
@@ -143,7 +181,7 @@ public class AutoWorker {
         if(autoThread !=null){
             autoThread.interrupt();
         }
-        ShellUtils.runShell(cmd);
+        ShellUtils.execCommand(cmd);
     }
 	
 	private String apkName2CaseName(String apkName){
@@ -154,7 +192,7 @@ public class AutoWorker {
 	
 	private String getUiautomatorPid(){
 	    String cmd = "ps | grep uiautomator";
-	    CommandResult cr = ShellUtils.execCommand(cmd, false);
+	    ShellUtils.CommandResult cr = ShellUtils.execCommand(cmd, false);
 	    String[] pidStr = cr.successMsg.split("\\s+");
 	    if(pidStr !=null && pidStr.length>2){
 	        return pidStr[1].trim();

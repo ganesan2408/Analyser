@@ -28,14 +28,14 @@ import com.yhh.analyser.bean.PerfBean;
 import com.yhh.analyser.bean.TempInfo;
 import com.yhh.analyser.bean.app.PhoneInfo;
 import com.yhh.analyser.provider.AutoWorker;
-import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.FileMediaScanner;
-import com.yhh.analyser.utils.FileUtils;
-import com.yhh.analyser.utils.ShellUtils;
 import com.yhh.analyser.utils.UploadUtils;
 import com.yhh.analyser.utils.Utils;
+import com.yhh.analyser.view.BaseActivity;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.ShellUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -284,7 +284,8 @@ public class BenchmarkActivity extends BaseActivity {
                                         if(!isStop){
                                             writeInfo2File(sb.toString());
                                             mHandler.sendMessage(mHandler.obtainMessage(1, status));
-                                            ShellUtils.runShell(cmd);
+                                            ShellUtils.execCommand(cmd);
+//                                            ShellUtils.runShell(cmd);
                                         }
                                        
                                     }
@@ -294,8 +295,9 @@ public class BenchmarkActivity extends BaseActivity {
                     }
                 }else{
                     waitForTmp();
-                    if(!isStop){
-                        ShellUtils.runShell(cmd);
+                    if(!isStop) {
+                        ShellUtils.execCommand(cmd);
+//                        ShellUtils.runShell(cmd);
                     }
                 }
                 mHandler.sendMessage(mHandler.obtainMessage(2));
@@ -463,7 +465,11 @@ public class BenchmarkActivity extends BaseActivity {
         String curTime = Utils.getCurrentTime();
         mFileName =  "/sdcard/systemAnalyzer/BM_" + curTime+".csv";
         mRobotEditor.putString(CASE_BENCHMARK+ "#file", curTime).commit();
-        FileUtils.createFile(mFileName);
+        try {
+            FileUtils.createFile(mFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
    

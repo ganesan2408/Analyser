@@ -6,10 +6,6 @@
  */
 package com.yhh.analyser.view.fragment;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -29,10 +25,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.view.activity.LogReaderActivity;
 import com.yhh.analyser.view.activity.LogSleepReaderActivity;
+import com.yhh.androidutils.ArrayUtils;
+import com.yhh.androidutils.FileUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class LogHistoryFragment extends Fragment{
     private static final String TAG =  ConstUtils.DEBUG_TAG+ "HistoryLogFragment";
@@ -57,10 +59,10 @@ public class LogHistoryFragment extends Fragment{
     }
     
     private void getFileList(){
-        mFolder = new ArrayList<String>();
-        mFileTree = new ArrayList<ArrayList<String>>();
+        mFolder = new ArrayList<>();
+        mFileTree = new ArrayList<>();
         
-        File dir = new File(FileUtils.PATH_SD_LOG);
+        File dir = new File(AppConfig.PATH_SD_LOG);
         if(dir.exists()){
             File[] subDir = dir.listFiles();   
             if(subDir == null || subDir.length <= 0){
@@ -76,7 +78,7 @@ public class LogHistoryFragment extends Fragment{
                     }else  if(FileUtils.checkPath(choosedDir+"/curlog")){
                         choosedDir += "/curlog";
                     }
-                    ArrayList<String> subFileList = FileUtils.listAllFiles(choosedDir);
+                    ArrayList<String> subFileList = (ArrayList<String>) ArrayUtils.toList(FileUtils.listFolderOrFile(choosedDir));
                     Collections.sort(subFileList);
                     mFileTree.add(subFileList);
                 }
@@ -138,7 +140,7 @@ public class LogHistoryFragment extends Fragment{
             public View getGroupView(int groupPosition, boolean isExpanded,
                     View convertView, ViewGroup parent) {
                 LinearLayout ll = new LinearLayout(mcontext);
-                ll.setOrientation(0);
+                ll.setOrientation(LinearLayout.HORIZONTAL);
                 ImageView folderImage = new ImageView(mcontext);
                 folderImage.setImageResource(R.drawable.ic_folder);
                 ll.addView(folderImage);
@@ -170,7 +172,7 @@ public class LogHistoryFragment extends Fragment{
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                     int groupPosition, int childPosition, long id) {
-                String targetPath = FileUtils.PATH_SD_LOG +"/" 
+                String targetPath = AppConfig.PATH_SD_LOG +"/"
                     + mFolder.get(groupPosition) +"/"
                     + mFileTree.get(groupPosition).get(childPosition);
                 Log.i(TAG,"targetPath"+targetPath);

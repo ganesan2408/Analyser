@@ -66,7 +66,7 @@ public class MonitorDiy extends Monitor {
         /**更新CPU节点值 */
         if(mCheckedList.get(MonitorFactory.CPU_USED_RATIO)){
             mInfoFactory.getCpuInfo().updateAllCpu();
-            mContentList.add(mInfoFactory.getCpuTotalUsedRatio().get(0));
+            mContentList.add(mInfoFactory.getCpuRatioList().get(0));
         }
 
         if(mCheckedList.get(MonitorFactory.CPU_CLOCK)){

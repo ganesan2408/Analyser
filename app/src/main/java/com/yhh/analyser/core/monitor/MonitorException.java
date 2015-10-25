@@ -49,9 +49,6 @@ public class MonitorException extends Monitor {
     }
 
     private boolean isSatisfy() {
-        if(TempInfo.getTemp() >= mThresholdValue){
-            return true;
-        }
-        return false;
+        return TempInfo.getTemp() >= mThresholdValue;
     }
 }

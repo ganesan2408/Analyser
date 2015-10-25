@@ -6,8 +6,8 @@
  */
 package com.yhh.analyser.provider;
 
-import com.yhh.analyser.utils.ShellUtils;
-import com.yhh.analyser.utils.ShellUtils.CommandResult;
+
+import com.yhh.androidutils.ShellUtils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -30,7 +30,7 @@ public class LogInterruptParser {
     }
     
     private void initLocal(){
-        CommandResult cr = ShellUtils.execCommand(CMD_INTERRUPTS, false);
+        ShellUtils.CommandResult cr = ShellUtils.execCommand(CMD_INTERRUPTS, false);
         String interuptInfo = cr.successMsg;
         String[] interuptArray = interuptInfo.split("\n");
         int len = interuptArray.length;

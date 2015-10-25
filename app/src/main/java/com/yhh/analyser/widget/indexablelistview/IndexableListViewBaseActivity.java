@@ -6,8 +6,6 @@
  */
 package com.yhh.analyser.widget.indexablelistview;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,8 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.SectionIndexer;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.StringUtils;
 import com.yhh.analyser.widget.IndexableListView;
+import com.yhh.androidutils.StringUtils;
+
+import java.util.List;
 
 public abstract class IndexableListViewBaseActivity extends Activity {
     private IndexableListView mListView;
@@ -63,7 +63,7 @@ public abstract class IndexableListViewBaseActivity extends Activity {
 				for (int j = 0; j < getCount(); j++) {
 					if (i == 0) {
 						for (int k = 0; k <= 9; k++) {
-						    if (StringUtils.match(getItem(j).charAt(0),(char)k))
+						    if (StringUtils.match(getItem(j).charAt(0), (char) k))
                                 return j;
 						}
 					} else {

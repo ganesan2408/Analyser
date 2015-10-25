@@ -47,7 +47,7 @@ public class MonitorDataProvider {
     }
     
     public void parseNewest(){
-        String path =  AppConfig.MONITOR_DIR +"/"+LogUtils.getDateNewestLog(AppConfig.MONITOR_DIR);
+        String path =  AppConfig.MONITOR_DIR +"/"+ LogUtils.getDateNewestLog(AppConfig.MONITOR_DIR);
         Log.i(TAG, "PATH="+path);
         parse(path);
     }

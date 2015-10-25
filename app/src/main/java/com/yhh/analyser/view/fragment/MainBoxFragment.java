@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.AppUtils;
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.FileUtils;
 import com.yhh.analyser.view.activity.AdbWirelessActivity;
 import com.yhh.analyser.view.activity.AutomaticActivity;
 import com.yhh.analyser.view.activity.BenchmarkActivity;
@@ -34,8 +33,15 @@ import com.yhh.analyser.view.activity.NodeViewActivity;
 import com.yhh.analyser.view.activity.OneKeySleepActivity;
 import com.yhh.analyser.view.activity.SyncTimeActivity;
 import com.yhh.analyser.view.activity.WakeLockActivity;
+import com.yhh.androidutils.AppUtils;
+import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.IOUtils;
 import com.yhh.terminal.Term;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,7 +82,7 @@ public class MainBoxFragment extends Fragment{
             "查看节点","调节亮度","唤醒锁","远程ADB",
             "解析Log","查看Log","模拟终端", "安兔兔跑分",
             "自动化Case","模拟死机", "CPU压测", "IO压测",
-            "震动微调器","一键休眠","时钟微调","更多"
+            "震动微调器","一键休眠","时钟微调","重启压测"
     };
 
 
@@ -154,10 +160,45 @@ public class MainBoxFragment extends Fragment{
         }else{
             String path = Environment.getExternalStorageDirectory().toString() + "/systemAnalyzer/"+AppName+".apk";
             //资源拷贝
-            FileUtils.copyRaw2Local(mContext, rawId, path);
+            copyRaw2Local(mContext, rawId, path);
             //启动安装过程
             AppUtils.installApp(mContext, path);
         }
+    }
+
+        public static boolean copyRaw2Local(Context context, int rawId, String targetPath) {
+        File file = new File(targetPath);
+        //资源已经拷贝,无需重复拷贝
+        if (file.exists()) {
+            return true;
+        }
+
+            try {
+                if (!FileUtils.createFile(targetPath)) {
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            InputStream is = null;
+        FileOutputStream fos = null;
+        try {
+            is = context.getResources().openRawResource(rawId);
+            fos = new FileOutputStream(targetPath);
+            byte[] buffer = new byte[2048];
+            int count;
+            while ((count = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, count);
+            }
+            return true;
+        } catch (IOException e) {
+            Log.e(TAG, "copyRaw2Local Exception ", e);
+        } finally {
+            IOUtils.closeQuietly(fos, is);
+        }
+        return false;
     }
 
     public void startApp(int index){
@@ -202,10 +243,17 @@ public class MainBoxFragment extends Fragment{
                 mContext.startActivity(intent2);
                 break;
 
+            case 6:
+                rawId = R.raw.rebooter;
+                AppName = "Rebooter";
+                pkgName = "com.yhh.rebooter";
+                ActName = "com.yhh.rebooter.MainActivity";
+                runApp(rawId, AppName, pkgName, ActName);
+                break;
+
             default:
                 Toast.makeText(mContext, "正在设计筹划中，敬请期待！", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
 }

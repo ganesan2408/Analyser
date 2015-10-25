@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.bean.app.AppInfo;
-import com.yhh.analyser.utils.AppUtils;
+import com.yhh.androidutils.AppUtils;
 
 import java.util.List;
 

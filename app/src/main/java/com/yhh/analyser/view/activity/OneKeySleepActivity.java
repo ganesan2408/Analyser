@@ -3,40 +3,54 @@ package com.yhh.analyser.view.activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.adapter.OnekeyAdapter;
 import com.yhh.analyser.bean.app.AppInfo;
 import com.yhh.analyser.bean.app.ProcessInfo;
+import com.yhh.analyser.config.OneKeyConfig;
 import com.yhh.analyser.view.BaseActivity;
-import com.yhh.analyser.utils.AppUtils;
-import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.DebugLog;
 import com.yhh.analyser.widget.ProgressWheel;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenu;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuCreator;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuItem;
+import com.yhh.analyser.widget.swipemenulistview.SwipeMenuListView;
+import com.yhh.androidutils.AppUtils;
+import com.yhh.androidutils.DebugLog;
+import com.yhh.androidutils.ScreenUtils;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OneKeySleepActivity extends BaseActivity {
 
+    private LinearLayout mLoopTitle;
     private TextView mSleepBtn;
-    private TextView mTipsTv;
     private TextView mSleepTitleBtn;
     private ProgressWheel mWheel;
 
     private ProcessInfo mProceessInfo;
     private List<AppInfo> mRunningApps;
-    private List<AppInfo> mSecondRunningApps;
 
     private int mAppNum;
+    private SwipeMenuListView mListView;
+    private OnekeyAdapter mOnekeyAdapter;
+    private List<String> mAppRunningList;
+
 
     private PowerManager mPowerManager;
 
@@ -46,9 +60,11 @@ public class OneKeySleepActivity extends BaseActivity {
         setContentView(R.layout.activity_onekey_sleep);
 
         mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        mProceessInfo = new ProcessInfo();
 
         initView();
-        work();
+
+        createSwipeListView();
     }
 
     @Override
@@ -57,29 +73,147 @@ public class OneKeySleepActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateAppList();
+        mLoopTitle.setVisibility(View.GONE);
+    }
+
     private void initView() {
         mSleepBtn = (TextView) findViewById(R.id.txt_onekey_sleep);
-        mTipsTv = (TextView) findViewById(R.id.tv_info_tips);
         mSleepTitleBtn = (TextView) findViewById(R.id.txt_sleep_title);
         mWheel = (ProgressWheel) findViewById(R.id.progress_wheel);
+        mListView = (SwipeMenuListView) findViewById(R.id.smlv_app_list);
+        mLoopTitle = (LinearLayout) findViewById(R.id.ll_loop);
 
         mSleepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLoopTitle.setVisibility(View.VISIBLE);
                 new OneKeyTask().execute();
             }
         });
     }
 
-    private void work() {
-        mProceessInfo = new ProcessInfo();
-        mRunningApps = mProceessInfo.getAllRunningApp(this);
-        mAppNum = mRunningApps.size();
-        mSleepTitleBtn.setText("" + mAppNum);
+
+    private void createSwipeListView() {
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "white" item
+                SwipeMenuItem addWhiteItem = new SwipeMenuItem(
+                        mContext);
+                // set item background
+                addWhiteItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)));
+                // set item width
+                addWhiteItem.setWidth(ScreenUtils.dp2px(mContext, 100));
+                // set item title
+                addWhiteItem.setTitle("加入白名单");
+                // set item title font size
+                addWhiteItem.setTitleSize(16);
+                // set item title font color
+                addWhiteItem.setTitleColor(Color.WHITE);
+                // add to menu
+                menu.addMenuItem(addWhiteItem);
+
+                // create "close" item
+                SwipeMenuItem closeItem = new SwipeMenuItem(mContext);
+                // set item background
+                closeItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
+                // set item width
+                closeItem.setWidth(ScreenUtils.dp2px(mContext, 90));
+                // set item title
+                closeItem.setTitle("关闭");
+                // set item title font size
+                closeItem.setTitleSize(16);
+                // set item title font color
+                closeItem.setTitleColor(Color.WHITE);
+                // set a icon
+//                closeItem.setIcon(R.drawable.ic_delete);
+                // add to menu
+                menu.addMenuItem(closeItem);
+            }
+        };
+
+        mListView.setMenuCreator(creator);
+
+        mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        // 加入白名单
+                        addWhiteList(mRunningApps.get(position).getPackageName());
+                        break;
+                    case 1:
+                        // 关闭
+                        forceStopApp(mRunningApps.get(position).getPackageName());
+                        updateAppList();
+                        break;
+                }
+                return false;
+            }
+        });
+
+        // set SwipeListener
+        mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
+
+            @Override
+            public void onSwipeStart(int position) {
+                // swipe start
+            }
+
+            @Override
+            public void onSwipeEnd(int position) {
+                // swipe end
+            }
+        });
+    }
+
+    private void addWhiteList(String pkgName) {
+        try {
+            OneKeyConfig.addWhite(pkgName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void forceStopApp(String pkgName) {
+        try {
+            AppUtils.forceStopApp(mContext, pkgName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
-    public void startSleep(){
+    private void updateAppList() {
+        initOrUpdateRunnintApp();
+
+        if (mAppNum < 1) {
+            return;
+        }
+
+        mAppRunningList = new ArrayList<>();
+        for (int i = 0; i < mAppNum; i++) {
+            mAppRunningList.add(mRunningApps.get(i).getName());
+        }
+
+        mOnekeyAdapter = new OnekeyAdapter(mAppRunningList);
+        mListView.setAdapter(mOnekeyAdapter);
+    }
+
+    private void initOrUpdateRunnintApp() {
+        mRunningApps = mProceessInfo.getAllRunningApp(this);
+        mAppNum = mRunningApps.size();
+        mSleepTitleBtn.setText("" + mAppNum);
+        Toast.makeText(this,"App num="+mAppNum,Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void startSleep() {
         try {
             Class<?> clazz = Class.forName("android.os.PowerManager");
             Method method = clazz.getMethod("goToSleep", long.class);
@@ -98,20 +232,20 @@ public class OneKeySleepActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            ArrayList<String> whiteList = OneKeyConfig.getWhiteList();
+            String pkgName;
             for (int i = 0; i < mAppNum; i++) {
-                try {
-
-                    DebugLog.d("==>" + mRunningApps.get(i).getPackageName());
-                    Thread.sleep(5);
-                    AppUtils.forceStopApp(mContext, mRunningApps.get(i).getPackageName());
-                } catch (Exception e) {
-                    e.printStackTrace();
+                pkgName = mRunningApps.get(i).getPackageName();
+                //过滤白名单的应用程序
+                if (whiteList.contains(pkgName)) {
+                    continue;
                 }
-
+                DebugLog.d("==>" + pkgName);
+                forceStopApp(pkgName);
                 //调用publishProgress公布进度,最后onProgressUpdate方法将被执行
                 publishProgress(i);
             }
-            mSecondRunningApps = mProceessInfo.getAllRunningApp(mContext);
+//            mSecondRunningApps = mProceessInfo.getAllRunningApp(mContext);
             publishProgress(mAppNum);
             return null;
         }
@@ -126,9 +260,6 @@ public class OneKeySleepActivity extends BaseActivity {
 
                 mSleepTitleBtn.setText((values[0] + 1) + "/" + mAppNum);
             } else {
-                mRunningApps = mSecondRunningApps;
-                mAppNum = mSecondRunningApps.size();
-                mWheel.setText("Complete");
                 startSleep();
             }
         }
@@ -137,9 +268,6 @@ public class OneKeySleepActivity extends BaseActivity {
         protected void onPostExecute(String s) {
             mSleepBtn.setText(R.string.txt_onekey_sleep);
             mSleepTitleBtn.setText("" + mAppNum);
-
-            Log.i(ConstUtils.DEBUG_TAG, "startSleep");
-
         }
 
         @Override
@@ -150,24 +278,18 @@ public class OneKeySleepActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_onekey, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (item.getItemId() == R.id.action_settings) {
             createShortCut();
             return true;
+        }else if (item.getItemId() == R.id.item_white_app) {
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -177,7 +299,7 @@ public class OneKeySleepActivity extends BaseActivity {
         // add name
         shortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.txt_onekey_sleep));
         // add intent
-        ComponentName comp = new ComponentName(this.getPackageName(), ".ui.OneKeySleepActivity");
+        ComponentName comp = new ComponentName(this.getPackageName(), ".view.activity.OneKeySleepActivity");
         Intent mainIntent = new Intent(Intent.ACTION_MAIN).setComponent(comp);
         mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

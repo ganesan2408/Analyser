@@ -7,7 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.yhh.analyser.utils.DensityUtils;
+import com.yhh.androidutils.ScreenUtils;
+
 
 /**
  * Created by yuanhh1 on 2015/8/14.
@@ -31,7 +32,7 @@ public class FloatCreator {
 
     public void createFloatingWindow(final View floatingTitle, final View floatingWindow) {
 
-        y0 = DensityUtils.dip2px(mContext, 25);
+        y0 = ScreenUtils.dp2px(mContext, 25);
         windowManager = (WindowManager) mContext.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         wmParams =  new WindowManager.LayoutParams();
         wmParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;

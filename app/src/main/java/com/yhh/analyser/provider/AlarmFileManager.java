@@ -1,6 +1,7 @@
 package com.yhh.analyser.provider;
 
-import com.yhh.analyser.utils.FileUtils;
+
+import com.yhh.androidutils.FileUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/12.
@@ -15,6 +16,6 @@ public class AlarmFileManager extends AlarmManager{
 
     @Override
     String getDumpsysAlarm() {
-        return FileUtils.readFromFile(file);
+        return FileUtils.readFile(file) ;
     }
 }

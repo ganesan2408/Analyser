@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.yhh.analyser.config.AppConfig;
+import com.yhh.androidutils.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,7 +60,7 @@ public class ScreenShot {
     }
 
     public static boolean shoot(View v) {
-        String shotPath = createFile(TimeUtils.getTime());
+        String shotPath = createFile(TimeUtils.getCurrentTime(TimeUtils.DATETIME_UNDERLINE_FORMAT));
         if(shotPath ==null || shotPath.equals("")){
             return false;
         }
@@ -93,7 +94,7 @@ public class ScreenShot {
     }
 
     public static void shoot(Activity a){
-        shoot(a, TimeUtils.getTime());
+        shoot(a, TimeUtils.getCurrentTime(TimeUtils.DATETIME_UNDERLINE_FORMAT));
     }
 
     public static void shoot(Activity a, String shotName) {

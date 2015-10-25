@@ -14,7 +14,7 @@ import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.yhh.analyser.R;
 import com.yhh.analyser.utils.ChartTool;
-import com.yhh.analyser.utils.NumberUtils;
+import com.yhh.androidutils.NumberUtils;
 
 public class MyMarkerView extends MarkerView {
 
@@ -41,7 +41,7 @@ public class MyMarkerView extends MarkerView {
             CandleEntry ce = (CandleEntry) e;
             if(mMode == 1){
                 tvContent.setText(ChartTool.getInstance().index2hhmm(ce.getXIndex())
-                        +"("+NumberUtils.formatDecimal(ce.getHigh(),2,true)+")");
+                        +"("+ NumberUtils.format(ce.getHigh(), 2, true)+")");
             }else{
                 tvContent.setText(ChartTool.getInstance().index2hhmm(ce.getXIndex())
                         +"("+ce.getHigh()+")");
@@ -49,7 +49,7 @@ public class MyMarkerView extends MarkerView {
         } else {
             if(mMode == 1){
                 tvContent.setText(ChartTool.getInstance().index2hhmm(e.getXIndex())
-                        +"("+NumberUtils.formatDecimal(e.getVal(),2,true)+")");
+                        +"("+NumberUtils.format(e.getVal(),2,true)+")");
             }else{
                 tvContent.setText(ChartTool.getInstance().index2hhmm(e.getXIndex())
                         +"("+e.getVal()+")");

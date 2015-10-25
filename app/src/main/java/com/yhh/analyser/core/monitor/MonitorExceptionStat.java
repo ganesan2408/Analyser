@@ -9,7 +9,7 @@ package com.yhh.analyser.core.monitor;
 import android.util.Log;
 
 import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.ShellUtils;
+import com.yhh.androidutils.ShellUtils;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
