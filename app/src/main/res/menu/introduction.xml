@@ -1,8 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
      
     <item android:id="@+id/introduction_doc"
-        android:title="@string/introduction_title" 
-        android:showAsAction="always"/>
+        android:title="@string/introduction_title"/>
     
     
 </menu>
