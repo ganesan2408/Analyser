@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Analyser.iml" filepath="$PROJECT_DIR$/Analyser.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidutils/androidutils.iml" filepath="$PROJECT_DIR$/androidutils/androidutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" filepath="$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" />
     </modules>
   </component>
 </project>
