@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.widget.IndexableListView;
 import com.yhh.analyser.view.activity.LogReaderActivity;
 import com.yhh.androidutils.ArrayUtils;
@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LogCurrentFragment extends Fragment {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "CurrentLogFragment";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "CurrentLogFragment";
     
     private IndexableListView mLogLv;
     private List<String> mLogNameList = null;
@@ -49,7 +49,7 @@ public class LogCurrentFragment extends Fragment {
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.log_current_fragment, container, false);  
         mLogLv = (IndexableListView) view.findViewById(R.id.log_current_lv);
-        mLogNameList = ArrayUtils.toList(FileUtils.listFolderOrFile(ConstUtils.LOG_DIR));
+        mLogNameList = ArrayUtils.toList(FileUtils.listFolderOrFile(LogUtils.LOG_DIR));
         if(mLogNameList != null && mLogNameList.size() >0){
         Collections.sort(mLogNameList);
         IndexableListView.ContentAdapter adapter = mLogLv.new ContentAdapter(this.getActivity(),
@@ -64,7 +64,7 @@ public class LogCurrentFragment extends Fragment {
                             int arg2, long arg3) {
                         Intent  intent = new Intent(mcontext, LogReaderActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("logPath", ConstUtils.LOG_DIR + "/" + mLogNameList.get(arg2));
+                        bundle.putString("logPath", LogUtils.LOG_DIR + "/" + mLogNameList.get(arg2));
                         intent.putExtras(bundle);
                         mcontext.startActivity(intent);
                     }
@@ -90,7 +90,7 @@ public class LogCurrentFragment extends Fragment {
         
         for (int i = 0; i < files.length; i++) {
             String tmpName = files[i].getName();
-            for (String log : ConstUtils.LOG_ALL) {
+            for (String log : LogUtils.LOG_ALL) {
                 if (tmpName.startsWith(log)) {
                     mLogNameList.add(tmpName);
                 }

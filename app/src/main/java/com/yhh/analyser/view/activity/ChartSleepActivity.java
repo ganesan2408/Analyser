@@ -26,8 +26,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.LogWakeup;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.model.LogWakeup;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.provider.AbtractLogSleepParser;
 import com.yhh.analyser.provider.LogSleepAbtractLogSleepParser;
@@ -35,7 +35,7 @@ import com.yhh.analyser.provider.LogSleepAbtractLogSleepParser;
 import java.util.ArrayList;
 
 public class ChartSleepActivity extends ChartBaseActivity implements  OnChartValueSelectedListener {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "ChartSleepActivity";
+    private static final String TAG = LogUtils.DEBUG_TAG + "ChartSleepActivity";
     private boolean DEBUG = true;
     
     private PieChart mChart;

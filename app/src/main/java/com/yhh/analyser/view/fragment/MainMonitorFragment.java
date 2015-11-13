@@ -5,15 +5,15 @@
 package com.yhh.analyser.view.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
@@ -25,11 +25,13 @@ import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.MonitorService;
 import com.yhh.analyser.view.BaseFragment;
+import com.yhh.analyser.view.activity.MonitorAnalyticActivity;
 import com.yhh.analyser.view.activity.MonitorAppMainActivity;
 import com.yhh.analyser.view.activity.MonitorDiyActivity;
 import com.yhh.analyser.view.activity.MonitorExceptionActivity;
 import com.yhh.analyser.view.activity.MonitorShellActivity;
 import com.yhh.androidutils.DebugLog;
+import com.yhh.androidutils.PreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,11 +40,12 @@ import java.util.Map;
 
 public class MainMonitorFragment extends BaseFragment {
 
-    private SharedPreferences preferences;
-    private static final int DEFAULT_FREQ = 2;
     public static final String KEY_INTERVAL = "interval";
+    public static final int DEFAULT_FREQ = 2;
+    public static final String KEY_HAVE_BACKGROUND = "have_background";
+    public static final boolean DEFAULT_BG = false;
 
-
+    private CheckBox mHaveBackGrounp;
     private GridView mGridView;
     private SimpleAdapter mAdapter;
     private List<Map<String, Object>> mDataList;
@@ -56,8 +59,6 @@ public class MainMonitorFragment extends BaseFragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("sa_","onCreate");
-        preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         setData();
 
     }
@@ -71,12 +72,33 @@ public class MainMonitorFragment extends BaseFragment {
     }
 
     private void initView(View v) {
+        Button analyticBtn = (Button) v.findViewById(R.id.btn_analytic_data);
+        analyticBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext, MonitorAnalyticActivity.class));
+
+            }
+        });
+
+        //是否开启背景
+        mHaveBackGrounp = (CheckBox) v.findViewById(R.id.cb_have_background);
+        boolean haveBg = PreferencesUtils.getInstance(mContext).get(KEY_HAVE_BACKGROUND, DEFAULT_BG);
+        mHaveBackGrounp.setChecked(haveBg);
+
+        mHaveBackGrounp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                PreferencesUtils.getInstance(mContext).put(KEY_HAVE_BACKGROUND, isChecked);
+            }
+        });
+
         //初始化监控频率UI
         SeekBar monitorFreqSb = (SeekBar) v.findViewById(R.id.seekbar_freq);
         final TextView monitorFreqTv = (TextView) v.findViewById(R.id.tv_freq_value);
 
-        int freqValue = preferences.getInt(KEY_INTERVAL, DEFAULT_FREQ);
-        monitorFreqTv.setText(freqValue + "");
+        int freqValue = PreferencesUtils.getInstance(mContext).get(KEY_INTERVAL, DEFAULT_FREQ);
+        monitorFreqTv.setText(String.valueOf(freqValue));
         monitorFreqSb.setProgress(freqValue - 1);
 
         monitorFreqSb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -92,7 +114,7 @@ public class MainMonitorFragment extends BaseFragment {
             @Override
             public void onStopTrackingTouch(SeekBar arg0) {
                 int interval = arg0.getProgress() + 1;
-                preferences.edit().putInt(KEY_INTERVAL, interval).commit();
+                PreferencesUtils.getInstance(mContext).put(KEY_INTERVAL, interval);
             }
         });
 

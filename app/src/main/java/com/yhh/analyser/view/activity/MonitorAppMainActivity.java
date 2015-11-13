@@ -14,9 +14,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.app.AppInfo;
-import com.yhh.analyser.bean.app.ProcessInfo;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.model.app.AppInfo;
+import com.yhh.analyser.model.app.ProcessInfo;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.widget.DropDownListView;
@@ -34,7 +34,7 @@ import java.util.List;
 
 
 public class MonitorAppMainActivity extends BaseActivity {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "mama";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "mama";
     
     private static List<AppInfo> mAppList;
 	private DropDownListView sortListView;

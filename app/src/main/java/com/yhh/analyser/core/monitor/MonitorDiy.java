@@ -2,8 +2,8 @@ package com.yhh.analyser.core.monitor;
 
 import android.content.Context;
 
-import com.yhh.analyser.bean.InfoFactory;
-import com.yhh.analyser.bean.MonitorChoice;
+import com.yhh.analyser.model.InfoFactory;
+import com.yhh.analyser.model.MonitorChoice;
 import com.yhh.analyser.core.MonitorFactory;
 
 import java.util.ArrayList;

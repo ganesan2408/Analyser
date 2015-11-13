@@ -13,12 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu.CanvasTransformer;
 
 public class CustomViewBehind extends ViewGroup {
 
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "CustomViewBehind";
+	private static final String TAG =  LogUtils.DEBUG_TAG+ "CustomViewBehind";
 
 	private static final int MARGIN_THRESHOLD = 48; // dips
 	private int mTouchMode = SlidingMenu.TOUCHMODE_MARGIN;

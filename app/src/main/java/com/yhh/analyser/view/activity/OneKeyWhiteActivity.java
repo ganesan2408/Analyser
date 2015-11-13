@@ -5,14 +5,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.adapter.OnekeyAdapter;
+import com.yhh.analyser.adapter.OnekeyWhiteAdapter;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.config.OneKeyConfig;
 import com.yhh.analyser.view.BaseActivity;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenu;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenuCreator;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenuItem;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenuListView;
+import com.yhh.analyser.widget.menulistview.SwipeMenu;
+import com.yhh.analyser.widget.menulistview.SwipeMenuCreator;
+import com.yhh.analyser.widget.menulistview.SwipeMenuItem;
+import com.yhh.analyser.widget.menulistview.SwipeMenuListView;
+import com.yhh.androidutils.AppUtils;
 import com.yhh.androidutils.FileUtils;
 import com.yhh.androidutils.ScreenUtils;
 
@@ -25,7 +26,7 @@ public class OneKeyWhiteActivity extends BaseActivity {
 
     private SwipeMenuListView mListView;
 
-    private OnekeyAdapter mOnekeyAdapter;
+    private OnekeyWhiteAdapter mOnekeyAdapter;
     private List<String> mWhiteList;
 
 
@@ -33,7 +34,7 @@ public class OneKeyWhiteActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onekey_sleep);
+        setContentView(R.layout.activity_onekey_white);
 
 
         initView();
@@ -55,7 +56,7 @@ public class OneKeyWhiteActivity extends BaseActivity {
 
     private void initView() {
 
-        mListView = (SwipeMenuListView) findViewById(R.id.smlv_white_list);
+        mListView = (SwipeMenuListView) findViewById(R.id.smlv_app_white);
 
     }
 
@@ -80,22 +81,6 @@ public class OneKeyWhiteActivity extends BaseActivity {
                 addWhiteItem.setTitleColor(Color.WHITE);
                 // add to menu
                 menu.addMenuItem(addWhiteItem);
-
-                // create "close" item
-//                SwipeMenuItem closeItem = new SwipeMenuItem(mContext);
-//                // set item background
-//                closeItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
-//                // set item width
-//                closeItem.setWidth(DensityUtils.dip2px(mContext, 90));
-//                // set item title
-//                closeItem.setTitle("关闭");
-//                // set item title font size
-//                closeItem.setTitleSize(16);
-//                // set item title font color
-//                closeItem.setTitleColor(Color.WHITE);
-//                // set a icon
-//                // add to menu
-//                menu.addMenuItem(closeItem);
             }
         };
 
@@ -145,10 +130,17 @@ public class OneKeyWhiteActivity extends BaseActivity {
     private void updateAppList() {
         mWhiteList = (ArrayList) FileUtils.readFile2List(AppConfig.ONE_KEY_WHITE_LIST);
 
-        mOnekeyAdapter = new OnekeyAdapter(mWhiteList);
+        mOnekeyAdapter = new OnekeyWhiteAdapter(pkgName2appName(mWhiteList));
         mListView.setAdapter(mOnekeyAdapter);
     }
 
+    private List<String> pkgName2appName(List<String> list){
+        List<String> appNames = new ArrayList<>();
+        for(String pkgName: list){
+            appNames.add(AppUtils.getAppName(this, pkgName));
+        }
+        return appNames;
+    }
 
 
 

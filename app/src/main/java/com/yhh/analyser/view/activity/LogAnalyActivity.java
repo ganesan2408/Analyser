@@ -8,57 +8,51 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.adapter.LogListAdapter;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.provider.LogBatteryParser;
 import com.yhh.analyser.provider.LogPmParser;
 import com.yhh.analyser.provider.LogSleepParser;
 import com.yhh.analyser.provider.LogcatParser;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.widget.numberprogressbar.NumberProgressBar;
+import com.yhh.androidutils.ArrayUtils;
 import com.yhh.androidutils.FileUtils;
+import com.yhh.androidutils.StringUtils;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class LogAnalyActivity extends BaseActivity {
-    public static final String TAG = ConstUtils.DEBUG_TAG + "LogAnalyActivity";
-    private boolean DEBUG = true;
+    public static final String TAG = LogUtils.DEBUG_TAG + "LogAnaly";
 
     private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
     public static final String LOG_PATH = "log path";
 
     public static String sLogCacheDir;
 
-    public static String mParseDir = ConstUtils.LOG_DIR;
+    public static String mParseDir = LogUtils.LOG_DIR;
 
     private NumberProgressBar mNumberBar;
-    private Button mParserBtn;
     private ListView mLv;
-    private RadioButton mRadioButton;
 
     private int mTargetNum = 1;
 
@@ -71,7 +65,7 @@ public class LogAnalyActivity extends BaseActivity {
         setContentView(R.layout.log_analyser_mainpage);
 
 
-        sLogCacheDir = getApplicationContext().getFilesDir().getAbsolutePath() + "/log_cache";
+        sLogCacheDir = getApplicationContext().getFilesDir().getAbsolutePath() + "/log_cache/";
         FileUtils.createFolder(sLogCacheDir);
 
         initUI();
@@ -81,7 +75,7 @@ public class LogAnalyActivity extends BaseActivity {
     private void initUI() {
         mNumberBar = (NumberProgressBar) findViewById(R.id.log_loading);
 
-        mParserBtn = (Button) findViewById(R.id.log_parser_btn);
+        Button mParserBtn = (Button) findViewById(R.id.log_parser_btn);
         mParserBtn.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -107,6 +101,7 @@ public class LogAnalyActivity extends BaseActivity {
      * @param Dir 需要解析的Log所在文件夹路径
      */
     private int parseLog(String Dir) {
+        Log.d(TAG, "delete log cache.");
         FileUtils.deleteFile(LogAnalyActivity.sLogCacheDir);
         FileUtils.createFolder(LogAnalyActivity.sLogCacheDir);
 
@@ -116,16 +111,20 @@ public class LogAnalyActivity extends BaseActivity {
             return 0;
         }
 
-        Log.d(TAG, "delete log cache succuss.");
+
+        Log.i(TAG, "begin parse battery log");
         LogBatteryParser mLogBatteryParser = new LogBatteryParser(Dir);
         mLogBatteryParser.parse(mHandler);
 
+        Log.i(TAG, "begin parse sleep log");
         LogSleepParser mLogSleepParser = new LogSleepParser(Dir);
         mLogSleepParser.parse(mHandler);
 
+        Log.i(TAG, "begin parse pm log");
         LogPmParser mLogPmParser = new LogPmParser(Dir);
         mLogPmParser.parse(mHandler);
 
+        Log.i(TAG, "begin parse logcat log");
         LogcatParser mLogcatParser = new LogcatParser(Dir);
         mLogcatParser.parse(mHandler);
         return 1;
@@ -138,10 +137,10 @@ public class LogAnalyActivity extends BaseActivity {
         if (parentDir.exists()) {
             File[] files = parentDir.listFiles();
             for (File f : files) {
-                if (f.getName().contains(ConstUtils.LOG_BATTERY) ||
-                        f.getName().contains(ConstUtils.LOG_PMLOG) ||
-                        f.getName().contains(ConstUtils.LOG_LOGCAT) ||
-                        f.getName().contains(ConstUtils.LOG_SLEEP)) {
+                if (f.getName().contains(LogBatteryParser.LOG_BATTERY) ||
+                        f.getName().contains(LogPmParser.LOG_PMLOG) ||
+                        f.getName().contains(LogcatParser.LOG_LOGCAT) ||
+                        f.getName().contains(LogSleepParser.LOG_SLEEP)) {
                     num++;
                 }
             }
@@ -149,18 +148,18 @@ public class LogAnalyActivity extends BaseActivity {
         return num;
     }
 
-    Handler mHandler = new Handler() {
+    public Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             if (msg.what == 1) {
                 mNumberBar.setVisibility(View.GONE);
                 mNumberBar.setProgress(0);
 
                 newLog = FileUtils.listFiles(sLogCacheDir);
-                if (newLog == null || newLog.length <= 0) {
+                if (ArrayUtils.isEmpty(newLog)) {
                     DialogUtils.closeLoading();
                     return;
                 }
-                mLv.setAdapter(new ListAdapter());
+                mLv.setAdapter(new LogListAdapter(LogAnalyActivity.this, newLog));
                 mLv.setOnItemClickListener(new OnItemClickListener() {
 
                     @Override
@@ -189,28 +188,15 @@ public class LogAnalyActivity extends BaseActivity {
 
     };
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if(item.getItemId() == R.id.introduction_doc){
-//            DialogUtils.showAlergDialog(this, getString(R.string.introduction_title),
-//                    getString(R.string.introduction_log_analyser));
-//        }else if(item.getItemId() == R.id.log_viewer){
-//            Intent intent = new Intent(this, LogViewActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (mParseDir == null || mParseDir.equals("")) {
+        if (StringUtils.isBlank(mParseDir)) {
             return;
         }
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        Editor editor = pref.edit();
-        editor.putString("log_dir", mParseDir);
-        editor.commit();
+        pref.edit().putString("log_dir", mParseDir).apply();
     }
 
     public void showChooseLogDialog() {
@@ -237,8 +223,7 @@ public class LogAnalyActivity extends BaseActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.i(TAG, "selectedFileIndex=" + selectedFileIndex);
-                        if (files == null || files.length < 1) {
+                        if (ArrayUtils.isEmpty(files)) {
                             return;
                         }
                         mParseDir = AppConfig.PATH_SD_LOG + "/" + files[selectedFileIndex];
@@ -271,71 +256,4 @@ public class LogAnalyActivity extends BaseActivity {
             }
         });
     }
-
-
-    private class ListAdapter extends BaseAdapter {
-        int checkedPosition = -1;
-        int lastCheckedPosition = -1;
-
-        public ListAdapter() {
-
-        }
-
-        @Override
-        public int getCount() {
-            return newLog.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return newLog[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null)
-                convertView = getLayoutInflater().inflate(R.layout.common_list_items, parent, false);
-            Viewholder holder = (Viewholder) convertView.getTag();
-            if (holder == null) {
-                holder = new Viewholder();
-                convertView.setTag(holder);
-                holder.logNameTv = (TextView) convertView.findViewById(R.id.commom_item);
-                holder.choiceButton = (RadioButton) convertView.findViewById(R.id.commom_rb);
-                holder.choiceButton.setFocusable(false);
-                holder.choiceButton.setOnCheckedChangeListener(checkedChangeListener);
-            }
-            holder.logNameTv.setText(newLog[position]);
-            holder.choiceButton.setId(position);
-            holder.choiceButton.setChecked(checkedPosition == position);
-            return convertView;
-        }
-
-        OnCheckedChangeListener checkedChangeListener = new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d(TAG, "isChecked=" + isChecked);
-                if (isChecked) {
-                    checkedPosition = buttonView.getId();
-                    if (lastCheckedPosition != -1) {
-                        RadioButton tempButton = (RadioButton) findViewById(lastCheckedPosition);
-                        if ((tempButton != null) && (lastCheckedPosition != checkedPosition)) {
-                            tempButton.setChecked(false);
-                        }
-                    }
-                    lastCheckedPosition = checkedPosition;
-                }
-            }
-        };
-    }
-
-    static class Viewholder {
-        TextView logNameTv;
-        RadioButton choiceButton;
-    }
-
 }

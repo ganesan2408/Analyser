@@ -11,27 +11,23 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.PerfBean;
+import com.yhh.analyser.model.PerfBean;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.BaseActivity;
-import com.yhh.analyser.utils.RootUtils;
-import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.widget.SwitchButton;
 import com.yhh.analyser.widget.rangebar.RangeBar;
 
 public class BenchmarkSettingsActivity extends BaseActivity {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "bmset";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "bmset";
     private boolean DEBUG = true;
 
     private SharedPreferences mPref;
     private SharedPreferences.Editor mEditor;
     
-    private SwitchButton mThermalControlBtn;
     private EditText mStartTmpEt;
     private SwitchButton mLoopConfigBtn;
     
@@ -65,7 +61,6 @@ public class BenchmarkSettingsActivity extends BaseActivity {
     public static String GPU_FRQ_LOWER_KEY = "gfb";
     
     
-    boolean isThermalControl;
     String startTmp;
     boolean isLoogConfig;
     int cpuBigNumUpper;
@@ -94,7 +89,6 @@ public class BenchmarkSettingsActivity extends BaseActivity {
     }
     
     public void initUI(){
-        mThermalControlBtn = (SwitchButton) findViewById(R.id.thermal_control_btn);
         mStartTmpEt =  (EditText) findViewById(R.id.start_temp_et);
         mLoopConfigBtn = (SwitchButton) findViewById(R.id.loop_config_btn);
         
@@ -111,23 +105,6 @@ public class BenchmarkSettingsActivity extends BaseActivity {
         mGpufreqTv = (TextView) findViewById(R.id.gpu_freq_tv);
         
         
-        mThermalControlBtn.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                    boolean isChecked) {
-                mEditor.putBoolean(THERMAL_CONTROL_KEY, !isChecked);
-                mEditor.commit();
-                RootUtils.getInstance().startThermalEngine(!isChecked);
-            }
-        });
-//      mLoopConfigBtn.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-//          @Override
-//          public void onCheckedChanged(CompoundButton buttonView,
-//                  boolean isChecked) {
-//              mEditor.putBoolean(LOOP_CONFIG_KEY, !isChecked);
-//              mEditor.commit();
-//          }
-//      });
         //设置
         mCpuBigNumBar.setTickCount(PerfBean.CPU_BIG_NUM+1);
         mCpuSmallNumBar.setTickCount(PerfBean.CPU_LITTER_NUM+1);
@@ -175,7 +152,6 @@ public class BenchmarkSettingsActivity extends BaseActivity {
     }
     
     public void readRefs(){
-        isThermalControl = mPref.getBoolean(THERMAL_CONTROL_KEY, true);
         startTmp = mPref.getString(START_TEMP_KEY, "");
         isLoogConfig = mPref.getBoolean(LOOP_CONFIG_KEY, false);
         cpuBigNumUpper = mPref.getInt(CPU_BIG_NUM_UPPER_KEY, 2);
@@ -189,7 +165,6 @@ public class BenchmarkSettingsActivity extends BaseActivity {
         gpuFreqUpper = mPref.getInt(GPU_FRQ_UPPER_KEY, 4);
         gpuFreqLower = mPref.getInt(GPU_FRQ_LOWER_KEY, 0);
         
-        mThermalControlBtn.setChecked(!isThermalControl);
         mStartTmpEt.setText(startTmp);
         mLoopConfigBtn.setChecked(!isLoogConfig);
         
@@ -210,7 +185,6 @@ public class BenchmarkSettingsActivity extends BaseActivity {
     }
     
     private void writeRefs(){
-        mEditor.putBoolean(THERMAL_CONTROL_KEY, !mThermalControlBtn.isChecked());
         mEditor.putString(START_TEMP_KEY, mStartTmpEt.getText().toString());
         mEditor.putBoolean(LOOP_CONFIG_KEY, !mLoopConfigBtn.isChecked());
         

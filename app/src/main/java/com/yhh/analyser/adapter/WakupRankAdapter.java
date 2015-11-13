@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.AlarmBean;
+import com.yhh.analyser.model.AlarmBean;
 
 import java.util.List;
 

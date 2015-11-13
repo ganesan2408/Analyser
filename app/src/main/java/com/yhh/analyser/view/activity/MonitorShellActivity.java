@@ -23,7 +23,7 @@ import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.MonitorService;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.androidutils.FileUtils;
 import com.yhh.androidutils.StringUtils;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MonitorShellActivity extends BaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "mshell";
+    private static final String TAG = LogUtils.DEBUG_TAG + "mshell";
     private boolean DEBUG = true;
 
     private Button mMonitorBtn;
@@ -45,6 +45,9 @@ public class MonitorShellActivity extends BaseActivity {
     private List<String> mShellList;
 
     public static String sCommand;
+
+    public static final String CMD_TOP_PROCESS = "top -m 10 -n 1 -d 1";
+    public static final String CMD_TOP_THREAD = "top -t -m 10 -n 1 -d 1";
 
     @SuppressLint("NewApi")
     @Override
@@ -98,10 +101,11 @@ public class MonitorShellActivity extends BaseActivity {
         mCmdEdit = (EditText) findViewById(R.id.shell_command);
 
         mShellLv = (ListView) findViewById(R.id.lv_shell);
+
+//        mShellList = getInternalCommand();
+//        mShellList.addAll(getData());
         mShellList = getData();
-        if (mShellList == null) {
-            mShellList = new ArrayList<>();
-        }
+        addInternalCommand(mShellList);
 
         mShellLv.setAdapter(new ArrayAdapter<>(this, R.layout.auto_comlete_drop_down, mShellList));
         mShellLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -168,5 +172,19 @@ public class MonitorShellActivity extends BaseActivity {
                     }
                 })
                 .show();
+    }
+
+
+    private void addInternalCommand(List<String> commandList){
+        if(commandList ==null){
+            commandList = new ArrayList<>();
+        }
+
+        if(!commandList.contains(CMD_TOP_PROCESS)) {
+            commandList.add(0, CMD_TOP_PROCESS);
+        }
+        if(!commandList.contains(CMD_TOP_THREAD)) {
+            commandList.add(1, CMD_TOP_THREAD);
+        }
     }
 }

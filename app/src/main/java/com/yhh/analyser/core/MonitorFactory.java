@@ -2,7 +2,7 @@ package com.yhh.analyser.core;
 
 import android.content.Context;
 
-import com.yhh.analyser.bean.MonitorChoice;
+import com.yhh.analyser.model.MonitorChoice;
 import com.yhh.analyser.core.monitor.Monitor;
 import com.yhh.analyser.core.monitor.MonitorBattery;
 import com.yhh.analyser.core.monitor.MonitorCpu;

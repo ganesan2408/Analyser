@@ -11,17 +11,14 @@
         android:layout_height="120dp"
         android:background="#e0e0e0"
         android:layout_marginBottom="20dp"
-        android:clickable="true"
         >
         <TextView
-            style="@style/slide_menu_left_center_title"
-            android:text="@string/menu_phone"
-            android:textColor="@color/black"
-            />
-        <TextView
             android:id="@+id/phone_model"
-            style="@style/slide_menu_right_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:textColor="@color/black"
+            android:layout_centerInParent="true"
             />
     </RelativeLayout>
     <RelativeLayout

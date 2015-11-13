@@ -29,9 +29,8 @@ import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.monitor.MonitorExceptionStat;
 import com.yhh.analyser.provider.MonitorDataProvider;
-import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.LogUtils;
+import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.ScreenShot;
 import com.yhh.analyser.widget.NoScrollListView;
 import com.yhh.analyser.widget.chart.custom.MyValueFormatter;
@@ -39,13 +38,14 @@ import com.yhh.analyser.widget.chart.items.ChartItem;
 import com.yhh.analyser.widget.chart.items.LineChartItem;
 import com.yhh.analyser.widget.chart.items.StackedBarChartItem;
 import com.yhh.androidutils.DebugLog;
+import com.yhh.androidutils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ChartMonitorActivity extends ChartBaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "ChartMonitor";
+    private static final String TAG = LogUtils.DEBUG_TAG + "ChartMonitor";
     private boolean DEBUG = true;
 
     private MonitorDataProvider mMonitorDataProvider;
@@ -135,7 +135,7 @@ public class ChartMonitorActivity extends ChartBaseActivity {
             @Override
             public void run() {
                 mMonitorDataProvider = new MonitorDataProvider(ChartMonitorActivity.this);
-                if (mMonitorPath == null || "".equals(mMonitorPath)) {
+                if (StringUtils.isBlank(mMonitorPath)) {
                     mMonitorPath = LogUtils.getDateNewestLog(AppConfig.MONITOR_DIR);
                 }
                 mMonitorDataProvider.parse(AppConfig.MONITOR_DIR + "/" + mMonitorPath);
@@ -188,7 +188,7 @@ public class ChartMonitorActivity extends ChartBaseActivity {
             Log.d(TAG, "monitor data length:" + monitorData.size());
         }
         for (int i = 0; i < len; i++) {
-            if (ConstUtils.CPU_FREQ_TITLE.equals(monitorTitle[i])) {
+            if (LogUtils.CPU_FREQ_TITLE.equals(monitorTitle[i])) {
                 if (DEBUG) {
                     Log.d(TAG, "CPU_FREQ_TITLE:" + i);
                 }

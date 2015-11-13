@@ -27,10 +27,10 @@ import android.util.Log;
 import com.yhh.analyser.R;
 import com.yhh.terminal.emulatorview.TermSession;
 import com.yhh.terminal.util.SessionList;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 public class TermService extends Service implements TermSession.FinishCallback {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "TermService";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "TermService";
     /* Parallels the value of START_STICKY on API Level >= 5 */
     private static final int COMPAT_START_STICKY = 1;
 

@@ -9,7 +9,7 @@ package com.yhh.analyser.provider;
 import android.os.Handler;
 import android.util.Log;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.ChartTool;
 
 import java.io.BufferedWriter;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class LogParser{
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "LogParser";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "LogParser";
 
     protected  boolean mIsParse = true;
     

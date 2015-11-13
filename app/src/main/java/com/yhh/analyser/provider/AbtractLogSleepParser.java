@@ -9,7 +9,6 @@ package com.yhh.analyser.provider;
 import android.util.Log;
 
 import com.yhh.analyser.utils.ChartTool;
-import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.LogUtils;
 
 import java.io.File;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class AbtractLogSleepParser {
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "AbtractLogSleepParser";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "AbtractLogSleepParser";
     protected String mLogDir;
     protected String mLogNameType;
     protected ChartTool mChartTool = ChartTool.getInstance();

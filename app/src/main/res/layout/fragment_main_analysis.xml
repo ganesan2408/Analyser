@@ -15,23 +15,43 @@
       android:orientation="horizontal" 
         >
         <RadioButton 
-            android:id="@+id/rb_analysis_monitor"
+            android:id="@+id/rb_power_lcd"
             style="@style/status_main_tab" 
             android:background="@drawable/main_selector_left"
             android:textColor="@color/sub_title_color"
             android:padding="6dp"
-            android:text="@string/analysis_monitor"
+            android:text="@string/power_lcd"
             android:checked="true"
             />
         <RadioButton 
-             android:id="@+id/rb_analysis_wakeup"
+             android:id="@+id/rb_power_wakeup"
              style="@style/status_main_tab" 
-             android:background="@drawable/main_selector_right"
+             android:background="@drawable/main_selector_center"
              android:textColor="@color/sub_title_color"
              android:layout_marginLeft="1dp"
              android:layout_marginRight="1dp"
              android:padding="6dp"
-             android:text="@string/analysis_wakeup"
+             android:text="@string/power_wakeup"
+            />
+        <RadioButton
+            android:id="@+id/rb_power_lock"
+            style="@style/status_main_tab"
+            android:background="@drawable/main_selector_center"
+            android:textColor="@color/sub_title_color"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:padding="6dp"
+            android:text="@string/power_lock"
+            />
+        <RadioButton
+            android:id="@+id/rb_power_else"
+            style="@style/status_main_tab"
+            android:background="@drawable/main_selector_right"
+            android:textColor="@color/sub_title_color"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:padding="6dp"
+            android:text="@string/power_else"
             />
     </RadioGroup>
     <FrameLayout

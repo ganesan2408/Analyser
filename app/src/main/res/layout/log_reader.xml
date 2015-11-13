@@ -7,16 +7,15 @@
         android:id="@+id/search_layout"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="42sp"
-        android:gravity="center"
-        android:layout_marginBottom="10sp">
+        android:layout_height="36sp"
+        android:gravity="center">
 
         <AutoCompleteTextView
             android:id="@+id/searchKey"
             android:layout_width="0sp"
             android:layout_weight="4"
-            android:layout_height="40sp"
-            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
             android:hint="@string/searchHint"
             android:selectAllOnFocus="true"
             android:background="@drawable/log_search_border"
@@ -26,7 +25,7 @@
             android:id="@+id/search_btn"
             android:layout_width="0sp"
             android:layout_weight="1"
-            android:layout_height="40sp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:text="@string/log_search"
@@ -43,51 +42,57 @@
             android:id="@+id/log_info"   
             android:layout_width="fill_parent"  
             android:layout_height="wrap_content"
-            android:dividerHeight="3sp"
+            android:dividerHeight="1px"
             android:choiceMode="singleChoice"
-            android:listSelector="#0f0"/> 
+            android:listSelector="@color/primary"/>
         <ListView
             android:id="@+id/search_log_info"   
             android:layout_width="fill_parent"  
             android:layout_height="wrap_content"
-            android:dividerHeight="3sp"
+            android:dividerHeight="1px"
             android:choiceMode="singleChoice"
-            android:listSelector="#f00"/>
+            android:listSelector="@color/primary"/>
     </ViewFlipper>
 	<LinearLayout
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
-	    android:layout_height="30sp"
-	    android:layout_marginLeft="10sp"
-	    android:layout_marginRight="10sp"
-	    android:background="@drawable/selector_monitor_button">
+	    android:layout_height="36sp"
+        android:background="@drawable/selector_monitor_button"
+        >
 		<TextView
 			android:id="@+id/firstPage"
 			android:layout_width="0sp"
 			android:layout_weight="1"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
+            android:layout_marginRight="4dp"
 			android:text="首页"
-			android:background="@drawable/selector_monitor_button"
             android:gravity="center"
-            android:layout_gravity="center"
             android:onClick="pageHandler"/>
     	<TextView
 			android:id="@+id/prePage"
 			android:layout_width="0sp"
 			android:layout_weight="1"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
+            android:layout_marginRight="4dp"
 			android:text="上页"
-			android:background="@drawable/selector_monitor_button"
             android:gravity="center"
-            android:layout_gravity="center"
+            android:onClick="pageHandler"/>
+        <TextView
+            android:id="@+id/pageNum"
+            android:layout_width="0sp"
+            android:layout_weight="1.2"
+            android:layout_height="match_parent"
+            android:layout_marginRight="4dp"
+            android:text="1/23"
+            android:textColor="#f00"
+            android:gravity="center"
             android:onClick="pageHandler"/>
 		<TextView
 			android:id="@+id/nextPage"
 			android:layout_width="0sp"
 			android:layout_weight="1"
-			android:layout_height="wrap_content"
-			android:background="@drawable/selector_monitor_button"
-			android:layout_gravity="center"
+			android:layout_height="match_parent"
+            android:layout_marginRight="4dp"
 			android:text="下页"
             android:gravity="center"
             android:onClick="pageHandler"/>
@@ -96,22 +101,11 @@
 			android:id="@+id/lastPage"
 			android:layout_width="0sp"
 			android:layout_weight="1"
-			android:layout_height="wrap_content"
-			android:background="@drawable/selector_monitor_button"
+			android:layout_height="match_parent"
 			android:text="末页"
-			android:gravity="center"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:onClick="pageHandler"/>
 		
-        <TextView
-			android:id="@+id/pageNum"
-			android:layout_width="0sp"
-			android:layout_weight="1.2"
-			android:layout_height="wrap_content"
-			android:text="1/23"
-			android:textColor="#f00"
-			android:gravity="center"
-			android:layout_gravity="center"
-            android:onClick="pageHandler"/>
+
 	</LinearLayout>
 </LinearLayout>

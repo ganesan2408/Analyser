@@ -22,9 +22,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.app.PhoneInfo;
+import com.yhh.analyser.model.app.PhoneInfo;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.view.fragment.LogCurrentFragment;
@@ -34,7 +34,7 @@ import com.yhh.androidutils.FileUtils;
 import com.yhh.androidutils.TimeUtils;
 
 public class LogViewActivity extends BaseActivity {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "LogViewActivity";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "LogViewActivity";
     private static final int DELETE_CURRENT_LOG = 1;
     private static final int DELETE_HISTORY_LOG = 2;
     
@@ -54,7 +54,7 @@ public class LogViewActivity extends BaseActivity {
         
         fm =  this.getFragmentManager();
         setDaultFragment();
-        if(!PhoneInfo.getBrand().contains(ConstUtils.BRAND_LENOVO)){
+        if(!PhoneInfo.getBrand().contains(LogUtils.BRAND_LENOVO)){
             Log.e(TAG,PhoneInfo.getBrand()+" Not support!");
             Toast.makeText(this, PhoneInfo.getBrand()+" Not support!", Toast.LENGTH_LONG).show();
         }
@@ -142,7 +142,7 @@ public class LogViewActivity extends BaseActivity {
 
             @Override
             public void run() {
-                String srcDir = ConstUtils.LOG_DIR;
+                String srcDir = LogUtils.LOG_DIR;
                 String desDir = AppConfig.PATH_SD_LOG +"/aplog_"+ TimeUtils.getCurrentTime(TimeUtils.DATETIME_UNDERLINE_FORMAT);
                 FileUtils.copyFolder(srcDir, desDir);
                 mHandler.sendEmptyMessage(0x11);
@@ -156,7 +156,7 @@ public class LogViewActivity extends BaseActivity {
      */
     public void deleteCurrentLog(){
         Log.d(TAG,"delete all Log");
-        FileUtils.deleteFile(ConstUtils.LOG_DIR);
+        FileUtils.deleteFile(LogUtils.LOG_DIR);
     }
     
     /**

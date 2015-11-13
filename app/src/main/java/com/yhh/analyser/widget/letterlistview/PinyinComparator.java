@@ -8,7 +8,7 @@ package com.yhh.analyser.widget.letterlistview;
 
 import java.util.Comparator;
 
-import com.yhh.analyser.bean.app.AppInfo;
+import com.yhh.analyser.model.app.AppInfo;
 
 public class PinyinComparator implements Comparator<AppInfo> {
 

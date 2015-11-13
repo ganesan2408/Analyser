@@ -26,7 +26,8 @@ import android.widget.TextView;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.provider.LogSleepParser;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.activity.LogReaderActivity;
 import com.yhh.analyser.view.activity.LogSleepReaderActivity;
 import com.yhh.androidutils.ArrayUtils;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class LogHistoryFragment extends Fragment{
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "HistoryLogFragment";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "HistoryLogFragment";
     private ArrayList<String> mFolder;
     private ArrayList<ArrayList<String>> mFileTree;
     private ExpandableListView mFileTreeElv;
@@ -178,7 +179,7 @@ public class LogHistoryFragment extends Fragment{
                 Log.i(TAG,"targetPath"+targetPath);
                 
                 Intent intent;
-                if(mFileTree.get(groupPosition).get(childPosition).contains(ConstUtils.LOG_SLEEP)){
+                if(mFileTree.get(groupPosition).get(childPosition).contains(LogSleepParser.LOG_SLEEP)){
                     intent = new Intent(mcontext, LogSleepReaderActivity.class);
                 }else{
                     intent = new Intent(mcontext, LogReaderActivity.class);

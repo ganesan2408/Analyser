@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <com.yhh.analyser.widget.SwitchButton
+        android:id="@+id/power_lcd_btn"
+        style="@style/item"
+        android:text="CABC"
+        android:textSize="15sp"
+        android:background="@drawable/selector_preference_complete"
+        android:checked="false"
+        app:withTextInterval="6dp"
+        android:layout_marginTop="10dp"
+        app:frameDrawable="@drawable/switch_frame"
+        app:stateDrawable="@drawable/selector_switch_state"
+        app:stateMaskDrawable="@drawable/switch_state_mask"
+        app:sliderDrawable="@drawable/selector_switch_slider"/>
+
+    <com.yhh.analyser.widget.SwitchButton
+        android:id="@+id/power_lcd_auto_btn"
+        style="@style/item"
+        android:text="自动背光"
+        android:textSize="15sp"
+        android:background="@drawable/selector_preference_complete"
+        android:checked="false"
+        app:withTextInterval="6dp"
+        android:layout_marginTop="10dp"
+        app:frameDrawable="@drawable/switch_frame"
+        app:stateDrawable="@drawable/selector_switch_state"
+        app:stateMaskDrawable="@drawable/switch_state_mask"
+        app:sliderDrawable="@drawable/selector_switch_slider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="24dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:text="背光亮度:"/>
+        <TextView
+            android:id="@+id/power_brightness_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:text="20"/>
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/power_brightness_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:focusable="true"
+        android:max="254"
+        android:maxHeight="3dp"
+        android:minHeight="3dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:progress="1"
+        android:progressDrawable="@drawable/custom_seekbar"/>
+</LinearLayout>

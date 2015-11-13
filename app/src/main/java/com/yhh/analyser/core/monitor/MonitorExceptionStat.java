@@ -8,14 +8,14 @@ package com.yhh.analyser.core.monitor;
 
 import android.util.Log;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.androidutils.ShellUtils;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class MonitorExceptionStat {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "ExceptionStat";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "ExceptionStat";
     private boolean DEBUG = false;
     
     private HashMap<String, Integer> mTopCpuApp = new HashMap<>();

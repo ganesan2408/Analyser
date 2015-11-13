@@ -21,7 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ScreenShot {
-    private static final String TAG = ConstUtils.DEBUG_TAG+ "ScreenShot";
+    private static final String TAG = LogUtils.DEBUG_TAG+ "ScreenShot";
 
 
     private static Bitmap takeScreenShot(Activity activity) {

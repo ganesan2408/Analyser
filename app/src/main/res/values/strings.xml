@@ -48,27 +48,34 @@
 
 
     <string name="version_update">版本更新</string>
+    <string name="two_dimension_code">下载二维码</string>
 
     <!-- 首页start -->
     <string name="title_monitor">监控</string>
-    <string name="title_app_monitor">应用监控</string>
+    <string name="title_app_monitor">APP监控</string>
     <string name="title_analyzer">分析</string>
     <string name="title_view">查看</string>
     <string name="title_performance">性能</string>
+    <string name="title_power">功耗</string>
     <string name="title_tool">工具箱</string>
 
     <string name="analysis_monitor">监控表</string>
-    <string name="analysis_wakeup">唤醒榜</string>
 
     <string name="status_power">Power</string>
     <string name="status_battery">Battery</string>
 	<string name="top_processes">Process</string>
 	<string name="top_threads">Thread</string>
-	
+
+    <string name="power_lcd">LCD</string>
+    <string name="power_lock">Lock</string>
+    <string name="power_wakeup">Wakeup</string>
+    <string name="power_else">VddMin</string>
+
 	<string name="perf_cpu">CPU</string>
 	<string name="perf_gpu">GPU</string>
-	<string name="perf_score">跑分</string>
-	
+	<string name="perf_io">IO</string>
+	<string name="perf_thermal">Thermal</string>
+
 	<string name="toolbox_node">查看节点</string>
 	<string name="toolbox_score">安兔兔跑分</string>
 	<string name="toolbox_auto">自动化Case</string>
@@ -84,6 +91,7 @@
         2.点击启动按钮，在电脑端输入下方ADB指令即可。</string>
 
     <string name="txt_sync_time">时钟微调</string>
+    <string name="txt_onekey_clear">一键清理</string>
     <string name="txt_onekey_sleep">一键休眠</string>
     <string name="txt_onekey_info">提示：能彻底强杀所有的应用程序，包含部分系统程序</string>
     <string name="txt_onekey_complete">完成</string>
@@ -147,7 +155,7 @@
     <!-- activit_main start-->
     <string name="about_phone">手机版本</string>
     <string name="create_icon">创建桌面图标</string>
-    <string name="create_icon_msg">手机桌面将生成“分析中心”的App图标，不再需要通过暗码，可直接点击图标启动，是否创建？</string>
+    <string name="create_icon_msg">是否创建App桌面图标？</string>
     <string name="help">关于System Analyzer</string>
     <string name="help_url">有任何建议或反馈，欢迎联系MBG BSP或邮件至yuanhh1@lenovo.com(袁辉辉)</string>
     <!-- activit_main end-->
@@ -511,9 +519,6 @@
     <string name="action_settings">创建图标</string>
     <string name="onekey_white">查看白名单</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-  <!-- LDrawer end -->
 
     <string name="drop_down_list_header_default_text">Click to refresh&#8230;</string>
     <string name="drop_down_list_header_pull_text">Drop Down to refresh&#8230;</string>
@@ -524,5 +529,19 @@
     <string name="drop_down_list_footer_no_more_text">No More</string>
 
     <string name="image_content">Image</string>
-  
+
+    <!--vibrator tool -->
+    <string name="vmax">最大震动电压：</string>
+    <string name="vibrator_wf">震动电压波形调节：</string>
+    <string name="brake">刹车功能</string>
+    <string name="vibrator_time">震动时间</string>
+    <string name="wf_s0">wf_s0</string>
+    <string name="wf_s1">wf_s1</string>
+    <string name="wf_s2">wf_s2</string>
+    <string name="wf_s3">wf_s3</string>
+    <string name="wf_s4">wf_s4</string>
+    <string name="wf_s5">wf_s5</string>
+    <string name="wf_s6">wf_s6</string>
+    <string name="wf_s7">wf_s7</string>
+    <!--vibrator tool end-->
 </resources>

@@ -2,7 +2,7 @@ package com.yhh.analyser.core.monitor;
 
 import android.content.Context;
 
-import com.yhh.analyser.bean.TempInfo;
+import com.yhh.analyser.model.TempInfo;
 import com.yhh.analyser.core.MonitorFactory;
 
 /**

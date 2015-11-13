@@ -9,15 +9,15 @@ package com.yhh.analyser.provider;
 import android.os.Handler;
 import android.util.Log;
 
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.activity.LogAnalyActivity;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.androidutils.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,12 +29,13 @@ import java.util.regex.Pattern;
  * 
  */
 public class LogBatteryParser extends LogParser{
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "LogBatteryParser";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "LogBatteryParser";
     private boolean DEBUG = true;
 
     private BufferedWriter bw;
     private String mDir;
-    public static String newFile ="_电池";
+    public static String newFile ="_Battery";
+    public static final String LOG_BATTERY = "battery";
     
     public LogBatteryParser(String dir){
         mDir = dir;
@@ -43,11 +44,12 @@ public class LogBatteryParser extends LogParser{
 
     @Override
     public void parse(Handler handler){
-        ArrayList<File> files = listTargetLog(mDir, ConstUtils.LOG_BATTERY);
+        ArrayList<File> files = listTargetLog(mDir, LOG_BATTERY);
         if(files ==null || files.size() <=0){
+            Log.w(TAG,"LOG_BATTERY is null");
             return;
         }
-        
+
         //保证解析过程由旧至新
         Collections.sort(files);
         for(File f: files){
@@ -75,16 +77,16 @@ public class LogBatteryParser extends LogParser{
         
         try {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(log)));
-            String curTime =null;
+            String curTime;
             String lastTime = null;
             String curYYMMDD = null;
             
-            ArrayList<Integer> lastStatus = new ArrayList<Integer>();
-            ArrayList<Integer> lastHealth = new ArrayList<Integer>();
-            ArrayList<Integer> lastLevels = new ArrayList<Integer>();
-            ArrayList<Integer> lastVoltage = new ArrayList<Integer>();
-            ArrayList<Integer> lastTemps = new ArrayList<Integer>();
-            
+            ArrayList<Integer> lastStatus = new ArrayList<>();
+            ArrayList<Integer> lastHealth = new ArrayList<>();
+            ArrayList<Integer> lastLevels = new ArrayList<>();
+            ArrayList<Integer> lastVoltage = new ArrayList<>();
+            ArrayList<Integer> lastTemps = new ArrayList<>();
+
             long startTime = 0;
             if(DEBUG){
                 startTime = System.currentTimeMillis();
@@ -162,13 +164,7 @@ public class LogBatteryParser extends LogParser{
         } catch (Exception e) {
             Log.e(TAG,"Init battery log failure.",e);
         } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    Log.e(TAG,"init battery log close failure.");
-                }
-            }
+            IOUtils.close(br);
         }
     }
 }

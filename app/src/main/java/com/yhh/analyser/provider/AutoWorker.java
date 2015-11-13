@@ -10,7 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.RootUtils;
 import com.yhh.androidutils.FileUtils;
@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class AutoWorker {
-	public static final String TAG =  ConstUtils.DEBUG_TAG+ "AutoWorker";
+	public static final String TAG =  LogUtils.DEBUG_TAG+ "AutoWorker";
 	private boolean DEBUG = true;
 	
 	private static final String ROBOT_JAR_NAME = "/myrobot.jar";
@@ -44,7 +44,7 @@ public class AutoWorker {
 	    ROBOT_ROOT_PATH = mContext.getApplicationContext().getFilesDir().getAbsolutePath()
 	            +"/myrobot";
 	    
-	    mConfigPath = "/data/data/"+ConstUtils.MY_PACKAGE_NAME 
+	    mConfigPath = "/data/data/"+ LogUtils.MY_PACKAGE_NAME
                 + "/shared_prefs" + ROBOT_CONFIG_NAME;
 	}
 	

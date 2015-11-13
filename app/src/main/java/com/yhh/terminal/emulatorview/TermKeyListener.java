@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 import android.util.Log;
 import android.view.KeyCharacterMap;
@@ -16,7 +16,7 @@ import android.view.KeyEvent;
  *
  */
 public class TermKeyListener {
-    private final static String TAG =  ConstUtils.DEBUG_TAG+ "TermKeyListener";
+    private final static String TAG =  LogUtils.DEBUG_TAG+ "TermKeyListener";
     private static final boolean LOG_MISC = false;
     private static final boolean LOG_KEYS = false;
     private static final boolean LOG_COMBINING_ACCENT = false;

@@ -14,19 +14,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.adapter.OnekeyAdapter;
-import com.yhh.analyser.bean.app.AppInfo;
-import com.yhh.analyser.bean.app.ProcessInfo;
+import com.yhh.analyser.model.app.AppInfo;
+import com.yhh.analyser.model.app.ProcessInfo;
 import com.yhh.analyser.config.OneKeyConfig;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.widget.ProgressWheel;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenu;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenuCreator;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenuItem;
-import com.yhh.analyser.widget.swipemenulistview.SwipeMenuListView;
+import com.yhh.analyser.widget.menulistview.SwipeMenu;
+import com.yhh.analyser.widget.menulistview.SwipeMenuCreator;
+import com.yhh.analyser.widget.menulistview.SwipeMenuItem;
+import com.yhh.analyser.widget.menulistview.SwipeMenuListView;
 import com.yhh.androidutils.AppUtils;
 import com.yhh.androidutils.DebugLog;
 import com.yhh.androidutils.ScreenUtils;
@@ -40,17 +39,16 @@ public class OneKeySleepActivity extends BaseActivity {
 
     private LinearLayout mLoopTitle;
     private TextView mSleepBtn;
-    private TextView mSleepTitleBtn;
+    private TextView mClearBtn;
     private ProgressWheel mWheel;
 
-    private ProcessInfo mProceessInfo;
+    private ProcessInfo mProcessInfo;
     private List<AppInfo> mRunningApps;
 
     private int mAppNum;
     private SwipeMenuListView mListView;
-    private OnekeyAdapter mOnekeyAdapter;
-    private List<String> mAppRunningList;
 
+    private boolean needScreenOff;
 
     private PowerManager mPowerManager;
 
@@ -60,7 +58,7 @@ public class OneKeySleepActivity extends BaseActivity {
         setContentView(R.layout.activity_onekey_sleep);
 
         mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        mProceessInfo = new ProcessInfo();
+        mProcessInfo = new ProcessInfo();
 
         initView();
 
@@ -76,13 +74,14 @@ public class OneKeySleepActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        UpdateRunningAppData();
         updateAppList();
         mLoopTitle.setVisibility(View.GONE);
     }
 
     private void initView() {
         mSleepBtn = (TextView) findViewById(R.id.txt_onekey_sleep);
-        mSleepTitleBtn = (TextView) findViewById(R.id.txt_sleep_title);
+        mClearBtn = (TextView) findViewById(R.id.txt_onekey_clear);
         mWheel = (ProgressWheel) findViewById(R.id.progress_wheel);
         mListView = (SwipeMenuListView) findViewById(R.id.smlv_app_list);
         mLoopTitle = (LinearLayout) findViewById(R.id.ll_loop);
@@ -91,6 +90,16 @@ public class OneKeySleepActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 mLoopTitle.setVisibility(View.VISIBLE);
+                needScreenOff = true;
+                new OneKeyTask().execute();
+            }
+        });
+
+        mClearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoopTitle.setVisibility(View.VISIBLE);
+                needScreenOff = false;
                 new OneKeyTask().execute();
             }
         });
@@ -150,6 +159,7 @@ public class OneKeySleepActivity extends BaseActivity {
                     case 1:
                         // 关闭
                         forceStopApp(mRunningApps.get(position).getPackageName());
+                        UpdateRunningAppData();
                         updateAppList();
                         break;
                 }
@@ -157,19 +167,6 @@ public class OneKeySleepActivity extends BaseActivity {
             }
         });
 
-        // set SwipeListener
-        mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
-
-            @Override
-            public void onSwipeStart(int position) {
-                // swipe start
-            }
-
-            @Override
-            public void onSwipeEnd(int position) {
-                // swipe end
-            }
-        });
     }
 
     private void addWhiteList(String pkgName) {
@@ -190,26 +187,19 @@ public class OneKeySleepActivity extends BaseActivity {
 
 
     private void updateAppList() {
-        initOrUpdateRunnintApp();
+//        UpdateRunningAppData();
 
         if (mAppNum < 1) {
             return;
         }
 
-        mAppRunningList = new ArrayList<>();
-        for (int i = 0; i < mAppNum; i++) {
-            mAppRunningList.add(mRunningApps.get(i).getName());
-        }
-
-        mOnekeyAdapter = new OnekeyAdapter(mAppRunningList);
+        OnekeyAdapter mOnekeyAdapter = new OnekeyAdapter(mRunningApps);
         mListView.setAdapter(mOnekeyAdapter);
     }
 
-    private void initOrUpdateRunnintApp() {
-        mRunningApps = mProceessInfo.getAllRunningApp(this);
+    private void UpdateRunningAppData() {
+        mRunningApps = mProcessInfo.getAllRunningApp(this);
         mAppNum = mRunningApps.size();
-        mSleepTitleBtn.setText("" + mAppNum);
-        Toast.makeText(this,"App num="+mAppNum,Toast.LENGTH_SHORT).show();
     }
 
 
@@ -235,17 +225,21 @@ public class OneKeySleepActivity extends BaseActivity {
             ArrayList<String> whiteList = OneKeyConfig.getWhiteList();
             String pkgName;
             for (int i = 0; i < mAppNum; i++) {
+                //调用publishProgress公布进度,最后onProgressUpdate方法将被执行
+                publishProgress(i);
+
                 pkgName = mRunningApps.get(i).getPackageName();
-                //过滤白名单的应用程序
+                //过滤白名单的应用`程序
                 if (whiteList.contains(pkgName)) {
                     continue;
                 }
                 DebugLog.d("==>" + pkgName);
                 forceStopApp(pkgName);
-                //调用publishProgress公布进度,最后onProgressUpdate方法将被执行
-                publishProgress(i);
+
             }
-//            mSecondRunningApps = mProceessInfo.getAllRunningApp(mContext);
+            if(!needScreenOff){
+                UpdateRunningAppData();
+            }
             publishProgress(mAppNum);
             return null;
         }
@@ -258,16 +252,18 @@ public class OneKeySleepActivity extends BaseActivity {
                 mWheel.setProgress((int) (3.6 * progress));
                 mWheel.setText(mRunningApps.get(values[0]).getName());
 
-                mSleepTitleBtn.setText((values[0] + 1) + "/" + mAppNum);
             } else {
-                startSleep();
+                mLoopTitle.setVisibility(View.GONE);
+                updateAppList();
+                if(needScreenOff) {
+                    startSleep();
+                }
             }
         }
 
         @Override
         protected void onPostExecute(String s) {
             mSleepBtn.setText(R.string.txt_onekey_sleep);
-            mSleepTitleBtn.setText("" + mAppNum);
         }
 
         @Override
@@ -288,6 +284,8 @@ public class OneKeySleepActivity extends BaseActivity {
             createShortCut();
             return true;
         }else if (item.getItemId() == R.id.item_white_app) {
+            Intent intent = new Intent(this, OneKeyWhiteActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

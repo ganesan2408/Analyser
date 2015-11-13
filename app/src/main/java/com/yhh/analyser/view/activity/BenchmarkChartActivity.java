@@ -22,20 +22,21 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.yhh.analyser.R;
+import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.provider.MonitorDataProvider;
-import com.yhh.analyser.utils.ConstUtils;
-import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.LogUtils;
+import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.ScreenShot;
 import com.yhh.analyser.widget.NoScrollListView;
 import com.yhh.analyser.widget.chart.items.ChartItem;
 import com.yhh.analyser.widget.chart.items.LineChartItem;
+import com.yhh.androidutils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BenchmarkChartActivity extends ChartBaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "benchchart";
+    private static final String TAG = LogUtils.DEBUG_TAG + "benchchart";
     private boolean DEBUG = true;
     
     private MonitorDataProvider mMonitorDataProvider;
@@ -121,15 +122,15 @@ public class BenchmarkChartActivity extends ChartBaseActivity {
             @Override
             public void run() {
                 mMonitorDataProvider = new MonitorDataProvider(BenchmarkChartActivity.this);
-                if(mBenchmarkPath ==null || "".equals(mBenchmarkPath)){
-                    mBenchmarkPath = LogUtils.getDateNewestLog(BenchmarkActivity.MONITOR_PARENT_PATH);
+                if(StringUtils.isBlank(mBenchmarkPath)){
+                    mBenchmarkPath = LogUtils.getDateNewestLog(AppConfig.ROOT_DIR);
                 }
-                
+
                 if(DEBUG){
                     Log.d(TAG,"mMonitorPath="+mBenchmarkPath);
                 }
-              //需要修改的
-                mMonitorDataProvider.parse("/sdcard/systemAnalyzer/"+mBenchmarkPath);
+
+                mMonitorDataProvider.parse(AppConfig.ROOT_DIR + mBenchmarkPath);
                 
                 updateAdapter();
                 mHandler.sendMessage(mHandler.obtainMessage(0x1));
@@ -207,7 +208,7 @@ public class BenchmarkChartActivity extends ChartBaseActivity {
         // lineDataSet.setShader(new LinearGradient(0, 0, 0, mChart.getHeight(),
         // Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
 
-        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
+        ArrayList<LineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet); // add the datasets
 
         // create a data object with the datasets

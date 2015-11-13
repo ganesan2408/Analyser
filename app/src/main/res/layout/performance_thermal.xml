@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <com.yhh.analyser.widget.SwitchButton
+        android:id="@+id/thermal_control_btn"
+        style="@style/item"
+        android:text="@string/settings_thermal_control"
+        android:textSize="15sp"
+        android:background="@drawable/selector_preference_header"
+        android:checked="false"
+        app:withTextInterval="6dp"
+        android:layout_marginTop="10dp"
+        app:frameDrawable="@drawable/switch_frame"
+        app:stateDrawable="@drawable/selector_switch_state"
+        app:stateMaskDrawable="@drawable/switch_state_mask"
+        app:sliderDrawable="@drawable/selector_switch_slider"/>
+
+    <TextView
+        android:id="@+id/tv_thermal_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        android:text="thermal"/>
+</LinearLayout>

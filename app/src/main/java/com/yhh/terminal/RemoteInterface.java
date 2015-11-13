@@ -33,12 +33,12 @@ import android.util.Log;
 import com.yhh.terminal.emulatorview.TermSession;
 import com.yhh.terminal.util.SessionList;
 import com.yhh.terminal.util.TermSettings;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 
 
 public class RemoteInterface extends Activity {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "RemoteInterface";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "RemoteInterface";
     protected static final String PRIVACT_OPEN_NEW_WINDOW = "jackpal.androidterm.private.OPEN_NEW_WINDOW";
     protected static final String PRIVACT_SWITCH_WINDOW = "jackpal.androidterm.private.SWITCH_WINDOW";
 

@@ -21,10 +21,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 public class AutoCaseSettings {
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "AutoCaseSettings";
+	private static final String TAG =  LogUtils.DEBUG_TAG+ "AutoCaseSettings";
 	private boolean DEBUG = true;
 
 	private Context mContext;

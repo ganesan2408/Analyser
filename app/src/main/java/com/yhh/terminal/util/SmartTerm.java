@@ -5,10 +5,10 @@ import java.io.File;
 import android.content.Context;
 import android.util.Log;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 public class SmartTerm{
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "SmartTerm";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "SmartTerm";
     private Context mContext;
     private String input;
     

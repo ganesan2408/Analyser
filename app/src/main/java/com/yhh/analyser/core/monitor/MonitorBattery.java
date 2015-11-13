@@ -2,10 +2,9 @@ package com.yhh.analyser.core.monitor;
 
 import android.content.Context;
 
-import com.yhh.analyser.bean.BatteryBean;
-import com.yhh.analyser.bean.BatteryInfo;
-import com.yhh.analyser.bean.PowerInfo;
 import com.yhh.analyser.core.MonitorFactory;
+import com.yhh.analyser.model.BatteryWorker;
+import com.yhh.analyser.model.PowerInfo;
 
 import java.util.ArrayList;
 
@@ -13,10 +12,11 @@ import java.util.ArrayList;
  * Created by yuanhh1 on 2015/8/19.
  */
 public class MonitorBattery extends Monitor {
-    private BatteryInfo mBatteryInfo;
+    private BatteryWorker mBatteryWorker;
     private PowerInfo mPowerInfo;
 
-    private ArrayList<String> mContentList;
+//    private ArrayList<String> mContentList;
+    private ArrayList<String> mWriteableList;
 
     public MonitorBattery(Context context) {
         super(context);
@@ -42,31 +42,34 @@ public class MonitorBattery extends Monitor {
     public void onStart() {
         super.onStart();
         mPowerInfo = new PowerInfo();
-        mBatteryInfo = new BatteryInfo();
-        mBatteryInfo.init(mContext);
-        mBatteryInfo.register();
+        mBatteryWorker = new BatteryWorker();
+        mBatteryWorker.init(mContext);
+        mBatteryWorker.register();
 
-        mContentList = new ArrayList<>();
+//        mContentList = new ArrayList<>();
+        mWriteableList = new ArrayList<>();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mBatteryInfo.unregister();
+        mBatteryWorker.unregister();
     }
 
     @Override
     public String monitor() {
-        BatteryBean bean = mBatteryInfo.getBattery();
+        writeBatteryInfo();
 
-        mContentList.clear();
-        mContentList.add(String.valueOf(mPowerInfo.getcurrent()));
-        mContentList.add(bean.getLevel());
-        mContentList.add(bean.getTemperature());
-        mContentList.add(bean.getVoltage());
+        return "current: " + mPowerInfo.getcurrent() + "mA \n" + mBatteryWorker.getBatteryShowInfo();
+    }
 
-        write2File(mContentList);
-
-        return getFloatBody(mContentList);
+    /**
+     * 将电池信息吸入到文件
+     */
+    private void writeBatteryInfo(){
+        mWriteableList.clear();
+        mWriteableList.add(String.valueOf(mPowerInfo.getcurrent()));
+        mWriteableList.addAll(mBatteryWorker.getBatteryInfo());
+        write2File(mWriteableList);
     }
 }

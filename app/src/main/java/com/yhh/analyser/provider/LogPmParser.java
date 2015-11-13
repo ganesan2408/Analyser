@@ -9,9 +9,9 @@ package com.yhh.analyser.provider;
 import android.os.Handler;
 import android.util.Log;
 
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.activity.LogAnalyActivity;
-import com.yhh.analyser.bean.app.PhoneInfo;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.model.app.PhoneInfo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,12 +24,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class LogPmParser extends LogParser{
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "LogPmParser";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "LogPmParser";
     private boolean DEBUG = true;
 
     private BufferedWriter bw;
     private String mDir;
-    public static String newFile ="_电流";
+    public static String newFile ="_pmlog";
+    public static final String LOG_PMLOG = "pmlog";
     
     public LogPmParser(String dir){
         mDir = dir;
@@ -37,8 +38,9 @@ public class LogPmParser extends LogParser{
     
     @Override
     public void parse(Handler handler){
-        ArrayList<File> files = listTargetLog(mDir, ConstUtils.LOG_PMLOG);
+        ArrayList<File> files = listTargetLog(mDir, LOG_PMLOG);
         if(files ==null || files.size() <=0){
+            Log.w(TAG,"LOG_PMLOG is null");
             return;
         }
         
@@ -135,10 +137,10 @@ public class LogPmParser extends LogParser{
         } catch (Exception e) {
             Log.e(TAG,"init PMLOG log failure.",e);
         } finally {
-            if (br != null) {
+            if (bw != null) {
                 try {
                     bw.flush();
-                    br.close();
+                    bw.close();
                 } catch (IOException e) {
                     Log.e(TAG,"init PMLOG log close failure.");
                 }

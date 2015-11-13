@@ -27,6 +27,7 @@ public class WakeLockActivity extends BaseActivity {
 
         pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
         mStatusTv = (TextView) findViewById(R.id.status);
+
     }
     
     @SuppressLint("Wakelock")

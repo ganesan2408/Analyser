@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.ActionBar;
-import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -64,20 +63,20 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.terminal.emulatorview.EmulatorView;
 import com.yhh.terminal.emulatorview.TermKeyListener;
 import com.yhh.terminal.emulatorview.TermSession;
 import com.yhh.terminal.emulatorview.UpdateCallback;
 import com.yhh.terminal.util.SessionList;
 import com.yhh.terminal.util.TermSettings;
-import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * A terminal emulator activity.
  */
 
 public class Term extends Activity implements UpdateCallback {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "Term";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "Term";
     /**
      * The ViewFlipper which holds the collection of EmulatorView widgets.
      */

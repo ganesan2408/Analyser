@@ -14,7 +14,7 @@
             android:layout_margin="12dp"
             android:text="@string/shot_path"/>
     </RelativeLayout>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
+    <com.yhh.analyser.widget.menulistview.SwipeMenuListView
         android:id="@+id/shot_swipe_ll"
         android:layout_below="@id/screen_shot_title"
         android:layout_width="match_parent"

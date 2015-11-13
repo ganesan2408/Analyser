@@ -13,7 +13,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.LogUtils;
 
 import java.io.BufferedReader;
@@ -24,7 +23,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MonitorDataProvider {
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "MonitorDataProvider";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "MonitorDataProvider";
     private boolean DEBUG = true;
     
     private boolean mIsParse;
@@ -71,7 +70,7 @@ public class MonitorDataProvider {
                 mTitle[i] = mResTitle[Integer.valueOf(mTitle[i])];
             }
             
-            int cpuFreqNum = findItemByTitle(ConstUtils.CPU_FREQ_TITLE);
+            int cpuFreqNum = findItemByTitle(LogUtils.CPU_FREQ_TITLE);
             if(DEBUG){
                 Log.d(TAG,"itemLen= "+itemLen+",cpuFreqNum="+cpuFreqNum);
             }

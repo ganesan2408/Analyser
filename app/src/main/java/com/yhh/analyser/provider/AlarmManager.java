@@ -2,8 +2,8 @@ package com.yhh.analyser.provider;
 
 import android.content.Context;
 
-import com.yhh.analyser.bean.AlarmBean;
-import com.yhh.analyser.bean.AlarmType;
+import com.yhh.analyser.model.AlarmBean;
+import com.yhh.analyser.model.AlarmType;
 import com.yhh.androidutils.AppUtils;
 import com.yhh.androidutils.DebugLog;
 import com.yhh.androidutils.StringUtils;
@@ -19,7 +19,7 @@ public abstract class AlarmManager {
     private List<AlarmBean> alarmBeanList;
 
     public AlarmManager(){
-        alarmBeanList = new ArrayList<AlarmBean>();
+        alarmBeanList = new ArrayList<>();
     }
 
     /**
@@ -29,8 +29,7 @@ public abstract class AlarmManager {
     public boolean parse(Context context){
         String rawInfo = getDumpsysAlarm();
 
-        if(rawInfo ==null){
-            DebugLog.e("dumpsys alarm is null");
+        if(StringUtils.isBlank(rawInfo)){
             return false;
         }
         String[] rawInfoArr = rawInfo.split("\\n");
@@ -134,7 +133,7 @@ public abstract class AlarmManager {
         }
 
         String[] arr = line.trim().split("\\s+");
-        if(arr !=null && arr.length==5){
+        if(arr.length == 5){
             String[] subArr = arr[0].trim().split(":");
             alarmBean.setUid(subArr[0]);
             alarmBean.setName(subArr[1]);
@@ -160,7 +159,7 @@ public abstract class AlarmManager {
         }
 
         String[] arr = line.trim().split("\\s+");
-        if(arr != null && arr.length ==6){
+        if((arr.length == 6)){
             alarmType.setRunningTime(arr[0].trim());
             alarmType.setWakeups(Integer.valueOf(arr[1].trim()));
             int index = arr[5].indexOf(":");

@@ -19,25 +19,25 @@
         <TextView
             android:id="@+id/gpu_freq_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <com.yhh.analyser.widget.rangebar.RangeBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+    <com.yhh.analyser.widget.rangebar.RangeBar
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
         android:id="@+id/gpu_freq_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/gpu_freq_ll"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        custom:tickCount="7"
         custom:barWeight="1dp"
-        custom:connectingLineWeight="1dp"
-        custom:tickHeight="5dp"
         custom:connectingLineColor="@color/primary"
-        custom:thumbRadius="3dp"
+        custom:connectingLineWeight="1dp"
         custom:thumbColorNormal="@color/primary"
-        custom:thumbColorPressed="@color/primary_dark"/>
+        custom:thumbColorPressed="@color/primary_dark"
+        custom:thumbRadius="3dp"
+        custom:tickCount="7"
+        custom:tickHeight="5dp" />
 
     <Button
         android:id="@+id/reflash_btn"

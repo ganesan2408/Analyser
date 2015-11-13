@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -46,7 +46,7 @@ import android.widget.Scroller;
  * take care of this for you.
  */
 public class EmulatorView extends View implements GestureDetector.OnGestureListener {
-    private final static String TAG =  ConstUtils.DEBUG_TAG+ "EmulatorView";
+    private final static String TAG =  LogUtils.DEBUG_TAG+ "EmulatorView";
     private final static boolean LOG_KEY_EVENTS = false;
     private final static boolean LOG_IME = false;
 

@@ -42,7 +42,7 @@ import com.yhh.analyser.provider.LogBatteryParser;
 import com.yhh.analyser.provider.LogPmParser;
 import com.yhh.analyser.provider.LogSleepParser;
 import com.yhh.analyser.provider.LogcatParser;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.widget.NoScrollListView;
 
@@ -56,7 +56,7 @@ import java.util.List;
  *
  */
 public class ChartLogActivity extends ChartBaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "ChartLogActivity";
+    private static final String TAG = LogUtils.DEBUG_TAG + "ChartLogActivity";
     private boolean DEBUG = true;
     
     private LogProvider mLogProvider;

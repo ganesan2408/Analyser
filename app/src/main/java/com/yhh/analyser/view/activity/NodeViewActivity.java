@@ -35,7 +35,7 @@ import com.yhh.analyser.R.color;
 import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.service.MonitorService;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.androidutils.FileUtils;
@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class NodeViewActivity extends BaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG+ "NodeView";
+    private static final String TAG = LogUtils.DEBUG_TAG+ "NodeView";
 
     private EditText autoKey;
     private LinearLayout mCatalogLayout;
@@ -287,7 +287,7 @@ public class NodeViewActivity extends BaseActivity {
      */
     public void autoInputShell() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.auto_comlete_drop_down, ConstUtils.CommandArray);
+                R.layout.auto_comlete_drop_down, LogUtils.CommandArray);
         autoKey.addTextChangedListener(new TextWatcher() {
 
             @Override

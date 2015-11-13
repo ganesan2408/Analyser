@@ -24,18 +24,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.PerfBean;
-import com.yhh.analyser.bean.TempInfo;
-import com.yhh.analyser.bean.app.PhoneInfo;
+import com.yhh.analyser.config.AppConfig;
+import com.yhh.analyser.model.PerfBean;
+import com.yhh.analyser.model.TempInfo;
+import com.yhh.analyser.model.app.PhoneInfo;
 import com.yhh.analyser.provider.AutoWorker;
-import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.utils.FileMediaScanner;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.UploadUtils;
-import com.yhh.analyser.utils.Utils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.androidutils.FileUtils;
 import com.yhh.androidutils.ShellUtils;
+import com.yhh.androidutils.TimeUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -52,7 +53,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BenchmarkActivity extends BaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG +"BenchmarkActivity";
+    private static final String TAG = LogUtils.DEBUG_TAG +"antutu";
     
     private Button mRobotBtn;
     private Button mViewBtn;
@@ -69,13 +70,11 @@ public class BenchmarkActivity extends BaseActivity {
     private AutoWorker mRobot;
     private boolean isStart; //自动化是否已经启动
     private boolean isStop; //是否停止运行
-    private FileMediaScanner mFileMediaScanner = new FileMediaScanner(this);
+    private FileMediaScanner mFileMediaScanner;
     private UploadUtils mUploadUtils;
     
     private String mFileName;
     private BufferedWriter bw;
-    
-    public static String MONITOR_PARENT_PATH="/sdcard/systemAnalyzer/";
     
     public static String MONITOR_PATH_TAG="monitor_path";
     private static final String CASE_BENCHMARK= "BenchMark";
@@ -105,7 +104,11 @@ public class BenchmarkActivity extends BaseActivity {
     private static final String LOOP_COUNT = "loop_count";
     
     private PerfBean mPerfBean;
-    
+
+    public BenchmarkActivity() {
+        mFileMediaScanner = new FileMediaScanner(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,13 +183,13 @@ public class BenchmarkActivity extends BaseActivity {
          
             @Override
             public void run() {
-                mFileMediaScanner.scan("/sdcard/systemAnalyzer/");
+                mFileMediaScanner.scan(AppConfig.ROOT_DIR);
             }
         }, 1, TimeUnit.NANOSECONDS);
     }
     
     private void upload(String filename){
-        String path = "/sdcard/systemAnalyzer/"+filename;
+        String path = AppConfig.ROOT_DIR+filename;
         String key = getUploadKey(filename);
         mUploadUtils.uploadFile(key, path);
     }
@@ -297,7 +300,6 @@ public class BenchmarkActivity extends BaseActivity {
                     waitForTmp();
                     if(!isStop) {
                         ShellUtils.execCommand(cmd);
-//                        ShellUtils.runShell(cmd);
                     }
                 }
                 mHandler.sendMessage(mHandler.obtainMessage(2));
@@ -462,8 +464,8 @@ public class BenchmarkActivity extends BaseActivity {
     }
     
     private void createFile(){
-        String curTime = Utils.getCurrentTime();
-        mFileName =  "/sdcard/systemAnalyzer/BM_" + curTime+".csv";
+        String curTime = TimeUtils.getCurrentTime(TimeUtils.DATETIME_UNDERLINE_FORMAT);
+        mFileName =  AppConfig.BENCHMACH_FILE  + curTime+".csv";
         mRobotEditor.putString(CASE_BENCHMARK+ "#file", curTime).commit();
         try {
             FileUtils.createFile(mFileName);
@@ -513,7 +515,7 @@ public class BenchmarkActivity extends BaseActivity {
     }
     
     private String[] listFiles(){
-        File parentDir = new File(MONITOR_PARENT_PATH);
+        File parentDir = new File(AppConfig.ROOT_DIR);
         String[] files = parentDir.list(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String filename) {

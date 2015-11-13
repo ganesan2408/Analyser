@@ -1,81 +1,79 @@
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/ll_loop"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:background="@color/primary_dark">
-           <RelativeLayout 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <com.yhh.analyser.widget.ProgressWheel
-                    android:id="@+id/progress_wheel"
-                    android:layout_marginTop="15dp"
-                    android:layout_width="270dp"
-                    android:layout_height="270dp"
-                    ProgressWheel:text="0%"
-                    ProgressWheel:WheeltextColor="@color/white"
-                    ProgressWheel:textSize="12sp"
-                    ProgressWheel:rimColor="#445E5561"
-                    ProgressWheel:WheelbarColor="#0f0"
-                    ProgressWheel:barLength="120dp" 
-                    ProgressWheel:barWidth="10dp"
-                    ProgressWheel:rimWidth="15dp" 
-                    ProgressWheel:spinSpeed="20dp"
-                    android:layout_centerInParent="true" />
-                <TextView 
-                    android:id="@+id/txt_sleep_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="后台应用个数："
-                    android:textColor="#fff"
-                    android:textSize="12sp"
-                    android:layout_marginTop="15dp"
-                    android:layout_centerHorizontal="true"/>
-               <TextView
-                    android:id="@+id/txt_sleep_title"
-                    android:layout_toRightOf="@id/txt_sleep_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="N"
-                    android:textColor="#fff"
-                    android:textSize="15sp"
-                    android:layout_marginTop="15dp"
-                    android:layout_centerHorizontal="true"/>
-           </RelativeLayout>
-     </LinearLayout>
+        android:background="@color/primary_dark"
+        android:gravity="center"
+        >
+
+            <com.yhh.analyser.widget.ProgressWheel
+                android:id="@+id/progress_wheel"
+                android:layout_width="270dp"
+                android:layout_height="270dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                ProgressWheel:WheelbarColor="#0f0"
+                ProgressWheel:WheeltextColor="@color/white"
+                ProgressWheel:barLength="120dp"
+                ProgressWheel:barWidth="10dp"
+                ProgressWheel:rimColor="#445E5561"
+                ProgressWheel:rimWidth="15dp"
+                ProgressWheel:spinSpeed="20dp"
+                ProgressWheel:text="0%"
+                ProgressWheel:textSize="12sp" />
+
+    </LinearLayout>
 
 
-     <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:background="#fff">
-         <com.baoyz.swipemenulistview.SwipeMenuListView
-             android:id="@+id/smlv_app_list"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:headerDividersEnabled="true" />
+
+        <com.yhh.analyser.widget.menulistview.SwipeMenuListView
+            android:id="@+id/smlv_app_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:headerDividersEnabled="true" />
     </LinearLayout>
-     <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         android:padding="16dp"
-        android:background="@color/accent">
+        android:layout_height="60dp"
+        android:background="@color/accent"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
         <TextView
-           android:id="@+id/txt_onekey_sleep"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:text="@string/txt_onekey_sleep"
-           android:gravity="center"
-           android:textSize="20sp"
-           android:textColor="@color/white"/>
+            android:id="@+id/txt_onekey_clear"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txt_onekey_clear"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#fff"/>
+        <TextView
+            android:id="@+id/txt_onekey_sleep"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txt_onekey_sleep"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>

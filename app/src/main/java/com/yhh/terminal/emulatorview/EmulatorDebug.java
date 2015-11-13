@@ -16,7 +16,7 @@
 
 package com.yhh.terminal.emulatorview;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 /**
  * Debug settings.
@@ -50,7 +50,7 @@ class EmulatorDebug {
      * from other messages in the log. Public because it's used by several
      * classes.
      */
-    public static final String LOG_TAG =  ConstUtils.DEBUG_TAG+ "EmulatorDebug";
+    public static final String LOG_TAG =  LogUtils.DEBUG_TAG+ "EmulatorDebug";
 
     public static String bytesToString(byte[] data, int base, int length) {
         StringBuilder buf = new StringBuilder();

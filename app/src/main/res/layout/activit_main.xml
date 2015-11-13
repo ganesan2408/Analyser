@@ -27,39 +27,31 @@
             android:id="@+id/tab_rb_monitor"
             style="@style/tab_rb_style"
             android:checked="true"
-            android:drawableTop="@drawable/main_monitor_status"
+            android:drawableTop="@drawable/main_monitors"
             android:paddingTop="5dp"
             android:text="@string/title_monitor"
             android:textColor="@color/main_view_color" />
 
         <RadioButton
-            android:id="@+id/tab_rb_data"
-            style="@style/tab_rb_style"
-            android:drawableTop="@drawable/main_monitor_status"
-            android:paddingTop="5dp"
-            android:text="@string/title_analyzer"
-            android:textColor="@color/main_view_color" />
-
-        <RadioButton
-            android:id="@+id/tab_rb_status"
-            style="@style/tab_rb_style"
-            android:drawableTop="@drawable/main_view_status"
-            android:paddingTop="5dp"
-            android:text="@string/title_view"
-            android:textColor="@color/main_view_color" />
-
-        <RadioButton
             android:id="@+id/tab_rb_perf"
             style="@style/tab_rb_style"
-            android:drawableTop="@drawable/main_perf_status"
+            android:drawableTop="@drawable/main_perfs"
             android:paddingTop="5dp"
             android:text="@string/title_performance"
             android:textColor="@color/main_view_color" />
 
         <RadioButton
+            android:id="@+id/tab_rb_power"
+            style="@style/tab_rb_style"
+            android:drawableTop="@drawable/main_power"
+            android:paddingTop="5dp"
+            android:text="@string/title_power"
+            android:textColor="@color/main_view_color" />
+
+        <RadioButton
             android:id="@+id/tab_rb_box"
             style="@style/tab_rb_style"
-            android:drawableTop="@drawable/main_tool_status"
+            android:drawableTop="@drawable/main_tools"
             android:paddingTop="5dp"
             android:text="@string/title_tool"
             android:textColor="@color/main_view_color" />

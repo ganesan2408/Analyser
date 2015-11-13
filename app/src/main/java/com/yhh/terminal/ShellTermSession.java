@@ -29,10 +29,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.terminal.emulatorview.ColorScheme;
 import com.yhh.terminal.emulatorview.TermSession;
 import com.yhh.terminal.util.TermSettings;
-import com.yhh.analyser.utils.ConstUtils;
 
 /**
  * A terminal session, consisting of a TerminalEmulator, a TranscriptScreen,
@@ -40,7 +40,7 @@ import com.yhh.analyser.utils.ConstUtils;
  * talk to the process.
  */
 public class ShellTermSession extends TermSession {
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "ShellTermSession";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "ShellTermSession";
     //** Set to true to force into 80 x 24 for testing with vttest. */
     private static final boolean VTTEST_MODE = false;
     private TermSettings mSettings;

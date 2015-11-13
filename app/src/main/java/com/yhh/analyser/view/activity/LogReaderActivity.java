@@ -38,19 +38,19 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.LogInfo;
-import com.yhh.analyser.view.BaseActivity;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.model.LogInfo;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.DialogUtils;
+import com.yhh.analyser.view.BaseActivity;
+import com.yhh.androidutils.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class LogReaderActivity extends BaseActivity implements TabListener{
-    private static final String TAG =  ConstUtils.DEBUG_TAG+ "LogReader";
+    private static final String TAG =  LogUtils.DEBUG_TAG+ "LogReader";
     private ViewFlipper mViewFlipper;
     private GestureDetector mDetector;
     /** 搜索的LOG*/
@@ -122,16 +122,16 @@ public class LogReaderActivity extends BaseActivity implements TabListener{
     
 //    @SuppressLint("NewApi")
 //    private void initActionBar(){
-//        mActionBar.setHomeButtonEnabled(true);
-//        mActionBar.setIcon(R.drawable.nav_back);
-        
+////        mActionBar.setHomeButtonEnabled(true);
+////        mActionBar.setIcon(R.drawable.nav_back);
+//
 //        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 //        mActionBar.addTab(mActionBar.newTab().setText("全部Log")
 //                .setTabListener(this));
 //        mActionBar.addTab(mActionBar.newTab().setText("搜索Log")
 //                .setTabListener(this));
 //    }
-    
+//
 //    public void addTabs(ArrayList<String> tabNames){
 //        if(null != mActionBar && null != tabNames){
 //            for(String tabName: tabNames){
@@ -232,13 +232,13 @@ public class LogReaderActivity extends BaseActivity implements TabListener{
         showDisplayId(0);
         
         String[] keyArray = null;
-        for (String lname : ConstUtils.LOG_ALL) {
+        for (String lname : LogUtils.LOG_ALL) {
             Log.i(TAG,"logPath====="+logPath);
             int index = logPath.lastIndexOf("/");
             String  filename = logPath.substring(index+1);
             Log.i(TAG,"lname====="+lname);
             if (filename.startsWith(lname)) {
-                keyArray = ConstUtils.KEY_TABLE.get(lname);
+                keyArray = LogUtils.KEY_TABLE.get(lname);
                 if (keyArray != null) {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             this, R.layout.auto_comlete_drop_down, keyArray);
@@ -322,26 +322,12 @@ public class LogReaderActivity extends BaseActivity implements TabListener{
             mHandler.sendMessage(mHandler.obtainMessage(0x99));
             Log.e(TAG, "read error" + e);
         } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(br);
         }
     }
     
     private void searchByPage(String key) {
-//        Pattern pattern = null;
-//        try{
-//            pattern = Pattern.compile(key);
-//        }catch(Exception e){
-//            Toast.makeText(this, "Invalid regex expression.", Toast.LENGTH_SHORT).show();
-//            Log.e(TAG,"pattern key wrong:"+key);
-//            return;
-//        }
-       
+
         boolean haveNotify = false;
         int arrSub = 0;
         ArrayList<String> aList = new ArrayList<String>();

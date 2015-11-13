@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.widget.IndexableListView;
 import com.yhh.androidutils.ShellUtils;
 
@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class StatusDumpsysActivity extends Activity {
-    private static final String TAG = ConstUtils.DEBUG_TAG+ "StatusDumpsysActivity";
+    private static final String TAG = LogUtils.DEBUG_TAG+ "StatusDumpsysActivity";
 	private List<String> mItems;
 	
 	private ExecutorService fixedThreadPool = Executors.newCachedThreadPool();

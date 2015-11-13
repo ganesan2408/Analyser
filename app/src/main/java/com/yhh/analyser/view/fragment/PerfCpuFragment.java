@@ -20,13 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.PerfBean;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.model.PerfBean;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.BaseFragment;
 import com.yhh.analyser.widget.rangebar.RangeBar;
 
 public class PerfCpuFragment extends BaseFragment {
-    private static final String TAG = ConstUtils.DEBUG_TAG +"PerfCpuFragment";
+    private static final String TAG = LogUtils.DEBUG_TAG +"PerfCpuFragment";
     
 
     private RangeBar mCpuBigFreqBar;

@@ -26,14 +26,14 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu.CanvasTransformer;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu.OnClosedListener;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu.OnOpenedListener;
 
 public class CustomViewAbove extends ViewGroup {
 
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "CustomViewAbove";
+	private static final String TAG =  LogUtils.DEBUG_TAG+ "CustomViewAbove";
 	private static final boolean DEBUG = false;
 
 	private static final boolean USE_CACHE = false;

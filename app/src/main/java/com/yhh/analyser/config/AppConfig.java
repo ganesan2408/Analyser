@@ -8,21 +8,23 @@ import android.os.Environment;
 public class AppConfig {
 
     /**analyser的文件夹根路径 */
-    public final static String PARENT_DIR = "/sdcard/systemAnalyzer/";
+    public final static String ROOT_DIR = Environment.getExternalStorageDirectory().getPath()
+            + "/systemAnalyzer/";
+
+    /** log文件夹*/
+    public static final String PATH_SD_LOG = Environment.getExternalStorageDirectory().getPath()
+            + "/Log";
 
     /**监控的文件夹 */
-    public final static String MONITOR_DIR = PARENT_DIR + "monitor/";
+    public final static String MONITOR_DIR = ROOT_DIR + "monitor/";
     /**截图的文件夹 */
-    public final static String SCREEN_SHOT_DIR = PARENT_DIR + "screenshot/";
+    public final static String SCREEN_SHOT_DIR = ROOT_DIR + "screenshot/";
     /**adb指令的文件名 */
-    public final static String ADB_SHELL_FILE = PARENT_DIR + "adb.txt";
+    public final static String ADB_SHELL_FILE = ROOT_DIR + "adb.txt";
     /** 白名单文件*/
-    public static final String ONE_KEY_WHITE_LIST =  PARENT_DIR + "whitelist.config";
-    /** log文件夹*/
-    public static final String PATH_SD_LOG = Environment.getExternalStorageDirectory().getPath() + "/Log";
+    public static final String ONE_KEY_WHITE_LIST =  ROOT_DIR + "whitelist.config";
+    public static final String BENCHMACH_FILE =  ROOT_DIR + "benchmark/";
 
-    /** 监控频率，单位（ms）*/
-    public static int MONITOR_DELAY_TIME = 2000;
     /** 临时用*/
     public static int TYPE;
 

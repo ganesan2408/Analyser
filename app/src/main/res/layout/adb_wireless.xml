@@ -31,11 +31,4 @@
         app:sliderDrawable="@drawable/selector_switch_slider"
         />
 
-    <!--<TextView-->
-        <!--android:id="@+id/txt_adb_status"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_below="@id/cb_adb_controller"-->
-        <!--/>-->
 </RelativeLayout>

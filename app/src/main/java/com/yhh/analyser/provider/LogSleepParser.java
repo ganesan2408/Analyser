@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.yhh.analyser.view.activity.LogAnalyActivity;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,13 +23,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class LogSleepParser extends LogParser{
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "LogSleepAbtractLogSleepParser";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "LogSleep";
     private boolean DEBUG = true;
 
     private BufferedWriter bw;
     private String mDir;
     private  int curGroupIndex;
-    public static String newFile ="_休眠与唤醒";
+    public static String newFile ="_sleep";
+    public static final String LOG_SLEEP = "sleep";
     
     public LogSleepParser(String dir){
         mDir = dir;
@@ -37,8 +38,9 @@ public class LogSleepParser extends LogParser{
     
     @Override
     public void parse(Handler handler){
-        ArrayList<File> files = listTargetLog(mDir,ConstUtils.LOG_SLEEP);
+        ArrayList<File> files = listTargetLog(mDir, LOG_SLEEP);
         if(files ==null || files.size() <=0){
+            Log.w(TAG,"LOG_SLEEP is null");
             return;
         }
       //保证解析过程由旧至新

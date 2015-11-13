@@ -6,6 +6,11 @@
  */
 package com.yhh.analyser.provider;
 
+import android.util.Log;
+
+import com.yhh.analyser.model.LogWakeupList;
+import com.yhh.analyser.utils.LogUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,13 +18,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import android.util.Log;
-
-import com.yhh.analyser.bean.LogWakeupList;
-import com.yhh.analyser.utils.ConstUtils;
-
 public class LogSleepAbtractLogSleepParser extends AbtractLogSleepParser {
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "LogSleepAbtractLogSleepParser";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "LogSleepAbtractLogSleepParser";
     private String mSleepLogContent;
     private int mStartRealTime;
     private int mStartTimeStamp;
@@ -34,12 +34,12 @@ public class LogSleepAbtractLogSleepParser extends AbtractLogSleepParser {
     public static final int TYPE_NO_KNOWN = 4;
     
     public LogSleepAbtractLogSleepParser(String logDir){
-        super(logDir,ConstUtils.LOG_SLEEP);
-        if(logDir.equals(ConstUtils.LOG_DIR)){
+        super(logDir,LogSleepParser.LOG_SLEEP);
+        if(logDir.equals(LogUtils.LOG_DIR)){
             Log.d(TAG,"parse local interrupt");
             mIrqParser = new LogInterruptParser();
         }else{
-            mIrqParser = new LogInterruptParser(mLogDir+"/"+ConstUtils.LOG_INTERRUPTES);
+            mIrqParser = new LogInterruptParser(mLogDir+"/"+ LogUtils.LOG_INTERRUPTES);
         }
         mWakeupList = new LogWakeupList(mIrqParser);
     }
@@ -92,7 +92,6 @@ public class LogSleepAbtractLogSleepParser extends AbtractLogSleepParser {
      *      begin time stamp
      * @param endTime
      *      end time stamp
-     * @param init
      */
     public String statistic(int beginTime, int endTime){
         int validTime = 0;

@@ -3,8 +3,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/smlv_white_list"
+    <com.yhh.analyser.widget.menulistview.SwipeMenuListView
+        android:id="@+id/smlv_app_white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:headerDividersEnabled="true" />

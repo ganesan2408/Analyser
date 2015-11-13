@@ -37,18 +37,14 @@ public class AppUtils {
      * @return
      */
     public static String getAppName(Context context, String packageName){
-        String appName;
-        if(StringUtils.isNull(packageName)){
-            packageName = context.getPackageName();
-        }
-
-        PackageManager pm = context.getPackageManager();
+        String appName = packageName;
+        PackageManager packageManager = context.getApplicationContext().getPackageManager();
         try {
-            appName = context.getString(pm.getPackageInfo(packageName, 0 ).applicationInfo.labelRes);
-        } catch (NameNotFoundException e) {
-            throw new RuntimeException("NameNotFoundException", e);
-        }
+            ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
+            appName =  (String) packageManager.getApplicationLabel(appInfo);
+        } catch (Exception e) {
 
+        }
         return appName;
     }
 
@@ -80,7 +76,7 @@ public class AppUtils {
             versionName = pm.getPackageInfo(packageName, 0).versionName;
 
         } catch (NameNotFoundException e) {
-            throw new RuntimeException("NameNotFoundException", e);
+            versionName = "";
         }
         return versionName;
     }

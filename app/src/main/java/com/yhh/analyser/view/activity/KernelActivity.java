@@ -17,12 +17,12 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.yhh.analyser.R;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.BaseActivity;
-import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.RootUtils;
 
 public class KernelActivity extends BaseActivity {
-	private static String TAG= ConstUtils.DEBUG_TAG+"KernelActivity";
+	private static String TAG= LogUtils.DEBUG_TAG+"KernelActivity";
 	
 	private CheckBox mPanicCb;
 	private TextView mPanicTv;

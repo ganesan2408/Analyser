@@ -36,7 +36,7 @@
     <!-- App monitor END! -->
     
     <dimen name="shadow_width">1dp</dimen>
-    <dimen name="slidingmenu_offset">80dp</dimen>
+    <dimen name="slidingmenu_offset">160dp</dimen>
     <dimen name="bbuton_rounded_corner_radius">5dp</dimen>
     
     <!-- LDrawer start -->

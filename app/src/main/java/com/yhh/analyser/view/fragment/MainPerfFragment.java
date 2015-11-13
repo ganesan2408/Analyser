@@ -18,19 +18,20 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 public class MainPerfFragment extends Fragment implements
         OnCheckedChangeListener {
     
-    private static final String TAG = ConstUtils.DEBUG_TAG+ "MainPerfFragment";
+    private static final String TAG = LogUtils.DEBUG_TAG+ "MainPerf";
     
     private RadioGroup main_tab_RadioGroup;
     
     private Fragment mCpuFragment;
     private Fragment mGpuFragment;
-//    private Fragment mScoreFragment;
-    
+    private Fragment mThermalFragment;
+    private Fragment mIOFragment;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,11 +75,17 @@ public class MainPerfFragment extends Fragment implements
                 Log.i(TAG,"===GPU");
                 break;
                 
-//            case R.id.main_perf_score:
-//                mScoreFragment = new BenchmarkFragment();
-//                afragment = mScoreFragment;
-//                Log.i(TAG,"===SCORE");
-//                break;
+            case R.id.main_perf_io:
+                mIOFragment = new PerfIoFragment();
+                fragment = mIOFragment;
+                Log.i(TAG,"===IO");
+                break;
+
+            case R.id.main_perf_thermal:
+                mThermalFragment = new PerfThermalFragment();
+                fragment = mThermalFragment;
+                Log.i(TAG,"===THERMAL");
+                break;
                 
             default:
                 Log.i(TAG,"===error: "+CheckedId);
@@ -107,13 +114,20 @@ public class MainPerfFragment extends Fragment implements
                 transaction.replace(R.id.perf_Pager,  mGpuFragment);
                 break;
                 
-//            case R.id.main_perf_score:
-//                if(mScoreFragment == null){
-//                    mScoreFragment = new BenchmarkFragment();
-//                }
-//                transaction.replace(R.id.perf_Pager,  mScoreFragment);
-//                break;
-        }
+            case R.id.main_perf_io:
+                if(mIOFragment == null){
+                    mIOFragment = new PerfIoFragment();
+                }
+                transaction.replace(R.id.perf_Pager,  mIOFragment);
+                break;
+
+            case R.id.main_perf_thermal:
+                    if(mThermalFragment == null){
+                        mThermalFragment = new PerfThermalFragment();
+                    }
+                    transaction.replace(R.id.perf_Pager,  mThermalFragment);
+                    break;
+            }
         transaction.commit();
     }
     

@@ -2,9 +2,9 @@ package com.yhh.analyser.core.monitor;
 
 import android.content.Context;
 
-import com.yhh.analyser.bean.CpuInfo;
-import com.yhh.analyser.bean.GpuInfo;
-import com.yhh.analyser.bean.MemoryInfo;
+import com.yhh.analyser.model.CpuInfo;
+import com.yhh.analyser.model.GpuInfo;
+import com.yhh.analyser.model.MemoryInfo;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.androidutils.NumberUtils;
 

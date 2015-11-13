@@ -6,8 +6,6 @@
  */
 package com.yhh.analyser.utils;
 
-import java.io.File;
-
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.media.MediaScannerConnection.MediaScannerConnectionClient;
@@ -15,8 +13,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
+import java.io.File;
+
 public class FileMediaScanner {
-        private static final String TAG = ConstUtils.DEBUG_TAG +"MyFileMedia";
+        private static final String TAG = LogUtils.DEBUG_TAG +"MyFileMedia";
         private static final boolean DEBUG = false;
         
         private final String SD_ROOT = Environment.getExternalStorageDirectory().toString()+"/";

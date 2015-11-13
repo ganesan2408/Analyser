@@ -13,11 +13,11 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.MonitorChoice;
-import com.yhh.analyser.bean.app.AppInfo;
-import com.yhh.analyser.bean.app.ProcessInfo;
+import com.yhh.analyser.model.MonitorChoice;
+import com.yhh.analyser.model.app.AppInfo;
+import com.yhh.analyser.model.app.ProcessInfo;
 import com.yhh.analyser.service.MonitorService;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.widget.SwitchButton;
 import com.yhh.androidutils.StringUtils;
@@ -25,7 +25,7 @@ import com.yhh.androidutils.StringUtils;
 import java.util.List;
 
 public class MonitorDiyActivity extends BaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "MonitorDiyActivity";
+    private static final String TAG = LogUtils.DEBUG_TAG + "MonitorDiyActivity";
     private boolean DEBUG = true;
 
     // add items, need change

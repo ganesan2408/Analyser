@@ -28,12 +28,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.widget.slidingmenu.CustomViewAbove.OnPageChangeListener;
 
 public class SlidingMenu extends RelativeLayout {
 
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "SlidingMenu";
+	private static final String TAG =  LogUtils.DEBUG_TAG+ "SlidingMenu";
 
 	public static final int SLIDING_WINDOW = 0;
 	public static final int SLIDING_CONTENT = 1;

@@ -5,8 +5,6 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
@@ -19,51 +17,37 @@ import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
-import com.yhh.analyser.bean.app.PhoneInfo;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.model.app.PhoneInfo;
 import com.yhh.analyser.utils.DialogUtils;
 import com.yhh.analyser.view.BaseActivity;
 import com.yhh.analyser.view.activity.AboutActivity;
 import com.yhh.analyser.view.activity.FeedbackActivity;
-import com.yhh.analyser.view.activity.MyShotActivity;
-import com.yhh.analyser.view.fragment.MainAnalysisFragment;
+import com.yhh.analyser.view.activity.ShotActivity;
 import com.yhh.analyser.view.fragment.MainBoxFragment;
 import com.yhh.analyser.view.fragment.MainMonitorFragment;
 import com.yhh.analyser.view.fragment.MainPerfFragment;
-import com.yhh.analyser.view.fragment.MainStatusFragment;
+import com.yhh.analyser.view.fragment.MainPowerFragment;
 import com.yhh.analyser.widget.slidingmenu.SlidingMenu;
+import com.yhh.androidutils.PreferencesUtils;
 
 public class Main extends BaseActivity {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "Main";
 
     private FragmentTabHost mTabHost;
     private RadioGroup mTabRg;
     private Long mExitTime = (long) 0;
 
-//    public static String MONITOR_PARENT_PATH;
-
     private final Class[] mFragments = {
             MainMonitorFragment.class,
-            MainAnalysisFragment.class,
-            MainStatusFragment.class,
             MainPerfFragment.class,
+            MainPowerFragment.class,
             MainBoxFragment.class
     };
 
     private final int[] mRadioIds = {
             R.id.tab_rb_monitor,
-            R.id.tab_rb_data,
-            R.id.tab_rb_status,
             R.id.tab_rb_perf,
+            R.id.tab_rb_power,
             R.id.tab_rb_box
-    };
-
-    private final int[] mTitles = {
-            R.string.title_monitor,
-            R.string.title_analyzer,
-            R.string.title_view,
-            R.string.title_performance,
-            R.string.title_tool
     };
 
     private SlidingMenu menuMenu;
@@ -84,11 +68,11 @@ public class Main extends BaseActivity {
         return false;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activit_main);
-
 
         initView();
         initMenu();
@@ -96,9 +80,10 @@ public class Main extends BaseActivity {
 
         firstCreateShortCut();
 
-        MobclickAgent.updateOnlineConfig(this);
+        MobclickAgent.updateOnlineConfig(this);  //更新在线配置
 
-        UmengUpdateAgent.update(this); //更新umeng
+        UmengUpdateAgent.update(this); //更新apk
+
     }
 
     @Override
@@ -158,7 +143,7 @@ public class Main extends BaseActivity {
         menuMenu.setFadeDegree(0.9f);  // 设置渐入渐出效果的值 
         menuMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         menuMenu.setMenu(R.layout.menu);
-        menuMenu.setTouchmodeMarginThreshold(48);
+        menuMenu.setTouchmodeMarginThreshold(64);
 
         //设置手机型号
         ((TextView) findViewById(R.id.phone_model)).setText(PhoneInfo.getPhoneType());
@@ -178,27 +163,6 @@ public class Main extends BaseActivity {
                 mActionBar.setHomeAsUpIndicator(R.drawable.actionbar_menu);
             }
         });
-
-//        // 配置背景图片
-//        menuMenu.setBackgroundImage(R.drawable.menu_bg3);
-//        // 设置专场动画效果     
-//        menuMenu.setBehindCanvasTransformer(new SlidingMenu.CanvasTransformer() {
-//            
-//            @Override
-//            public void transformCanvas(Canvas canvas, float percentOpen) {
-//                float scale = (float) (percentOpen * 0.25 + 0.75);
-//                canvas.scale(scale, scale, -canvas.getWidth() / 2, canvas.getHeight() / 2);
-//            }
-//        });
-//        
-//        menuMenu.setAboveCanvasTransformer(new SlidingMenu.CanvasTransformer() {
-//            
-//            @Override
-//            public void transformCanvas(Canvas canvas, float percentOpen) {
-//                float scale = (float) (1 - percentOpen * 0.25);
-//                canvas.scale(scale, scale, 0, canvas.getHeight() / 2);
-//            }
-//        });
 
     }
 
@@ -230,7 +194,7 @@ public class Main extends BaseActivity {
                 break;
 
             case R.id.mmenu_my_shot:
-                Intent shotIntent = new Intent(this, MyShotActivity.class);
+                Intent shotIntent = new Intent(this, ShotActivity.class);
                 startActivity(shotIntent);
                 break;
 
@@ -281,15 +245,10 @@ public class Main extends BaseActivity {
     }
 
     private void firstCreateShortCut() {
-        SharedPreferences pref = this.getPreferences(MODE_PRIVATE);
-        boolean firstStart = pref.getBoolean("First", true);
+        boolean firstStart = PreferencesUtils.getInstance(this).get("First", true);
         if (firstStart) {
             createShortCutDialog();
-            Editor editor = pref.edit();
-            editor.putBoolean("First", false);
-            editor.commit();
-
-//            menuMenu.toggle();
+            PreferencesUtils.getInstance(this).put("First", false);
         }
     }
 }

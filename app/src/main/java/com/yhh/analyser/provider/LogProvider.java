@@ -11,9 +11,9 @@ import android.util.Log;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.yhh.analyser.bean.app.PhoneInfo;
+import com.yhh.analyser.model.app.PhoneInfo;
 import com.yhh.analyser.utils.ChartTool;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.activity.LogAnalyActivity;
 import com.yhh.androidutils.AppUtils;
 
@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * 
  */
 public class LogProvider {
-    private static String TAG =  ConstUtils.DEBUG_TAG+ "LogProvider";
+    private static String TAG =  LogUtils.DEBUG_TAG+ "LogProvider";
     private boolean DEBUG = true;
     
     private Context mContext;
@@ -130,7 +130,6 @@ public class LogProvider {
                 String[] split = line.split("#");
                 appStart.add(split[0]);
                 appName.add(AppUtils.getAppName(mContext, split[1]));
-//                Log.i(TAG,split[1]+" ==> "+Utils.getAppName(mContext, split[1]));
             }
             mForeApps.add(appStart);
             mForeApps.add(appName);

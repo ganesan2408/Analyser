@@ -6,7 +6,7 @@
  */
 package com.yhh.analyser.widget;
 
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 
 import android.util.Log;
 import android.view.GestureDetector.OnGestureListener;
@@ -18,7 +18,7 @@ import android.view.MotionEvent;
  *
  */
 public class OnMyGestureListener implements OnGestureListener {
-	private final static String TAG =  ConstUtils.DEBUG_TAG+ "Gesture";
+	private final static String TAG =  LogUtils.DEBUG_TAG+ "Gesture";
     private final static  int SWIPE_THRESHOLD = 100;
     private final static  int SWIPE_VELOCITY_THRESHOLD = 50;
     

@@ -27,12 +27,12 @@ import com.yhh.analyser.R;
 import com.yhh.analyser.adapter.AutoCaseAdapter;
 import com.yhh.analyser.provider.AutoCaseSettings;
 import com.yhh.analyser.provider.AutoWorker;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.BaseActivity;
-import com.yhh.analyser.utils.ConstUtils;
 import com.yhh.analyser.utils.DialogUtils;
 
 public class AutomaticActivity extends BaseActivity {
-	private static final String TAG =  ConstUtils.DEBUG_TAG+ "AutomaticActivity";
+	private static final String TAG =  LogUtils.DEBUG_TAG+ "AutomaticActivity";
 
 	private ListView mListProgramLv;
 	private Button mRobotBtn;

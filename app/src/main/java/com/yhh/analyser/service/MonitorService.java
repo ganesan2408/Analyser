@@ -4,12 +4,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -20,24 +18,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yhh.analyser.Main;
 import com.yhh.analyser.R;
-import com.yhh.analyser.config.AppConfig;
 import com.yhh.analyser.core.MonitorFactory;
 import com.yhh.analyser.core.monitor.Monitor;
 import com.yhh.analyser.core.monitor.MonitorApp;
 import com.yhh.analyser.core.monitor.MonitorAppDiy;
 import com.yhh.analyser.core.monitor.MonitorException;
-import com.yhh.analyser.provider.FloatCreator;
 import com.yhh.analyser.core.monitor.MonitorShell;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.provider.FloatCreator;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.utils.ScreenShot;
-import com.yhh.analyser.view.activity.MonitorSysActivity;
+import com.yhh.analyser.view.fragment.MainMonitorFragment;
+import com.yhh.androidutils.PreferencesUtils;
 
 /**
  * Created by yuanhh1 on 2015/8/14.
  */
 public class MonitorService extends Service {
-    private static final String TAG = ConstUtils.DEBUG_TAG + "ms";
+    private static final String TAG = LogUtils.DEBUG_TAG + "ms";
 
     private Context mContext;
 
@@ -60,10 +59,9 @@ public class MonitorService extends Service {
      */
     private static int sColorIndex = 0;
     private int[] COLORS = new int[]{
+            Color.MAGENTA,Color.BLUE,
             Color.GREEN, Color.YELLOW,
-            Color.CYAN, Color.MAGENTA,
-            Color.DKGRAY, Color.RED,
-            Color.BLUE
+            Color.CYAN, Color.DKGRAY, Color.RED,
     };
 
     /**
@@ -94,6 +92,7 @@ public class MonitorService extends Service {
 
     private TextView mShowAllTv;
     private RelativeLayout mFloatTitleRl;
+    private int interval;
 
     @Override
     public void onCreate() {
@@ -134,9 +133,12 @@ public class MonitorService extends Service {
             mMonitor = MonitorFactory.newInstance(mContext, type);
         }
 
-        mMonitor.onStart();
+        interval = PreferencesUtils.getInstance(mContext).get(
+                MainMonitorFragment.KEY_INTERVAL, MainMonitorFragment.DEFAULT_FREQ)*1000;
 
-        readPrefs();
+        Log.i(TAG," monitor interval="+interval);
+
+        mMonitor.onStart();
         handler.post(task);
 
         return START_NOT_STICKY;
@@ -150,12 +152,6 @@ public class MonitorService extends Service {
     }
 
 
-    private void readPrefs() {
-        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        int interval = mPreferences.getInt(MonitorSysActivity.KEY_INTERVAL, 1);
-        AppConfig.MONITOR_DELAY_TIME = interval * 1000;
-    }
 
     private void initView() {
 
@@ -164,6 +160,9 @@ public class MonitorService extends Service {
         mFloatLv = (TextView) viFloatingWindow.findViewById(R.id.float_items_lv);
         mFloatLv.setText(R.string.calculating);
         setFloatColor();
+
+        boolean haveBg = PreferencesUtils.getInstance(mContext).get(MainMonitorFragment.KEY_HAVE_BACKGROUND, MainMonitorFragment.DEFAULT_BG);
+        setFloatBackground(haveBg);
 
         mShowAllTv = (TextView) viFloatingTitle.findViewById(R.id.tv_show_all);
         mFloatTitleRl = (RelativeLayout) viFloatingTitle.findViewById(R.id.rl_float_title);
@@ -229,7 +228,7 @@ public class MonitorService extends Service {
 
     private void initNotification(int startId) {
         PendingIntent contentIntent = PendingIntent.getActivity(getBaseContext(), 0,
-                new Intent(this, MonitorSysActivity.class), 0);
+                new Intent(this, Main.class), 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.logo1)
@@ -242,6 +241,12 @@ public class MonitorService extends Service {
     private void autoChangeFloatColor() {
         sColorIndex++;
         setFloatColor();
+    }
+
+    private void setFloatBackground(boolean haveBg){
+        if(haveBg) {
+            mFloatLv.setBackgroundResource(R.color.white);
+        }
     }
 
     private void setFloatColor() {
@@ -313,7 +318,7 @@ public class MonitorService extends Service {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             mFloatLv.setText(s);
-            handler.postDelayed(task, AppConfig.MONITOR_DELAY_TIME);
+            handler.postDelayed(task, interval);
         }
     }
 

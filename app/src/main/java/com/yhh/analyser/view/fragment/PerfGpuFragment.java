@@ -18,26 +18,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhh.analyser.R;
-import com.yhh.analyser.bean.PerfBean;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.model.PerfBean;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.analyser.view.BaseFragment;
 import com.yhh.analyser.widget.rangebar.RangeBar;
 
 public class PerfGpuFragment extends BaseFragment {
-    private static final String TAG = ConstUtils.DEBUG_TAG +"PerfGpuFragment";
-    
+    private static final String TAG = LogUtils.DEBUG_TAG +"PerfGpuFragment";
+
     private RangeBar mGpuFreqBar;
     private TextView mGpufreqTv;
-    
+
     private int mLowerFrq;
     private int mUpperFreq;
-    
+
     private Button mReflashBtn;
     private boolean mReflashing;
-    
+
     private static String GPU_FREQ_MAX = "/sys/class/kgsl/kgsl-3d0/max_pwrlevel";
     private static String GPU_FREQ_MIN = "/sys/class/kgsl/kgsl-3d0/min_pwrlevel";
-    
+
     private PerfBean mPerfBean;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class PerfGpuFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.performance_gpu, null);
         mGpuFreqBar = (RangeBar) view.findViewById(R.id.gpu_freq_bar);
         mGpufreqTv = (TextView) view.findViewById(R.id.gpu_freq_tv);
-        
+
         mReflashBtn = (Button) view.findViewById(R.id.reflash_btn);
         
         initListener();

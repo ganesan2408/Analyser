@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.yhh.analyser.bean.AppLaunchBean;
-import com.yhh.analyser.bean.AppLaunchList;
+import com.yhh.analyser.model.AppLaunchBean;
+import com.yhh.analyser.model.AppLaunchList;
 import com.yhh.analyser.view.activity.MonitorAppActivity;
 import com.yhh.androidutils.DebugLog;
 

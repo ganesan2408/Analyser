@@ -30,6 +30,9 @@ public class ArrayUtils {
      * @return
      */
     public static <T> List<T> toList(T[] array){
+        if(isEmpty(array)){
+            return null;
+        }
         return Arrays.asList(array);
     }
 
@@ -43,6 +46,6 @@ public class ArrayUtils {
      * @return
      */
     public static String[] fromList(List<String> list){
-        return list == null? null : list.toArray(new String[]{});
+        return list == null? null : list.toArray(new String[list.size()]);
     }
 }

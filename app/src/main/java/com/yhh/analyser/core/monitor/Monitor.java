@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.yhh.analyser.R;
 import com.yhh.analyser.config.AppConfig;
-import com.yhh.analyser.utils.ConstUtils;
+import com.yhh.analyser.utils.LogUtils;
 import com.yhh.androidutils.DebugLog;
 import com.yhh.androidutils.FileUtils;
 import com.yhh.androidutils.TimeUtils;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by yuanhh1 on 2015/8/19.
  */
 public abstract class Monitor {
-    private static final String TAG = ConstUtils.DEBUG_TAG+ "Monitor";
+    private static final String TAG = LogUtils.DEBUG_TAG+ "Monitor";
 
     private BufferedWriter bw;
 
@@ -107,7 +107,7 @@ public abstract class Monitor {
         for(int i=0; i<len-1; i++){
             sb.append(monitorItems[i] + ",");
         }
-        sb.append(monitorItems[len - 1] + ConstUtils.LINE_END);
+        sb.append(monitorItems[len - 1] + LogUtils.LINE_END);
         return sb.toString();
     }
 
@@ -124,7 +124,7 @@ public abstract class Monitor {
         for(int i=0; i<len; i++){
             sb.append(infoList.get(i) + ",");
         }
-        sb.append(ConstUtils.LINE_END);
+        sb.append(LogUtils.LINE_END);
         return  sb.toString();
     }
 
